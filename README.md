@@ -49,17 +49,20 @@ Valores Propios    n        Número de Términos    1:10
 Coeficientes    Int[2*f_1*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
 Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*(pi-y))
 
-n 1:10
-Int[2*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
-sin(lamda_n*x)*sinh(lamda_n*y)
+Solución del Subproblema #2
+Valores Propios    n        Número de Términos    1:10
+Coeficientes    Int[2*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
+Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*y)
 
-n 1:10
-Int[2*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
-sin(lamda_n*y)*sinh(lamda_n*(pi-x))
+Solución del Subproblema #3
+Valores Propios    n        Número de Términos    1:10
+Coeficientes    Int[2*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*(pi-x))
 
-n 1:10
-Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
-sin(lamda_n*y)*sinh(lamda_n*x)
+Solución del Subproblema #4
+Valores Propios    n        Número de Términos    1:10
+Coeficientes    Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*x)
 ```
 
 # Documentación
