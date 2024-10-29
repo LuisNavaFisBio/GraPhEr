@@ -1063,7 +1063,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         borrardatosaplicacion(self, False) 
 
         # Scripts en LaTeX para la creación del documento en donde se muestra el resultado de la interpretación.
-        self.inicioTex = r'''\documentclass[40pt]{memoir}\usepackage[paperwidth=820mm, paperheight=220mm, left = 50mm, right = 50mm, top = 20mm, bottom = 20mm]{geometry}\usepackage{amsmath, amssymb, amsthm}\usepackage[spanish]{babel}\usepackage[utf8]{inputenc}\usepackage{tabularx} \begin{document}\LARGE\centering\begin{table}[!h]\begin{tabular}{|c|ccccccc|} \hline &\\ [-0.5em]'''
+        self.inicioTex = r'''\documentclass[40pt]{memoir}\usepackage[paperwidth=820mm, paperheight=220mm, left = 50mm, right = 50mm, top = 20mm, bottom = 20mm]{geometry}\usepackage{amsmath, amssymb, amsthm}\usepackage[spanish]{babel}\usepackage[utf8]{inputenc}\usepackage{tabularx} \begin{document}\LARGE\justifying\begin{table}[!h]\begin{tabular}{|c|ccccccc|} \hline &\\ [-0.5em]'''
         
         self.Entrada = r'''\textbf{Solución} & \multicolumn{7}{c|}{$\displaystyle u(\mathbf{x}) \approx %(solucion)s $} \\ \hline \textbf{Coeficientes} & \multicolumn{7}{c|}{$\displaystyle %(coeficientes)s$} \\ \hline \textbf{Valores Propios} & \multicolumn{7}{c|}{$\displaystyle %(valores)s$} \\ \hline \textbf{Funciones Peso} & \multicolumn{7}{c|}{$\displaystyle %(funciones)s$} \\ \hline \textbf{Condiciones}  & \multicolumn{7}{c|}{$\quad \displaystyle %(condiciones)s \quad$} \\ \hline \textbf{Dominio}  & \multicolumn{7}{c|}{$\quad \displaystyle %(dominio)s \quad$} \\ '''
 
