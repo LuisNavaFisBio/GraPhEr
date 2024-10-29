@@ -463,22 +463,22 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                 dominio_string = r"x=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) # Tabla.
                 self.ui.Simbolos = [x]
                 if self.ui.DimensionEspacialEntrada.value() > 1:
-                    dominio_string = dominio_string + ", \quad " + r"y=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
+                    dominio_string = dominio_string + r", \quad " + r"y=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
                     self.ui.Simbolos.append(y)
                 if self.ui.DimensionEspacialEntrada.value() > 2:
-                    dominio_string = dominio_string + ", \quad " + r"z=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                    dominio_string = dominio_string + r", \quad " + r"z=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
                     self.ui.Simbolos.append(z)
             elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
-                dominio_string = r"r=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + ", \quad " + r"\phi=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
+                dominio_string = r"r=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + r", \quad " + r"\phi=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
                 self.ui.Simbolos = [r, phi]
                 if self.ui.DimensionEspacialEntrada.value() > 2:
-                    dominio_string = dominio_string + ", \quad " + r"z=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                    dominio_string = dominio_string + r", \quad " + r"z=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
                     self.ui.Simbolos.append(z)
             elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
-                dominio_string = r"r=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + ", \quad " + r"\theta=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) + ", \quad " + r"\phi=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                dominio_string = r"r=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + r", \quad " + r"\theta=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) + r", \quad " + r"\phi=\left[{0},\ {1}\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
                 self.ui.Simbolos = [r, theta, phi]
             if self.ui.DimensionTemporalEntrada.isChecked():
-                dominio_string = dominio_string + ", \quad " + r"t=\left[0,\ {}\right]".format(latex(self.ui.Dominios[-1][0])) # Tabla.
+                dominio_string = dominio_string + r", \quad " + r"t=\left[0,\ {}\right]".format(latex(self.ui.Dominios[-1][0])) # Tabla.
                 self.ui.Simbolos.append(t)
 
             coeficientes_string = coeficientes_string+r"\right. \ "  # Tabla

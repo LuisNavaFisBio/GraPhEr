@@ -2243,7 +2243,7 @@ class Ui_Graficacion(QMainWindow):
         angulo_radianes = angulo/np.pi
         if angulo_radianes == float(1):
             # Si el ángulo es de pi radianes.
-            angulo_radianes = "\pi"
+            angulo_radianes = r"\pi"
         elif angulo_radianes == float(0):
             # Si el ángulo es cero.
             angulo_radianes = "0"
@@ -2254,7 +2254,7 @@ class Ui_Graficacion(QMainWindow):
             # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
             angulo_radianes = Fraction(angulo_radianes).limit_denominator()
 
-            angulo_radianes = "\\frac{"+"{0}".format(angulo_radianes.numerator if angulo_radianes.numerator != 1 else "")+"\pi}{"+"{0}".format(angulo_radianes.denominator)+"}"
+            angulo_radianes = r"\\frac{"+"{0}".format(angulo_radianes.numerator if angulo_radianes.numerator != 1 else "")+r"\pi}{"+"{0}".format(angulo_radianes.denominator)+"}"
         angulo_string = r"$"+r"{}".format(angulo_radianes)+r"$"
         return angulo_string
 
