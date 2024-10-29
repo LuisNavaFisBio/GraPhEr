@@ -69,7 +69,7 @@ Posteriormente se debe presionar el botón **Interpretar** y esperar a que se re
 
 <p align="center">
     <a>
-        <img src="https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables/blob/main/EjemploInterpretacion.bmp" style="width: 300px; height: 200px;">
+        <img src="https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables/blob/main/EjemploInterpretacion.bmp" style="width: 800px; height: 228px;">
     </a>
 </p>
 
