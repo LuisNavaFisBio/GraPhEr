@@ -77,7 +77,7 @@ Si la interpretación es correcta, se debe presionar el botón **Resolver** en e
 
 <p align="center">
     <a>
-        <img src="https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables/blob/main/EjemploVentanaGraficacion.bmp">
+        <img src="https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables/blob/main/EjemploVentanaGraficacion.png">
     </a>
 </p>
 
