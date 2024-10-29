@@ -81,7 +81,7 @@ Si la interpretación es correcta, se debe presionar el botón **Resolver** en e
     </a>
 </p>
 
-
+En esta ventana se puede obtener el valor de la solución en los distintos puntos del dominio, el valor de los coeficientes de cada uno de los términos considerados, la visualización de las curvas de nivel y, en este caso, también se puede realizar el cambio entre la vista 3D y una vista cenital.
 
 # Documentación
 
