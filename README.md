@@ -36,7 +36,7 @@ pip install matplotlib, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
 
 Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo.
 
-Como ejemplo copiar y pegar en los respectivos campos de la ventana inicial la información siguiente:
+Para tener una ejemplificación del desempeño de la app, se puede copiar y pegar en los respectivos campos de la ventana inicial la información siguiente:
 
 ```
 Número de Dimensiones Espaciales    2
@@ -65,7 +65,7 @@ Coeficientes    Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
 Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*x)
 ```
 
-Posteriormente presionar el botón **Interpretar** y esperar a la ventana emergente que muestra 
+Posteriormente se debe presionar el botón **Interpretar** y esperar a que se realice la interpretación y se muestre la ventana de visualización de la entrada del usuario. En ella se puede observar la entrada en formato LaTeX como se aprecia en la siguiente imagen [https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables/blob/main/EjemploInterpretacion.bmp?style=flat]()
 
 # Documentación
 
