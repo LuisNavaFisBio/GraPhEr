@@ -450,10 +450,16 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         indice_ayuda1 += 1
                         indice_ayuda2 += 1
 
-                if suma != "":
-                    solucion_string = solucion_string + " + " + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
+                if indice != 0:
+                    if suma != "":
+                        solucion_string = solucion_string + " + " + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
+                    else:
+                        solucion_string = solucion_string + " + " + latex(solucion) # Tabla.
                 else:
-                    solucion_string = solucion_string + suma + latex(solucion) # Tabla.
+                    if suma != "":
+                        solucion_string = solucion_string + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
+                    else:
+                        solucion_string = solucion_string + latex(solucion) # Tabla.
 
             self.envioActualizacion("Interpretando Otras Características")
 
