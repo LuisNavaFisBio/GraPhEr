@@ -123,7 +123,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                     raise ExcesoEntradaError
             
             if self.ui.DimensionTemporalEntrada.isChecked(): # Tabla.
-                self.ui.Entrada = self.ui.Entrada.replace("u(\\mathbf{x})", "u(\\mathbf{x},\,t)") # Tabla.
+                self.ui.Entrada = self.ui.Entrada.replace("u(\\mathbf{x})", "u(\\mathbf{x},\\hspace{0.1cm} t)") # Tabla.
 
             # Creación de listas bidimensionales para guardar las interpretaciones de las entradas de cada subproblema.
             self.ui.ValoresPropios = [[] for x in range(int(self.ui.NumeroEntradas.text()))]
@@ -234,7 +234,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         else:
                             if indice2 == 0:
                                 # Cuando el problema tiene primera derivada temporal.
-                                condiciones_string = condiciones_string + ", \\quad u(\\mathbf{x},\,0) = " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2])) # Tabla.
+                                condiciones_string = condiciones_string + ", \\quad u(\\mathbf{x},\\hspace{0.1cm} 0) = " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2])) # Tabla.
                                 coeficientes = [expresion.replace("g_1", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]
                             else:
                                 # Cuando el problema tiene segunda derivada temporal.
@@ -465,30 +465,30 @@ class TrabajoInterpretacion(QtCore.QRunnable):
 
             # Esta parte se encarga de diseñar la interpretación del dominio, así como de obtener las coordenadas presentes en la solución.
             if self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
-                dominio_string = "x=\\left[{0},\, {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) # Tabla.
+                dominio_string = "x=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[0][0]), 'limitesuperior':latex(self.ui.Dominios[0][1])} # Tabla.
                 self.ui.Simbolos = [x]
                 if self.ui.DimensionEspacialEntrada.value() > 1:
-                    dominio_string = dominio_string + ", \\quad " + "y=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
+                    dominio_string = dominio_string + ", \\quad " + "y=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[1][0]), 'limitesuperior':latex(self.ui.Dominios[1][1])} # Tabla.
                     self.ui.Simbolos.append(y)
                 if self.ui.DimensionEspacialEntrada.value() > 2:
-                    dominio_string = dominio_string + ", \\quad " + "z=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                    dominio_string = dominio_string + ", \\quad " + "z=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[2][0]), 'limitesuperior':latex(self.ui.Dominios[2][1])} # Tabla.
                     self.ui.Simbolos.append(z)
             elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
-                dominio_string = "r=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + ", \\quad " + "\\phi=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
+                dominio_string = "r=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[0][0]), 'limitesuperior':latex(self.ui.Dominios[0][1])} + ", \\quad " + "\\phi=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[1][0]), 'limitesuperior':latex(self.ui.Dominios[1][1])} # Tabla.
                 self.ui.Simbolos = [r, phi]
                 if self.ui.DimensionEspacialEntrada.value() > 2:
-                    dominio_string = dominio_string + ", \\quad " + "z=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                    dominio_string = dominio_string + ", \\quad " + "z=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[2][0]), 'limitesuperior':latex(self.ui.Dominios[2][1])} # Tabla.
                     self.ui.Simbolos.append(z)
             elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
-                dominio_string = "r=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + ", \\quad " + "\\theta=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) + ", \\quad " + "\\phi=\\left[{0},\,{1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                dominio_string = "r=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[0][0]), 'limitesuperior':latex(self.ui.Dominios[0][1])} + ", \\quad " + "\\theta=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[1][0]), 'limitesuperior':latex(self.ui.Dominios[1][1])} + ", \\quad " + "\\phi\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[2][0]), 'limitesuperior':latex(self.ui.Dominios[2][1])} # Tabla.
                 self.ui.Simbolos = [r, theta, phi]
             if self.ui.DimensionTemporalEntrada.isChecked():
-                dominio_string = dominio_string + ", \\quad " + "t=\\left[0,\,{}\\right]".format(latex(self.ui.Dominios[-1][0])) # Tabla.
+                dominio_string = dominio_string + ", \\quad " + "t=\\left[0,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limitesuperior':latex(self.ui.Dominios[-1][0])}# Tabla.
                 self.ui.Simbolos.append(t)
 
-            coeficientes_string = coeficientes_string+"\\right. \,"  # Tabla
-            valorespropios_string = valorespropios_string+"\\right. \," # Tabla
-            funcionespeso_string = funcionespeso_string+"\\right. \," # Tabla
+            coeficientes_string = coeficientes_string+"\\right. "  # Tabla
+            valorespropios_string = valorespropios_string+"\\right. " # Tabla
+            funcionespeso_string = funcionespeso_string+"\\right. " # Tabla
 
             # Creación de un diccionario con la entrada interpretada y escrita en LaTeX.
             entrada = {'solucion':solucion_string}
