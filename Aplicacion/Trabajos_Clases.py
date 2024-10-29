@@ -1,5 +1,5 @@
 from PantallaInicialInterfaz import borrardatosaplicacion
-from Errores import *
+from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 
 from fractions import Fraction
 from matplotlib.animation import FuncAnimation, FFMpegFileWriter
