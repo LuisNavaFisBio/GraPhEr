@@ -65,6 +65,8 @@ Coeficientes    Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
 Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*x)
 ```
 
+Posteriormente presionar el botón **Interpretar** y esperar a la ventana emergente que muestra 
+
 # Documentación
 
 No existe una documentación estrictamente hablando, sin embargo, se puede consultar una explicación del desarrollo de la aplicación, así como ejemplos de utilización en el siguiente documento:
