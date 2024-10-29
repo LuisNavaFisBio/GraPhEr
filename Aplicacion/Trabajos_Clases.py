@@ -123,7 +123,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                     raise ExcesoEntradaError
             
             if self.ui.DimensionTemporalEntrada.isChecked(): # Tabla.
-                self.ui.Entrada = self.ui.Entrada.replace(r"u(\\mathbf{x})", r"u(\\mathbf{x},\ t)") # Tabla.
+                self.ui.Entrada = self.ui.Entrada.replace("u(\\mathbf{x})", "u(\\mathbf{x},\ t)") # Tabla.
 
             # Creación de listas bidimensionales para guardar las interpretaciones de las entradas de cada subproblema.
             self.ui.ValoresPropios = [[] for x in range(int(self.ui.NumeroEntradas.text()))]
@@ -136,11 +136,11 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                 self.ui.FuncionesTemporales = [[] for x in range(int(self.ui.NumeroEntradas.text()))]      
             
             solucion_string = "" # Tabla.
-            valorespropios_string = r"\\quad \\left\\lvert \\quad " # Tabla.
-            coeficientes_string = r"\\quad \\left\\lvert \\quad " # Tabla.
-            funcionespeso_string = r"\\quad \\left\\lvert \\quad " # Tabla.
+            valorespropios_string = "\\quad \\left\\lvert \\quad " # Tabla.
+            coeficientes_string = "\\quad \\left\\lvert \\quad " # Tabla.
+            funcionespeso_string = "\\quad \\left\\lvert \\quad " # Tabla.
             for indice in range(int(self.ui.NumeroEntradas.text())):
-                funcionespeso_string = funcionespeso_string + "w_{}=".format(indice + 1) + latex(self.ui.FuncionesPeso[indice])  + r"\\quad \\right\\rvert \\left. \\quad " # Tabla.
+                funcionespeso_string = funcionespeso_string + "w_{}=".format(indice + 1) + latex(self.ui.FuncionesPeso[indice])  + "\\quad \\right\\rvert \\left. \\quad " # Tabla.
 
             self.envioActualizacion("Interpretando Dominio")
 
@@ -181,14 +181,14 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             integral_string_f = integral_string_f + ", ({0}, {1}, {2}))".format(simbolo.replace(",",""), self.ui.Dominios[indice_ayuda][0], self.ui.Dominios[indice_ayuda][1])
                         indice_ayuda += 1
                 elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
-                    for simbolo in [",r", ",phi", ",z"]:
+                    for simbolo in [",", ",phi", ",z"]:
                         if simbolo in CoefE["{}".format(indice)]:
                             CoefE["{}".format(indice)] = CoefE["{}".format(indice)].replace(simbolo,"")
                             integral_string_i = integral_string_i + "Integral("
                             integral_string_f = integral_string_f + ", ({0}, {1}, {2}))".format(simbolo.replace(",",""), self.ui.Dominios[indice_ayuda][0], self.ui.Dominios[indice_ayuda][1])
                         indice_ayuda += 1
                 elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
-                    for simbolo in [",r", [",theta", ",ct"], ",phi",]:
+                    for simbolo in [",", [",theta", ",ct"], ",phi",]:
                         if type(simbolo) == list:
                             if simbolo[0] in CoefE["{}".format(indice)]:
                                 # En caso de que la integral sea respecto a theta.
@@ -229,12 +229,12 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                     for indice2 in range(len(self.ui.Condiciones[indice1])):
                         if ((not self.ui.DimensionTemporalEntrada.isChecked()) or (len(self.ui.Condiciones) > 1)) and (indice1 != 1):
                             # En caso de que el problema considere solo condiciones espaciales o de ambos tipos.
-                            condiciones_string = condiciones_string  + r", \\quad f_{%(subindice)s}(\mathbf{x})" % {"subindice":indice2 + 1} +  "= " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2]))  # Tabla.
+                            condiciones_string = condiciones_string  + ", \\quad f_{%(subindice)s}(\\mathbf{x})" % {"subindice":indice2 + 1} +  "= " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2]))  # Tabla.
                             coeficientes = [expresion.replace("f_{}".format(indice2 + 1), "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]
                         else:
                             if indice2 == 0:
                                 # Cuando el problema tiene primera derivada temporal.
-                                condiciones_string = condiciones_string + r", \\quad u(\mathbf{x},\ 0) = " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2])) # Tabla.
+                                condiciones_string = condiciones_string + ", \\quad u(\\mathbf{x},\ 0) = " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2])) # Tabla.
                                 coeficientes = [expresion.replace("g_1", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]
                             else:
                                 # Cuando el problema tiene segunda derivada temporal.
@@ -316,7 +316,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             partes = self.ui.ValoresPropios[indice][indice1][0].split("=")
                             self.ui.ValoresPropios[indice][indice1][0] = sp.Eq(parsing.parse_expr(partes[0]),parsing.parse_expr(partes[1]))
 
-                        valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1][0]) + r",\\quad \\lambda_{%(subindice)s} \\rightarrow "% {"subindice":indice_ayuda} + signo + "{}".format(latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1]))) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                        valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1][0]) + ",\\quad \\lambda_{%(subindice)s} \\rightarrow "% {"subindice":indice_ayuda} + signo + "{}".format(latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1]))) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                     else: 
                         # Cuando se buscan los k primeros valores propios.
                         if "=" not in self.ui.ValoresPropios[indice][indice1]:
@@ -331,18 +331,18 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             self.ui.ValoresPropios[indice][indice1] = sp.Eq(parsing.parse_expr(partes[0]),parsing.parse_expr(partes[1]))
                         
                         if parsing.parse_expr("lamda_{}n".format(indice_ayuda)) in self.ui.ValoresPropios[indice][indice1].free_symbols and indice1 == 0:
-                            valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s n} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                            valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s n} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                         elif parsing.parse_expr("lamda_{}m".format(indice_ayuda)) in self.ui.ValoresPropios[indice][indice1].free_symbols and indice1 == 1:
-                            valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s m} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                            valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s m} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                         elif parsing.parse_expr("lamda_{}l".format(indice_ayuda)) in self.ui.ValoresPropios[indice][indice1].free_symbols and indice1 == 2:
-                            valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s l} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                            valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s l} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                         else:
                             if indice1 == 0:
-                                valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s n} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                                valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s n} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                             elif indice1 == 1:
-                                valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s m} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                                valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s m} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                             else:
-                                valorespropios_string = valorespropios_string + r"\\lambda_{%(subindice)s l} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                                valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s l} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
 
                     if signo == "":
                         print((parsing.parse_expr("lamda_{}n".format(indice_ayuda)) or parsing.parse_expr("lamda_{}m".format(indice_ayuda)) or parsing.parse_expr("lamda_{}l".format(indice_ayuda))) in list(self.ui.ValoresPropios[indice][indice1].free_symbols))
@@ -385,13 +385,13 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                     
                     if self.ui.NumeroTerminos[indice][indice1][0] == "auto":
                         # En caso de tener una suma con valores propios menores a un número determinado.
-                        suma = suma + r"\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + "}" # Tabla.
+                        suma = suma + "\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + "}" # Tabla.
                     elif (self.ui.NumeroTerminos[indice][indice1][0] != "auto") and (type(self.ui.ValoresPropios[indice][indice1]) == list):
                         # En caso de tener una suma con valores propios mayores a un número determinado.
-                        suma = suma + r"\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + ", {0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
+                        suma = suma + "\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + ", {0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
                     elif self.ui.NumeroTerminos[indice][indice1][0] != self.ui.NumeroTerminos[indice][indice1][1]:
                         # En caso de tener una suma con ambos límites.
-                        suma = suma + r"\sum_{" + "{0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
+                        suma = suma + "\sum_{" + "{0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
                     else:
                         # En caso de tener un solo sumando.
                         suma = suma + "" # Tabla.
@@ -423,7 +423,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                     indices = indices + ""  # Tabla.
                                 else:
                                     indices = indices + "m"  # Tabla.
-                            coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                            coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                             solucion = solucion + parsing.parse_expr("{0}_{1}".format(list(ascii_uppercase)[indice_ayuda1],indices))*funproesp*funprotem # Tabla. 
 
                             indice_ayuda1 += 1
@@ -444,45 +444,45 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                     indices = indices + "0" # Tabla.
                                 else:
                                     indices = indices + "l" # Tabla.
-                        coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + r"\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                        coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                         solucion = solucion + parsing.parse_expr("{0}_{1}".format(list(ascii_uppercase)[indice_ayuda1],indices))*funproesp # Tabla.
 
                         indice_ayuda1 += 1
                         indice_ayuda2 += 1
 
                 if indice != 0:
-                    solucion_string = solucion_string + " + " + suma + "\\left[" + latex(solucion) + "\\\right]" # Tabla.
+                    solucion_string = solucion_string + " + " + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
                 else:
-                    solucion_string = solucion_string + suma + "\\left[" + latex(solucion) + "\\\right]" # Tabla.
+                    solucion_string = solucion_string + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
 
             self.envioActualizacion("Interpretando Otras Características")
 
             # Esta parte se encarga de diseñar la interpretación del dominio, así como de obtener las coordenadas presentes en la solución.
             if self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
-                dominio_string = r"x=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) # Tabla.
+                dominio_string = "x=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) # Tabla.
                 self.ui.Simbolos = [x]
                 if self.ui.DimensionEspacialEntrada.value() > 1:
-                    dominio_string = dominio_string + r", \\quad " + r"y=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
+                    dominio_string = dominio_string + ", \\quad " + "y=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
                     self.ui.Simbolos.append(y)
                 if self.ui.DimensionEspacialEntrada.value() > 2:
-                    dominio_string = dominio_string + r", \\quad " + r"z=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                    dominio_string = dominio_string + ", \\quad " + "z=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
                     self.ui.Simbolos.append(z)
             elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
-                dominio_string = r"r=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + r", \\quad " + r"\phi=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
+                dominio_string = "r=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + ", \\quad " + "\\phi=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) # Tabla.
                 self.ui.Simbolos = [r, phi]
                 if self.ui.DimensionEspacialEntrada.value() > 2:
-                    dominio_string = dominio_string + r", \\quad " + r"z=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                    dominio_string = dominio_string + ", \\quad " + "z=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
                     self.ui.Simbolos.append(z)
             elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
-                dominio_string = r"r=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + r", \\quad " + r"\theta=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) + r", \\quad " + r"\phi=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
+                dominio_string = "r=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[0][0]), latex(self.ui.Dominios[0][1])) + ", \\quad " + "\\theta=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[1][0]), latex(self.ui.Dominios[1][1])) + ", \\quad " + "\\phi=\\left[{0},\ {1}\\right]".format(latex(self.ui.Dominios[2][0]), latex(self.ui.Dominios[2][1])) # Tabla.
                 self.ui.Simbolos = [r, theta, phi]
             if self.ui.DimensionTemporalEntrada.isChecked():
-                dominio_string = dominio_string + r", \\quad " + r"t=\\left[0,\ {}\\right]".format(latex(self.ui.Dominios[-1][0])) # Tabla.
+                dominio_string = dominio_string + ", \\quad " + "t=\\left[0,\ {}\\right]".format(latex(self.ui.Dominios[-1][0])) # Tabla.
                 self.ui.Simbolos.append(t)
 
-            coeficientes_string = coeficientes_string+r"\\right. \ "  # Tabla
-            valorespropios_string = valorespropios_string+r"\\right. \ " # Tabla
-            funcionespeso_string = funcionespeso_string+r"\\right. \ " # Tabla
+            coeficientes_string = coeficientes_string+"\\right. \ "  # Tabla
+            valorespropios_string = valorespropios_string+"\\right. \ " # Tabla
+            funcionespeso_string = funcionespeso_string+"\\right. \ " # Tabla
 
             # Creación de un diccionario con la entrada interpretada y escrita en LaTeX.
             entrada = {'solucion':solucion_string}
@@ -635,7 +635,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                             else:
                                 ValoresObtenidos[indice] = valores[indice]
 
-                    elif "\leq" in latex(entrada):
+                    elif "\\leq" in latex(entrada):
                         entrada = entrada.subs(parsing.parse_expr("lamda_{}m".format(valorpropio_numero)), n).subs(parsing.parse_expr("lamda_{}l".format(valorpropio_numero)), n)
                         ValoresObtenidos = [None for indice_nulo in range(int(-float(entrada.args[1])),  int(float(entrada.args[1]))+1)]
                         numero = int(-float(entrada.args[1]))
