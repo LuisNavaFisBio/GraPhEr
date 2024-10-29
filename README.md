@@ -26,10 +26,11 @@ El procedimiento en Windows es el siguiente:
 
 ---
 
+Finalmente, requiere la instalación de varias librerías de Python. Para ello es necesario abrir la consola del sistema (dependiendo del sistema operativo y de preferencia en modo administrador) y correr el comando (o equivalente según el sistema operativo; el objetivo es añadir todas estas librerías a Python).
 
-Abrir la consola del sistema (dependiendo del sistema operativo y de preferencia en modo administrador) y correr el comando (o equivalente según el sistema operativo, el objetivo es añadir todas esas librerías a Python)
-
+```
 pip install matplotlib, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
+```
 
 Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”.
 
