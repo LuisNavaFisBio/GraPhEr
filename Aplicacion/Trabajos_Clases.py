@@ -1,4 +1,3 @@
-from PantallaInicialInterfaz import borrardatosaplicacion
 from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 
 from fractions import Fraction
@@ -86,7 +85,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             if self.ui.entradaresuelta == True:
                 # En caso de necesitar actualizar la entrada se elimina la información anterior.
                 self.ui.entradaresuelta = False
-                borrardatosaplicacion(self.ui, False)
+                self.ui.borrardatosaplicacion(self.ui, False)
 
             self.envioActualizacion("Leyendo Entrada")
 
