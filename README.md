@@ -13,7 +13,9 @@ GraPhEr es una aplicación de graficación, visualización y exploración de las
 GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior. 
 
 ---
+
 En Windows es necesario instalar Python con las opciones “Use admin privileges when installing py.exe” y “Add python.exe to PATH”, antes de finalizar elegir la opción “Disable PATH limit”.
+
 ---
 
 Adicionalmente, requiere la instalación de [FFMPEG](https://ffmpeg.org/download.html) en el sistema (las instrucciones de instalación para diferentes sistemas se pueden encontrar en 
