@@ -21,8 +21,8 @@ Adicionalmente, requiere la instalación de [FFMPEG](https://ffmpeg.org/download
 
 El procedimiento en Windows es el siguiente:
 1. Descargar el archivo ffmpeg-release-full.7z de [https://www.gyan.dev/ffmpeg/builds/](https://www.gyan.dev/ffmpeg/builds/) y descomprimirlo.
-2. Agregar los archivos ejecutables de la carpeta *bin* en una carpeta que se llame *FFMPEG* y pasar dicha carpeta a la carpeta de *archivos de programa* del sistema.
-3. Posteriormente añadir la dirección de la carpeta en donde están los ejecutables copiados a PATH en las variables de entorno del sistema.
+2. Agregar los archivos ejecutables de la carpeta *bin* en una carpeta que se llame *FFMPEG* y pasar dicha carpeta a *Archivos de Programa* del sistema.
+3. Posteriormente añadir la dirección de *FFMPEG* a PATH en las variables de entorno del sistema.
 
 ---
 
