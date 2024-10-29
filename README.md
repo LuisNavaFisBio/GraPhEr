@@ -32,17 +32,17 @@ Finalmente, requiere la instalación de varias librerías de Python. Para ello e
 pip install matplotlib, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
 ```
 
-## Ejecución de la aplicación
+# Ejecución de la aplicación
 
 Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo.
 
-## Documentación
+# Documentación
 
 No existe una documentación estrictamente hablando, sin embargo, se puede consultar una explicación del desarrollo de la aplicación, así como ejemplos de utilización en el siguiente documento:
 
 
-## Contribuciones
+# Contribuciones
 Cualquier modificación sugerida es aceptada, por favor explique el motivo del cambio y ejemplos del efecto que tendría en la aplicación. 
 
-## Licencia
+# Licencia
 Este proyecto se distribuye con la Licencia Pública General de GNU, la cual puede ser consultada en el archivo **COPYING**.
