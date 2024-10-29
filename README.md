@@ -109,5 +109,5 @@ Documentation is in progress at [3b1b.github.io/manim](https://3b1b.github.io/ma
 Is always welcome.  As mentioned above, the [community edition](https://github.com/ManimCommunity/manim) has the most active ecosystem for contributions, with testing and continuous integration, but pull requests are welcome here too.  Please explain the motivation for a given change and examples of its effect.
 
 
-## License
-This project falls under the MIT license.
+## Licencia
+Este proyecto se distribuye con la Licencia Pública General de GNU, la cual puede ser consultada en el archivo **COPYING**.
