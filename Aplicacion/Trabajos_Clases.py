@@ -385,13 +385,13 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                     
                     if self.ui.NumeroTerminos[indice][indice1][0] == "auto":
                         # En caso de tener una suma con valores propios menores a un número determinado.
-                        suma = suma + "\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + "}" # Tabla.
+                        suma = suma + "\\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + "}" # Tabla.
                     elif (self.ui.NumeroTerminos[indice][indice1][0] != "auto") and (type(self.ui.ValoresPropios[indice][indice1]) == list):
                         # En caso de tener una suma con valores propios mayores a un número determinado.
-                        suma = suma + "\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + ", {0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
+                        suma = suma + "\\sum_{\\lambda_{" + "{0}{1}".format(indice_ayuda, indices[indice1]) + "}" + signo + latex(parsing.parse_expr(self.ui.ValoresPropios[indice][indice1][1])) + ", {0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
                     elif self.ui.NumeroTerminos[indice][indice1][0] != self.ui.NumeroTerminos[indice][indice1][1]:
                         # En caso de tener una suma con ambos límites.
-                        suma = suma + "\sum_{" + "{0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
+                        suma = suma + "\\sum_{" + "{0}".format(indices[indice1]) + "= {0}".format(self.ui.NumeroTerminos[indice][indice1][0]) + "}^{" + "{}".format(self.ui.NumeroTerminos[indice][indice1][1]) + "}" # Tabla.
                     else:
                         # En caso de tener un solo sumando.
                         suma = suma + "" # Tabla.
@@ -450,10 +450,10 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         indice_ayuda1 += 1
                         indice_ayuda2 += 1
 
-                if indice != 0:
+                if suma != "":
                     solucion_string = solucion_string + " + " + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
                 else:
-                    solucion_string = solucion_string + suma + "\\left[" + latex(solucion) + "\\right]" # Tabla.
+                    solucion_string = solucion_string + suma + latex(solucion) # Tabla.
 
             self.envioActualizacion("Interpretando Otras Características")
 
