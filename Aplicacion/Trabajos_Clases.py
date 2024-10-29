@@ -483,7 +483,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                 dominio_string = "r=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[0][0]), 'limitesuperior':latex(self.ui.Dominios[0][1])} + ", \\quad " + "\\theta=\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[1][0]), 'limitesuperior':latex(self.ui.Dominios[1][1])} + ", \\quad " + "\\phi\\left[%(limiteinferior)s,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limiteinferior':latex(self.ui.Dominios[2][0]), 'limitesuperior':latex(self.ui.Dominios[2][1])} # Tabla.
                 self.ui.Simbolos = [r, theta, phi]
             if self.ui.DimensionTemporalEntrada.isChecked():
-                dominio_string = dominio_string + ", \\quad " + "t=\\left[0,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limitesuperior':latex(self.ui.Dominios[-1][0])}# Tabla.
+                dominio_string = dominio_string + ", \\quad " + "t=\\left[0,\\hspace{0.1cm} %(limitesuperior)s\\right]"%{'limitesuperior':latex(self.ui.Dominios[-1][0])} # Tabla.
                 self.ui.Simbolos.append(t)
 
             coeficientes_string = coeficientes_string+"\\right. "  # Tabla
@@ -515,7 +515,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                 Renderer().render(tex.parse())
 
             # Reinicio del string de interpretación.
-            self.ui.Entrada = r'''\textbf{Solución} & \multicolumn{7}{c|}{$\displaystyle u(\mathbf{x}) \approx %(solucion)s $} \\ \hline \textbf{Coeficientes} & \multicolumn{7}{c|}{$\displaystyle %(coeficientes)s$} \\ \hline \textbf{Valores Propios} & \multicolumn{7}{c|}{$\displaystyle %(valores)s$} \\ \hline\textbf{Funciones Peso} & \multicolumn{7}{c|}{$\displaystyle %(funciones)s$} \\ \hline \textbf{Condiciones} & \multicolumn{7}{c|}{$\quad \displaystyle %(condiciones)s \quad$} \\ \hline \textbf{Dominio}& \multicolumn{7}{c|}{$\\quad \displaystyle %(dominio)s \quad$} \\'''
+            self.ui.Entrada = r'''\textbf{Solución} & \multicolumn{7}{c|}{$\displaystyle u(\mathbf{x}) \approx %(solucion)s $} \\ \hline \textbf{Coeficientes} & \multicolumn{7}{c|}{$\displaystyle %(coeficientes)s$} \\ \hline \textbf{Valores Propios} & \multicolumn{7}{c|}{$\displaystyle %(valores)s$} \\ \hline\textbf{Funciones Peso} & \multicolumn{7}{c|}{$\displaystyle %(funciones)s$} \\ \hline \textbf{Condiciones} & \multicolumn{7}{c|}{$\quad \displaystyle %(condiciones)s \quad$} \\ \hline \textbf{Dominio}& \multicolumn{7}{c|}{$\quad \displaystyle %(dominio)s \quad$} \\'''
 
             # Lectura de la precisión y calidad deseada.
             self.ui.Precision = int(self.ui.PrecisionEntrada.value())
