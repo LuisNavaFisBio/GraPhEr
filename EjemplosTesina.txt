@@ -1,0 +1,227 @@
+Ecuación de calor 1D con condiciones de frontera no homogéneas
+0:pi 10
+100
+n   1:10  -----  1   1
+Int[2*(g_1-u_1)*sin(lamda_n*x)/pi,x] ----- 1
+sin(lamda_n*x) ------ -30*x/pi+20
+exp(-(0.5*lamda_n)**2*t) ----- 1
+
+
+Ecuación de onda 1D con condiciones de frontera homogéneas del tipo Neumann
+0:pi 10
+x*(pi-x);sin(pi*x)
+(2*n-1)/2  1:10
+Int[2*g_1*cos(lamda_n*x)/pi,x];Int[2*g_2*cos(lamda_n*x)/(lamda_n*pi),x]
+cos(lamda_n*x)
+cos(lamda_n*t);sin(lamda_n*t)
+
+
+Ecuación de calor unidimensional con extremos fijos a cero y fuente
+0:pi 2
+100
+sin(lamda_n*pi)=0
+Int[2*g_1*sin(lamda_n*x)/pi,x];1
+sin(lamda_n*x)
+exp(-lamda_n**2*t/pi);exp(-lamda_n**2*t/pi)*Int{Int[2*x*exp(-s)*sin(lamda_n*x)/pi]*exp(lamda_n**2*s/pi)}
+
+Ecuación de onda unidimensional con resistencia proporcional a la velocidad
+0:2*pi   10
+0;10
+sin(2*lamda_n*pi)=0:<2    auto
+Int[g_2*sin(lamda_n*x)/(pi*sqrt(Abs(4-lamda_n**2))),x]
+sin(lamda_n*x)
+exp(-2*t)*sinh(sqrt(Abs(4-lamda_n**2))*t)
+
+1      1
+Int[g_2*sin(2*x)/pi,x]
+sin(2*x)
+t*exp(-2*t)
+
+n/2:>2     1:10
+Int[g_2*sin(lamda_n*x)/(pi*sqrt(Abs(4-lamda_n**2))),x]
+sin(lamda_n*x)
+exp(-2*t)*sin(sqrt(Abs(4-lamda_n**2))*t)
+
+Ecuación de la cadena colgante
+0:1    10
+Piecewise((x/100, x<1/2), ((1-x)/100, x>=1/2));0
+besselj(0, lamda_n)=0        1:10
+Int[g_1*besselj(0, lamda_n*sqrt(x))/besselj(1,lamda_n)**2, x]
+besselj(0,lamda_n*sqrt(x))
+cos(sqrt(9.81)*t*lamda_n/2)
+
+Ecuación del telegrafista
+0:1     10
+DiracDelta(x-0.01);0
+n*pi     1:10
+Int[2*g_1*sin(lamda_n*x)/cos(atan2(1,lamda_n)),x]
+sin(lamda_n*x)
+exp(-t)*cos(lamda_n*t-atan2(1,lamda_n))
+
+Ecuación de Laplace en dos dimensiones y coordenadas cartesianas
+0:pi  0:pi
+x*sin(x);x*sin(x);y*(pi-y);y*(y-pi)
+n 	1:10
+Int[2*f_1*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
+sin(lamda_n*x)*sinh(lamda_n*(pi-y))
+
+n 1:10
+Int[2*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
+sin(lamda_n*x)*sinh(lamda_n*y)
+
+n 1:10
+Int[2*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+sin(lamda_n*y)*sinh(lamda_n*(pi-x))
+
+n 1:10
+Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+sin(lamda_n*y)*sinh(lamda_n*x)
+
+Ecuación de Laplace en coordenadas polares
+0:1  0:pi/2 
+sin(phi)
+1   1
+1
+2*phi/pi
+
+2*n   1:10
+Int[4*(f_1-u_1)*sin(lamda_n*phi)/pi,phi]
+r**lamda_n*sin(lamda_n*phi)
+
+Ecuación de Laplace en una región anular
+1:3 0:2*pi
+(2*pi-phi)*(pi-phi)*phi
+1     1
+Int[f_1/(2*pi),phi]
+(ln(3)-ln(r))/ln(3)
+
+n     1:10
+Int[f_1*cos(lamda_n*phi)/pi,phi];Int[f_1*sin(lamda_n*phi)/pi,phi]
+(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*cos(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n));(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*sin(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n))
+
+
+Ecuación de Poisson en dos dimensiones y coordenadas cartesianas
+0:1  0:1
+DiracDelta(x-1/2)*DiracDelta(y-1/2)
+n*pi;m*pi	1:10;1:10
+Int[4*f_1*sin(lamda_n*x)*sin(lamda_m*y)/(lamda_n**2+lamda_m**2),x,y]
+sin(lamda_n*x)*sin(lamda_m*y)
+
+
+Ecuación de calor bidimensional en coordenadas cartesianas
+0:pi  0:pi   10
+Piecewise((10,y<=x), (0, y>x))
+n;m 1:10;1:10
+Int[4*g_1*sin(lamda_n*x)*sin(lamda_m*y)/pi**2,x,y]
+sin(lamda_n*x)*sin(lamda_m*y)
+exp(-((lamda_n/pi)**2+(lamda_m/pi)**2)*t)
+
+Ecuación de onda bidimensional en coordenadas cartesianas
+0:1  0:1   10
+x*(x-1)*y*(y-1);0
+n*pi;m*pi  1:10;1:10
+Int[4*g_1*sin(lamda_n*x)*sin(lamda_m*y),x,y]
+sin(lamda_n*x)*sin(lamda_m*y)
+cos(sqrt((lamda_n/pi)**2+(lamda_m/pi)**2)*t)
+
+
+Ecuación de calor bidimensional en coordenadas polares y con condición de frontera no homogénea.
+0:3  0:pi/2   10
+sin(2*phi):3-r
+2    1
+Int[4*f_1*sin(lamda_n*phi)/pi,phi]
+(r/3)**lamda_n*sin(lamda_n*phi)
+1
+
+2*n;besselj(lamda_n,3*lamda_m)=0     1:3;1:3        r
+Int[8*(g_1-u_1)*besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)/(besselj(lamda_n+1,3*lamda_m)**2*9*pi),r,phi]
+besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)
+exp(-(lamda_m/3)**2*t)
+
+
+Ecuación de la placa vibrante en coordenadas polares
+0:1   0:2*pi   10
+1;0
+besselj(0,lamda_n)*besseli(1,lamda_n)+besseli(0,lamda_n)*besselj(1,lamda_n)=0      1:10             r
+Int[g_1*(besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r)),r]/Int[(besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r))**2,r]
+besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r)
+cos(lamda_n**2*t)
+
+
+Ecuación de Laplace en coordenadas cartesianas representando una caja cuyos dos lados opuestos tienen potenciales distintos
+0:1   0:1   0:1
+1;-1
+n*pi;m*pi     1:10;1:10
+Int[4*sin(lamda_n*y)*sin(lamda_n*z)/sinh(pi*sqrt((lamda_n/pi)**2+(lamda_m/pi)**2)),y,z]
+sinh((pi*sqrt((lamda_n/pi)**2+(lamda_m/pi)**2))*(1-x))*sin(lamda_n*y)*sin(lamda_n*z)
+
+n*pi;m*pi     1:10;1:10
+Int[-4*sin(lamda_n*y)*sin(lamda_n*z)/sinh(pi*sqrt((lamda_n/pi)**2+(lamda_m/pi)**2)),y,z]
+sinh((pi*sqrt((lamda_n/pi)**2+(lamda_m/pi)**2))*x)*sin(lamda_n*y)*sin(lamda_n*z)
+
+
+Ecuación de Poisson tridimensional en coordenadas cartesianas
+0:1  0:1  0:1
+DiracDelta(y-1/2)*DiracDelta(z-1/2)
+n*pi;m*pi;l*pi	  1:10;1:10;1:10
+Int[8*f_1*sin(lamda_n*x)*sin(lamda_m*y)*sin(lamda_l*z)/(lamda_n**2+lamda_m**2+lamda_l**2),x,y,z]
+sin(lamda_n*x)*sin(lamda_m*y)*sin(lamda_l*z)
+
+
+Ecuación de Laplace tridimensional en coordenadas cilíndricas representando la temperatura en el estado estacionario de un barril flotando en el agua
+0:1/4  0:2*pi  0:1
+30;-5;Piecewise((-5,z<2/3),(30,z>2/3))
+besselj(0, lamda_n)=0          1:10
+Int[32*f_1*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n)**2),r]
+besselj(0, lamda_n*r)*sinh(lamda_n*z)
+
+besselj(0, lamda_n)=0          1:10
+Int[32*f_2*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n)**2),r]
+besselj(0, lamda_n*r)*sinh(lamda_n*(1-z))
+
+n*pi         1:10
+Int[2*f_3*sin(lamda_n*z)/besseli(0,lamda_n/4),z]
+besseli(0, lamda_n*r)*sin(lamda_n*z)
+
+
+Ecuación de Poisson tridimensional en coordenadas cilíndricas
+0:1  0:2*pi  -1:1
+DiracDelta(r-1/2)*(1-cos(phi))
+0;besselj(0,lamda_m)=0;(2*l-1)*pi/2	1;1:3;1:3
+Int[f_1*besselj(lamda_n, lamda_m*r)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z]
+besselj(lamda_n, lamda_m*r)*cos(lamda_l*z)
+
+n;besselj(lamda_n,lamda_m)=0;(2*l-1)*pi/2	  1:3;1:3;1:3
+Int[2*f_1*besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z];Int[2*f_1*besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z]
+besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)*cos(lamda_l*z);besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)*cos(lamda_l*z)
+
+
+Ecuación de Laplace tridimensional en coordenadas esféricas representando la temperatura en el estado estacionario de una boya flotando en el agua
+0:1	0:pi	0:2*pi
+Piecewise((30, theta>pi/2+atan2(1,4)), (-5,theta<pi/2+atan2(1,4)))
+n      0:9
+Int[(2*lamda_n+1)*Piecewise((30, s>cos(pi/2+atan2(1,4))), (-5,s<cos(pi/2+atan2(1,4))))*legendre(lamda_n,s)/2,ct]
+r**lamda_n*legendre(lamda_n,cos(theta))
+
+
+Ecuación de Laplace tridimensional en coordenadas esféricas representando el potencial entre dos esferas conductoras concéntricas con potenciales opuestos
+1:2	0:pi	0:2*pi
+1;-1
+n       0:9
+Int[(2*lamda_n+1)*f_1*legendre(lamda_n,s)/(2*((1/2)**lamda_n-2**(lamda_n+1))),ct]
+((r/2)**lamda_n-(2/r)**(lamda_n+1))*legendre(lamda_n, cos(theta))
+
+n       0:9
+Int[(2*lamda_n+1)*f_2*legendre(lamda_n,s)/(2*(2**lamda_n-(1/2)**(lamda_n+1))),ct]
+(r**lamda_n-(1/r)**(lamda_n+1))*legendre(lamda_n, cos(theta))
+
+Ecuación de Poisson tridimensional en coordenadas esféricas
+0:1   0:pi   0:2*pi
+Piecewise((1,phi<pi), (0,phi>pi))
+n;abs(lamda_m)<=lamda_n      0:2;absoluto   1
+Int[f_1*conjugate(Ynm(lamda_n, lamda_m)),ct,phi]
+r**lamda_n*Ynm(lamda_n, lamda_m)
+
+n;besselj(lamda_n+1/2,lamda_m)=0;abs(lamda_l)<=lamda_n  0:2;1:3;absoluto  r**2
+Int[2*DiracDelta(r-1/4)*DiracDelta(s)*jn(lamda_n,lamda_m*r)*conjugate(Ynm(lamda_n, lamda_l))/(lamda_m*jn(lamda_n+1,lamda_m))**2, r, ct, phi]
+jn(lamda_n,lamda_m*r)*Ynm(lamda_n, lamda_l)
