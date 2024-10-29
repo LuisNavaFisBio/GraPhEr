@@ -10,12 +10,12 @@
 ## -*- coding: utf-8 -*-
 ################################################################################################
 
-from Errores import *
+from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 from PantallaGrafica import Ui_Graficacion, Lienzo
 from PantallaEntradaInterpretada import Ui_InterpretacionEDP
 from VentanaCarga import Ui_VentanaCarga
 from VentanaEtiquetas import Ui_VentanaEtiquetas
-from Trabajos_Clases import *
+from Trabajos_Clases import Inicializacion, TrabajoInterpretacion, TrabajoResolucion, TrabajoCambiarCoordenada, TrabajoCorteEspecifico, TrabajoCurvasNivel, TrabajoCambioProyeccion, TrabajoGuardado, TrabajoVisualizacion
 
 
 from matplotlib.animation import FuncAnimation, FFMpegFileWriter
