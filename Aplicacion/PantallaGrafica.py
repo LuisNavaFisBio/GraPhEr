@@ -3743,8 +3743,9 @@ class Ui_Graficacion(QMainWindow):
                 # Envio de actualización cuando no se está guardando la animación.
                 self.envioActualizacion("Calculando Valores")
 
-            # Calculo de los valores constantes con los que se buscarán las curvas de nivel.
+            # Calculo de los valores constantes con los que se buscarán las curvas de nivel. La lista contiene el valor 10000 para homogeneizar la aplicación con el caso de curvas de nivel para valores especificados manualmente.
             self.curvas_nivel = np.round(np.linspace(self.minimo+(self.maximo-self.minimo)/10, self.minimo+9*(self.maximo-self.minimo)/10, 9), self.Precision)
+            self.curvas_nivel.append(10000)
 
             if self.Animacion.curvas_nivel == False:
                 # Configuración de los atributos de la animación para habilitar la visualización de curvas de nivel.
@@ -3773,12 +3774,12 @@ class Ui_Graficacion(QMainWindow):
                 # Envio de actualización cuando no se está guardando la animación.
                 self.envioActualizacion("Interpretando Valores")
 
-            # Interpretación de los valores introducidos por el usuario. La lista contiene el valor 100000 para superar la limitación de la función contour de requerir dos valores para lograr la graficación y así permitir la visualización de una sola curva de nivel.
+            # Interpretación de los valores introducidos por el usuario. La lista contiene el valor 10000 para superar la limitación de la función contour de requerir dos valores para lograr la graficación y así permitir la visualización de una sola curva de nivel.
             self.curvas_nivel = []
             for valor in self.CurvasNivelEspecificasEntrada.text().split(";"):
                 if valor != "":
                     self.curvas_nivel.append(np.round(float(parsing.parse_expr(valor)), self.Precision))
-            self.curvas_nivel.append(1000)
+            self.curvas_nivel.append(10000)
 
             if self.carga:
                 # Envio de actualización cuando no se está guardando la animación.
