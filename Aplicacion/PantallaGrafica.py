@@ -1,6 +1,6 @@
 from VentanaCarga import Ui_VentanaCarga
-from Animaciones import *
-from Errores import *
+from Animaciones import ReproductorProyeccion1D, ReproductorGeneral, Graficacion2D_NoTemporal
+from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 
 from fractions import Fraction
 from matplotlib import cm
