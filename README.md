@@ -36,7 +36,8 @@ pip install matplotlib, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
 
 Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo.
 
-### Documentación
+## Documentación
+
 No existe una documentación estrictamente hablando, sin embargo, se puede consultar una explicación del desarrollo de la aplicación, así como ejemplos de utilización en el siguiente documento:
 
 
