@@ -4,7 +4,7 @@
     </a>
 </p>
 
-[![GNU GENERAL PUBLIC LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
+[![GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/graphics/gplv3-127x51.png?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html#license-text)
 
 Manim is an engine for precise programmatic animations, designed for creating explanatory math videos.
 
