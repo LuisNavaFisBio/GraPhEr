@@ -6,81 +6,32 @@
 
 [![GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/graphics/gplv3-127x51.png?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html#license-text)
 
-Manim is an engine for precise programmatic animations, designed for creating explanatory math videos.
+GraPhEr es una aplicación de graficación, visualización y exploración de las soluciones de ecuaciones diferenciales parciales que admitan una resolución en variables separadas.
 
-Note, there are two versions of manim.  This repository began as a personal project by the author of [3Blue1Brown](https://www.3blue1brown.com/) for the purpose of animating those videos, with video-specific code available [here](https://github.com/3b1b/videos).  In 2020 a group of developers forked it into what is now the [community edition](https://github.com/ManimCommunity/manim/), with a goal of being more stable, better tested, quicker to respond to community contributions, and all around friendlier to get started with. See [this page](https://docs.manim.community/en/stable/faq/installation.html#different-versions) for more details.
+## Requerimientos
+GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior.
 
-## Installation
-> **WARNING:** These instructions are for ManimGL _only_. Trying to use these instructions to install [ManimCommunity/manim](https://github.com/ManimCommunity/manim) or instructions there to install this version will cause problems. You should first decide which version you wish to install, then only follow the instructions for your desired version.
-> 
-> **Note**: To install manim directly through pip, please pay attention to the name of the installed package. This repository is ManimGL of 3b1b. The package name is `manimgl` instead of `manim` or `manimlib`. Please use `pip install manimgl` to install the version in this repository.
+Instalar con las opciones “Use admin privileges when installing py.exe” y “Add python.exe to PATH”, antes de finalizar elegir la opción “Disable PATH limit”
 
-Manim runs on Python 3.7 or higher.
+Descargar el ejecutable de FFMPEG (este procedimiento es para windows) https://ffmpeg.org/download.html 
+Agregar los archivos ejecutables en una carpeta que se llame FFMPEG y pasar dicha carpeta a la carpeta de archivos de programa.
+Posteriormente añadir la dirección de la carpeta en donde están los ejecutables copiados a PATH en las variables de entorno del sistema.
+En el caso de otros sistemas, para instalar FFMPEG seguir las instrucciones de https://github.com/kkroening/ffmpeg-python
+
+
+Abrir la consola del sistema (dependiendo del sistema operativo y de preferencia en modo administrador) y correr el comando (o equivalente según el sistema operativo, el objetivo es añadir todas esas librerías a Python)
+
+pip install matplotlib, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
+
+Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”.
+
+
 
 System requirements are [FFmpeg](https://ffmpeg.org/), [OpenGL](https://www.opengl.org/) and [LaTeX](https://www.latex-project.org) (optional, if you want to use LaTeX).
 For Linux, [Pango](https://pango.gnome.org) along with its development headers are required. See instruction [here](https://github.com/ManimCommunity/ManimPango#building).
 
 
-### Directly
-
-```sh
-# Install manimgl
-pip install manimgl
-
-# Try it out
-manimgl
-```
-
-For more options, take a look at the [Using manim](#using-manim) sections further below.
-
-If you want to hack on manimlib itself, clone this repository and in that directory execute:
-
-```sh
-# Install manimgl
-pip install -e .
-
-# Try it out
-manimgl example_scenes.py OpeningManimExample
-# or
-manim-render example_scenes.py OpeningManimExample
-```
-
-### Directly (Windows)
-
-1. [Install FFmpeg](https://www.wikihow.com/Install-FFmpeg-on-Windows).
-2. Install a LaTeX distribution. [MiKTeX](https://miktex.org/download) is recommended.
-3. Install the remaining Python packages.
-    ```sh
-    git clone https://github.com/3b1b/manim.git
-    cd manim
-    pip install -e .
-    manimgl example_scenes.py OpeningManimExample
-    ```
-
-### Mac OSX
-
-1. Install FFmpeg, LaTeX in terminal using homebrew.
-    ```sh
-    brew install ffmpeg mactex
-    ```
-   
-2. Install latest version of manim using these command.
-    ```sh
-    git clone https://github.com/3b1b/manim.git
-    cd manim
-    pip install -e .
-    manimgl example_scenes.py OpeningManimExample
-    ```
-
-## Anaconda Install
-
-1. Install LaTeX as above.
-2. Create a conda environment using `conda create -n manim python=3.8`.
-3. Activate the environment using `conda activate manim`.
-4. Install manimgl using `pip install -e .`.
-
-
-## Using manim
+## Ejecución de la aplicación
 Try running the following:
 ```sh
 manimgl example_scenes.py OpeningManimExample
