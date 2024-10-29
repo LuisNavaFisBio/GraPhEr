@@ -1,13 +1,34 @@
+#    GraPhEr - Ecuaciones Diferenciales Parciales Separables. Un programa para la graficación de la solución aproximada a ecuaciones diferenciales párciales que admiten soluciones en variables separadas.
+#    Copyright (C) 2024  Luis Enrique Nava Garcia
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#    Contact Email: navaluisfisbio@ciencias.unam.mx
+
 ################################################################################################
 ## Interfaz gráfica para la visualización gráfica de la solución de problemas a través del método de variables separables.
-##
+#
 ## Creada por: Luis Enrique Nava Garcia, estudiante de la Licenciatura en Física Biomédica. Correo de contacto navaluisfisbio@ciencias.unam.mx
-##
+#
 ## Diseño de la interfaz creado en Qt User Interface Compiler (versión 5.14.1) por Luis Enrique Nava Garcia.
-##
-## Fecha: Julio 2024
-## 
+#
+## Fecha: Octubre 2024
+#
 ## -*- coding: utf-8 -*-
+#
+## Se necesitan los archivos PantallaInicialInterfaz.py, PantallaEntradaInterpretada.py, PantallGrafica.py, Trabajo_Clases.py, Animaciones.py, 
+## Errores.py, VentanaCarga.py y VentanaEtiquetas.py, así como las carpetas Iconos y Carga para la ejecución de la interfaz gráfica.
 ################################################################################################
 
 from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
@@ -1935,6 +1956,8 @@ def borrardatosaplicacion(ui_informacion, cierretotal):
 # Ejecución de la aplicación
 if __name__ == "__main__":
     import sys
+
+    print("GraPhEr - Ecuaciones Diferenciales Parciales Separables  Copyright (C) 2024  Luis Enrique Nava Garcia \n This program comes with ABSOLUTELY NO WARRANTY; for details see the COPYING file. \n This is free software, and you are welcome to redistribute it \n under certain conditions; see the COPYING file for details.")
 
     app = QApplication(sys.argv)
     VentanaInicial = PantallaPrincipal()
