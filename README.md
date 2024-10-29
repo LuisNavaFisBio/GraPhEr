@@ -17,7 +17,7 @@ En Windows es necesario instalar Python con las opciones “Use admin privileges
 ---
 
 Adicionalmente, requiere la instalación de [FFMPEG](https://ffmpeg.org/download.html) en el sistema (las instrucciones de instalación para diferentes sistemas se pueden encontrar en 
-[ffmpeg-python](https://github.com/kkroening/ffmpeg-python)). Este es un software para grabar los animaciones.
+[ffmpeg-python](https://github.com/kkroening/ffmpeg-python)). Este es un software necesario para crear los videos de las animaciones, si no planea exportar las animaciones no es necesaria su instalación.
 
 El procedimiento en Windows es el siguiente:
 1. Descargar el archivo ffmpeg-release-full.7z de [https://www.gyan.dev/ffmpeg/builds/](https://www.gyan.dev/ffmpeg/builds/) y descomprimirlo.
