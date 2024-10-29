@@ -36,6 +36,30 @@ pip install matplotlib, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
 
 Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo.
 
+Como ejemplo copiar y pegar en los respectivos campos de la ventana inicial la información siguiente:
+# Dimensiones Espaciales    2
+Dominio x    0:pi        Dominio y    0:pi
+Condiciones iniciales y/o de frontera    x*sin(x);x*sin(x);y*(pi-y);y*(y-pi)
+Número de subproblemas    4
+
+Solución del Subproblema #1
+Valores Propios    n        Número de Términos    1:10
+Coeficientes    Int[2*f_1*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
+Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*(pi-y))
+
+n 1:10
+Int[2*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
+sin(lamda_n*x)*sinh(lamda_n*y)
+
+n 1:10
+Int[2*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+sin(lamda_n*y)*sinh(lamda_n*(pi-x))
+
+n 1:10
+Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+sin(lamda_n*y)*sinh(lamda_n*x)
+
+
 # Documentación
 
 No existe una documentación estrictamente hablando, sin embargo, se puede consultar una explicación del desarrollo de la aplicación, así como ejemplos de utilización en el siguiente documento:
