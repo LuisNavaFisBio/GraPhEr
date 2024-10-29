@@ -8,7 +8,7 @@
 
 GraPhEr es una aplicación de graficación, visualización y exploración de las soluciones de ecuaciones diferenciales parciales que admitan una resolución en variables separadas.
 
-## Requerimientos
+# Requerimientos
 
 GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior. 
 
