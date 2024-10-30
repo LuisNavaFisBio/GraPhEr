@@ -92,4 +92,4 @@ No existe una documentación estrictamente hablando, sin embargo, se puede consu
 Cualquier modificación sugerida es aceptada, por favor explique el motivo del cambio y ejemplos del efecto que tendría en la aplicación. 
 
 # Licencia
-Este proyecto (código, iconos, logo y animaciones) se distribuye con la versión 3 de la Licencia Pública General de GNU, la cual puede ser consultada en el archivo **COPYING** o en [GNU](https://www.gnu.org/licenses/). 
+Este proyecto (código, iconos, logo y animaciones de carga) se distribuye con la versión 3 de la Licencia Pública General de GNU, la cual puede ser consultada en el archivo **COPYING** o en [GNU](https://www.gnu.org/licenses/). 
