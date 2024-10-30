@@ -1697,6 +1697,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # Inicia la animación y actualiza la ventana de carga.
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
+        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.espacio_reproduccion)
         self.Ui_Carga.label.setText(mensaje)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
