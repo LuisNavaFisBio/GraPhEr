@@ -837,8 +837,8 @@ class Ui_Graficacion(QMainWindow):
 
         # Diseño y configuración del campo de entrada del cuadro_fijo de la coordenada fija y el botón de graficación correspondiente.
         self.CoordenadaFija = QLineEdit()
-        self.CoordenadaFija.setMinimumSize(QSize(100, 40))
-        self.CoordenadaFija.setMaximumSize(QSize(100, 40))
+        self.CoordenadaFija.setMinimumSize(QSize(140, 40))
+        self.CoordenadaFija.setMaximumSize(QSize(140, 40))
         self.CoordenadaFija.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
         horizontalLayout_7.addWidget(self.CoordenadaFija)
 
@@ -3728,7 +3728,7 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1.setChecked(True)
                 self.CoordenadaFija_1.setEnabled(True)
             self.CoordenadaFija.setEnabled(True)
-            self.CoordenadaFija.setText("Ingrese un valor.")
+            self.CoordenadaFija.setText("Ingrese un valor")
             self.GraficarCoordenadaFija.setEnabled(True)
             self.GraficarCoordenadaFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
 
