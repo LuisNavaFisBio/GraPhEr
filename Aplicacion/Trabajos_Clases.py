@@ -273,6 +273,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                 coeficientes = [expresion.replace("g_1", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]
                             else:
                                 # Cuando el problema tiene segunda derivada temporal.
+                                condiciones_string = condiciones_string + ", \\quad \\frac{\\partial u(\\mathbf{x},\\hspace{0.1cm} t)}{\\partial t}|_{t=0}=" + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2]))  # Tabla.
                                 coeficientes = [expresion.replace("g_2", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]    
 
                 if self.ui.DimensionTemporalEntrada.isChecked():
