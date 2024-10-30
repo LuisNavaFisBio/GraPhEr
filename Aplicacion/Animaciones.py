@@ -149,9 +149,10 @@ class ReproductorGeneral(FuncAnimation):
         """Inicia la reproducción de la animación de manera normal (inicio-fin)."""
 
         self.adelante = True
-        self.empezar()
         for eje in self.canva.figura.axes:
             self.canva.figura.canvas.release_mouse(eje)
+        self.empezar()
+        
 
     def reproducciónAtras(self, event=None):
         """Inicia la reproducción de la animación en reversa (fin-inicio)."""
@@ -159,18 +160,25 @@ class ReproductorGeneral(FuncAnimation):
         if not (self.cuadro < self.argumentos[0]+2):
             # Inicio de la reproducción siempre y cuando el cuadro actual no sea el primer cuadro de la reproducción.
             self.adelante = False
+            for eje in self.canva.figura.axes:
+                self.canva.figura.canvas.release_mouse(eje)
             self.empezar()
+            
 
     def pasoAdelante(self, event=None):
         """Avanza la animación al siguiente cuadro."""
         
         self.adelante = True
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.cuadroPorCuadro()
 
     def pasoAtras(self, event=None):
         """Retrocede la animación al cuadro previo."""
 
         self.adelante = False
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.cuadroPorCuadro()
 
     def cuadroPorCuadro(self):
@@ -184,6 +192,8 @@ class ReproductorGeneral(FuncAnimation):
             self.cuadro += 1
         # Actualizar el valor del deslizador.
         self.deslizador.set_val(self.cuadro-self.argumentos[0]-1)
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.canva.figura.canvas.draw_idle()
 
     def botonesReproduccion(self):
@@ -347,6 +357,8 @@ class ReproductorProyeccion1D(FuncAnimation):
         """Inicia la reproducción de la animación de manera normal (inicio-fin)."""
 
         self.adelante = True
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.empezar()
 
     def reproducciónAtras(self, event = None):
@@ -355,18 +367,24 @@ class ReproductorProyeccion1D(FuncAnimation):
         if not (self.cuadro < 1):
             # Inicio de la reproducción siempre y cuando el cuadro actual no sea el primer cuadro de la reproducción.
             self.adelante = False
+            for eje in self.canva.figura.axes:
+                self.canva.figura.canvas.release_mouse(eje)
             self.empezar()
     
     def pasoAdelante(self, event = None):
         """Avanza la animación al siguiente cuadro."""
         
         self.adelante = True
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.cuadroPorCuadro()
     
     def pasoAtras(self, event = None):
         """Retrocede la animación al cuadro previo."""
 
         self.adelante = False
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.cuadroPorCuadro()
 
     def cuadroPorCuadro(self):
@@ -380,6 +398,8 @@ class ReproductorProyeccion1D(FuncAnimation):
             self.cuadro += 1
         # Actualizar el valor del deslizador.
         self.deslizador.set_val(self.cuadro)
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
         self.canva.figura.canvas.draw_idle()
 
     def botonesReproduccion(self):
