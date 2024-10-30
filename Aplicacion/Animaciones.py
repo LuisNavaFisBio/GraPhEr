@@ -443,14 +443,6 @@ class ReproductorProyeccion1D(FuncAnimation):
         self.cuadro = int(cuadro)
         # Actualización de la gráfica.
         self.funcionActualizadora(self.cuadro, *self.argumentos[0:-2])
-        if cuadro == -1:
-            self.proceso = False
-            self.event_source.stop()
-            QCoreApplication.processEvents()
-            for eje in self.canva.figura.axes:
-                self.canva.figura.canvas.release_mouse(eje)
-            self.canva.figura.canvas.release_mouse(self.ejeDeslizador)
-            self.canva.figura.canvas.release_mouse(self.ejeBotones)
         self.canva.figura.canvas.draw_idle()
 
     def actualizar(self, indice):
@@ -470,6 +462,13 @@ class ReproductorProyeccion1D(FuncAnimation):
             # Último cuadro de la introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
             self.detener()
+            self.proceso = False
+            self.event_source.stop()
+            QCoreApplication.processEvents()
+            for eje in self.canva.figura.axes:
+                self.canva.figura.canvas.release_mouse(eje)
+            self.canva.figura.canvas.release_mouse(self.ejeDeslizador)
+            self.canva.figura.canvas.release_mouse(self.ejeBotones)
 
             # Visualización de la barra de color.
             colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
