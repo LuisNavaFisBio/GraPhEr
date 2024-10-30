@@ -316,7 +316,7 @@ class ReproductorProyeccion1D(FuncAnimation):
     def iniciar(self):
         """Inicia la creación e interacción de la animación."""
 
-        self.proceso = False
+        self.proceso = True
         self.adelante = True 
         FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = self.contador(), interval = self.interval, repeat = False, save_count = self.maximo) 
 
@@ -443,6 +443,10 @@ class ReproductorProyeccion1D(FuncAnimation):
         self.cuadro = int(cuadro)
         # Actualización de la gráfica.
         self.funcionActualizadora(self.cuadro, *self.argumentos[0:-2])
+        if cuadro == -1:
+            self.proceso = False
+            self.event_source.stop()
+            QCoreApplication.processEvents()
         self.canva.figura.canvas.draw_idle()
 
     def actualizar(self, indice):
@@ -461,8 +465,6 @@ class ReproductorProyeccion1D(FuncAnimation):
         elif indice == -1:
             # Último cuadro de la introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
-            self.detener()
-            QCoreApplication.processEvents()
 
             # Visualización de la barra de color.
             colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
