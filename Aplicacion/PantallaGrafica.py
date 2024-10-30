@@ -1039,7 +1039,6 @@ class Ui_Graficacion(QMainWindow):
                 self.label_5_1.setSizePolicy(sizePolicy2)
                 self.label_5_1.setVisible(False)
 
-            print("a")
             # Diseño de la caja de herramientas para la visualización del valor de la solución en un punto determinado.
             self.Coordenada1.setText("{}".format(self.Dominio[0][0]))
             if not self.dependencia_tiempo:
@@ -1047,7 +1046,6 @@ class Ui_Graficacion(QMainWindow):
             else:
                 self.Coordenada2.setText("0")
 
-            print("a")
             if len(self.Dominio) < 3:
                 # Cuando solo hay dos variables en la solución.
                 self.Coordenada3.setEnabled(False)
@@ -1073,7 +1071,6 @@ class Ui_Graficacion(QMainWindow):
                     # Cuando la tercera variable es temporal.
                     self.Coordenada3.setText("0")
 
-            print("a")
             # Colocación de las imágenes de cada una de las variables (coordenadas) involucradas.
             if self.Coordenadas == "Cartesianas":
                 self.label_7.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "x2.svg")))
@@ -1095,7 +1092,6 @@ class Ui_Graficacion(QMainWindow):
             elif len(self.Dominio) == 2 and len(self.Dominio[-1]) != 1:
                 self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "sinOpcion.svg")))
             
-            print("a")
             # Diseño de la caja de herramientas para la visualización de curvas de nivel, intercambio de proyecciones y graficación de cortes específicos.
             if ((len(self.Dominio) == 3) and not self.dependencia_tiempo) or ((len(self.Dominio) == 2) and self.dependencia_tiempo):
                 # Desactivación de curvas de nivel cuando no hay dependencia temporal y se tiene una visualización 3D de una función de 3 variables espaciales o cuando se tiene un problema de una dimensión espacial con dependencia temporal.
@@ -1125,7 +1121,7 @@ class Ui_Graficacion(QMainWindow):
             self.CoordenadaFija_1.setSizePolicy(sizePolicy2)
             self.CoordenadaFija_2.setSizePolicy(sizePolicy2)
             self.CoordenadaFija_3.setSizePolicy(sizePolicy2)
-            print("a")
+
             if (len(self.Dominio) < 3) and (not self.dependencia_tiempo):
                 # Cuando se tiene un problema de dos coordenadas y estas son espaciales, se deshabilita la opción de graficación de cortes.
                 self.CoordenadaFija_1.setChecked(False)
@@ -1173,9 +1169,13 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "t2.svg")))
                 self.CoordenadaFija_2_label.setVisible(False)
                 self.CoordenadaFija_3_label.setVisible(False)
-                if self.Proyeccion or (len(self.Dominio) > 2):
+                if self.Proyeccion and (len(self.Dominio) > 2):
                     self.CurvasNivelAuto.setShortcut("Ctrl+A")
                     self.CurvasNivelAuto.setEnabled(True)
+                    self.CurvasNivelAuto.setCheckable(True)
+                    self.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+                    self.CurvasNivelEspecificas.setEnabled(True)
+                    self.CurvasNivelEspecificas.setCheckable(True)
             else:
                 # En otro caso, tres coordenadas espaciales, se activa el corte en la primera coordenada.
                 self.CoordenadaFija_1.setChecked(True)

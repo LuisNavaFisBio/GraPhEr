@@ -1695,16 +1695,16 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         """
 
         # Inicia la animación y actualiza la ventana de carga.
-        self.Interpretar.setShortcut("Ctrl+I")
-        self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
-        self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
-        self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
         self.Ui_Carga.label.setText(mensaje)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
+        self.Interpretar.setShortcut("Ctrl+I")
+        self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
+        self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
+        self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
