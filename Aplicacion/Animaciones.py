@@ -316,7 +316,7 @@ class ReproductorProyeccion1D(FuncAnimation):
     def iniciar(self):
         """Inicia la creación e interacción de la animación."""
 
-        self.proceso = True
+        self.proceso = False
         self.adelante = True 
         FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = self.contador(), interval = self.interval, repeat = False, save_count = self.maximo) 
 
