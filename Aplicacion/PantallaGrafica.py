@@ -1246,7 +1246,7 @@ class Ui_Graficacion(QMainWindow):
                 # Para problemas de una dimensión espacial y con dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion)
                 self.Valores = self.MatrizResultados
-                self.Animacion = ReproductorProyeccion1D(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[*self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1]))
+                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[int(len(self.Dominios[0])/10), *self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10)+1)
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
                 # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
                 self.Valores = self.MatrizResultados
@@ -1463,7 +1463,7 @@ class Ui_Graficacion(QMainWindow):
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         return linea
     
-    def introducirProyeccion1D(self, cuadro, x, t, tiempo_total, resolucion, valores_matriz, lienzo, cota):
+    def introducirProyeccion1D(self, cuadro, cuadro_fijo, x, t, tiempo_total, resolucion, valores_matriz, lienzo, cota):
         """
         Crea el mapa de calor para problemas con una dimensión espacial y dependencia temporal.
         
@@ -1474,6 +1474,7 @@ class Ui_Graficacion(QMainWindow):
 
         cuadro_fijo: entero
             Cuadro inicial del reproductor.
+
 
         x: lista flotantes
             Particion del dominio x.
@@ -1503,11 +1504,15 @@ class Ui_Graficacion(QMainWindow):
             Z = coordenada1**2+coordenada2**2
             lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
-        elif 0 <= cuadro <= tiempo_total*resolucion:
-            # Creación de la gráfica.
-            tiempo = cuadro
+        elif 0  <= cuadro <= cuadro_fijo:
+            # Inicialización de la gráfica.
             lienzo.proyeccion.remove()
-            lienzo.proyeccion = lienzo.pcolormesh(t[:cuadro+1], x, valores_matriz[:cuadro+1].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+            lienzo.proyeccion = lienzo.pcolormesh(t[0:1], x[:cuadro+1], valores_matriz[0:1].T[:cuadro+1], cmap=self.Colormap, vmin=-cota, vmax=cota)
+        elif cuadro_fijo+1 <= cuadro <= tiempo_total*resolucion+cuadro_fijo+1:
+            # Creación de la gráfica.
+            tiempo = cuadro-cuadro_fijo-1
+            lienzo.proyeccion.remove()
+            lienzo.proyeccion = lienzo.pcolormesh(t[:tiempo+1], x, valores_matriz[:tiempo+1].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         return lienzo
     
@@ -3178,7 +3183,7 @@ class Ui_Graficacion(QMainWindow):
                 # Problemas de una dimensión espacial y dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion2)
                 argumentos = [*self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
-                maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+20-1
+                maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10)+20-1
                 minimo = 0
                 funcion = self.introducirProyeccion1D
                 nombre = "1DP_tiempo"
