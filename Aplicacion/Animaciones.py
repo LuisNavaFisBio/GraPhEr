@@ -150,6 +150,8 @@ class ReproductorGeneral(FuncAnimation):
 
         self.adelante = True
         self.empezar()
+        for eje in self.canva.figura.axes:
+            self.canva.figura.canvas.release_mouse(eje)
 
     def reproducciónAtras(self, event=None):
         """Inicia la reproducción de la animación en reversa (fin-inicio)."""
@@ -263,6 +265,7 @@ class ReproductorGeneral(FuncAnimation):
         else:
             # Introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
+        
         
         # Graficación de la cuadrícula.
         if len(self.canva.figura.axes) > 9:
