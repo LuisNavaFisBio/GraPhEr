@@ -202,10 +202,10 @@ class ReproductorGeneral(FuncAnimation):
         # Diseño de los botones de reproducción.
         self.ejeBotones = self.canva.figura.add_axes([0.18, 0.02, 0.64, 0.04])
         self.cuadricula = mpl_toolkits.axes_grid1.make_axes_locatable(self.ejeBotones)
-        self.espacio_reproduccionAtras = self.cuadricula.append_axes("right", size="90%", pad=0.5)
-        self.espacio_detener = self.cuadricula.append_axes("right", size="90%", pad=0.5)
-        self.espacio_reproduccion = self.cuadricula.append_axes("right", size="90%", pad=0.5)
-        self.espacio_pasoAdelante = self.cuadricula.append_axes("right", size="90%", pad=0.5)
+        self.espacio_reproduccionAtras = self.cuadricula.append_axes("right", size="100%", pad=0.5)
+        self.espacio_detener = self.cuadricula.append_axes("right", size="100%", pad=0.5)
+        self.espacio_reproduccion = self.cuadricula.append_axes("right", size="100%", pad=0.5)
+        self.espacio_pasoAdelante = self.cuadricula.append_axes("right", size="100%", pad=0.5)
         self.boton_pasoAtras = mpl.widgets.Button(self.ejeBotones, label='$\u29CF$')
         self.boton_reproduccionAtras = mpl.widgets.Button(self.espacio_reproduccionAtras, label='$\u25C0$')
         self.boton_detener = mpl.widgets.Button(self.espacio_detener, label='$\u25A0$')
@@ -218,7 +218,7 @@ class ReproductorGeneral(FuncAnimation):
         self.boton_pasoAdelante.on_clicked(self.pasoAdelante)
 
         # Diseño del deslizador.
-        self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.07, 0.8, 0.04])
+        self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.08, 0.8, 0.04])
         self.deslizador = mpl.widgets.Slider(self.ejeDeslizador, '', 0, self.maximo-self.argumentos[0]-1, valstep=1, valinit=0)
         # Ocultamiento del valor del deslizador.
         self.deslizador.valtext.set_visible(False)

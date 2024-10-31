@@ -1086,7 +1086,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         borrardatosaplicacion(self, False) 
 
         # Scripts en LaTeX para la creación del documento en donde se muestra el resultado de la interpretación.
-        self.inicioTex = r'''\documentclass[40pt]{memoir}\usepackage[paperwidth=820mm, paperheight=220mm, left = 50mm, right = 50mm, top = 20mm, bottom = 20mm]{geometry}\usepackage{amsmath, amssymb, amsthm}\usepackage[spanish]{babel}\usepackage[utf8]{inputenc}\usepackage{tabularx} \begin{document}\LARGE\begin{table}[!h]\begin{tabular}{|c|ccccccc|} \hline &\\ [-0.5em]'''
+        self.inicioTex = r'''\documentclass[40pt]{memoir}\usepackage[paperwidth=820mm, paperheight=220mm, left = 50mm, right = 50mm, top = 20mm, bottom = 20mm]{geometry}\usepackage{amsmath, amssymb, amsthm}\usepackage[spanish]{babel}\usepackage[utf8]{inputenc}\usepackage{tabularx} \begin{document}\LARGE\centering\begin{table}[!h]\begin{tabular}{|c|ccccccc|} \hline &\\ [-0.5em]'''
         
         self.Entrada = r'''\textbf{Solución} & \multicolumn{7}{c|}{$\displaystyle u(\mathbf{x}) \approx %(solucion)s $} \\ \hline \textbf{Coeficientes} & \multicolumn{7}{c|}{$\displaystyle %(coeficientes)s$} \\ \hline \textbf{Valores Propios} & \multicolumn{7}{c|}{$\displaystyle %(valores)s$} \\ \hline \textbf{Funciones Peso} & \multicolumn{7}{c|}{$\displaystyle %(funciones)s$} \\ \hline \textbf{Condiciones}  & \multicolumn{7}{c|}{$\quad \displaystyle %(condiciones)s \quad$} \\ \hline \textbf{Dominio}  & \multicolumn{7}{c|}{$\quad \displaystyle %(dominio)s \quad$} \\ '''
 
@@ -1694,23 +1694,20 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             Mensaje a desplegar en la pantalla de carga.
         """
 
+        self.Interpretar.setShortcut("Ctrl+I")
+        self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
+        self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
+        self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+
         # Inicia la animación y actualiza la ventana de carga.
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
-        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.espacio_reproduccion)
-        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.espacio_detener)
-        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.espacio_pasoAdelante)
-        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.espacio_pasoAtras)
-        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.ejeDeslizador)
+        self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.cuadricula)
         self.Ui_Grafica.MostrarSolucion.figura.canvas.release_mouse(self.Ui_Grafica.Animacion.ejeBotones)
         self.Ui_Carga.label.setText(mensaje)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
-        self.Interpretar.setShortcut("Ctrl+I")
-        self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
-        self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
-        self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
