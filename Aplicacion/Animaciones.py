@@ -66,7 +66,7 @@ class ReproductorGeneral(FuncAnimation):
     Clase que contiene las instrucciones para el proceso de reproducción de las animaciones para problemas que no sean proyecciones de una dimensión espacial y dependencia temporal o problemas con dos dimensiones espaciales sin dependencia temporal.
     """
 
-    def __init__(self, canva, func, fargs, interval, maximo = 10, curvas_nivel = False, funcion_curvas = None, sistema_coordenadas = ""):
+    def __init__(self, canva, func, fargs, interval, maximo = 10, curvas_nivel = False, funcion_curvas = None, sistema_coordenadas = "", deslizador_navegacion = None):
         """
         Inicializa la animación y sus herramientas.
         
@@ -101,9 +101,10 @@ class ReproductorGeneral(FuncAnimation):
         self.interval = interval
         self.maximo = maximo
         self.coordenadas = sistema_coordenadas
+        self.deslizador = deslizador_navegacion
 
         # Configuración de los botones de reproducción.
-        self.botonesReproduccion()
+        #self.botonesReproduccion()
 
     def iniciar(self):
         """Inicia la creación e interacción de la animación."""
@@ -145,40 +146,31 @@ class ReproductorGeneral(FuncAnimation):
         self.proceso = False
         self.event_source.stop()
 
-    def reproducciónAdelante(self, event=None):
+    def reproduccionAdelante(self, event=None):
         """Inicia la reproducción de la animación de manera normal (inicio-fin)."""
 
         self.adelante = True
-        for eje in self.canva.figura.axes:
-            self.canva.figura.canvas.release_mouse(eje)
-        self.empezar()
-        
+        self.empezar()     
 
-    def reproducciónAtras(self, event=None):
+    def reproduccionAtras(self, event=None):
         """Inicia la reproducción de la animación en reversa (fin-inicio)."""
 
         if not (self.cuadro < self.argumentos[0]+2):
             # Inicio de la reproducción siempre y cuando el cuadro actual no sea el primer cuadro de la reproducción.
             self.adelante = False
-            for eje in self.canva.figura.axes:
-                self.canva.figura.canvas.release_mouse(eje)
             self.empezar()
             
 
     def pasoAdelante(self, event=None):
         """Avanza la animación al siguiente cuadro."""
-        
+
         self.adelante = True
-        for eje in self.canva.figura.axes:
-            self.canva.figura.canvas.release_mouse(eje)
         self.cuadroPorCuadro()
 
     def pasoAtras(self, event=None):
         """Retrocede la animación al cuadro previo."""
 
         self.adelante = False
-        for eje in self.canva.figura.axes:
-            self.canva.figura.canvas.release_mouse(eje)
         self.cuadroPorCuadro()
 
     def cuadroPorCuadro(self):
@@ -191,9 +183,7 @@ class ReproductorGeneral(FuncAnimation):
             # Aumentar el número de cuadro si se quiere el siguiente cuadro.
             self.cuadro += 1
         # Actualizar el valor del deslizador.
-        self.deslizador.set_val(self.cuadro-self.argumentos[0]-1)
-        for eje in self.canva.figura.axes:
-            self.canva.figura.canvas.release_mouse(eje)
+        self.deslizador.setValue(self.cuadro-self.argumentos[0]-1)
         self.canva.figura.canvas.draw_idle()
 
     def botonesReproduccion(self):
@@ -218,11 +208,11 @@ class ReproductorGeneral(FuncAnimation):
         #self.boton_pasoAdelante.on_clicked(self.pasoAdelante)
 
         # Diseño del deslizador.
-        self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.08, 0.8, 0.04])
-        self.deslizador = mpl.widgets.Slider(self.ejeDeslizador, '', 0, self.maximo-self.argumentos[0]-1, valstep=1, valinit=0)
+        #self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.08, 0.8, 0.04])
+        #self.deslizador = mpl.widgets.Slider(self.ejeDeslizador, '', 0, self.maximo-self.argumentos[0]-1, valstep=1, valinit=0)
         # Ocultamiento del valor del deslizador.
-        self.deslizador.valtext.set_visible(False)
-        self.deslizador.on_changed(self.actualizarGrafica)
+        #self.deslizador.valtext.set_visible(False)
+        #self.deslizador.on_changed(self.actualizarGrafica)
 
     def actualizarGrafica(self, cuadro):
         """
@@ -255,7 +245,7 @@ class ReproductorGeneral(FuncAnimation):
 
         if indice > self.argumentos[0]+1 and indice <= self.maximo:
             # Actualización de la gráfica.
-            self.deslizador.set_val(indice-self.argumentos[0]-1)
+            self.deslizador.setValue(indice-self.argumentos[0]-1)
         elif indice == self.argumentos[0]+1:
             # Último cuadro de la introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
@@ -397,7 +387,7 @@ class ReproductorProyeccion1D(FuncAnimation):
             # Aumentar el número de cuadro si se quiere el siguiente cuadro.
             self.cuadro += 1
         # Actualizar el valor del deslizador.
-        self.deslizador.set_val(self.cuadro-self.argumentos[0])
+        self.deslizador.setValue(self.cuadro-self.argumentos[0])
         for eje in self.canva.figura.axes:
             self.canva.figura.canvas.release_mouse(eje)
         self.canva.figura.canvas.draw_idle()
@@ -424,10 +414,10 @@ class ReproductorProyeccion1D(FuncAnimation):
         self.boton_pasoAdelante.on_clicked(self.pasoAdelante)
 
         # Diseño del deslizador.
-        self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.07, 0.8, 0.04])
-        self.deslizador = mpl.widgets.Slider(self.ejeDeslizador, '', 0, self.maximo-1-len(self.argumentos[0]), valstep=1, valinit=0)
-        self.deslizador.valtext.set_visible(False)
-        self.deslizador.on_changed(self.actualizarGrafica)
+        #self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.07, 0.8, 0.04])
+        #self.deslizador = mpl.widgets.Slider(self.ejeDeslizador, '', 0, self.maximo-1-len(self.argumentos[0]), valstep=1, valinit=0)
+        #self.deslizador.valtext.set_visible(False)
+        #self.deslizador.on_changed(self.actualizarGrafica)
 
     def actualizarGrafica(self, cuadro):
         """
@@ -457,16 +447,11 @@ class ReproductorProyeccion1D(FuncAnimation):
 
         if indice >= len(self.argumentos[0]) and indice < self.maximo-1:
             # Actualización de la gráfica.
-            self.deslizador.set_val(indice-len(self.argumentos[0]))
+            self.deslizador.setValue(indice-len(self.argumentos[0]))
         elif indice == len(self.argumentos[0])-1:
             # Último cuadro de la introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
             self.detener()
-            #for eje in self.canva.figura.axes:
-            #    self.canva.figura.canvas.release_mouse(eje)
-            #self.canva.figura.canvas.release_mouse(self.ejeDeslizador)
-            #self.canva.figura.canvas.release_mouse(self.ejeBotones)
-            #QCoreApplication.processEvents()
 
             # Visualización de la barra de color.
             colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
