@@ -1551,6 +1551,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
             self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
+            self.Ui_Grafica.deslizador.setValue(0)
+            self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0]-1)
+            self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
 
     def graficarCorte(self):
         """Ejecuta el trabajo de cambio de corte, es decir, realiza el trabajo de graficación en problemas de tres dimensiones espaciales para el valor especificado por el usuario para la coordenada fija actual."""
@@ -1720,6 +1723,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
             self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
+            self.Ui_Grafica.deslizador.setValue(0)
+            self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0]-1)
+            self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
@@ -1847,6 +1853,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
             self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
+            self.Ui_Grafica.deslizador.setValue(0)
+            self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0]-1)
+            self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
 
 class PantallaPrincipal(QMainWindow):
     """

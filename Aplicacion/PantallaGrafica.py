@@ -130,7 +130,7 @@ class Lienzo(FigureCanvasQTAgg):
     """Clase que contiene el diseño y configuración inicial del lienzo para las gráficas."""
     # El código de esta clase fue modificado de Fitzpatrick, M. (05 de febrero de 2024). Plotting with Matplotlib. Create PyQt5 plots with the popular Python plotting library. PythonGUIs. https://www.pythonguis.com/tutorials/plotting-matplotlib/
     
-    def __init__(self, contenedor = None, ancho = 1260, alto = 780, dpi = 100):
+    def __init__(self, contenedor = None, ancho = 1260, alto = 690, dpi = 100):
         """
         Diseño y configuración del lienzo.
         
@@ -371,7 +371,9 @@ class Ui_Graficacion(QMainWindow):
         verticalLayout_1.setStretch(0, 30)
         verticalLayout_1.setStretch(1, 10)
         verticalLayout_1.setStretch(2, 50)
-        verticalLayout_1.setStretch(3, 780)
+        verticalLayout_1.setStretch(3, 690)
+        verticalLayout_1.setStretch(4, 20)
+        verticalLayout_1.setStretch(5, 50)
 
         label_1 = QLabel()
         label_1.setText(u"Visualizaci\u00f3n de la Soluci\u00f3n")
@@ -407,6 +409,41 @@ class Ui_Graficacion(QMainWindow):
         verticalLayout_1.addWidget(self.BarraHerramientas, alignment=Qt.AlignHCenter)
         verticalLayout_1.addWidget(self.MostrarSolucion)
 
+        self.deslizador = QSlider(frame2)
+        self.deslizador.setOrientation(Qt.Horizontal)
+        self.deslizador.setSingleStep(1)
+        self.deslizador.setMinimumSize(QSize(1150, 30))
+        self.deslizador.setMaximumSize(QSize(1150, 30))
+        self.deslizador.setMinimum(1)
+        self.deslizador.setMaximum(10)
+        # El diseño del deslizador fue tomado de Magno Efren (24 de mayo de 2021). PyQt5 con Matplotlib | Grafica del Seno Frecuencia y Amplitud QSlider. YouTube. https://www.youtube.com/watch?v=XvIAVnpdLYc
+        # La modificación consiste en el cambio de los colores del deslizador y el tamaño del objeto seleccionable.
+        self.deslizador.setStyleSheet("QSlider::groove:horizontal {\n"
+                                "    border: 1px solid #44cfee;\n"
+                                "    height: 4px; \n"
+                                "    background: #44cfee;\n"
+                                " \n"
+                                "}\n"
+                                "QSlider::handle:horizontal {\n"
+                                "    background: #f6f7f7;\n"
+                                "    \n"
+                                "    width: 24px;\n"
+                                "    height:24px;\n"
+                                "\n"
+                                "left: 10px;\n"
+                                "right: 10px;\n"
+                                "\n"
+                                "    margin: -10px; \n"
+                                "    border-radius:12px;\n"
+                                "}\n"
+                                "\n"
+                                "QSlider::add-page:horizontal{\n"
+                                "background-color:rgba(255,255,255,155);\n"
+                                "border: 1px solid rgba(255,255,255,155);\n"
+                                "}")
+        
+        verticalLayout_1.addWidget(self.deslizador, alignment=Qt.AlignHCenter)
+
         horizontalLayout_8 = QHBoxLayout()
         horizontalLayout_8.setContentsMargins(10,10,10,10)
         horizontalLayout_8.setStretch(0, 240)
@@ -417,36 +454,36 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_8.setSpacing(10)
 
         self.BotonPasoAtras = QPushButton(frame2)
-        self.BotonPasoAtras.setMaximumSize(QSize(80, 50))
-        self.BotonPasoAtras.setMinimumSize(QSize(80, 50))
+        self.BotonPasoAtras.setMaximumSize(QSize(100, 50))
+        self.BotonPasoAtras.setMinimumSize(QSize(100, 50))
         self.BotonPasoAtras.setText('\u29CF')
         self.BotonPasoAtras.setStyleSheet(u"color: rgb(11, 61, 98) ; background-color: rgba(246, 247, 247, 255)")
         horizontalLayout_8.addWidget(self.BotonPasoAtras)
 
         self.BotonReproduccionAtras = QPushButton(frame2)
-        self.BotonReproduccionAtras.setMaximumSize(QSize(80, 50))
-        self.BotonReproduccionAtras.setMinimumSize(QSize(80, 50))
+        self.BotonReproduccionAtras.setMaximumSize(QSize(100, 50))
+        self.BotonReproduccionAtras.setMinimumSize(QSize(100, 50))
         self.BotonReproduccionAtras.setText('\u25C0')
         self.BotonReproduccionAtras.setStyleSheet(u"color: rgb(11, 61, 98) ; background-color: rgba(246, 247, 247, 255)")
         horizontalLayout_8.addWidget(self.BotonReproduccionAtras)
 
         self.BotonPausa = QPushButton(frame2)
-        self.BotonPausa.setMaximumSize(QSize(80, 50))
-        self.BotonPausa.setMinimumSize(QSize(80, 50))
+        self.BotonPausa.setMaximumSize(QSize(100, 50))
+        self.BotonPausa.setMinimumSize(QSize(100, 50))
         self.BotonPausa.setText('\u25A0')
         self.BotonPausa.setStyleSheet(u"color: rgb(11, 61, 98) ; background-color: rgba(246, 247, 247, 255)")
         horizontalLayout_8.addWidget(self.BotonPausa)
 
         self.BotonReproduccionAdelante = QPushButton(frame2)
-        self.BotonReproduccionAdelante.setMaximumSize(QSize(80, 50))
-        self.BotonReproduccionAdelante.setMinimumSize(QSize(80, 50))
+        self.BotonReproduccionAdelante.setMaximumSize(QSize(100, 50))
+        self.BotonReproduccionAdelante.setMinimumSize(QSize(100, 50))
         self.BotonReproduccionAdelante.setText('\u25B6')
         self.BotonReproduccionAdelante.setStyleSheet(u"color: rgb(11, 61, 98) ; background-color: rgba(246, 247, 247, 255)")
         horizontalLayout_8.addWidget(self.BotonReproduccionAdelante)
 
         self.BotonPasoAdelante = QPushButton(frame2)
-        self.BotonPasoAdelante.setMaximumSize(QSize(80, 50))
-        self.BotonPasoAdelante.setMinimumSize(QSize(80, 50))
+        self.BotonPasoAdelante.setMaximumSize(QSize(100, 50))
+        self.BotonPasoAdelante.setMinimumSize(QSize(100, 50))
         self.BotonPasoAdelante.setText('\u29D0')
         self.BotonPasoAdelante.setStyleSheet(u"color: rgb(11, 61, 98) ; background-color: rgba(246, 247, 247, 255)")
         horizontalLayout_8.addWidget(self.BotonPasoAdelante)
@@ -590,7 +627,7 @@ class Ui_Graficacion(QMainWindow):
         line_4.setStyleSheet(u"background-color: rgb(11, 61, 98);")
         line_4.setFrameShadow(QFrame.Plain)
         line_4.setFrameShape(QFrame.HLine)
-        verticalLayout_2.addWidget(line_4)
+        verticalLayout_2.addWidget(line_4, alignment=Qt.AlignHCenter)
 
         label_6 = QLabel()
         label_6.setText(u"Solución")
@@ -683,7 +720,7 @@ class Ui_Graficacion(QMainWindow):
         line_6.setStyleSheet(u"background-color: rgb(11, 61, 98);")
         line_6.setFrameShadow(QFrame.Plain)
         line_6.setFrameShape(QFrame.HLine)
-        verticalLayout_2.addWidget(line_6)
+        verticalLayout_2.addWidget(line_6, alignment=Qt.AlignHCenter)
 
         label_10 = QLabel()
         label_10.setText(u"Visualización")
@@ -776,7 +813,7 @@ class Ui_Graficacion(QMainWindow):
         self.GraficarCurvasFija = QPushButton(frame3, clicked = lambda: self.interpretacionCurvasNivel())
         self.GraficarCurvasFija.setMaximumSize(QSize(80, 40))
         self.GraficarCurvasFija.setMinimumSize(QSize(80, 40))
-        self.GraficarCurvasFija.setText("Ir")
+        self.GraficarCurvasFija.setText('Ir')
         self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
         horizontalLayout_5.addWidget(self.GraficarCurvasFija)
         verticalLayout_2.addLayout(horizontalLayout_5)
@@ -901,7 +938,7 @@ class Ui_Graficacion(QMainWindow):
         line_9.setStyleSheet(u"background-color: rgb(11, 61, 98);")
         line_9.setFrameShadow(QFrame.Plain)
         line_9.setFrameShape(QFrame.HLine)
-        verticalLayout_2.addWidget(line_9)
+        verticalLayout_2.addWidget(line_9, alignment=Qt.AlignHCenter)
     
         # Diseño y configuración del botón de guardado de animación.
         self.GuardarAnimacion = QPushButton(frame3, clicked = lambda: self.signals.guardar_signal.emit())
@@ -1012,6 +1049,7 @@ class Ui_Graficacion(QMainWindow):
         self.ValoresPropios = valorespropios
         
         self.valorpropiodependendiente = ""
+        self.Animacion = None
 
         if len(self.Dominio[-1]) == 1:
             self.dependencia_tiempo = True
@@ -1291,7 +1329,7 @@ class Ui_Graficacion(QMainWindow):
                 # Para problemas de una dimensión espacial y con dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion)
                 self.Valores = self.MatrizResultados
-                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[int(len(self.Dominios[0])/10), *self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10)+1)
+                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[int(len(self.Dominios[0])/10), *self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10)+1, deslizador_navegacion=self.deslizador)
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
                 # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
                 self.Valores = self.MatrizResultados
@@ -1300,7 +1338,7 @@ class Ui_Graficacion(QMainWindow):
                 elif self.Coordenadas == "Cilíndricas / Polares":
                     self.DatosGrafica = self.crearProyeccion2D_polares(self.MostrarSolucion)
                 if self.dependencia_tiempo:
-                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion2D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel =self.curvas, funcion_curvas = self.funcion_curvas)
+                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion2D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel =self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
                 else:
                     self.Animacion = Graficacion2D_NoTemporal(self.MostrarSolucion, self.introducirProyeccion2D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:-2], self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10)+1, interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
             elif len(self.Dominio) == 3:
@@ -1348,9 +1386,9 @@ class Ui_Graficacion(QMainWindow):
 
                 if (coordenada_especifica == "r") and (self.Coordenadas == "Esféricas"):
                     # Para gráfica en coordenadas esféricas y donde la coordenada fija es el radio.
-                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D_especial, fargs=[int(len(self.DatosGrafica[1])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Valores, limites, self.MostrarSolucion.figura, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
+                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D_especial, fargs=[int(len(self.DatosGrafica[1])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Valores, limites, self.MostrarSolucion.figura, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
                 else:
-                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Coordenadas, self.Valores, self.MostrarSolucion.axes, coordenada_especifica, limites, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
+                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Coordenadas, self.Valores, self.MostrarSolucion.axes, coordenada_especifica, limites, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
         else:   
             # Cuando no se requiere la proyección.
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
@@ -1362,7 +1400,7 @@ class Ui_Graficacion(QMainWindow):
                     puntos = np.array([self.Dominios[0], self.MatrizResultados[indice]]).T.reshape(-1, 1, 2)
                     self.Segmentos[indice] = np.concatenate([puntos[:-1], puntos[1:]], axis=1)
                 self.DatosGrafica = self.crearGrafica1D(self.MostrarSolucion)
-                self.Animacion =ReproductorGeneral(self.MostrarSolucion,self.actualizarAnimacion1D,fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.MatrizResultados, self.MostrarSolucion.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
+                self.Animacion =ReproductorGeneral(self.MostrarSolucion,self.actualizarAnimacion1D,fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.MatrizResultados, self.MostrarSolucion.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
                 # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
                 if self.Coordenadas == "Cartesianas":
@@ -1377,7 +1415,7 @@ class Ui_Graficacion(QMainWindow):
                 self.Valores = self.MatrizResultados
 
                 if self.dependencia_tiempo:
-                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarAnimacion2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
+                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarAnimacion2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
                 else:
                     self.Animacion = Graficacion2D_NoTemporal(self.MostrarSolucion, self.introducirGrafica2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10+1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
             elif len(self.Dominio) == 3:
@@ -1448,7 +1486,7 @@ class Ui_Graficacion(QMainWindow):
                 self.rcount = self.Valores.shape[1]
                 self.ccount = self.Valores.shape[2]        
 
-                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarGrafica3D, fargs=[longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(longitud2+self.DatosGrafica[0]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
+                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarGrafica3D, fargs=[longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(longitud2+self.DatosGrafica[0]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
 
         self.envioActualizacion("Mostrando Coeficientes y Valores")
 
@@ -3757,7 +3795,7 @@ class Ui_Graficacion(QMainWindow):
                 self.GraficarCurvasFija.setEnabled(False)
                 self.GraficarCurvasFija.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
                 self.CoordenadaFija.setDisabled(True)
-                self.CoordenadaFija.setText("")
+                #self.CoordenadaFija.setText("")
                 self.GraficarCoordenadaFija.setEnabled(False)
                 self.GraficarCoordenadaFija.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
             
@@ -3779,7 +3817,7 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1.setChecked(True)
                 self.CoordenadaFija_1.setEnabled(True)
             self.CoordenadaFija.setEnabled(True)
-            self.CoordenadaFija.setText("Ingrese un valor")
+            #self.CoordenadaFija.setText("Ingrese un valor")
             self.GraficarCoordenadaFija.setEnabled(True)
             self.GraficarCoordenadaFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
 
