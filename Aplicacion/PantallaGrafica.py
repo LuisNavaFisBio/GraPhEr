@@ -379,6 +379,7 @@ class Ui_Graficacion(QMainWindow):
         label_1.setText(u"Visualizaci\u00f3n de la Soluci\u00f3n")
         label_1.setFont(fuente)
         label_1.setMinimumSize(QSize(1200, 30))
+        label_1.setMaximumSize(QSize(1200, 30))
         label_1.setAlignment(Qt.AlignCenter)
         verticalLayout_1.addWidget(label_1)
 
@@ -512,7 +513,7 @@ class Ui_Graficacion(QMainWindow):
         # Diseño del cuadro lateral derecho (herramientas).
         verticalLayout_2 = QVBoxLayout(frame3)
         verticalLayout_2.setSpacing(10)
-        verticalLayout_2.setContentsMargins(0,0,0,0)
+        verticalLayout_2.setContentsMargins(0,10,0,10)
         verticalLayout_2.setStretch(0, 30)
         verticalLayout_2.setStretch(1, 20)
         verticalLayout_2.setStretch(2, 50)
@@ -1133,6 +1134,12 @@ class Ui_Graficacion(QMainWindow):
             self.Coordenada1.setText("{}".format(self.Dominio[0][0]))
             if not self.dependencia_tiempo:
                 self.Coordenada2.setText("{}".format(self.Dominio[1][0]))
+                self.BotonPasoAdelante.setVisible(False)
+                self.BotonPasoAtras.setVisible(False)
+                self.BotonPausa.setVisible(False)
+                self.BotonReproduccionAdelante.setVisible(False)
+                self.BotonReproduccionAtras.setVisible(False)
+                self.deslizador.setVisible(False)
             else:
                 self.Coordenada2.setText("0")
 
