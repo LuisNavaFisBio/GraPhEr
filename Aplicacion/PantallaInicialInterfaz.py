@@ -1545,6 +1545,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
         self.Ui_Grafica.Animacion.iniciar()
         self.VentanaCarga.close()
+        if self.DimensionTemporalEntrada.isChecked():
+            self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
+            self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
+            self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
+            self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
+            self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
 
     def graficarCorte(self):
         """Ejecuta el trabajo de cambio de corte, es decir, realiza el trabajo de graficación en problemas de tres dimensiones espaciales para el valor especificado por el usuario para la coordenada fija actual."""
@@ -1708,6 +1714,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
+        if self.DimensionTemporalEntrada.isChecked():
+            self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
+            self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
+            self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
+            self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
+            self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
@@ -1829,6 +1841,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
         self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
         self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+        if self.DimensionTemporalEntrada.isChecked():
+            self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
+            self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
+            self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
+            self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
+            self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
 
 class PantallaPrincipal(QMainWindow):
     """
