@@ -235,7 +235,7 @@ class ReproductorGeneral(FuncAnimation):
         
         
         # Graficación de la cuadrícula.
-        if len(self.canva.figura.axes) > 9:
+        if len(self.canva.figura.axes) > 2:
             self.canva.axes.grid(True, lw = 0.2)
             self.canva.axes2.grid(True, lw = 0.2)
         else:

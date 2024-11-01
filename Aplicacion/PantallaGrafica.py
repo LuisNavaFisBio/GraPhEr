@@ -237,7 +237,7 @@ class GuardadoAnimacion(FuncAnimation):
                 if self.curvas_nivel:
                     # Modificación de la opacidad.
                     if self.proyeccion:
-                        if len(self.canva.figura.axes) > 8:
+                        if len(self.canva.figura.axes) > 2:
                             self.canva.axes.proyeccion.set_alpha(0.4)
                             self.canva.axes2.proyeccion.set_alpha(0.4)
                         else:
@@ -259,10 +259,10 @@ class GuardadoAnimacion(FuncAnimation):
                 self.actualizarGrafica(indice)
             else:
                 # Fijación de la gráfica en su último cuadro.
-                self.funcionActualizadora(indice, *self.argumentos[0:-2])
+                self.funcionActualizadora(self.numerocuadromaximo-10, *self.argumentos[0:-2])
 
             # Visualización de la cuadrícula.    
-            if len(self.canva.figura.axes) > 9:
+            if len(self.canva.figura.axes) > 2:
                 self.canva.axes.grid(True, lw = 0.2)
                 self.canva.axes2.grid(True, lw = 0.2)
             else:
@@ -3953,7 +3953,7 @@ class Ui_Graficacion(QMainWindow):
             if self.curvasdibujadas:
                 for linea in self.Curvas.collections:
                     linea.remove()
-                if len(canva.figura.axes) > 8:
+                if len(canva.figura.axes) > 2:
                     if self.curvasdibujadas2:
                         for linea in self.Curvas2.collections:
                             linea.remove()
@@ -3962,7 +3962,7 @@ class Ui_Graficacion(QMainWindow):
             canva.axes.grid(True)
             if self.Proyeccion:
                 canva.axes.proyeccion.set_alpha(1)
-                if len(canva.figura.axes) > 8:
+                if len(canva.figura.axes) > 2:
                     canva.axes2.proyeccion.set_alpha(1)
                     canva.axes2.grid(True)
             else:
@@ -4011,7 +4011,7 @@ class Ui_Graficacion(QMainWindow):
             if self.curvasdibujadas:
                 for linea in self.Curvas.collections:
                     linea.remove()
-                if len(canva.figura.axes) > 8:
+                if len(canva.figura.axes) > 2:
                     if self.curvasdibujadas2:
                         for linea in self.Curvas2.collections:
                             linea.remove()
@@ -4045,7 +4045,7 @@ class Ui_Graficacion(QMainWindow):
                             if (len(self.Dominios) == 2) and (not self.dependencia_tiempo):
                                 # Curvas de nivel para problemas de dos dimensiones espaciales sin dependencia temporal.
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
-                            elif len(canva.figura.axes) > 8:
+                            elif len(canva.figura.axes) > 2:
                                 # Curvas de nivel para proyección en coordenadas esféricas con radio como coordenada fija.
                                 canva.axes2.proyeccion.set_alpha(0.4)
                                 r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.val/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
@@ -4067,11 +4067,11 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes.grid(True)
                     else:
                         # Graficación de curvas de nivel cuando se especifica un valor especifico para la coordenada fija (si es que se tiene una).
-                        if self.Proyeccion and (len(canva.figura.axes) < 8):
+                        if self.Proyeccion and (len(canva.figura.axes) < 2):
                             # Curvas de nivel para visualizaciones de proyecciones que no correspondan a coordenadas esféricas con radio como coordenada fija.
                             canva.axes.proyeccion.set_alpha(0.4)
                             self.Curvas = canva.axes.contour(self.x, self.y, valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
-                        elif len(canva.figura.axes) > 8:
+                        elif len(canva.figura.axes) > 2:
                             # Curvas de nivel para visualizaciones de proyecciones en coordenadas esféricas con radio como coordenada fija.
                             canva.axes.proyeccion.set_alpha(0.4)
                             canva.axes2.proyeccion.set_alpha(0.4)
