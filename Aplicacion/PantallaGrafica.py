@@ -415,7 +415,7 @@ class Ui_Graficacion(QMainWindow):
         self.deslizador.setSingleStep(1)
         self.deslizador.setMinimumSize(QSize(1150, 30))
         self.deslizador.setMaximumSize(QSize(1150, 30))
-        self.deslizador.setMinimum(1)
+        self.deslizador.setMinimum(0)
         self.deslizador.setMaximum(10)
         # El diseño del deslizador fue tomado de Magno Efren (24 de mayo de 2021). PyQt5 con Matplotlib | Grafica del Seno Frecuencia y Amplitud QSlider. YouTube. https://www.youtube.com/watch?v=XvIAVnpdLYc
         # La modificación consiste en el cambio de los colores del deslizador y el tamaño del objeto seleccionable.
@@ -973,8 +973,6 @@ class Ui_Graficacion(QMainWindow):
         self.curvas = False
         self.dependencia_tiempo = False
         self.EmergenteVentanaGraficacion = QMessageBox()
-
-        QMetaObject.connectSlotsByName(ventana)
 
     def transferirDatos(self, funcion, soluciones, numero_terminos, valores, dominio, simbolos, colormap, proyeccion, coordenadas, numero_subproblemas, precision, calidad, particiones, dependencia, bidependencia, indicesdependencia, invertir, valorespropios):
         """

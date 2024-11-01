@@ -1546,6 +1546,18 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Animacion.iniciar()
         self.VentanaCarga.close()
         if self.DimensionTemporalEntrada.isChecked():
+            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+            try:
+                self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAdelante.clicked.disconnect()
+                self.Ui_Grafica.BotonPausa.clicked.disconnect()
+                self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
+                self.Ui_Grafica.deslizador.valueChanged.disconnect()
+            except:
+                pass
+
             self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
             self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
@@ -1716,6 +1728,18 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
         if self.DimensionTemporalEntrada.isChecked():
+            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+            try:
+                self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAdelante.clicked.disconnect()
+                self.Ui_Grafica.BotonPausa.clicked.disconnect()
+                self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
+                self.Ui_Grafica.deslizador.valueChanged.disconnect()
+            except:
+                pass
+
             self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
             self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
@@ -1846,6 +1870,18 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
         self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
         if self.DimensionTemporalEntrada.isChecked():
+            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+            try:
+                self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAdelante.clicked.disconnect()
+                self.Ui_Grafica.BotonPausa.clicked.disconnect()
+                self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
+                self.Ui_Grafica.deslizador.valueChanged.disconnect()
+            except:
+                pass
+            
             self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
             self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
