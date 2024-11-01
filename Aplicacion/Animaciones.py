@@ -59,7 +59,7 @@ matplotlib.use('Qt5Agg')
 
 # Todas y cada una de las clases de este archivo fueron tomadas y modificadas de ImportanceOfBeingErnest. (02 de abril de 2020). Respuesta a la pregunta "Animated interactive plot using matplotlib". stackoverflow. https://stackoverflow.com/a/46327978
 # La reproducción de dicho código está licenciada bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
-# La modificación consiste en la modificación de algunas de las funciones de la clase y/o la apariencia.
+# La modificación consiste en la modificación de algunas de las funciones de la clase y/o la apariencia, además de reemplazar los botónes de reproducción y el slider por widgets de PyQt5.
 
 class ReproductorGeneral(FuncAnimation):
     """
@@ -102,9 +102,6 @@ class ReproductorGeneral(FuncAnimation):
         self.maximo = maximo
         self.coordenadas = sistema_coordenadas
         self.deslizador = deslizador_navegacion
-
-        # Configuración de los botones de reproducción.
-        #self.botonesReproduccion()
 
     def iniciar(self):
         """Inicia la creación e interacción de la animación."""
@@ -185,34 +182,6 @@ class ReproductorGeneral(FuncAnimation):
         # Actualizar el valor del deslizador.
         self.deslizador.setValue(self.cuadro-self.argumentos[0]-1)
         self.canva.figura.canvas.draw_idle()
-
-    def botonesReproduccion(self):
-        """Configura y diseña los botones de reproducción de la animación."""
-
-        # Diseño de los botones de reproducción.
-        #self.ejeBotones = self.canva.figura.add_axes([0.18, 0.02, 0.64, 0.04])
-        #self.cuadricula = mpl_toolkits.axes_grid1.make_axes_locatable(self.ejeBotones)
-        #self.espacio_reproduccionAtras = self.cuadricula.append_axes("right", size="100%", pad=0.5)
-        #self.espacio_detener = self.cuadricula.append_axes("right", size="100%", pad=0.5)
-        #self.espacio_reproduccion = self.cuadricula.append_axes("right", size="100%", pad=0.5)
-        #self.espacio_pasoAdelante = self.cuadricula.append_axes("right", size="100%", pad=0.5)
-        #self.boton_pasoAtras = mpl.widgets.Button(self.ejeBotones, label='$\u29CF$')
-        #self.boton_reproduccionAtras = mpl.widgets.Button(self.espacio_reproduccionAtras, label='$\u25C0$')
-        #self.boton_detener = mpl.widgets.Button(self.espacio_detener, label='$\u25A0$')
-        #self.boton_reproduccion = mpl.widgets.Button(self.espacio_reproduccion, label='$\u25B6$')
-        #self.boton_pasoAdelante = mpl.widgets.Button(self.espacio_pasoAdelante, label='$\u29D0$')
-        #self.boton_pasoAtras.on_clicked(self.pasoAtras)
-        #self.boton_reproduccionAtras.on_clicked(self.reproducciónAtras)
-        #self.boton_detener.on_clicked(self.detener)
-        #self.boton_reproduccion.on_clicked(self.reproducciónAdelante)
-        #self.boton_pasoAdelante.on_clicked(self.pasoAdelante)
-
-        # Diseño del deslizador.
-        #self.ejeDeslizador = self.canva.figura.add_axes([0.1, 0.08, 0.8, 0.04])
-        #self.deslizador = mpl.widgets.Slider(self.ejeDeslizador, '', 0, self.maximo-self.argumentos[0]-1, valstep=1, valinit=0)
-        # Ocultamiento del valor del deslizador.
-        #self.deslizador.valtext.set_visible(False)
-        #self.deslizador.on_changed(self.actualizarGrafica)
 
     def actualizarGrafica(self, cuadro):
         """
