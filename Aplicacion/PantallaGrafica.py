@@ -3807,7 +3807,7 @@ class Ui_Graficacion(QMainWindow):
                 self.GraficarCurvasFija.setEnabled(False)
                 self.GraficarCurvasFija.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
                 self.CoordenadaFija.setDisabled(True)
-                #self.CoordenadaFija.setText("")
+                self.CoordenadaFija.setText("")
                 self.GraficarCoordenadaFija.setEnabled(False)
                 self.GraficarCoordenadaFija.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
             
@@ -3829,7 +3829,7 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1.setChecked(True)
                 self.CoordenadaFija_1.setEnabled(True)
             self.CoordenadaFija.setEnabled(True)
-            #self.CoordenadaFija.setText("Ingrese un valor")
+            self.CoordenadaFija.setText("Ingrese un valor")
             self.GraficarCoordenadaFija.setEnabled(True)
             self.GraficarCoordenadaFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
 
