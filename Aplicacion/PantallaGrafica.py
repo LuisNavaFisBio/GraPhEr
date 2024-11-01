@@ -35,7 +35,7 @@
 
 
 from VentanaCarga import Ui_VentanaCarga
-from Animaciones import ReproductorProyeccion1D, ReproductorGeneral, Graficacion2D_NoTemporal
+from Animaciones import ReproductorGeneral, Graficacion2D_NoTemporal
 from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 
 from fractions import Fraction
