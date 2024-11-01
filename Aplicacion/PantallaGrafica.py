@@ -259,7 +259,7 @@ class GuardadoAnimacion(FuncAnimation):
                 self.actualizarGrafica(indice)
             else:
                 # Fijación de la gráfica en su último cuadro.
-                self.funcionActualizadora(self.numerocuadromaximo-10, *self.argumentos[0:-2])
+                self.funcionActualizadora(indice, *self.argumentos[0:-2])
 
             # Visualización de la cuadrícula.    
             if len(self.canva.figura.axes) > 2:
