@@ -246,9 +246,10 @@ class ReproductorGeneral(FuncAnimation):
         if indice > self.argumentos[0]+1 and indice <= self.maximo:
             # Actualización de la gráfica.
             self.deslizador.setValue(indice-self.argumentos[0]-1)
+            print()
         elif indice == self.argumentos[0]+1:
             # Último cuadro de la introducción de la gráfica.
-            self.funcionActualizadora(indice, *self.argumentos[0:-2])
+            self.deslizador.setValue(0)
             self.detener()
 
             # Visualización de la barra de color.
@@ -259,9 +260,6 @@ class ReproductorGeneral(FuncAnimation):
             self.argumentos[-1].setEnabled(True)
             self.argumentos[-1].setStyleSheet(u"color: rgb(246, 247, 247); background-color: rgb(11, 61, 98);")
 
-            # Graficación de las curvas de nivel para el primer cuadro.
-            if self.curvas_nivel == True:
-                self.funcion_curvas()
         else:
             # Introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
