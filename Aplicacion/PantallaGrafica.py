@@ -201,7 +201,7 @@ class GuardadoAnimacion(FuncAnimation):
 
         # Inicialización del proceso de guardado.
         self.proceso = True
-        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False)
+        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False, save_count = self.numerocuadromaximo)
     
     def finalizar(self):
         """
@@ -254,7 +254,7 @@ class GuardadoAnimacion(FuncAnimation):
                 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
                 
-            elif (-1+self.umbral+2 <  indice)  and (indice <= self.numerocuadromaximo-10):
+            elif (-1+self.umbral+2 <  indice)  and (indice <= self.numerocuadromaximo-20):
                 # Actualización de la animación después de la inicialización.
                 self.actualizarGrafica(indice)
             else:
@@ -1556,6 +1556,7 @@ class Ui_Graficacion(QMainWindow):
             linea.set_segments(segmentos[tiempo])
             linea.set_array(valores_matriz[tiempo])
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
+            
         return linea
     
     def introducirProyeccion1D(self, cuadro, cuadro_fijo, x, t, tiempo_total, resolucion, valores_matriz, lienzo, cota):
