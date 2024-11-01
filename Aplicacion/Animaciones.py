@@ -241,6 +241,7 @@ class ReproductorGeneral(FuncAnimation):
         else:
             self.canva.axes.grid(True, lw = 0.2)
 
+'''
 class ReproductorProyeccion1D(FuncAnimation):
     """
     Clase que contiene las instrucciones para el proceso de reproducción de la animación para la proyección de problemas con una dimensión espacial y dependencia temporal.
@@ -430,6 +431,7 @@ class ReproductorProyeccion1D(FuncAnimation):
         else:
             # Introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
+'''
 
 class Graficacion2D_NoTemporal(FuncAnimation):
     """
