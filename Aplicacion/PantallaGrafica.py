@@ -1254,9 +1254,11 @@ class Ui_Graficacion(QMainWindow):
             elif self.dependencia_tiempo:
                 # Cuando se tiene dependencia temporal, solo se pueden graficar cortes temporales.
                 self.CoordenadaFija_1.setChecked(True)
+                self.CoordenadaFija_1.setCheckable(True)
+                self.CoordenadaFija_1.setEnabled(True)
                 self.CoordenadaFija_1_label.setEnabled(True)
                 self.CoordenadaFija.setEnabled(True)
-                self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
+                self.GraficarCoordenadaFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
                 self.GraficarCoordenadaFija.setEnabled(True)
                 self.CoordenadaFija_2.setSizePolicy(sizePolicy2)
                 self.CoordenadaFija_3.setSizePolicy(sizePolicy2)
