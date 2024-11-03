@@ -714,8 +714,8 @@ class TrabajoResolucion(QtCore.QRunnable):
                         # Búsqueda de la primera raíz.
                         raiz = self.buscadorRaices(1, funcion_valorespropios, 0, entrada[1], precision, entrada[2])
                         if raiz[0] < np.round(entrada[1], precision):
-                            if Fraction(float(entrada.subs(n, numero))).limit_denominator().denominator == 1:
-                                ValoresObtenidos.append(int(entrada.subs(n, numero)))
+                            if Fraction(float(raiz[0])).limit_denominator().denominator == 1:
+                                ValoresObtenidos.append(int(raiz[0]))
                             else:
                                 ValoresObtenidos.append(raiz[0])
                         else:
