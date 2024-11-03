@@ -1261,6 +1261,13 @@ class Ui_Graficacion(QMainWindow):
                     self.CoordenadaFija.setEnabled(True)
                     self.GraficarCoordenadaFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
                     self.GraficarCoordenadaFija.setEnabled(True)
+                else:
+                    self.CoordenadaFija_1.setEnabled(False)
+                    self.CoordenadaFija_1.setCheckable(False) 
+                    self.CoordenadaFija_1_label.setEnabled(False)
+                    self.CoordenadaFija.setEnabled(False)
+                    self.GraficarCoordenadaFija.setStyleSheet(u"background-color: rgb(127,146,151); color: rgb(234,237,239);")
+                    self.GraficarCoordenadaFija.setEnabled(False)
                 self.CoordenadaFija_2.setSizePolicy(sizePolicy2)
                 self.CoordenadaFija_3.setSizePolicy(sizePolicy2)
                 self.CoordenadaFija_2.setEnabled(False)
