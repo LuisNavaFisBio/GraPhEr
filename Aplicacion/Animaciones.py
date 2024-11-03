@@ -102,6 +102,7 @@ class ReproductorGeneral(FuncAnimation):
         self.maximo = maximo
         self.coordenadas = sistema_coordenadas
         self.deslizador = deslizador_navegacion
+        self.barracolor = False
 
     def iniciar(self):
         """Inicia la creación e interacción de la animación."""
@@ -124,12 +125,13 @@ class ReproductorGeneral(FuncAnimation):
                 elif self.cuadro >= -1 and self.cuadro <= self.maximo-1:
                     yield self.cuadro
             else:
-                if self.cuadro < self.argumentos[0]+1:
+                if self.cuadro <= self.argumentos[0]+1:
                     # Detener en el primer cuadro del deslizador.
                     self.detener()
                     yield self.cuadro
-                elif self.cuadro >= self.argumentos[0]+1 and self.cuadro <= self.maximo:
+                elif self.cuadro > self.argumentos[0]+1 and self.cuadro <= self.maximo:
                     yield self.cuadro
+
 
     def empezar(self):
         """Comienza la reproducción."""
@@ -212,22 +214,26 @@ class ReproductorGeneral(FuncAnimation):
             Determina el número del cuadro requerido.
         """
 
+        print(indice)
         if indice > self.argumentos[0]+1 and indice <= self.maximo:
             # Actualización de la gráfica.
             self.deslizador.setValue(indice-self.argumentos[0]-1)
-            print(indice)
         elif indice == self.argumentos[0]+1:
             # Último cuadro de la introducción de la gráfica.
             self.deslizador.setValue(0)
             self.detener()
 
-            # Visualización de la barra de color.
-            colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
-            plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
+            if not self.barracolor:
 
-            # Activación del botón de guardado.
-            self.argumentos[-1].setEnabled(True)
-            self.argumentos[-1].setStyleSheet(u"color: rgb(246, 247, 247); background-color: rgb(11, 61, 98);")
+                # Visualización de la barra de color.
+                colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
+                plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
+
+                # Activación del botón de guardado.
+                self.argumentos[-1].setEnabled(True)
+                self.argumentos[-1].setStyleSheet(u"color: rgb(246, 247, 247); background-color: rgb(11, 61, 98);")
+
+                self.barracolor = True
 
         else:
             # Introducción de la gráfica.
