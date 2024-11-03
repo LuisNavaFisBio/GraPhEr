@@ -201,7 +201,7 @@ class GuardadoAnimacion(FuncAnimation):
 
         # Inicialización del proceso de guardado.
         self.proceso = True
-        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False, save_count = self.numerocuadromaximo)
+        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False)
     
     def finalizar(self):
         """
@@ -3278,7 +3278,7 @@ class Ui_Graficacion(QMainWindow):
             if (len(self.Dominio) == 2) and self.dependencia_tiempo:
                 # Problemas de una dimensión espacial y dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion2)
-                argumentos = [*self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
+                argumentos = [int(len(self.Dominios[0])/10), *self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
                 maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10)+20-1
                 minimo = 0
                 funcion = self.introducirProyeccion1D
