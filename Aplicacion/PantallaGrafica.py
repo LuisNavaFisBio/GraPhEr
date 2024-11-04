@@ -4089,7 +4089,7 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes.grid(True)
                     else:
                         # Graficación de curvas de nivel cuando se especifica un valor especifico para la coordenada fija (si es que se tiene una).
-                        if self.Proyeccion and (len(canva.figura.axes) < 2):
+                        if self.Proyeccion and (len(canva.figura.axes) < 3):
                             # Curvas de nivel para visualizaciones de proyecciones que no correspondan a coordenadas esféricas con radio como coordenada fija.
                             canva.axes.proyeccion.set_alpha(0.4)
                             self.Curvas = canva.axes.contour(self.x, self.y, valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
@@ -4105,6 +4105,7 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes2.grid(True)
                         else:
                             # Curvas de nivel para graficas sin proyección.
+                            print(12)
                             canva.axes.superficie.set_alpha(0.4)
                             self.Curvas = canva.axes.contour(self.x, self.y, valores, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                         canva.axes.grid(True)
@@ -4152,7 +4153,7 @@ class Ui_Graficacion(QMainWindow):
                     # El acomodo horizontal de las leyendas fue tomado de roschach. (04 de marzo de 2019). Respuesta a la pregunta "Matplotlib: how to show legend elements horizontally?". stackoverflow. https://stackoverflow.com/a/54870776
                     # La localización de la leyenda entera así como su tamaño respecto de la ventana fue tomado de Kington, J. (15 de enero de 2011). Respuesta a la pregunta "How to put the legend outside the plot". stackoverflow. https://stackoverflow.com/a/4701285.
                     # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
-                    self.Ui_Etiquetas.MostrarEtiqueta.axes.legend(curvas_especificas[:-1], curvas_etiquetas[:-1], labelcolor="white", facecolor=(0.52, 0.50, 0.49, 1.0), loc="upper left", ncol=int((len(curvas_especificas)+1)/3), bbox_to_anchor=(0, 0, 1, 1), mode = "expand", fontsize='x-large', edgecolor=(0.52, 0.50, 0.49, 1.0), framealpha=1, markerscale=1.5)
+                    self.Ui_Etiquetas.MostrarEtiqueta.axes.legend(curvas_especificas[1:], curvas_etiquetas[1:], labelcolor="white", facecolor=(0.52, 0.50, 0.49, 1.0), loc="upper left", ncol=int((len(curvas_especificas)+1)/3), bbox_to_anchor=(0, 0, 1, 1), mode = "expand", fontsize='x-large', edgecolor=(0.52, 0.50, 0.49, 1.0), framealpha=1, markerscale=1.5)
                     # Actualización de la leyenda en caso de que no se esté guardando la animación.
                     self.Ui_Etiquetas.MostrarEtiqueta.figura.canvas.draw_idle()
                     # Actualización del lienzo de la gráfica.
