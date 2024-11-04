@@ -1860,7 +1860,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.Interpretar.setShortcut("Ctrl+I")
-        if not ((self.DimensionEspacialEntrada.value() == 3 and not self.ProyeccionEntrada.isChecked()) or (self.DimensionEspacialEntrada.value() == 1)):
+        if not ((self.DimensionEspacialEntrada.value() == 3 and (not self.ProyeccionEntrada.isChecked())) or (self.DimensionEspacialEntrada.value() == 1)):
             # Permite la visualización de curvas de nivel excepto en problemas de tres dimensiones espaciales y que no se encuentran proyectados bidimensionalmente.
             self.Ui_Grafica.CurvasNivelAuto.setCheckable(True)
             self.Ui_Grafica.CurvasNivelEspecificas.setCheckable(True)

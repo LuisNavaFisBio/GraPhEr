@@ -1188,7 +1188,7 @@ class Ui_Graficacion(QMainWindow):
                 self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "sinOpcion.svg")))
             
             # Diseño de la caja de herramientas para la visualización de curvas de nivel, intercambio de proyecciones y graficación de cortes específicos.
-            if ((len(self.Dominio) == 3) and not self.dependencia_tiempo) or ((len(self.Dominio) == 2) and self.dependencia_tiempo):
+            if ((len(self.Dominio) == 3) and (not self.dependencia_tiempo) and (not self.Proyeccion)) or ((len(self.Dominio) == 2) and self.dependencia_tiempo):
                 # Desactivación de curvas de nivel cuando no hay dependencia temporal y se tiene una visualización 3D de una función de 3 variables espaciales o cuando se tiene un problema de una dimensión espacial con dependencia temporal.
                 self.CurvasNivelAuto.setCheckable(False)
                 self.CurvasNivelAuto.setEnabled(False)
@@ -1248,9 +1248,12 @@ class Ui_Graficacion(QMainWindow):
                 self.GraficarCoordenadaFija.setEnabled(False)
                 self.GraficarCoordenadaFija.setVisible(False)
                 self.GraficarCoordenadaFija.setSizePolicy(sizePolicy2)
+                self.CurvasNivelAuto.setEnabled(True)
                 self.CurvasNivelAuto.setCheckable(True)
                 self.CurvasNivelAuto.setShortcut("Ctrl+A")
+                self.CurvasNivelEspecificas.setEnabled(True)
                 self.CurvasNivelEspecificas.setCheckable(True)
+                self.CurvasNivelEspecificas.setShortcut("Ctrl+E")
             elif self.dependencia_tiempo:
                 # Cuando se tiene dependencia temporal, solo se pueden graficar cortes temporales.
                 if not self.Proyeccion:
@@ -3809,7 +3812,9 @@ class Ui_Graficacion(QMainWindow):
             # Creación de la proyección.
             if not ((len(self.Dominio) == 2) and self.dependencia_tiempo):
                 # Habilitación de las herramientas de curvas de nivel.
+                self.CurvasNivelAuto.setEnabled(True)
                 self.CurvasNivelAuto.setCheckable(True)
+                self.CurvasNivelEspecificas.setEnabled(True)
                 self.CurvasNivelEspecificas.setCheckable(True)
                 self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
                 self.GraficarCurvasFija.setEnabled(True)
