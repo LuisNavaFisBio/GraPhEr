@@ -714,10 +714,10 @@ class TrabajoResolucion(QtCore.QRunnable):
                         # Búsqueda de la primera raíz.
                         raiz = self.buscadorRaices(1, funcion_valorespropios, 0, entrada[1], precision, entrada[2])
                         if raiz[0] < np.round(entrada[1], precision):
-                            if Fraction(float(raiz[0])).limit_denominator().denominator == 1:
+                            if Fraction(raiz[0]).limit_denominator().denominator == 1:
                                 ValoresObtenidos.append(int(raiz[0]))
                             else:
-                                ValoresObtenidos.append(raiz[0])
+                                ValoresObtenidos.append(float(raiz[0]))
                         else:
                             # En caso de que la primera raíz encontrada no sea menor que el número determinado, existe un error en la entrada o no existen subsoluciones.
                             raise NoExistenciaError
@@ -731,7 +731,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                                     if Fraction(raiz[0]).limit_denominator().denominator == 1:
                                         ValoresObtenidos.append(int(raiz[0]))
                                     else:
-                                        ValoresObtenidos.append(raiz[0])
+                                        ValoresObtenidos.append(float(raiz[0]))
                             else:
                                 break
                     else:
@@ -744,7 +744,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                             if Fraction(float(entrada[0].subs(n, indice))).limit_denominator().denominator == 1:
                                 ValoresObtenidos.append(int(entrada[0].subs(n, indice)))
                             else:
-                                ValoresObtenidos.append(entrada[0].subs(n, indice))
+                                ValoresObtenidos.append(float(entrada[0].subs(n, indice)))
                         else:
                             # En caso de que la primera raíz encontrada no sea menor que el número determinado, existe un error en la entrada o no existen subsoluciones no nulas.
                             raise NoExistenciaError
@@ -781,7 +781,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                                 ValoresObtenidos[indice] = int(valores[indice])
                             else:
                                 # Redondeo a la precisión necesaria.
-                                ValoresObtenidos[indice] = np.round(valores[indice], precision)
+                                ValoresObtenidos[indice] = float(np.round(valores[indice], precision))
                     else:
                         # Cuando la entrada es la expresión general de los valores propios, primero se modifica la entrada.
 
