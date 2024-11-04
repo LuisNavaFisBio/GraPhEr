@@ -4038,7 +4038,7 @@ class Ui_Graficacion(QMainWindow):
                         for linea in self.Curvas2.collections:
                             linea.remove()
                 if not guardado:
-                    self.MostrarSolucion.figura.canvas.draw_idle()
+                    canva.figura.canvas.draw_idle()
             
             if self.carga:
                 # Envio de actualización cuando no se está guardando la animación.
@@ -4058,8 +4058,8 @@ class Ui_Graficacion(QMainWindow):
                     # Envio de actualización cuando no se está guardando la animación.
                     self.envioActualizacion("Graficando Curvas")
 
-                if not ((len(self.Dominio) == 3) and (not self.Proyeccion)) and not self.dependencia_tiempo:
-                    # Graficación de curvas de nivel para problemas que no sean de tres dimensiones espaciales.
+                if not ((len(self.Dominio) == 3) and (not self.Proyeccion) and (not self.dependencia_tiempo)):
+                    # Graficación de curvas de nivel para problemas que no sean de tres dimensiones espaciales y no estén proyectados.
                     if not self.valorespecial:
                         # Graficación de curvas de nivel cuando no se especifica un valor especifico para la coordenada fija (si es que se tiene una).
                         if self.Proyeccion:
