@@ -1303,8 +1303,9 @@ class TrabajoResolucion(QtCore.QRunnable):
             print(SolucionEncontrada)
 
             # Envio de la información encontrada a la pantalla principal.
-            # Conversión de la solución a una función de numpy.
-            self.ui.Solucion_funcion = sp.lambdify(self.ui.Simbolos, SolucionEncontrada)
+            # Conversión de la solución a una función de numpy y scipy.
+            # La necesidad de agregar la función sqrt de manera especial es para evitar un error de la función lambdify con esta función, la respuesta es tomada de alexbatgithub. (19 de diciembre de 2023). Respuesta a la discusión "regression in lambdify: module=['scipy'] ignored for sqrt". github. https://github.com/sympy/sympy/issues/24095#issuecomment-1862478578
+            self.ui.Solucion_funcion = sp.lambdify(self.ui.Simbolos, SolucionEncontrada, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
             self.ui.Soluciones = Soluciones
             self.ui.SolucionesSubproblemas = SolucionesSubproblemas
             self.ui.Coeficientes = coeficientes_copia
@@ -1343,24 +1344,24 @@ class TrabajoResolucion(QtCore.QRunnable):
                     self.ui.Ui_Grafica.t_grid = np.arange(0, float(self.ui.Dominios[indice][0]) + 0.04, step=0.04)
                 indice += 1
 
-            # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio.
+            # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
             self.ui.MatrizResultados = np.zeros(estructura).T
             if self.ui.dependencia_tiempo:
                 for indice1 in range(0, len(self.ui.Ui_Grafica.t_grid)):
                     for indice2 in range(0, len(self.ui.ParticionesDominios[0])):
                         if len(self.ui.ParticionesDominios) == 2:
                             for indice3 in range(0, len(self.ui.ParticionesDominios[1])):
-                                self.ui.MatrizResultados[indice1][indice3][indice2] = self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice2], self.ui.ParticionesDominios[1][indice3], self.ui.Ui_Grafica.t_grid[indice1])
+                                self.ui.MatrizResultados[indice1][indice3][indice2] = float(np.real(self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice2], self.ui.ParticionesDominios[1][indice3], self.ui.Ui_Grafica.t_grid[indice1])))
                         else:
-                            self.ui.MatrizResultados[indice1][indice2] = self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice2], self.ui.Ui_Grafica.t_grid[indice1])
+                            self.ui.MatrizResultados[indice1][indice2] = float(np.real(self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice2], self.ui.Ui_Grafica.t_grid[indice1])))
             else:
                 for indice1 in range(0, len(self.ui.ParticionesDominios[0])):
                     for indice2 in range(0, len(self.ui.ParticionesDominios[1])):
                         if len(self.ui.ParticionesDominios) == 3:
                             for indice3 in range(0, len(self.ui.ParticionesDominios[2])):
-                                self.ui.MatrizResultados[indice3][indice2][indice1] = self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice1], self.ui.ParticionesDominios[1][indice2], self.ui.ParticionesDominios[2][indice3])
+                                self.ui.MatrizResultados[indice3][indice2][indice1] = float(np.real(self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice1], self.ui.ParticionesDominios[1][indice2], self.ui.ParticionesDominios[2][indice3])))
                         else:
-                            self.ui.MatrizResultados[indice2][indice1] = self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice1], self.ui.ParticionesDominios[1][indice2])
+                            self.ui.MatrizResultados[indice2][indice1] = float(np.real(self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice1], self.ui.ParticionesDominios[1][indice2])))
 
             self.signals.finalizar_signal.emit("Solución Calculada")
         except:
