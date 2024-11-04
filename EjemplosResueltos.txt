@@ -40,7 +40,7 @@ Funciones Temporales    cos(lamda_n*t);sin(lamda_n*t)
 #### Ecuación de calor unidimensional con extremos fijos a cero y fuente
 
 Número de Dimensiones Espaciales    1       Dependencia Temporal    Sí        Coordenadas    Cartesianas
-Dominio x   0:pi        Dominio temporal    4
+Dominio x   0:pi        Dominio temporal    10
 Condiciones iniciales y/o de frontera    100
 Número de subproblemas    1
 
