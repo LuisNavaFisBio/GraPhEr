@@ -664,7 +664,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                     if Fraction(np.round(float(entrada), precision)).limit_denominator().denominator == 1:
                         ValoresObtenidos = [int(entrada)]
                     else:
-                        ValoresObtenidos = [np.round(float(entrada), precision)] 
+                        ValoresObtenidos = [float(np.round(float(entrada), precision))] 
                 else:
                     if type(entrada) == sp.core.relational.Equality:
                         # Cuando el usuario introduce una ecuación. 
@@ -675,7 +675,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                             if Fraction(valores[indice]).limit_denominator().denominator == 1:
                                 ValoresObtenidos[indice] = int(valores[indice])
                             else:
-                                ValoresObtenidos[indice] = valores[indice]
+                                ValoresObtenidos[indice] = float(valores[indice])
 
                     elif "\\leq" in latex(entrada):
                         entrada = entrada.subs(parsing.parse_expr("lamda_{}m".format(valorpropio_numero)), n).subs(parsing.parse_expr("lamda_{}l".format(valorpropio_numero)), n)
@@ -694,7 +694,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                                 ValoresObtenidos[indice] = int(entrada.subs(n, numero))
                             else:
                                 # Redondeo a la precisión necesaria.
-                                ValoresObtenidos[indice] = np.round(float(entrada.subs(n, numero)), precision)
+                                ValoresObtenidos[indice] = float(np.round(float(entrada.subs(n, numero)), precision))
                             numero += 1
                         
             else:
