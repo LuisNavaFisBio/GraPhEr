@@ -3906,7 +3906,7 @@ class Ui_Graficacion(QMainWindow):
 
             # Calculo de los valores constantes con los que se buscarán las curvas de nivel. La lista contiene el valor 10000 para homogeneizar la aplicación con el caso de curvas de nivel para valores especificados manualmente.
             self.curvas_nivel = np.round(np.linspace(self.minimo+(self.maximo-self.minimo)/10, self.minimo+9*(self.maximo-self.minimo)/10, 9), self.Precision)
-            np.append(self.curvas_nivel, 10000)
+            self.curvas_nivel = np.append(self.curvas_nivel, 10000)
 
             if self.Animacion.curvas_nivel == False:
                 # Configuración de los atributos de la animación para habilitar la visualización de curvas de nivel.
