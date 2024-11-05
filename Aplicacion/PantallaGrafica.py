@@ -270,7 +270,7 @@ class GuardadoAnimacion(FuncAnimation):
                     pass
 
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
-            elif -1 < indice < self.umbral:
+            elif (-1 < indice) and (indice < self.umbral):
                 # Creación de los cuadros de introducción de la gráfica en la animación.
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
 

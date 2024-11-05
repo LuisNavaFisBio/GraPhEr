@@ -215,7 +215,7 @@ class ReproductorGeneral(FuncAnimation):
         """
 
         print(indice)
-        if indice > self.argumentos[0]+1 and indice <= self.maximo:
+        if (indice > self.argumentos[0]+1) and (indice <= self.maximo):
             # Actualización de la gráfica.
             self.deslizador.setValue(indice-self.argumentos[0]-1)
         elif indice == self.argumentos[0]+1:
