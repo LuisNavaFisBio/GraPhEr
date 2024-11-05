@@ -1804,6 +1804,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             Mensaje a desplegar en la pantalla de carga.
         """
 
+        self.Ui_Grafica.GuardarAnimacion.setDisabled(True)
+        self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
         self.Ui_Grafica.GuardarAnimacion.setText("Iniciando guardado")
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
@@ -1822,7 +1824,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
 
         # Finalización
-        self.animacionGuardado.finalizar()
+        self.Ui_Grafica.animacionGuardado.pause()
 
         self.Ui_Grafica.GuardarAnimacion.setText("Guardado Finalizado")
         QCoreApplication.processEvents()
