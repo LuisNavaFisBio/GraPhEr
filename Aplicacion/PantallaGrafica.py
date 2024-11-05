@@ -3360,7 +3360,7 @@ class Ui_Graficacion(QMainWindow):
                     # Problemas sin dependencia temporal.
                     argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:-2], self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
                     maximo = int(len(self.DatosGrafica[0])/10)+50
-                    minimo = 0
+                    minimo = int(len(self.DatosGrafica[0])/10)
                     funcion = self.introducirProyeccion2D
                     nombre = "2DP_notiempo_{}".format(coordenadas)
             elif len(self.Dominios) == 3:
@@ -3417,7 +3417,7 @@ class Ui_Graficacion(QMainWindow):
             # Para guardado sin proyección.
             self.proyectado = False
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1): 
-                # Problemas con una dimensión espacial y depedencia temporal.
+                # Problemas con una dimensión espacial y dependencia temporal.
                 self.DatosGrafica = self.crearGrafica1D(self.MostrarSolucion2)
                 argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.MatrizResultados, self.MostrarSolucion2.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion] 
                 maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
@@ -3440,10 +3440,10 @@ class Ui_Graficacion(QMainWindow):
                     funcion = self.actualizarAnimacion2D
                     nombre = "2D_tiempo_{}".format(coordenadas)
                 else:
-                    # Problemas sin depedencia temporal.
+                    # Problemas sin dependencia temporal.
                     argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
                     maximo = int(len(self.DatosGrafica[0].T)/10)+50
-                    minimo = 0
+                    minimo = int(len(self.DatosGrafica[0].T)/10)
                     funcion = self.introducirGrafica2D
                     nombre = "2D_notiempo_{}".format(coordenadas)
             elif len(self.Dominios) == 3:
