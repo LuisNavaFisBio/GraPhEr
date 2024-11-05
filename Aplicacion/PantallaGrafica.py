@@ -160,7 +160,7 @@ class GuardadoAnimacion(FuncAnimation):
     Clase que contiene las instrucciones para el proceso de guardado de la animación.
     """
 
-    def __init__(self, canva, func, fargs, interval, maximo = 10, curvas_nivel = False, funcion_curvas = None, numero_introduccion = None, proyeccion = False):
+    def __init__(self, canva, func, fargs, interval, maximo = 10, curvas_nivel = False, funcion_curvas = None, numero_introduccion = None, proyeccion = False, dependencia_temporal = False, sistema_coordenadas = None):
         """
         Inicializa el proceso de guardado.
         
@@ -185,6 +185,12 @@ class GuardadoAnimacion(FuncAnimation):
 
         proyeccion: bool
             Determina si se guarda la proyección o la gráfica sin proyección.
+
+        dependencia_temporal: bool
+            Determina si hay dependencia temporal
+
+        sistema_coordenadas:string
+            El sistema de coordenadas del problema.
         """
 
         # Configuración de las variables necesarias.
@@ -198,6 +204,7 @@ class GuardadoAnimacion(FuncAnimation):
         self.numerocuadromaximo = maximo
         self.deslizador = Conteo()
         self.deslizador.val = -2
+        self.dependencia_temporal = dependencia_temporal
 
         # Inicialización del proceso de guardado.
         self.proceso = True
@@ -224,7 +231,15 @@ class GuardadoAnimacion(FuncAnimation):
         self.deslizador.val = cuadro+1-self.umbral-2
         # Actualización de la gráfica.
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
-        if self.curvas_nivel:
+        # Adicion de curvas de nivel.
+        if self.curvas_nivel and self.dependencia_temporal:
+            # Problemas con dependencia temporal.
+            self.funcion_curvas(guardar = True)
+        elif self.curvas_nivel and (not self.dependencia_temporal) and (self.deslizador.val == 0):
+            # Problemas sin dependencia temporal y dos dimensiones espaciales.
+            self.funcion_curvas(guardar = True)
+        elif self.curvas_nivel and (self.sistema_coordenadas == "Esféricas"):
+            # Problemas de tres dimensiones espaciales.
             self.funcion_curvas(guardar = True)
         self.canva.figura.canvas.draw_idle()
 
@@ -267,7 +282,6 @@ class GuardadoAnimacion(FuncAnimation):
                 self.canva.axes2.grid(True, lw = 0.2)
             else:
                 self.canva.axes.grid(True, lw = 0.2)
-            print(True)
         except: 
             exctype, value, line = sys.exc_info()[:3]
             print(exctype, value, line.tb_lineno)
@@ -3473,7 +3487,7 @@ class Ui_Graficacion(QMainWindow):
             curvas_str = ""
         
         # Configuración de la herramienta de guardado.
-        self.animacion = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/resolucion, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado)
+        self.animacion = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/resolucion, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
 
         self.envioActualizacion("Guardando Cuadros")
 
@@ -3906,7 +3920,7 @@ class Ui_Graficacion(QMainWindow):
 
             # Calculo de los valores constantes con los que se buscarán las curvas de nivel. La lista contiene el valor 10000 para homogeneizar la aplicación con el caso de curvas de nivel para valores especificados manualmente.
             self.curvas_nivel = np.round(np.linspace(self.minimo+(self.maximo-self.minimo)/10, self.minimo+9*(self.maximo-self.minimo)/10, 9), self.Precision)
-            self.curvas_nivel = np.append(self.curvas_nivel, 10000)
+            self.curvas_nivel = np.append(self.curvas_nivel, self.maximo+(self.maximo-self.minimo)/10)
 
             if self.Animacion.curvas_nivel == False:
                 # Configuración de los atributos de la animación para habilitar la visualización de curvas de nivel.
@@ -3940,7 +3954,7 @@ class Ui_Graficacion(QMainWindow):
             for valor in self.CurvasNivelEspecificasEntrada.text().split(";"):
                 if valor != "":
                     self.curvas_nivel.append(np.round(float(parsing.parse_expr(valor)), self.Precision))
-            self.curvas_nivel.append(10000)
+            self.curvas_nivel.append(self.maximo+(self.maximo-self.minimo)/10)
 
             if self.carga:
                 # Envio de actualización cuando no se está guardando la animación.
