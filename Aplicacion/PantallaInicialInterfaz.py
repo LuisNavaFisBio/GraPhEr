@@ -1765,7 +1765,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
 
         # Crea el lienzo sobre el que se graficaran los cuadros de la animación.
-        self.Ui_Grafica.MostrarSolucion2 = Lienzo(self, ancho= 854, alto=480, dpi = 72)
+        self.Ui_Grafica.MostrarSolucion2 = Lienzo(self, ancho= 854, alto=480, dpi = 144)
         self.Ui_Grafica.MostrarSolucion2.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         self.Ui_Grafica.MostrarSolucion2.figura.set_visible(True)
         
