@@ -976,13 +976,18 @@ class Ui_Graficacion(QMainWindow):
         verticalLayout_2.addWidget(line_9, alignment=Qt.AlignHCenter)
     
         # Diseño y configuración del botón de guardado de animación.
-        self.GuardarAnimacion = QPushButton(frame3, clicked = lambda: self.signals.guardar_signal.emit())
+        self.GuardarAnimacion = QPushButton(frame3)
         self.GuardarAnimacion.setText(u"Guardar Animaci\u00f3n")
         self.GuardarAnimacion.setMinimumSize(QSize(400, 45))
         self.GuardarAnimacion.setMaximumSize(QSize(400, 45))
         self.GuardarAnimacion.setShortcut("Ctrl+S")
         self.GuardarAnimacion.setDisabled(True)
         self.GuardarAnimacion.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
+        try:
+            self.GuardarAnimacion.clicked.disconnect()
+        except:
+            pass
+        self.GuardarAnimacion.clicked.connect(lambda: self.signals.guardar_signal.emit())
         verticalLayout_2.addWidget(self.GuardarAnimacion, alignment=Qt.AlignCenter)
         horizontalLayout_1.addWidget(frame3)
 
