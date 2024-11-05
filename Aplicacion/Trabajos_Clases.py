@@ -467,7 +467,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
 
                     else:
                         if suma == "":
-                            indices = "0" # Tabla.
+                            indices = "" # Tabla.
                         else: 
                             indices = "n" # Tabla.
                         if len(self.ui.ValoresPropios[indice]) >= 2:
