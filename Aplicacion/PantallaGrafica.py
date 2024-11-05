@@ -205,6 +205,7 @@ class GuardadoAnimacion(FuncAnimation):
         self.deslizador = Conteo()
         self.deslizador.val = -2
         self.dependencia_temporal = dependencia_temporal
+        self.sistema_coordenadas = sistema_coordenadas
 
         # Inicialización del proceso de guardado.
         self.proceso = True
