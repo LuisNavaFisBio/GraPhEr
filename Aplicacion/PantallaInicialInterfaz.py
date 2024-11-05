@@ -1491,7 +1491,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.signals.coordenada_signal.connect(self.cambiarCoordenadaFija)
 
         try:
-            self.GuardarAnimacion.clicked.disconnect()
+            self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
         except:
             pass
         self.Ui_Grafica.GuardarAnimacion.clicked.connect(lambda: self.Ui_Grafica.signals.guardar_signal.emit())
