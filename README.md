@@ -43,29 +43,31 @@ Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” c
 Para tener una ejemplificación del desempeño de la app, se puede copiar y pegar en los respectivos campos de la ventana inicial la información siguiente:
 
 ```
-Número de Dimensiones Espaciales    2
-Dominio x    0:pi        Dominio y    0:pi
-Condiciones iniciales y/o de frontera    x*sin(x);x*sin(x);y*(pi-y);y*(y-pi)
+#### Ecuación de Laplace en dos dimensiones y coordenadas cartesianas
+
+Número de Dimensiones Espaciales    2        Coordenadas    Cartesianas
+Dominio x    0:pi/2        Dominio y    0:pi/2
+Condiciones iniciales y/o de frontera    x*sin(2*x);x*sin(2*x);y*(pi/2-y);y*(y-pi/2)
 Número de subproblemas    4
 
 Solución del Subproblema #1
-Valores Propios    n        Número de Términos    1:10
-Coeficientes    Int[2*f_1*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
-Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*(pi-y))
+Valores Propios    n        Número de Términos    1:5
+Coeficientes    Int[4*f_1*sin(lamda_n*x)/(pi*sinh(lamda_n*pi/2)),x]
+Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*(pi/2-y))
 
 Solución del Subproblema #2
-Valores Propios    n        Número de Términos    1:10
-Coeficientes    Int[2*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi)),x]
+Valores Propios    n        Número de Términos    1:5
+Coeficientes    Int[4*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi/2)),x]
 Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*y)
 
 Solución del Subproblema #3
-Valores Propios    n        Número de Términos    1:10
-Coeficientes    Int[2*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
-Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*(pi-x))
+Valores Propios    n        Número de Términos    1:5
+Coeficientes    Int[4*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi/2)),y]
+Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*(pi/2-x))
 
 Solución del Subproblema #4
-Valores Propios    n        Número de Términos    1:10
-Coeficientes    Int[2*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi)),y]
+Valores Propios    n        Número de Términos    1:5
+Coeficientes    Int[4*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi/2)),y]
 Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*x)
 ```
 
