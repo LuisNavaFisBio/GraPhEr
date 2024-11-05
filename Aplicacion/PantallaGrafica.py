@@ -209,7 +209,7 @@ class GuardadoAnimacion(FuncAnimation):
 
         # Inicialización del proceso de guardado.
         self.proceso = True
-        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False, cache_frame = False)
+        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False, cache_frame_data = False)
     
     def finalizar(self):
         """
