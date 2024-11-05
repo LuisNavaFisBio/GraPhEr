@@ -983,7 +983,7 @@ class Ui_Graficacion(QMainWindow):
         self.GuardarAnimacion.setShortcut("Ctrl+S")
         self.GuardarAnimacion.setDisabled(True)
         self.GuardarAnimacion.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
-        self.GuardarAnimacion.clicked.connect(lambda: self.signals.guardar_signal.emit())
+        #self.GuardarAnimacion.clicked.connect(lambda: self.signals.guardar_signal.emit())
         verticalLayout_2.addWidget(self.GuardarAnimacion, alignment=Qt.AlignCenter)
         horizontalLayout_1.addWidget(frame3)
 
