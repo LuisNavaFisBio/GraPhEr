@@ -1927,7 +1927,7 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada2, coordenada1, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 else: 
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
-        return lienzo.proyeccion
+        return lienzo
     
     def actualizarGrafica3D(self, cuadro, cuadro_fijo, coordenada1, coordenada2, coordenada3, grid1, grid2, longitud, coordenadas, coordenada_fija, norma, valores_matriz, lienzo, limites, numero_columnas, numero_filas, cota):
         """
@@ -3326,7 +3326,7 @@ class Ui_Graficacion(QMainWindow):
         Guarda en un archivo .mov (a 25 FPS cuando hay dependencia temporal o 10 FPS cuando no lo hay) una animación mostrando la solución para distintos tiempos o distintos valores de coordenada fija (en problemas con dependencia temporal o con tres dimensiones espaciales, respectivamente) o la creación de la gráfica (en problemas sin dependencia temporal y con dos dimensiones espaciales o en la proyección en problemas de una dimensión espacial).
         """
 
-        self.Animacion.runs = False
+        self.Animacion.progreso = False
         self.envioActualizacion("Iniciando Gráfica")
         
         # Preparación de la gráfica y los datos de guardado.
@@ -3504,7 +3504,7 @@ class Ui_Graficacion(QMainWindow):
             curvas_str = ""
         
         # Configuración de la herramienta de guardado.
-        self.animacion = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
+        self.animacionGuardado = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
 
         self.envioActualizacion("Guardando Cuadros")
 
@@ -3513,10 +3513,10 @@ class Ui_Graficacion(QMainWindow):
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         writer = FFMpegFileWriter(fps=25, metadata=metadata, bitrate = 12000)
-        self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=72)
+        self.animacionGuardado.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=72)
 
         # Finalización
-        self.animacion.finalizar()
+        self.animacionGuardado.finalizar()
         
     def cambiarCoordenadaFija(self):
         """
@@ -4050,18 +4050,18 @@ class Ui_Graficacion(QMainWindow):
         if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
             # Determinación 
             if guardado:
-                anim = self.animacion
+                anim = self.animacionGuardado
                 canva = self.MostrarSolucion2
             else:
                 anim = self.Animacion
                 canva = self.MostrarSolucion
 
-            if self.carga:
-                # Envio de actualización cuando no se está guardando la animación.
-                self.envioActualizacion("Eliminando Curvas Anteriores")
-
             # Eliminación de las curvas de nivel dibujadas.
             if self.curvasdibujadas:
+                if self.carga:
+                    # Envio de actualización cuando no se está guardando la animación.
+                    self.envioActualizacion("Eliminando Curvas Anteriores")
+
                 for linea in self.Curvas.collections:
                     linea.remove()
                 if len(canva.figura.axes) > 2:
