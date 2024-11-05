@@ -32,6 +32,8 @@ Finalmente, requiere la instalación de varias librerías de Python. Para ello e
 pip install matplotlib<=3.6.2, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python
 ```
 
+**Nota: Se necesita una versión inferior o igual a la versión 3.6.2 de la librería MatPlotLib por la existencia de un bug en dicha librería que impide la graficación de curvas de nivel en la vista tridimensional.**
+
 # Ejecución de la aplicación
 
 Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo o correr el archivo con un editor como Visual Studio Code.
