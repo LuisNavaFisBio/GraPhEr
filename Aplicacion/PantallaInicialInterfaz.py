@@ -1490,6 +1490,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.signals.corte_signal.connect(self.graficarCorte)
         self.Ui_Grafica.signals.coordenada_signal.connect(self.cambiarCoordenadaFija)
 
+        try:
+            self.GuardarAnimacion.clicked.disconnect()
+        except:
+            pass
+        self.Ui_Grafica.GuardarAnimacion.clicked.connect(lambda: self.Ui_Grafica.signals.guardar_signal.emit())
+
         # La conectividad para abrir la ventana de etiquetas a partir de la ventana de graficación fue tomada de Elder, J. [Codemy.com] (05 de agosto de 2021). How To Open A Second Window - PyQt5 GUI Thursdays #24. YouTube. https://www.youtube.com/watch?v=R5N8TA0KFxc
         self.Ui_Grafica.Ui_Etiquetas = Ui_VentanaEtiquetas()
         self.Ui_Grafica.VentanaEtiquetas = QMainWindow()
