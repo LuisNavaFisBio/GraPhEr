@@ -3341,7 +3341,7 @@ class Ui_Graficacion(QMainWindow):
                 minimo = 0
                 funcion = self.introducirProyeccion1D
                 nombre = "1DP_tiempo"
-                resolucion = 25
+
             elif len(self.Dominios) == 2:
                 # Para problemas con dos dimensiones espaciales.
                 if self.Coordenadas == "Cartesianas":
@@ -3353,19 +3353,19 @@ class Ui_Graficacion(QMainWindow):
                 if self.dependencia_tiempo:
                     # Problemas con dependencia temporal.
                     argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+20
+                    maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
                     minimo = int(len(self.DatosGrafica[0])/10)
                     funcion = self.actualizarProyeccion2D
                     nombre = "2DP_tiempo_{}".format(coordenadas)
-                    resolucion = 25
+
                 else:
                     # Problemas sin dependencia temporal.
                     argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:-2], self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[0])/10)+20
+                    maximo = int(len(self.DatosGrafica[0])/10)+50
                     minimo = 0
                     funcion = self.introducirProyeccion2D
                     nombre = "2DP_notiempo_{}".format(coordenadas)
-                    resolucion = 10
+
             elif len(self.Dominios) == 3:
                 # Para problemas con tres dimensiones espaciales.
                 if self.CoordenadaFija_1.isChecked():
@@ -3405,18 +3405,17 @@ class Ui_Graficacion(QMainWindow):
                 if (self.CoordenadaFija_1.isChecked()) and (self.Coordenadas == "Esféricas"):
                     # Problemas con coordenadas esféricas y el radio como coordenada fija.
                     argumentos = [int(len(self.DatosGrafica[1])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Valores, limites, self.MostrarSolucion2.figura, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2])+20
+                    maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2])+50
                     minimo = int(len(self.DatosGrafica[1])/10)
                     funcion = self.actualizarProyeccion3D_especial
                 else:
                     # Cualquier otro problema.
                     argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Coordenadas, self.Valores, self.MostrarSolucion2.axes, coordenada_especifica, limites, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2])+20
+                    maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2])+50
                     minimo = int(len(self.DatosGrafica[0])/10)
                     funcion = self.actualizarProyeccion3D
 
                 nombre = "3DP_{}".format(coordenada_especifica)
-                resolucion = 10
         else:
             # Para guardado sin proyección.
             self.proyectado = False
@@ -3424,11 +3423,10 @@ class Ui_Graficacion(QMainWindow):
                 # Problemas con una dimensión espacial y depedencia temporal.
                 self.DatosGrafica = self.crearGrafica1D(self.MostrarSolucion2)
                 argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.MatrizResultados, self.MostrarSolucion2.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion] 
-                maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+20
+                maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
                 minimo = int(len(self.DatosGrafica[0])/10)
                 funcion = self.actualizarAnimacion1D
                 nombre = "1D_tiempo"
-                resolucion = 25
             elif len(self.Dominios) == 2:
                 # Problemas con dos dimensiones espaciales.
                 if self.Coordenadas == "Cartesianas":
@@ -3440,19 +3438,77 @@ class Ui_Graficacion(QMainWindow):
                 if self.dependencia_tiempo:
                     # Problemas con dependencia temporal.
                     argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+20
+                    maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
                     minimo = int(len(self.DatosGrafica[0].T)/10)
                     funcion = self.actualizarAnimacion2D
                     nombre = "2D_tiempo_{}".format(coordenadas)
-                    resolucion = 25
                 else:
                     # Problemas sin depedencia temporal.
-                    argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[0].T)/10)+20
+                        coordenada_especifica = "r"
+                        longitud2 = int(len(self.Dominios[1])/10)
+                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
+                    limites = self.dominio[0:2]
+                elif self.CoordenadaFija_2.isChecked():
+                    if self.Coordenadas == "Cartesianas":
+                        coordenada_especifica = "y"
+                    elif self.Coordenadas == "Cilíndricas / Polares":
+                        coordenada_especifica = "phi"
+                    elif self.Coordenadas == "Esféricas":
+                        coordenada_especifica = "theta"
+                    longitud2 = int(len(self.Dominios[0])/10)
+                    self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
+                    limites = self.dominio[2:4]
+                elif self.CoordenadaFija_3.isChecked():
+                    if self.Coordenadas == "Esféricas":
+                        coordenada_especifica = "phi"
+                    else:
+                        coordenada_especifica = "z"
+                    longitud2 = int(len(self.Dominios[0])/10)
+                    self.Valores = self.MatrizResultados
+                    limites = self.dominio[4:]
+                        
+                if self.Coordenadas == "Cartesianas":
+                    self.DatosGrafica = self.crearGrafica3D_cartesianas(self.MostrarSolucion2, coordenada_especifica)
+                    coordenadas = "cartesianas"
+                elif self.Coordenadas == "Cilíndricas / Polares":
+                    self.DatosGrafica = self.crearGrafica3D_cilindricas(self.MostrarSolucion2, coordenada_especifica)
+                    coordenadas = "cilindricas_polares"
+                elif self.Coordenadas == "Esféricas":
+                    self.DatosGrafica = self.crearGrafica3D_esfericas(self.MostrarSolucion2, coordenada_especifica)
+                    coordenadas = "esfericas"
+                argumentos = [longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion2.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion]
+                maximo = int(longitud2+self.DatosGrafica[0]+50)
+                minimo = int(longitud2)
+                funcion = self.actualizarGrafica3D
+                nombre = "3D_{}".format(coordenadas+"_"+coordenada_especifica)
+
+        self.envioActualizacion("Configurando Opciones")
+
+        # Configuración de las curvas de nivel.
+        if self.curvas:
+            curvas_str = "_Curvas"
+            self.funcion_curvas = self.interpretacionCurvasNivel
+        else:
+            curvas_str = ""
+        
+        # Configuración de la herramienta de guardado.
+        self.animacion = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
+
+        self.envioActualizacion("Guardando Cuadros")
+
+        # Configuración de los datos de guardado.
+        metadata = dict(title='SolucionEDP', artist='GraPhEr')
+        # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+        writer = FFMpegFileWriter(fps=25, metadata=metadata, bitrate = 12000)
+        self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=72)
+
+        # Finalización
+        self.animacion.finalizar()      argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
+                    maximo = int(len(self.DatosGrafica[0].T)/10)+50
                     minimo = 0
                     funcion = self.introducirGrafica2D
                     nombre = "2D_notiempo_{}".format(coordenadas)
-                    resolucion = 10
             elif len(self.Dominios) == 3:
                 # Problemas con tres dimensiones espaciales.
                 if self.CoordenadaFija_1.isChecked():
@@ -3496,11 +3552,10 @@ class Ui_Graficacion(QMainWindow):
                     self.DatosGrafica = self.crearGrafica3D_esfericas(self.MostrarSolucion2, coordenada_especifica)
                     coordenadas = "esfericas"
                 argumentos = [longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion2.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion]
-                maximo = int(longitud2+self.DatosGrafica[0]+20)
+                maximo = int(longitud2+self.DatosGrafica[0]+50)
                 minimo = int(longitud2)
                 funcion = self.actualizarGrafica3D
                 nombre = "3D_{}".format(coordenadas+"_"+coordenada_especifica)
-                resolucion = 10
 
         self.envioActualizacion("Configurando Opciones")
 
@@ -3512,7 +3567,7 @@ class Ui_Graficacion(QMainWindow):
             curvas_str = ""
         
         # Configuración de la herramienta de guardado.
-        self.animacion = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/resolucion, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
+        self.animacion = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
 
         self.envioActualizacion("Guardando Cuadros")
 
@@ -3520,7 +3575,7 @@ class Ui_Graficacion(QMainWindow):
         metadata = dict(title='SolucionEDP', artist='GraPhEr')
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
-        writer = FFMpegWriter(fps=resolucion, metadata=metadata, bitrate = 12000)
+        writer = FFMpegFileWriter(fps=25, metadata=metadata, bitrate = 12000)
         self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=72)
 
         # Finalización
