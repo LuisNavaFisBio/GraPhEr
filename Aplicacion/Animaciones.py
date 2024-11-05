@@ -227,6 +227,9 @@ class ReproductorGeneral(FuncAnimation):
 
                 # Visualización de la barra de color.
                 colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
+
+                # La creación de la barra de color se basa en mfitzp. (26 de febrero de 2015). Respuesta a la pregunta "Map values to colors in matplotlib". stackoverflow. https://stackoverflow.com/a/28752903
+                # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
 
                 # Activación del botón de guardado.
@@ -342,6 +345,8 @@ class Graficacion2D_NoTemporal(FuncAnimation):
 
             # Visualización de la barra de color.
             colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
+            # La creación de la barra de color se basa en mfitzp. (26 de febrero de 2015). Respuesta a la pregunta "Map values to colors in matplotlib". stackoverflow. https://stackoverflow.com/a/28752903
+            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
             plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap = self.argumentos[-2]), colorbarax)
 
             # Activación del botón de guardado.

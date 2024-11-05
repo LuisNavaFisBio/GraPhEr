@@ -245,7 +245,7 @@ class GuardadoAnimacion(FuncAnimation):
                     else:
                         self.canva.axes.superficie.set_alpha(0.4)
             elif indice == -1+self.umbral+2:
-                # Adición de la barra de color en la iniciaización.
+                # Adición de la barra de color en la inicialización.
                 self.actualizarGrafica(indice)
                 # Agregado de la barra de color para referencia.
                 colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
@@ -4084,6 +4084,7 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes.grid(True)
                         else:
                             # Curvas de nivel para gráficas sin proyección.
+                            print(9)
                             canva.axes.superficie.set_alpha(0.4)
                             self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=2, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             canva.axes.grid(True)
