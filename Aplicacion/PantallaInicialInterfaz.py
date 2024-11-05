@@ -1835,6 +1835,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.interpretacionCurvasNivel()
 
         # Habilita el botón de guardado.
+        self.Ui_Grafica.centralwidget.setEnabled(True)
         self.Ui_Grafica.GuardarAnimacion.setEnabled(True)
         self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(11, 61, 98); color: rgb(246,247,247)")
         self.Ui_Grafica.GuardarAnimacion.setText(u"Guardar Animaci\u00f3n")

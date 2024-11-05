@@ -1464,7 +1464,6 @@ class TrabajoGuardado(QtCore.QRunnable):
             self.ui.CurvasNivelAuto.setShortcut("Ctrl+A")
             self.ui.CurvasNivelEspecificas.setShortcut("Ctrl+E")
             self.ui.GuardarAnimacion.setStyleSheet(u"color: rgb(246, 247, 247); background-color: rgb(11, 61, 98);")
-            self.ui.centralwidget.setEnabled(True)
 
 class TrabajoCambioProyeccion(QtCore.QRunnable):
     """Ejecutable para realizar el procesamiento en paralelo del cambio entre proyecciones."""
