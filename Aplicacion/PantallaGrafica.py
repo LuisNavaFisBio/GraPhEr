@@ -1590,7 +1590,7 @@ class Ui_Graficacion(QMainWindow):
 
         self.valorespecial = False
 
-        if cuadro <= -1:
+        if cuadro < 0:
             # Inicialización de la gráfica.
             linea.set_segments([])
         elif 0 <= cuadro <= cuadro_fijo:
@@ -1703,7 +1703,7 @@ class Ui_Graficacion(QMainWindow):
 
         self.valorespecial = False
 
-        if cuadro <= -1:
+        if cuadro < 0:
             # Inicialización de la gráfica.
             coordenada1, coordenada2 = np.meshgrid([0], [0])
             Z = coordenada1**2+coordenada2**2
@@ -1760,18 +1760,18 @@ class Ui_Graficacion(QMainWindow):
         self.valorespecial = False
 
         if coordenadas == "Cartesianas":
-            if cuadro <= 0:
+            if cuadro < 0:
                 # Inicialización de gráfica.
                 lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
-            elif 1 <= cuadro <= cuadro_fijo:
+            elif 0 <= cuadro <= cuadro_fijo:
                 # Creación de la gráfica.
                 lienzo.superficie.remove()
                 lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
         elif coordenadas == "Cilíndricas / Polares":
-            if cuadro <= 0:
+            if cuadro < 0:
                 # Inicialización de gráfica.
                 lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
-            elif 1 <= cuadro <= cuadro_fijo:
+            elif 0 <= cuadro <= cuadro_fijo:
                 # Creación de la gráfica para el tiempo.
                 lienzo.superficie.remove()
                 lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
