@@ -241,6 +241,17 @@ class ReproductorGeneral(FuncAnimation):
         else:
             # Introducción de la gráfica.
             self.funcionActualizadora(indice, *self.argumentos[0:-2])
+
+            # Eliminación de cualquier gráfica en el lienzo.
+            try:
+                if self.proyeccion:
+                    self.canva.axes.proyeccion.remove()
+                    if len(self.canva.figura.axes) > 2:
+                        self.canva.axes2.proyeccion.remove()
+                else:
+                    self.canva.axes.superficie.remove()
+            except:
+                pass
         
         
         # Graficación de la cuadrícula.

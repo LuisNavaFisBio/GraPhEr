@@ -229,7 +229,7 @@ class GuardadoAnimacion(FuncAnimation):
             Cuadro actual de la animación.
         """
 
-        self.deslizador.val = cuadro+1-self.umbral
+        self.deslizador.val = cuadro-self.umbral
         # Actualización de la gráfica.
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
         if self.curvas_nivel:
@@ -260,6 +260,7 @@ class GuardadoAnimacion(FuncAnimation):
         try:
             print(indice)
             if indice == -1:
+                # Eliminación de cualquier gráfica en el lienzo.
                 try:
                     if self.proyeccion:
                         self.canva.axes.proyeccion.remove()
@@ -269,6 +270,7 @@ class GuardadoAnimacion(FuncAnimation):
                         self.canva.axes.superficie.remove()
                 except:
                     pass
+
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
             elif -1 < indice < self.umbral:
                 # Creación de los cuadros de introducción de la gráfica en la animación.
@@ -276,11 +278,9 @@ class GuardadoAnimacion(FuncAnimation):
                 if self.curvas_nivel:
                     # Modificación de la opacidad.
                     if self.proyeccion:
+                        self.canva.axes.proyeccion.set_alpha(0.4)
                         if len(self.canva.figura.axes) > 2:
-                            self.canva.axes.proyeccion.set_alpha(0.4)
                             self.canva.axes2.proyeccion.set_alpha(0.4)
-                        else:
-                            self.canva.axes.proyeccion.set_alpha(0.4)
                     else:
                         self.canva.axes.superficie.set_alpha(0.4)
             elif indice == self.umbral:
@@ -1774,7 +1774,7 @@ class Ui_Graficacion(QMainWindow):
         if coordenadas == "Cartesianas":
             if cuadro < 0:
                 # Inicialización de gráfica.
-                lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
+                lienzo.superficie = lienzo.plot_surface(coordenada1.T[:1+cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:1+cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:1+cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
             elif 0 <= cuadro <= cuadro_fijo:
                 # Creación de la gráfica.
                 lienzo.superficie.remove()
