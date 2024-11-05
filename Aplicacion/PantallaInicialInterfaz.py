@@ -1056,12 +1056,15 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Visualizar.setText("Visualizar")
         self.Visualizar.setMinimumSize(QSize(200, 35))
         self.Visualizar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98) ")
+
+        # La desconexión del botón de visualización para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         try:
             self.Visualizar.clicked.disconnect()
         except:
             pass
-        
         self.Visualizar.clicked.connect(self.visualizarSolucion)
+        
         self.Visualizar.setShortcut("Ctrl+o")
         horizontalLayout_22.addWidget(self.Visualizar)
 
@@ -1494,6 +1497,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.signals.corte_signal.connect(self.graficarCorte)
         self.Ui_Grafica.signals.coordenada_signal.connect(self.cambiarCoordenadaFija)
 
+        # La desconexión del botón de guardado para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         try:
             self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
         except:

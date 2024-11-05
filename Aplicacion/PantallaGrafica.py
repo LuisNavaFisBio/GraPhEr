@@ -260,6 +260,15 @@ class GuardadoAnimacion(FuncAnimation):
         try:
             print(indice)
             if indice == -1:
+                try:
+                    if self.proyeccion:
+                        self.canva.axes.proyeccion.remove()
+                        if len(self.canva.figura.axes) > 2:
+                            self.canva.axes2.proyeccion.remove()
+                    else:
+                        self.canva.axes.superficie.remove()
+                except:
+                    pass
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
             elif -1 < indice < -1+self.umbral:
                 # Creación de los cuadros de introducción de la gráfica en la animación.
