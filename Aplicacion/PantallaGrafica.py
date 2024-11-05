@@ -229,7 +229,7 @@ class GuardadoAnimacion(FuncAnimation):
             Cuadro actual de la animación.
         """
 
-        self.deslizador.val = cuadro+1-self.umbral-2
+        self.deslizador.val = cuadro+1-self.umbral
         # Actualización de la gráfica.
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
         if self.curvas_nivel:
@@ -259,7 +259,7 @@ class GuardadoAnimacion(FuncAnimation):
     def actualizar(self, indice):
         try:
             print(indice)
-            if indice < -1 + self.umbral+2:
+            if indice < -1 + self.umbral:
                 # Creación de los cuadros de introducción de la gráfica en la animación.
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
                 if self.curvas_nivel:
@@ -272,7 +272,7 @@ class GuardadoAnimacion(FuncAnimation):
                             self.canva.axes.proyeccion.set_alpha(0.4)
                     else:
                         self.canva.axes.superficie.set_alpha(0.4)
-            elif indice == -1+self.umbral+2:
+            elif indice == -1+self.umbral:
                 # Adición de la barra de color en la inicialización.
                 self.actualizarGrafica(indice)
                 # Agregado de la barra de color para referencia.
@@ -282,7 +282,7 @@ class GuardadoAnimacion(FuncAnimation):
                 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
                 
-            elif (-1+self.umbral+2 <  indice)  and (indice <= self.numerocuadromaximo-20):
+            elif (-1+self.umbral <  indice)  and (indice <= self.numerocuadromaximo-20):
                 # Actualización de la animación después de la inicialización.
                 self.actualizarGrafica(indice)
             else:
@@ -3508,7 +3508,7 @@ class Ui_Graficacion(QMainWindow):
         metadata = dict(title='SolucionEDP', artist='GraPhEr')
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
-        writer = FFMpegWriter(fps=resolucion, metadata=metadata, bitrate = 12000)
+        writer = FFMpegWriter(fps=resolucion, metadata=metadata)
         self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=144)
 
         # Finalización
