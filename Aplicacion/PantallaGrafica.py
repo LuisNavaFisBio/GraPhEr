@@ -232,16 +232,28 @@ class GuardadoAnimacion(FuncAnimation):
         self.deslizador.val = cuadro+1-self.umbral-2
         # Actualización de la gráfica.
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
-        # Adicion de curvas de nivel.
-        if self.curvas_nivel and self.dependencia_temporal:
-            # Problemas con dependencia temporal.
-            self.funcion_curvas(guardar = True)
-        elif self.curvas_nivel and (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-20):
-            # Problemas sin dependencia temporal y dos dimensiones espaciales.
-            self.funcion_curvas(guardar = True)
-        elif self.curvas_nivel and (self.sistema_coordenadas == "Esféricas"):
-            # Problemas de tres dimensiones espaciales.
-            self.funcion_curvas(guardar = True)
+        if self.curvas_nivel:
+            # Adicion de curvas de nivel.
+            if self.dependencia_temporal:
+                # Problemas con dependencia temporal.
+                self.funcion_curvas(guardar = True)
+            elif (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-20):
+                # Problemas sin dependencia temporal y dos dimensiones espaciales.
+                self.funcion_curvas(guardar = True)
+            elif (self.sistema_coordenadas == "Esféricas"):
+                # Problemas de tres dimensiones espaciales.
+                self.funcion_curvas(guardar = True)
+            
+            # Modificación de la opacidad.
+            if self.proyeccion:
+                if len(self.canva.figura.axes) > 2:
+                    self.canva.axes.proyeccion.set_alpha(0.4)
+                    self.canva.axes2.proyeccion.set_alpha(0.4)
+                else:
+                    self.canva.axes.proyeccion.set_alpha(0.4)
+            else:
+                self.canva.axes.superficie.set_alpha(0.4)
+
         self.canva.figura.canvas.draw_idle()
 
     def actualizar(self, indice):
