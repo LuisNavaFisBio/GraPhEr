@@ -472,12 +472,12 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             indices = "n" # Tabla.
                         if len(self.ui.ValoresPropios[indice]) >= 2:
                             if suma == "":
-                                indices = indices + "0" # Tabla.
+                                indices = indices + "" # Tabla.
                             else:
                                 indices = indices + "m" # Tabla.
                             if len(self.ui.ValoresPropios[indice]) == 3:
                                 if suma == "":
-                                    indices = indices + "0" # Tabla.
+                                    indices = indices + "" # Tabla.
                                 else:
                                     indices = indices + "l" # Tabla.
                         coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
