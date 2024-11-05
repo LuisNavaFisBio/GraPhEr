@@ -3521,7 +3521,7 @@ class Ui_Graficacion(QMainWindow):
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         writer = FFMpegWriter(fps=resolucion, metadata=metadata, bitrate = 4000)
-        self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=144)
+        self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=72)
 
         # Finalización
         self.animacion.finalizar()
