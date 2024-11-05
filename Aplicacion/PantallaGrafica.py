@@ -209,7 +209,7 @@ class GuardadoAnimacion(FuncAnimation):
 
         # Inicialización del proceso de guardado.
         self.proceso = True
-        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False)
+        FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = range(-1, self.numerocuadromaximo), interval = interval, repeat=False, cache_frame = False)
     
     def finalizar(self):
         """
@@ -246,11 +246,9 @@ class GuardadoAnimacion(FuncAnimation):
             
             # Modificación de la opacidad.
             if self.proyeccion:
+                self.canva.axes.proyeccion.set_alpha(0.4)
                 if len(self.canva.figura.axes) > 2:
-                    self.canva.axes.proyeccion.set_alpha(0.4)
                     self.canva.axes2.proyeccion.set_alpha(0.4)
-                else:
-                    self.canva.axes.proyeccion.set_alpha(0.4)
             else:
                 self.canva.axes.superficie.set_alpha(0.4)
 
@@ -275,14 +273,7 @@ class GuardadoAnimacion(FuncAnimation):
             elif -1 < indice < self.umbral:
                 # Creación de los cuadros de introducción de la gráfica en la animación.
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
-                if self.curvas_nivel:
-                    # Modificación de la opacidad.
-                    if self.proyeccion:
-                        self.canva.axes.proyeccion.set_alpha(0.4)
-                        if len(self.canva.figura.axes) > 2:
-                            self.canva.axes2.proyeccion.set_alpha(0.4)
-                    else:
-                        self.canva.axes.superficie.set_alpha(0.4)
+
             elif indice == self.umbral:
                 # Adición de la barra de color en la inicialización.
                 self.actualizarGrafica(indice)
@@ -299,6 +290,15 @@ class GuardadoAnimacion(FuncAnimation):
             else:
                 # Fijación de la gráfica en su último cuadro.
                 self.funcionActualizadora(self.numerocuadromaximo, *self.argumentos[0:-2])
+
+            if self.curvas_nivel:
+                # Modificación de la opacidad de la gráfica para visualizar las curvas de nivel.
+                if self.proyeccion:
+                    self.canva.axes.proyeccion.set_alpha(0.4)
+                    if len(self.canva.figura.axes) > 2:
+                        self.canva.axes2.proyeccion.set_alpha(0.4)
+                else:
+                    self.canva.axes.superficie.set_alpha(0.4)
 
             # Visualización de la cuadrícula.    
             if len(self.canva.figura.axes) > 2:
