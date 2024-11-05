@@ -1774,7 +1774,7 @@ class Ui_Graficacion(QMainWindow):
         if coordenadas == "Cartesianas":
             if cuadro < 0:
                 # Inicialización de gráfica.
-                lienzo.superficie = lienzo.plot_surface(coordenada1.T[:1+cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:1+cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:1+cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
+                lienzo.superficie = lienzo.plot_surface(coordenada1.T[:(1+cuadro)*10+int(len(coordenada1.T)%10)], coordenada2.T[:(1+cuadro)*10+int(len(coordenada1.T)%10)], valores_matriz.T[:(1+cuadro)*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
             elif 0 <= cuadro <= cuadro_fijo:
                 # Creación de la gráfica.
                 lienzo.superficie.remove()
@@ -1782,7 +1782,7 @@ class Ui_Graficacion(QMainWindow):
         elif coordenadas == "Cilíndricas / Polares":
             if cuadro < 0:
                 # Inicialización de gráfica.
-                lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz.T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
+                lienzo.superficie = lienzo.plot_surface(coordenada1.T[:(1+cuadro)*10+int(len(coordenada1.T)%10)], coordenada2.T[:(1+cuadro)*10+int(len(coordenada1.T)%10)], valores_matriz.T[:(1+cuadro)*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
             elif 0 <= cuadro <= cuadro_fijo:
                 # Creación de la gráfica para el tiempo.
                 lienzo.superficie.remove()
@@ -3520,7 +3520,7 @@ class Ui_Graficacion(QMainWindow):
         metadata = dict(title='SolucionEDP', artist='GraPhEr')
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
-        writer = FFMpegWriter(fps=resolucion, metadata=metadata)
+        writer = FFMpegWriter(fps=resolucion, metadata=metadata, bitrate = 4000)
         self.animacion.save("Solucion_{}.mov".format(nombre+curvas_str), writer=writer, dpi=144)
 
         # Finalización
