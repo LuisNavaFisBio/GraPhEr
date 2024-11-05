@@ -236,7 +236,7 @@ class GuardadoAnimacion(FuncAnimation):
         if self.curvas_nivel and self.dependencia_temporal:
             # Problemas con dependencia temporal.
             self.funcion_curvas(guardar = True)
-        elif self.curvas_nivel and (not self.dependencia_temporal) and (self.deslizador.val == self.numerocuadromaximo-20):
+        elif self.curvas_nivel and (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-20):
             # Problemas sin dependencia temporal y dos dimensiones espaciales.
             self.funcion_curvas(guardar = True)
         elif self.curvas_nivel and (self.sistema_coordenadas == "Esféricas"):
