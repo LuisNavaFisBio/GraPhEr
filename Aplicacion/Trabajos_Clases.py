@@ -1445,6 +1445,8 @@ class TrabajoGuardado(QtCore.QRunnable):
         try: 
             self.ui.guardarAnimacion()
             QtCore.QThread.msleep(500)
+            
+            self.ui.interpretacionCurvasNivel()
             self.signals.finalizar_signal.emit("Animación Guardada")
         except:
             tipoError, explicacion, line = sys.exc_info()[:3]
@@ -1455,7 +1457,7 @@ class TrabajoGuardado(QtCore.QRunnable):
             typeError = "Error -- Animación Fallida"
             Error = "No se pudo obtener una animación."
 
-            self.ui.Animacion.detener()
+            self.ui.animacionGuardado.detener()
             self.signals.error_signal.emit((typeError, Error))
         finally:
             self.ui.GuardarAnimacion.setEnabled(True)
