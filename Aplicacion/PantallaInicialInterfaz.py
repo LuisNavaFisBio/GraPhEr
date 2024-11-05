@@ -1056,6 +1056,11 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Visualizar.setText("Visualizar")
         self.Visualizar.setMinimumSize(QSize(200, 35))
         self.Visualizar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98) ")
+        try:
+            self.Visualizar.clicked.disconnect()
+        except:
+            pass
+        
         self.Visualizar.clicked.connect(self.visualizarSolucion)
         self.Visualizar.setShortcut("Ctrl+o")
         horizontalLayout_22.addWidget(self.Visualizar)

@@ -259,7 +259,9 @@ class GuardadoAnimacion(FuncAnimation):
     def actualizar(self, indice):
         try:
             print(indice)
-            if indice < -1 + self.umbral:
+            if indice == -1:
+                self.funcionActualizadora(indice, *self.argumentos[0:-2])
+            elif -1 < indice < -1+self.umbral:
                 # Creación de los cuadros de introducción de la gráfica en la animación.
                 self.funcionActualizadora(indice, *self.argumentos[0:-2])
                 if self.curvas_nivel:
