@@ -1483,7 +1483,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # La conectividad para abrir la ventana de graficación a partir de la ventana principal fue tomada de Elder, J. [Codemy.com] (05 de agosto de 2021). How To Open A Second Window - PyQt5 GUI Thursdays #24. YouTube. https://www.youtube.com/watch?v=R5N8TA0KFxc
         self.VentanaGrafica = PantallaGraficacion(self)
         self.Ui_Grafica = Ui_Graficacion(self.VentanaGrafica)
-
+        
         self.Ui_Grafica.signals.guardar_signal.connect(self.guardarAnimacion)
         self.Ui_Grafica.signals.proyeccion_signal.connect(self.cambiarProyeccion)
         self.Ui_Grafica.signals.curvas_signal.connect(self.visualizarCurvasNivel)
