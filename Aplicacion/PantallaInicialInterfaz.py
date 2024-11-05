@@ -1778,6 +1778,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # Deshabilita el botón de guardado.
         self.Ui_Grafica.GuardarAnimacion.setDisabled(True)
         self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.Ui_Grafica.GuardarAnimacion.setText("Procesando")
 
         # Crea el lienzo sobre el que se graficaran los cuadros de la animación.
         self.Ui_Grafica.MostrarSolucion2 = Lienzo(self, ancho= 854, alto=480, dpi = 72)
@@ -1802,10 +1803,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         **mensaje : string
             Mensaje a desplegar en la pantalla de carga.
         """
-        
-        # Habilita el botón de guardado.
-        self.Ui_Grafica.GuardarAnimacion.setEnabled(True)
-        self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(11, 61, 98); color: rgb(246,247,247)")
+
+        self.Ui_Grafica.GuardarAnimacion.setText("Iniciando guardado")
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
         
         self.Interpretar.setShortcut("Ctrl+I")
         self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
@@ -1815,6 +1816,27 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
+
+        self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
+
+        # Finalización
+        self.animacionGuardado.finalizar()
+
+        self.Ui_Grafica.GuardarAnimacion.setText("Guardado Finalizado")
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
+        del self.Ui_Grafica.animacionGuardado
+
+        # Graficación de las curvas de nivel para evitar su desaparación después del proceso de guardado
+        self.Ui_Grafica.interpretacionCurvasNivel()
+
+        # Habilita el botón de guardado.
+        self.Ui_Grafica.GuardarAnimacion.setEnabled(True)
+        self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(11, 61, 98); color: rgb(246,247,247)")
+        self.Ui_Grafica.GuardarAnimacion.setText(u"Guardar Animaci\u00f3n")
+        QCoreApplication.processEvents()
 
     def visualizarSolucion(self):
         """Ejecuta el trabajo de visualización de la gráfica."""
