@@ -1727,7 +1727,7 @@ class Ui_Graficacion(QMainWindow):
             tiempo = cuadro-cuadro_fijo
             lienzo.superficie.remove()
             lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, valores_matriz[tiempo], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
-            lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = -10)
+            lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)))
         return lienzo
         
     def introducirGrafica2D(self, cuadro, cuadro_fijo, coordenada1, coordenada2, tiempo_total, resolucion, coordenadas, valores_matriz, lienzo, numero_columnas, numero_filas, cota):
@@ -2011,7 +2011,7 @@ class Ui_Graficacion(QMainWindow):
                     indice = cuadro-cuadro_fijo-1
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(coordenada1[indice], grid1, grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$x = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$x = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
             elif coordenada_fija == "y":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
@@ -2028,7 +2028,7 @@ class Ui_Graficacion(QMainWindow):
                     indice = cuadro-cuadro_fijo-1
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(grid1, coordenada2[indice], grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$y = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$y = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
             elif coordenada_fija == "z":
                 if cuadro == -1:
                     # Inicialiación de la gráfica.
@@ -2045,7 +2045,7 @@ class Ui_Graficacion(QMainWindow):
                     indice = cuadro-cuadro_fijo-1
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(grid1, grid2, coordenada3[indice]*(1+(grid1**2+grid2**2)*0), facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$z = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$z = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
         elif coordenadas == "Cilíndricas / Polares":
             if coordenada_fija == "r":
                 if cuadro == -1:
@@ -2065,7 +2065,7 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.superficie.remove()
                     x, y = coordenada1[indice]*np.cos(grid1), coordenada1[indice]*np.sin(grid1)
                     lienzo.superficie = lienzo.plot_surface(x, y, grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
             elif coordenada_fija == "phi":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
@@ -2084,7 +2084,7 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.superficie.remove()
                     x, y = grid1*np.cos(coordenada2[indice]), grid1*np.sin(coordenada2[indice])
                     lienzo.superficie = lienzo.plot_surface(x, y, grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
             elif coordenada_fija == "z":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
@@ -2102,7 +2102,7 @@ class Ui_Graficacion(QMainWindow):
                     indice = cuadro-cuadro_fijo-1
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(grid1, grid2, coordenada3[indice]*(1+(grid1**2+grid2**2)*0), facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$z = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$z = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
         elif coordenadas == "Esféricas":
             if coordenada_fija == "r":
                 if cuadro == -1:
@@ -2124,7 +2124,7 @@ class Ui_Graficacion(QMainWindow):
                     x, y = coordenada1[indice]*np.cos(grid2)*np.sin(grid1), coordenada1[indice]*np.sin(grid2)*np.sin(grid1)
                     z = coordenada1[indice]*np.cos(grid1)
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
             elif coordenada_fija == "theta":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
@@ -2145,7 +2145,7 @@ class Ui_Graficacion(QMainWindow):
                     x, y = grid1*np.cos(grid2)*np.sin(coordenada2[indice]), grid1*np.sin(grid2)*np.sin(coordenada2[indice])
                     z = grid1*np.cos(coordenada2[indice])
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
             elif coordenada_fija == "phi":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
@@ -2166,7 +2166,7 @@ class Ui_Graficacion(QMainWindow):
                     x, y = grid1*np.cos(coordenada3[indice])*np.sin(grid2), grid1*np.sin(coordenada3[indice])*np.sin(grid2)
                     z = grid1*np.cos(grid2)
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = -10)
+                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)})
         return lienzo
             
     def actualizarProyeccion3D(self, cuadro, cuadro_fijo, coordenada1, coordenada2, longitud, coordenadas, valores_matriz, lienzo, coordenada_fija, limites, cota):
@@ -2588,7 +2588,7 @@ class Ui_Graficacion(QMainWindow):
         canva.axes.set_ylabel(r"$\bf{y}$")
         canva.axes.set_zlabel(r"$\bf{u(x,y)}$")
         if self.dependencia_tiempo:
-            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = -10)
+            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0))
 
         self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[1])
 
@@ -2684,7 +2684,7 @@ class Ui_Graficacion(QMainWindow):
         canva.axes.set_ylabel(r"$\bf{y}$")
         canva.axes.set_zlabel(r"$\bf{u(r,\phi)}$")
         if self.dependencia_tiempo:
-            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = -10)
+            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0))
 
         return [self.x, self.y, self.dominio[-1], resolucion]
     
@@ -2798,15 +2798,15 @@ class Ui_Graficacion(QMainWindow):
         if coordenada == "x":
             self.x, self.y = np.meshgrid(self.Dominios[1], self.Dominios[2])
             longitud = len(self.Dominios[0])
-            canva.axes.set_title(r'$x=%(valor)s$' % {"valor":self.dominio[0]}, pad = -10)
+            canva.axes.set_title(r'$x=%(valor)s$' % {"valor":self.dominio[0]})
         elif coordenada == "y":
             self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[2])
             longitud = len(self.Dominios[1])
-            canva.axes.set_title(r'$y=%(valor)s$' % {"valor":self.dominio[0]}, pad = -10)
+            canva.axes.set_title(r'$y=%(valor)s$' % {"valor":self.dominio[0]})
         elif coordenada == "z":
             self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[1])
             longitud = len(self.Dominios[2])
-            canva.axes.set_title(r'$z=%(valor)s$' % {"valor":self.dominio[0]}, pad = -10)
+            canva.axes.set_title(r'$z=%(valor)s$' % {"valor":self.dominio[0]})
 
         # Creación del paralelípedo para visualizar la forma del objeto de acuerdo a los dominios introducidos.
         x = np.linspace(self.dominio[0], self.dominio[1], 2)
@@ -2965,16 +2965,16 @@ class Ui_Graficacion(QMainWindow):
         if coordenada == "r":
             self.x, self.y = np.meshgrid(self.Dominios[1], self.Dominios[2])
             longitud = len(self.Dominios[0])
-            canva.axes.set_title(r'$r=%(valor)s$' % {"valor":self.dominio[0]}, pad = -10)
+            canva.axes.set_title(r'$r=%(valor)s$' % {"valor":self.dominio[0]})
         elif coordenada == "phi":
             self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[2])
             longitud = len(self.Dominios[1])
-            canva.axes.set_title(r'$\phi=%(valor)s$' % {"valor":self.dominio[2]}, pad = -10)
+            canva.axes.set_title(r'$\phi=%(valor)s$' % {"valor":self.dominio[2]})
         elif coordenada == "z":
             self.u, self.v = np.meshgrid(self.Dominios[0], self.Dominios[1])
             self.x, self.y = self.u*np.cos(self.v), self.u*np.sin(self.v)
             longitud = len(self.Dominios[2])
-            canva.axes.set_title(r'$z=%(valor)s$' % {"valor":self.dominio[4]}, pad = -10)
+            canva.axes.set_title(r'$z=%(valor)s$' % {"valor":self.dominio[4]})
 
         # Creación del cilindro para visualizar la forma del objeto de acuerdo a los dominios introducidos.
         r = np.linspace(self.dominio[0], self.dominio[1], 2)
@@ -3137,15 +3137,15 @@ class Ui_Graficacion(QMainWindow):
         if coordenada == "r":
             self.x, self.y = np.meshgrid(self.Dominios[1], self.Dominios[2])
             longitud = len(self.Dominios[0])
-            canva.axes.set_title(r'$r=%(valor)s$' % {"valor":self.dominio[0]}, pad = -10)
+            canva.axes.set_title(r'$r=%(valor)s$' % {"valor":self.dominio[0]})
         elif coordenada == "theta":
             self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[2])
             longitud = len(self.Dominios[1])
-            canva.axes.set_title(r'$\theta=%(valor)s$' % {"valor":self.dominio[2]}, pad = -10)
+            canva.axes.set_title(r'$\theta=%(valor)s$' % {"valor":self.dominio[2]})
         elif coordenada == "phi":
             self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[1])
             longitud = len(self.Dominios[2])
-            canva.axes.set_title(r'$\phi=%(valor)s$' % {"valor":self.dominio[4]}, pad = -10)
+            canva.axes.set_title(r'$\phi=%(valor)s$' % {"valor":self.dominio[4]})
 
         # Creación de la esfera para visualizar la forma del objeto de acuerdo a los dominios introducidos.
         r = np.linspace(self.dominio[0], self.dominio[1], 2)
@@ -3624,7 +3624,7 @@ class Ui_Graficacion(QMainWindow):
                                     self.MostrarSolucion.axes.superficie = self.MostrarSolucion.axes.plot_surface(self.x, self.y, self.ValoresSolucion, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota, ccount = self.ccount, rcount = self.rcount)
                                 elif self.Coordenadas == "Cilíndricas / Polares":
                                     self.MostrarSolucion.axes.superficie = self.MostrarSolucion.axes.plot_surface(self.x, self.y, self.ValoresSolucion.T, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota)
-                                self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = -10)
+                                self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)))
                     else:
                         raise ValorFueraDominioError
                 else:
