@@ -4110,10 +4110,14 @@ class Ui_Graficacion(QMainWindow):
                                 self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             canva.axes.grid(True)
                         else:
-                            # Curvas de nivel para gráficas sin proyección.
-                            print(9)
                             canva.axes.superficie.set_alpha(0.4)
-                            self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=2, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
+                            if self.dependencia_tiempo:
+                                # Curvas de nivel para gráficas sin proyección y con dependencia temporal.
+                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                            else:
+                                # Curvas de nivel para gráficas sin proyección y sin dependencia temporal.
+                                print(9)
+                                self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=2, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             canva.axes.grid(True)
                     else:
                         # Graficación de curvas de nivel cuando se especifica un valor especifico para la coordenada fija (si es que se tiene una).
