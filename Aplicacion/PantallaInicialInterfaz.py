@@ -1267,6 +1267,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.DimensionTemporalEntrada.setChecked(False)
         self.DimensionEspacialEntrada.setValue(1)
         self.SistemaCoordenadas1.setChecked(True)
+        self.SistemaCoordenadas2.setChecked(False)
+        self.SistemaCoordenadas3.setChecked(False)
         self.NumeroEntradasS.setValue(1)
         self.Interpretar.setText("Interpretar")
         self.Interpretar.setShortcut("Ctrl+I")

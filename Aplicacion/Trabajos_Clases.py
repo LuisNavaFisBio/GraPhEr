@@ -216,14 +216,14 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             integral_string_f = integral_string_f + ", ({0}, {1}, {2}))".format(simbolo.replace(",",""), self.ui.Dominios[indice_ayuda][0], self.ui.Dominios[indice_ayuda][1])
                         indice_ayuda += 1
                 elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
-                    for simbolo in [",", ",phi", ",z"]:
+                    for simbolo in [",r", ",phi", ",z"]:
                         if simbolo in CoefE["{}".format(indice)]:
                             CoefE["{}".format(indice)] = CoefE["{}".format(indice)].replace(simbolo,"")
                             integral_string_i = integral_string_i + "Integral("
                             integral_string_f = integral_string_f + ", ({0}, {1}, {2}))".format(simbolo.replace(",",""), self.ui.Dominios[indice_ayuda][0], self.ui.Dominios[indice_ayuda][1])
                         indice_ayuda += 1
                 elif self.ui.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
-                    for simbolo in [",", [",theta", ",ct"], ",phi",]:
+                    for simbolo in [",r", [",theta", ",ct"], ",phi",]:
                         if type(simbolo) == list:
                             if simbolo[0] in CoefE["{}".format(indice)]:
                                 # En caso de que la integral sea respecto a theta.
