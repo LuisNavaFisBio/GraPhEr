@@ -2675,7 +2675,7 @@ class Ui_Graficacion(QMainWindow):
         self.x, self.y = self.u*np.cos(self.v), self.u*np.sin(self.v)
 
         canva.axes = canva.figura.add_subplot(projection='3d')
-        canva.axes.set_position([0.05, 0.15, 0.8, 0.8])
+        canva.axes.set_position([0.05, 0.15, 0.7, 0.7])
         canva.axes.set_xlim(np.min(self.x), np.max(self.x))
         canva.axes.set_ylim(np.min(self.y), max(np.max(self.y), np.max(self.x)))
         canva.axes.set_zlim(self.minimo-(self.maximo-self.minimo)*0.05, self.maximo+(self.maximo-self.minimo)*0.05)
@@ -2784,7 +2784,7 @@ class Ui_Graficacion(QMainWindow):
         resolucion = 25
 
         canva.axes = canva.figura.add_subplot(1, 1, 1, projection='3d')
-        canva.axes.set_position([0.05, 0.15, 0.8, 0.8])
+        canva.axes.set_position([0.05, 0.15, 0.7, 0.7])
         canva.axes.set_xlim(self.dominio[0], self.dominio[1])
         canva.axes.set_ylim(self.dominio[2], self.dominio[3])
         canva.axes.set_zlim(self.dominio[4], self.dominio[5])
@@ -2949,7 +2949,7 @@ class Ui_Graficacion(QMainWindow):
         resolucion = 25
         
         canva.axes = canva.figura.add_subplot(projection='3d')
-        canva.axes.set_position([0.05, 0.15, 0.8, 0.8])
+        canva.axes.set_position([0.05, 0.15, 0.7, 0.7])
         r2, phi2 = np.meshgrid(self.Dominios[0], self.Dominios[1])
         x, y = r2*np.cos(phi2), r2*np.sin(phi2)
         canva.axes.set_xlim(x.min(), x.max())
@@ -3126,7 +3126,7 @@ class Ui_Graficacion(QMainWindow):
         resolucion = 25
 
         canva.axes = canva.figura.add_subplot(projection='3d')
-        canva.axes.set_position([0.05, 0.15, 0.8, 0.8])
+        canva.axes.set_position([0.05, 0.15, 0.7, 0.7])
         canva.axes.xaxis.set_pane_color((0.52, 0.50, 0.49, 1.0))
         canva.axes.yaxis.set_pane_color((0.52, 0.50, 0.49, 1.0))
         canva.axes.zaxis.set_pane_color((0.52, 0.50, 0.49, 1.0))
