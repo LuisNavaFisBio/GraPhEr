@@ -1841,7 +1841,7 @@ class Ui_Graficacion(QMainWindow):
                 tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[tiempo], cmap=self.Colormap, vmin=-cota, vmax=cota)
-                lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = -10)
+                lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         elif coordenadas == "Cilíndricas / Polares":
             if cuadro == -1:
                 # Inicialización de la gráfica.
@@ -1863,7 +1863,7 @@ class Ui_Graficacion(QMainWindow):
                 tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[tiempo].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
-                lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = -10)
+                lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         return lienzo
     
     def introducirProyeccion2D(self, cuadro, cuadro_fijo, coordenada1, coordenada2, coordenadas, valores_matriz, lienzo, cota):
@@ -2632,7 +2632,7 @@ class Ui_Graficacion(QMainWindow):
         canva.axes.set_xlabel(r"$\bf{x}$")
         canva.axes.set_ylabel(r"$\bf{y}$")
         if self.dependencia_tiempo:
-            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = -10)
+            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = 10)
 
         self.v, self.u = np.meshgrid(self.Dominios[0], self.Dominios[1])
         
@@ -2745,7 +2745,7 @@ class Ui_Graficacion(QMainWindow):
 
         canva.axes.grid(lw=0.2)
         if self.dependencia_tiempo:
-            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = -10)
+            canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = 10)
 
         # El procesamiento de los datos para la creación de una gráfica en coordenadas polares se basó en Wilson, R. (24 de febrero de 2012). Producing polar contour plots with matplotlib. Robin's blog. https://blog.rtwilson.com/producing-polar-contour-plots-with-matplotlib/
         self.u, self.v = np.meshgrid(self.Dominios[0], self.Dominios[1])
@@ -3597,7 +3597,7 @@ class Ui_Graficacion(QMainWindow):
                             # Graficación de la solución.
                             self.DatosGrafica[1].set_segments(segmentos)
                             self.DatosGrafica[1].set_array(self.ValoresSolucion)
-                            self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = -10)
+                            self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = 10)
                         else:
                             # Calculo de la solución para el tiempo especificado.
                             self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[1]))])
@@ -3615,7 +3615,7 @@ class Ui_Graficacion(QMainWindow):
                                     self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota)
                                 elif self.Coordenadas == "Cilíndricas / Polares":
                                     self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.v, self.u, self.ValoresSolucion.T, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota)
-                                self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = -10)
+                                self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = 10)
                             else:
                                 # Para graficas sin proyección.
                                 # Eliminación de superficies visibles.
