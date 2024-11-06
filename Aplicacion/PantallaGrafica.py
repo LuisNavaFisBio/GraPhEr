@@ -3506,8 +3506,6 @@ class Ui_Graficacion(QMainWindow):
         # Configuración de la herramienta de guardado.
         self.animacionGuardado = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
 
-        self.envioActualizacion("Guardando Cuadros")
-
         # Configuración de los datos de guardado.
         metadata = dict(title='SolucionEDP', artist='GraPhEr')
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
