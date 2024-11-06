@@ -1841,7 +1841,7 @@ class Ui_Graficacion(QMainWindow):
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
             elif cuadro_fijo < cuadro <= cuadro_fijo+ tiempo_total*resolucion+1:
                 # Creación de la gráfica para tiempos posteriores.
-                tiempo = cuadro-cuadro_fijo-1
+                tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[tiempo], cmap=self.Colormap, vmin=-cota, vmax=cota)
                 lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = -10)
@@ -1863,7 +1863,7 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0][:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
             elif cuadro_fijo < cuadro <= cuadro_fijo+ tiempo_total*resolucion+1:
                 # Creación de la gráfica para tiempos posteriores.
-                tiempo = cuadro-cuadro_fijo-1
+                tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[tiempo].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = -10)
@@ -2637,7 +2637,7 @@ class Ui_Graficacion(QMainWindow):
         if self.dependencia_tiempo:
             canva.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(0, 0, 0), pad = -10)
 
-        self.x, self.y = np.meshgrid(self.Dominios[0], self.Dominios[1])
+        self.v, self.u = np.meshgrid(self.Dominios[0], self.Dominios[1])
         
         return [self.Dominios[0], self.Dominios[1], self.dominio[-1], resolucion]
 
