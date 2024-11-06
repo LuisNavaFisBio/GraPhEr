@@ -814,7 +814,6 @@ class Ui_Graficacion(QMainWindow):
         self.ProyeccionEntrada.setMinimumSize(QSize(180, 40))
         self.ProyeccionEntrada.setMaximumSize(QSize(180, 40))
         self.ProyeccionEntrada.setShortcut("Ctrl+p")
-        self.ProyeccionEntrada.stateChanged.connect(lambda: self.signals.proyeccion_signal.emit())
         horizontalLayout_4.addWidget(self.ProyeccionEntrada, alignment=Qt.AlignHCenter)
         verticalLayout_2.addLayout(horizontalLayout_4)
 
@@ -856,7 +855,7 @@ class Ui_Graficacion(QMainWindow):
         label_13.setMaximumSize(QSize(10, 40))
         horizontalLayout_5.addWidget(label_13)
 
-        self.GraficarCurvasFija = QPushButton(frame3, clicked = lambda: self.interpretacionCurvasNivel())
+        self.GraficarCurvasFija = QPushButton(frame3)
         self.GraficarCurvasFija.setMaximumSize(QSize(80, 40))
         self.GraficarCurvasFija.setMinimumSize(QSize(80, 40))
         self.GraficarCurvasFija.setText('Ir')
@@ -870,7 +869,6 @@ class Ui_Graficacion(QMainWindow):
         self.Grupo.addButton(self.CurvasNivelEspecificas, 2)
         self.Grupo.setExclusive(True)
         self.Grupo.buttonPressed.connect(self.activarCurvas)
-        self.Grupo.buttonClicked.connect(lambda: self.signals.curvas_signal.emit())
         self.CurvasNivelAuto.setShortcut("Ctrl+A")
         
         # Diseño y configuración de las casillas de determinación de coordenada fija.
@@ -947,7 +945,6 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_Casilla.addButton(self.CoordenadaFija_2, 2)
         self.CoordenadaFija_Casilla.addButton(self.CoordenadaFija_3, 3)
         self.CoordenadaFija_Casilla.setExclusive(True)
-        self.CoordenadaFija_Casilla.buttonClicked.connect(lambda: self.signals.coordenada_signal.emit())
 
         horizontalLayout_7 = QHBoxLayout()
         horizontalLayout_7.setSpacing(1)
@@ -970,7 +967,7 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
         horizontalLayout_7.addWidget(self.CoordenadaFija)
 
-        self.GraficarCoordenadaFija = QPushButton(frame3, clicked = lambda: self.signals.corte_signal.emit())
+        self.GraficarCoordenadaFija = QPushButton(frame3)
         self.GraficarCoordenadaFija.setMaximumSize(QSize(80, 40))
         self.GraficarCoordenadaFija.setMinimumSize(QSize(80, 40))
         self.GraficarCoordenadaFija.setText("Ir")

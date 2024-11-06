@@ -1493,19 +1493,22 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # La conectividad para abrir la ventana de graficación a partir de la ventana principal fue tomada de Elder, J. [Codemy.com] (05 de agosto de 2021). How To Open A Second Window - PyQt5 GUI Thursdays #24. YouTube. https://www.youtube.com/watch?v=R5N8TA0KFxc
         self.VentanaGrafica = PantallaGraficacion(self)
         self.Ui_Grafica = Ui_Graficacion(self.VentanaGrafica)
-        
-        self.Ui_Grafica.signals.proyeccion_signal.connect(self.cambiarProyeccion)
-        self.Ui_Grafica.signals.curvas_signal.connect(self.visualizarCurvasNivel)
-        self.Ui_Grafica.signals.corte_signal.connect(self.graficarCorte)
-        self.Ui_Grafica.signals.coordenada_signal.connect(self.cambiarCoordenadaFija)
 
         # La desconexión del botón de guardado para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         try:
             self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+            self.Ui_Grafica.GraficarCoordenadaFija.clicked.disconnect()
+            self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.disconnect()
+            self.Ui_Grafica.Grupo.buttonClicked.disconnect()
+            self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
         except:
             pass
         self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+        self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
+        self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
+        self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
 
         # La conectividad para abrir la ventana de etiquetas a partir de la ventana de graficación fue tomada de Elder, J. [Codemy.com] (05 de agosto de 2021). How To Open A Second Window - PyQt5 GUI Thursdays #24. YouTube. https://www.youtube.com/watch?v=R5N8TA0KFxc
         self.Ui_Grafica.Ui_Etiquetas = Ui_VentanaEtiquetas()
