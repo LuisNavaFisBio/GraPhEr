@@ -154,7 +154,7 @@ class ReproductorGeneral(FuncAnimation):
     def reproduccionAtras(self, event=None):
         """Inicia la reproducción de la animación en reversa (fin-inicio)."""
 
-        if not (self.cuadro < self.argumentos[0]+2):
+        if not (self.cuadro < self.argumentos[0]+1):
             # Inicio de la reproducción siempre y cuando el cuadro actual no sea el primer cuadro de la reproducción.
             self.adelante = False
             self.empezar()
