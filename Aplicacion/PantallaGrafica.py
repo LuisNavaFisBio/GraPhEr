@@ -237,7 +237,7 @@ class GuardadoAnimacion(FuncAnimation):
             if self.dependencia_temporal:
                 # Problemas con dependencia temporal.
                 self.funcion_curvas(guardar = True)
-            elif (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-20):
+            elif (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-50):
                 # Problemas sin dependencia temporal y dos dimensiones espaciales.
                 self.funcion_curvas(guardar = True)
             elif (self.sistema_coordenadas == "Esféricas"):
@@ -284,7 +284,7 @@ class GuardadoAnimacion(FuncAnimation):
                 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
                 
-            elif (self.umbral <  indice)  and (indice < self.numerocuadromaximo-20):
+            elif (self.umbral <  indice)  and (indice <= self.numerocuadromaximo-50):
                 # Actualización de la animación después de la inicialización.
                 self.actualizarGrafica(indice)
             else:
@@ -1727,7 +1727,7 @@ class Ui_Graficacion(QMainWindow):
             lienzo.superficie = lienzo.plot_surface(coordenada1.T[:cuadro*10+int(len(coordenada1.T)%10)], coordenada2.T[:cuadro*10+int(len(coordenada1.T)%10)], valores_matriz[0].T[:cuadro*10+int(len(coordenada1.T)%10)], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
         elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+tiempo_total*resolucion+1:
             # Cración de la gráfica para tiempos posteriores.
-            tiempo = cuadro-cuadro_fijo-1
+            tiempo = cuadro-cuadro_fijo
             lienzo.superficie.remove()
             lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, valores_matriz[tiempo], cmap = self.Colormap, vmin=-cota, vmax=cota, ccount = numero_columnas, rcount = numero_filas)
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = -10)
