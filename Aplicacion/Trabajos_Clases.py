@@ -588,6 +588,9 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             elif tipoError == UnboundLocalError:
                 Error = "No se puede ocupar una clave especial en este tipo de problema."
                 typeError = "Error -- Clave Especial Inválida"
+            else:
+                Error = "Hubo un error en la entrada."
+                typeError = "Error -- No especificado"
 
             self.ui.Interpretar.setText("Interpretar")
 
