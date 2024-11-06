@@ -1095,6 +1095,7 @@ class Ui_Graficacion(QMainWindow):
         
         self.valorpropiodependendiente = ""
         self.Animacion = None
+        self.CurvasNivelEspecificasEntrada.setText("")
 
         if len(self.Dominio[-1]) == 1:
             self.dependencia_tiempo = True
