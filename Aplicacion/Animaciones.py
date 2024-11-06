@@ -220,7 +220,10 @@ class ReproductorGeneral(FuncAnimation):
             self.deslizador.setValue(indice-self.argumentos[0]-1)
         elif indice == self.argumentos[0]+1:
             # Último cuadro de la introducción de la gráfica.
-            self.deslizador.setValue(0)
+            if self.deslizador.value() != 0:
+                self.deslizador.setValue(0)
+            else:
+                self.actualizarGrafica(0)
             self.detener()
 
             if not self.barracolor:
