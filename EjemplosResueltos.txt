@@ -216,7 +216,7 @@ Dominio x    0:pi        Dominio y    0:pi        Dominio temporal    10
 Condiciones iniciales y/o de frontera    Piecewise((10,y<=x), (0, y>x))
 Número de subproblemas    1
 
-Valores Propios    n;m       Número de Términos    1:10;1:10
+Valores Propios    n;m       Número de Términos    1:5;1:5
 Coeficientes    Int[4*g_1*sin(lamda_n*x)*sin(lamda_m*y)/pi**2,x,y]
 Funciones Espaciales    sin(lamda_n*x)*sin(lamda_m*y)
 Funciones Temporales    exp(-((lamda_n/pi)**2+(lamda_m/pi)**2)*t)
