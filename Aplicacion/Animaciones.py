@@ -122,14 +122,14 @@ class ReproductorGeneral(FuncAnimation):
                     # Detener en el último cuadro.
                     self.detener()
                     yield self.cuadro
-                elif self.cuadro >= -1 and self.cuadro <= self.maximo-1:
+                elif self.cuadro >= -1 and self.cuadro <= self.maximo:
                     yield self.cuadro
             else:
                 if self.cuadro <= self.argumentos[0]:
                     # Detener en el primer cuadro del deslizador.
                     self.detener()
                     yield self.cuadro
-                elif self.cuadro > self.argumentos[0] and self.cuadro <= self.maximo-1:
+                elif self.cuadro > self.argumentos[0] and self.cuadro <= self.maximo:
                     yield self.cuadro
 
 
