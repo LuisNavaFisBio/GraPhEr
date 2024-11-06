@@ -284,7 +284,7 @@ class GuardadoAnimacion(FuncAnimation):
                 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
                 
-            elif (self.umbral <  indice)  and (indice <= self.numerocuadromaximo-20):
+            elif (self.umbral <  indice)  and (indice < self.numerocuadromaximo-20):
                 # Actualización de la animación después de la inicialización.
                 self.actualizarGrafica(indice)
             else:
