@@ -203,7 +203,7 @@ class GuardadoAnimacion(FuncAnimation):
         self.umbral = numero_introduccion
         self.numerocuadromaximo = maximo
         self.deslizador = Conteo()
-        self.deslizador.val = -2
+        self.deslizador.valueue = -2
         self.dependencia_temporal = dependencia_temporal
         self.sistema_coordenadas = sistema_coordenadas
 
@@ -229,7 +229,7 @@ class GuardadoAnimacion(FuncAnimation):
             Cuadro actual de la animación.
         """
 
-        self.deslizador.val = cuadro-self.umbral
+        self.deslizador.value = cuadro-self.umbral
         # Actualización de la gráfica.
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
         if self.curvas_nivel:
@@ -4097,23 +4097,23 @@ class Ui_Graficacion(QMainWindow):
                             elif len(canva.figura.axes) > 2:
                                 # Curvas de nivel para proyección en coordenadas esféricas con radio como coordenada fija.
                                 canva.axes2.proyeccion.set_alpha(0.4)
-                                r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.val/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
+                                r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.value/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
                                 r1, phi1 = np.meshgrid(r, self.y)
-                                self.Curvas = canva.axes.contour(phi1, r1, self.Valores[anim.deslizador.val].T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
-                                self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(self.Valores[anim.deslizador.val].T[int(np.floor(len(self.x)/2)):].T, 1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(phi1, r1, self.Valores[anim.deslizador.value].T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(self.Valores[anim.deslizador.value].T[int(np.floor(len(self.x)/2)):].T, 1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                                 self.curvasdibujadas2 = True
                                 canva.axes2.grid(True)
                             elif self.Coordenadas == "Esféricas" and self.CoordenadaFija_2.isChecked():
                                 # Curvas de nivel para proyección en coordenadas esféricas con el radio polar como coordenada fija.
-                                self.Curvas = canva.axes.contour(self.v, self.u*np.sin(np.round((self.dominio[3]-self.dominio[2])*anim.deslizador.val/(len(self.Dominios[1])-1)+self.dominio[2], 2)), self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.v, self.u*np.sin(np.round((self.dominio[3]-self.dominio[2])*anim.deslizador.value/(len(self.Dominios[1])-1)+self.dominio[2], 2)), self.Valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             else:
-                                self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             canva.axes.grid(True)
                         else:
                             canva.axes.superficie.set_alpha(0.4)
                             if self.dependencia_tiempo:
                                 # Curvas de nivel para gráficas sin proyección y con dependencia temporal.
-                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             else:
                                 # Curvas de nivel para gráficas sin proyección y sin dependencia temporal.
                                 print(9)
@@ -4124,15 +4124,15 @@ class Ui_Graficacion(QMainWindow):
                         if self.Proyeccion and (len(canva.figura.axes) < 3):
                             # Curvas de nivel para visualizaciones de proyecciones que no correspondan a coordenadas esféricas con radio como coordenada fija.
                             canva.axes.proyeccion.set_alpha(0.4)
-                            self.Curvas = canva.axes.contour(self.x, self.y, valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                            self.Curvas = canva.axes.contour(self.x, self.y, valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                         elif len(canva.figura.axes) > 2:
                             # Curvas de nivel para visualizaciones de proyecciones en coordenadas esféricas con radio como coordenada fija.
                             canva.axes.proyeccion.set_alpha(0.4)
                             canva.axes2.proyeccion.set_alpha(0.4)
-                            r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.val/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
+                            r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.value/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
                             r1, phi1 = np.meshgrid(r, self.y)
-                            self.Curvas = canva.axes.contour(phi1, r1, valores[anim.deslizador.val].T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
-                            self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores[anim.deslizador.val].T[int(np.floor(len(self.x)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                            self.Curvas = canva.axes.contour(phi1, r1, valores[anim.deslizador.value].T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                            self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores[anim.deslizador.value].T[int(np.floor(len(self.x)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             self.curvasdibujadas2 = True
                             canva.axes2.grid(True)
                         else:
@@ -4149,15 +4149,15 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes.proyeccion.set_alpha(0.4)
                             if self.Coordenadas == "Cartesianas":
                                 # Curvas de nivel en proyecciones de coordenadas cartesianas.
-                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             else:
                                 # Curvas de nivel en proyecciones que no sean coordenadas cartesianas.
-                                self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             canva.axes.grid(True)
                         else:
                             # Curvas de nivel en graficas sin proyección.
                             canva.axes.superficie.set_alpha(0.4)
-                            self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.val], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
+                            self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             canva.axes.grid(True)
                     else:
                         # Graficación de curvas de nivel cuando se especifica un valor especifico para la coordenada fija (si es que se tiene una).
@@ -4637,7 +4637,7 @@ class Conteo(QtCore.QObject):
 
     def __init__(self):
         # El nombre de la variable permite la compatibilidad de la función graficadora de curvas de nivel en el proceso de guardado.
-        self.val = -2
+        self.value = -2
 
 # ------ Ejecución de la aplicación
 if __name__ == "__main__":
