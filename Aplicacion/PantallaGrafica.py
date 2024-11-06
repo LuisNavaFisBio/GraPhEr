@@ -1606,12 +1606,12 @@ class Ui_Graficacion(QMainWindow):
         if cuadro < 0:
             # Inicialización de la gráfica.
             linea.set_segments([])
-        elif 0 <= cuadro <= cuadro_fijo:
+        elif 0 <= cuadro < cuadro_fijo:
             # Creación de la gráfica para el tiempo t=0.
             linea.set_segments(segmentos[0][:cuadro*10+int(len(x)%10)])
-        elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+tiempo_total*resolucion+1:
+        elif cuadro_fijo <= cuadro <= cuadro_fijo+tiempo_total*resolucion:
             # Actualización de la gráfica para tiempos posteriores.
-            tiempo = cuadro-cuadro_fijo-1
+            tiempo = cuadro-cuadro_fijo
             linea.set_segments(segmentos[tiempo])
             linea.set_array(valores_matriz[tiempo])
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
@@ -1663,7 +1663,7 @@ class Ui_Graficacion(QMainWindow):
             # Inicialización de la gráfica.
             lienzo.proyeccion.remove()
             lienzo.proyeccion = lienzo.pcolormesh(t[0:1], x[:cuadro+1], valores_matriz[0:1].T[:cuadro+1], cmap=self.Colormap, vmin=-cota, vmax=cota)
-        elif cuadro_fijo <= cuadro <= tiempo_total*resolucion+cuadro_fijo+1:
+        elif cuadro_fijo <= cuadro <= tiempo_total*resolucion+cuadro_fijo:
             # Creación de la gráfica.
             tiempo = cuadro-cuadro_fijo
             lienzo.proyeccion.remove()
@@ -1835,11 +1835,11 @@ class Ui_Graficacion(QMainWindow):
                 coordenada1, coordenada2 = np.meshgrid([0], [0])
                 Z = coordenada1**2+coordenada2**2
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
-            elif 0 <= cuadro <= cuadro_fijo:
+            elif 0 <= cuadro < cuadro_fijo:
                 # Creación de la gráfica para el tiempo t = 0.
                 lienzo.proyeccion.remove()
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
-            elif cuadro_fijo < cuadro <= cuadro_fijo+ tiempo_total*resolucion+1:
+            elif cuadro_fijo <= cuadro <= cuadro_fijo+ tiempo_total*resolucion:
                 # Creación de la gráfica para tiempos posteriores.
                 tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
@@ -1851,7 +1851,7 @@ class Ui_Graficacion(QMainWindow):
                 coordenada1, coordenada2 = np.meshgrid([0], [0, 1])
                 Z = 0*(coordenada1**2+coordenada2**2)
                 lienzo.proyeccion = lienzo.pcolormesh(coordenada2, coordenada1, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
-            elif 0 <= cuadro <= cuadro_fijo:
+            elif 0 <= cuadro < cuadro_fijo:
                 # Creación de la gráfica para el tiempo t = 0.
                 lienzo.proyeccion.remove()
                 if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
@@ -1861,7 +1861,7 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada2, coordenada1, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 else:
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0][:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
-            elif cuadro_fijo < cuadro <= cuadro_fijo+ tiempo_total*resolucion+1:
+            elif cuadro_fijo <= cuadro <= cuadro_fijo+ tiempo_total*resolucion:
                 # Creación de la gráfica para tiempos posteriores.
                 tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
