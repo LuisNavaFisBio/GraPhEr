@@ -129,7 +129,7 @@ class ReproductorGeneral(FuncAnimation):
                     # Detener en el primer cuadro del deslizador.
                     self.detener()
                     yield self.cuadro
-                elif self.cuadro > self.argumentos[0]+1 and self.cuadro <= self.maximo:
+                elif self.cuadro > self.argumentos[0]+1 and self.cuadro <= self.maximo-1:
                     yield self.cuadro
 
 
@@ -175,10 +175,10 @@ class ReproductorGeneral(FuncAnimation):
     def cuadroPorCuadro(self):
         """Actualiza la animación para mostrar el siguiente cuadro o el cuadro previo según sea el caso."""
 
-        if self.argumentos[0]+1 < self.cuadro <= self.maximo and not self.adelante:
+        if self.argumentos[0]+1 < self.cuadro <= self.maximo-1 and not self.adelante:
             # Disminuir el número de cuadro si se quiere el cuadro previo.
             self.cuadro -= 1
-        elif self.argumentos[0]+1 <= self.cuadro < self.maximo and self.adelante:
+        elif self.argumentos[0]+1 <= self.cuadro < self.maximo-1 and self.adelante:
             # Aumentar el número de cuadro si se quiere el siguiente cuadro.
             self.cuadro += 1
         # Actualizar el valor del deslizador.
@@ -215,7 +215,7 @@ class ReproductorGeneral(FuncAnimation):
         """
 
         print(indice)
-        if (indice > self.argumentos[0]+1) and (indice <= self.maximo):
+        if (indice > self.argumentos[0]+1) and (indice <= self.maximo-1):
             # Actualización de la gráfica.
             self.deslizador.setValue(indice-self.argumentos[0]-1)
         elif indice == self.argumentos[0]+1:
