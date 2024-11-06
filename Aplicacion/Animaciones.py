@@ -107,6 +107,7 @@ class ReproductorGeneral(FuncAnimation):
     def iniciar(self):
         """Inicia la creación e interacción de la animación."""
 
+        self.cuadro = -2
         self.proceso = True
         self.adelante = True 
         FuncAnimation.__init__(self, self.canva.figura, self.actualizar, frames = self.contador(), interval = self.interval, repeat = False, save_count = self.maximo) 
