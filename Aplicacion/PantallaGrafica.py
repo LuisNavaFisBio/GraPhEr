@@ -160,7 +160,7 @@ class GuardadoAnimacion(FuncAnimation):
     Clase que contiene las instrucciones para el proceso de guardado de la animación.
     """
 
-    def __init__(self, canva, func, fargs, interval, maximo = 10, curvas_nivel = False, funcion_curvas = None, numero_introduccion = None, proyeccion = False, dependencia_temporal = False, sistema_coordenadas = None):
+    def __init__(self, canva, func, fargs, interval, maximo = 10, curvas_nivel = False, funcion_curvas = None, numero_introduccion = None, proyeccion = False, dependencia_temporal = False, sistema_coordenadas = None, funciones = None):
         """
         Inicializa el proceso de guardado.
         
@@ -191,6 +191,9 @@ class GuardadoAnimacion(FuncAnimation):
 
         sistema_coordenadas:string
             El sistema de coordenadas del problema.
+        
+        funciones: lista de funciones
+            Contiene las funciones de graficación de problemas en tres dimensiones espaciales y con proyección.
         """
 
         # Configuración de las variables necesarias.
@@ -206,6 +209,7 @@ class GuardadoAnimacion(FuncAnimation):
         self.deslizador.val = -2
         self.dependencia_temporal = dependencia_temporal
         self.sistema_coordenadas = sistema_coordenadas
+        self.funciones = funciones
 
         # Inicialización del proceso de guardado.
         self.proceso = True
@@ -234,7 +238,7 @@ class GuardadoAnimacion(FuncAnimation):
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
         if self.curvas_nivel:
             # Adicion de curvas de nivel.
-            if self.dependencia_temporal:
+            if self.dependencia_temporal or (self.funcion == self.funciones[0]) or (self.funcion == self.funciones[1]):
                 # Problemas con dependencia temporal.
                 self.funcion_curvas(guardar = True)
             elif (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-50):
@@ -256,7 +260,7 @@ class GuardadoAnimacion(FuncAnimation):
 
     def actualizar(self, indice):
         try:
-            print(indice)
+            print(indice, self.deslizador.value(), self.umbral)
             if indice == -1:
                 # Eliminación de cualquier gráfica en el lienzo.
                 try:
@@ -1454,9 +1458,9 @@ class Ui_Graficacion(QMainWindow):
 
                 if (coordenada_especifica == "r") and (self.Coordenadas == "Esféricas"):
                     # Para gráfica en coordenadas esféricas y donde la coordenada fija es el radio.
-                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D_especial, fargs=[int(len(self.DatosGrafica[1])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Valores, limites, self.MostrarSolucion.figura, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
+                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D_especial, fargs=[int(len(self.DatosGrafica[1])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Valores, limites, self.MostrarSolucion.figura, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2]-1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
                 else:
-                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Coordenadas, self.Valores, self.MostrarSolucion.axes, coordenada_especifica, limites, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
+                    self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarProyeccion3D, fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Coordenadas, self.Valores, self.MostrarSolucion.axes, coordenada_especifica, limites, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]-1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
         else:   
             # Cuando no se requiere la proyección.
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
@@ -3400,13 +3404,13 @@ class Ui_Graficacion(QMainWindow):
                 if (self.CoordenadaFija_1.isChecked()) and (self.Coordenadas == "Esféricas"):
                     # Problemas con coordenadas esféricas y el radio como coordenada fija.
                     argumentos = [int(len(self.DatosGrafica[1])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Valores, limites, self.MostrarSolucion2.figura, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2])+50
+                    maximo = int(len(self.DatosGrafica[1])/10+self.DatosGrafica[-2])+49
                     minimo = int(len(self.DatosGrafica[1])/10)
                     funcion = self.actualizarProyeccion3D_especial
                 else:
                     # Cualquier otro problema.
                     argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:2], *self.DatosGrafica[3:-1], self.Coordenadas, self.Valores, self.MostrarSolucion2.axes, coordenada_especifica, limites, self.Cota, self.Colormap, self.GuardarAnimacion]
-                    maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2])+50
+                    maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2])+49
                     minimo = int(len(self.DatosGrafica[0])/10)
                     funcion = self.actualizarProyeccion3D
 
@@ -3487,7 +3491,7 @@ class Ui_Graficacion(QMainWindow):
                     self.DatosGrafica = self.crearGrafica3D_esfericas(self.MostrarSolucion2, coordenada_especifica)
                     coordenadas = "esfericas"
                 argumentos = [longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion2.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion]
-                maximo = int(longitud2+self.DatosGrafica[0]+50)
+                maximo = int(longitud2+self.DatosGrafica[0]+49)
                 minimo = int(longitud2)
                 funcion = self.actualizarGrafica3D
                 nombre = "3D_{}".format(coordenadas+"_"+coordenada_especifica)
@@ -3502,7 +3506,7 @@ class Ui_Graficacion(QMainWindow):
             curvas_str = ""
         
         # Configuración de la herramienta de guardado.
-        self.animacionGuardado = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas)
+        self.animacionGuardado = GuardadoAnimacion(self.MostrarSolucion2, funcion, fargs = argumentos, maximo = maximo, interval = 1000/25, curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, numero_introduccion = minimo, proyeccion = self.proyectado, dependencia_temporal = self.dependencia_tiempo, sistema_coordenadas=self.Coordenadas, funciones = [self.actualizarProyeccion3D_especial, self.actualizarProyeccion3D])
 
         # Configuración de los datos de guardado.
         metadata = dict(title='SolucionEDP', artist='GraPhEr')
