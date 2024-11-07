@@ -1434,8 +1434,8 @@ class Ui_Graficacion(QMainWindow):
                         self.DatosGrafica = self.crearProyeccion3D_cilindricas(self.MostrarSolucion, coordenada_especifica)
                     elif self.Coordenadas == "Esféricas":
                         self.DatosGrafica = self.crearProyeccion3D_esfericas(self.MostrarSolucion, coordenada_especifica)
-                        self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                     if coordenada_especifica == "x" or coordenada_especifica == "r":
+                        self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                         limites = self.dominio[0:2]
                     elif coordenada_especifica == "y" or (coordenada_especifica == "phi" and self.Coordenadas == "Cilíndricas / Polares") or (coordenada_especifica == "theta" and self.Coordenadas == "Esféricas"):
                         self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
