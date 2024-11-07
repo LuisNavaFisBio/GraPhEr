@@ -1658,17 +1658,17 @@ class Ui_Graficacion(QMainWindow):
             tiempo = 0
             coordenada1, coordenada2 = np.meshgrid([0], [0])
             Z = coordenada1**2+coordenada2**2
-            lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+            lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         elif 0  <= cuadro <= cuadro_fijo-1:
             # Inicialización de la gráfica.
             lienzo.proyeccion.remove()
-            lienzo.proyeccion = lienzo.pcolormesh(t[0:1], x[:cuadro+1], valores_matriz[0:1].T[:cuadro+1], cmap=self.Colormap, vmin=-cota, vmax=cota)
+            lienzo.proyeccion = lienzo.pcolormesh(t[0:1], x[:cuadro+1], valores_matriz[0:1].T[:cuadro+1], cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
         elif cuadro_fijo <= cuadro <= tiempo_total*resolucion+cuadro_fijo:
             # Creación de la gráfica.
             tiempo = cuadro-cuadro_fijo
             lienzo.proyeccion.remove()
-            lienzo.proyeccion = lienzo.pcolormesh(t[:tiempo+1], x, valores_matriz[:tiempo+1].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+            lienzo.proyeccion = lienzo.pcolormesh(t[:tiempo+1], x, valores_matriz[:tiempo+1].T, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         return lienzo
     
@@ -1835,16 +1835,16 @@ class Ui_Graficacion(QMainWindow):
                 # Inicialización de la gráfica.
                 coordenada1, coordenada2 = np.meshgrid([0], [0])
                 Z = coordenada1**2+coordenada2**2
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             elif 0 <= cuadro < cuadro_fijo:
                 # Creación de la gráfica para el tiempo t = 0.
                 lienzo.proyeccion.remove()
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             elif cuadro_fijo <= cuadro <= cuadro_fijo+ tiempo_total*resolucion:
                 # Creación de la gráfica para tiempos posteriores.
                 tiempo = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[tiempo], cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[tiempo], cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
         elif coordenadas == "Cilíndricas / Polares":
             if cuadro == -1:
@@ -1908,11 +1908,11 @@ class Ui_Graficacion(QMainWindow):
                 # Inicialización de la gráfica.
                 coordenada1, coordenada2 = np.meshgrid([0], [0])
                 Z = coordenada1**2+coordenada2**2
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             elif 0 <= cuadro <= cuadro_fijo:
                 # Creación de la gráfica.
                 lienzo.proyeccion.remove()
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz.T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz.T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
         elif coordenadas == "Cilíndricas / Polares":
             if cuadro == -1:
                 # Inicialización de la gráfica.
@@ -2220,16 +2220,16 @@ class Ui_Graficacion(QMainWindow):
                 # Inicialización de la gráfica.
                 coordenada1, coordenada2 = np.meshgrid([0], [0])
                 Z = coordenada1**2+coordenada2**2
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             elif 0 <= cuadro < cuadro_fijo:
                 # Creación de la gráfica para el primer valor de la coordenada fija.
                 lienzo.proyeccion.remove()
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
             elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                 # Creación de la gráfica para los demás valores.
                 indice = cuadro-cuadro_fijo
                 lienzo.proyeccion.remove()
-                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice], cmap=self.Colormap, vmin=-cota, vmax=cota)
+                lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice], cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 lienzo.set_title(r'$%(coordenada)s = %(valor)s $' % {"coordenada": coordenada_fija, "valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
         elif coordenadas == "Cilíndricas / Polares":
             if coordenada_fija == "r":
@@ -2237,7 +2237,7 @@ class Ui_Graficacion(QMainWindow):
                     # Inicialización de la gráfica.
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     Z = coordenada1**2+coordenada2**2
-                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     print(int(len(coordenada1)%10))
@@ -2245,21 +2245,21 @@ class Ui_Graficacion(QMainWindow):
                     if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
                         x, y = np.meshgrid([0], [0, 1])
                         Z = 0*(x**2+y**2)
-                        lienzo.proyeccion = lienzo.pcolormesh(x, y, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                        lienzo.proyeccion = lienzo.pcolormesh(x, y, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                     else:
-                        lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                        lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
                     indice = cuadro-cuadro_fijo
                     lienzo.proyeccion.remove()
-                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice], cmap=self.Colormap, vmin=-cota, vmax=cota)
+                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice], cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                     lienzo.set_title(r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
             elif coordenada_fija == "phi":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     Z = coordenada1**2+coordenada2**2
-                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 elif 0 <= cuadro < cuadro_fijo:
                     print(int(len(coordenada1)%10), valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)
                     # Creación de la gráfica para el primer valor de la coordenada fija.
@@ -2267,14 +2267,14 @@ class Ui_Graficacion(QMainWindow):
                     if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
                         x, y = np.meshgrid([0], [0, 1])
                         Z = 0*(x**2+y**2)
-                        lienzo.proyeccion = lienzo.pcolormesh(x, y, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                        lienzo.proyeccion = lienzo.pcolormesh(x, y, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                     else:
-                        lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                        lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
                     indice = cuadro-cuadro_fijo
                     lienzo.proyeccion.remove()
-                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice], cmap=self.Colormap, vmin=-cota, vmax=cota)
+                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice], cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                     lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
             elif coordenada_fija == "z":
                 if cuadro == -1:
@@ -3623,7 +3623,9 @@ class Ui_Graficacion(QMainWindow):
                                 # Eliminación de las proyecciones visibles.
                                 self.MostrarSolucion.axes.proyeccion.remove()
                                 if self.Coordenadas == "Cartesianas":
-                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota)
+                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
+                                elif self.Coordenadas == "Cilíndricas / Polares" and (not self.CoordenadaFija_3.isChecked()):
+                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.v, self.u, self.ValoresSolucion.T, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
                                 elif self.Coordenadas == "Cilíndricas / Polares":
                                     self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.v, self.u, self.ValoresSolucion.T, cmap = self.Colormap, vmin=-self.Cota, vmax=self.Cota)
                                 self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = 10)
@@ -3656,10 +3658,10 @@ class Ui_Graficacion(QMainWindow):
                                 # Eliminación de la proyección visible.
                                 self.MostrarSolucion.axes.proyeccion.remove()
                                 if self.Coordenadas == "Cartesianas":
-                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
+                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
                                     coordenada = "x"
                                 elif self.Coordenadas == "Cilíndricas / Polares":
-                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
+                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
                                     coordenada = "r"
                                 elif self.Coordenadas == "Esféricas":
                                     self.MostrarSolucion.axes2.proyeccion.remove()
@@ -3706,10 +3708,10 @@ class Ui_Graficacion(QMainWindow):
                                 # Eliminación de la proyección visible.
                                 self.MostrarSolucion.axes.proyeccion.remove()
                                 if self.Coordenadas == "Cartesianas":
-                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
+                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
                                     coordenada = "y"
                                 elif self.Coordenadas == "Cilíndricas / Polares":
-                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
+                                    self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
                                     coordenada = "\\phi"
                                 elif self.Coordenadas == "Esféricas":
                                     self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.v, self.u*np.sin(valor_coordenadaFija), self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
@@ -3753,7 +3755,7 @@ class Ui_Graficacion(QMainWindow):
                                 self.MostrarSolucion.axes.proyeccion.remove()
                                 if self.CoordenadaFija_3.isChecked():
                                     if self.Coordenadas == "Cartesianas":
-                                        self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y.T, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
+                                        self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.x, self.y.T, self.ValoresSolucion.T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota, shading='gouraud')
                                         coordenada = "y"
                                     elif self.Coordenadas == "Cilíndricas / Polares":
                                         self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(self.DatosGrafica[0], self.DatosGrafica[1], self.ValoresSolucion, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
