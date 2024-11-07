@@ -215,56 +215,60 @@ class ReproductorGeneral(FuncAnimation):
         indice: entero
             Determina el número del cuadro requerido.
         """
-
-        print(indice)
-        if (indice > self.argumentos[0]) and (indice <= self.maximo):
-            # Actualización de la gráfica.
-            self.deslizador.setValue(indice-self.argumentos[0])
-        elif indice == self.argumentos[0]:
-            # Último cuadro de la introducción de la gráfica.
-            if self.deslizador.value() != 0:
-                self.deslizador.setValue(0)
-            else:
-                self.actualizarGrafica(0)
-            self.detener()
-
-            if not self.barracolor:
-
-                # Visualización de la barra de color.
-                colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
-
-                # La creación de la barra de color se basa en mfitzp. (26 de febrero de 2015). Respuesta a la pregunta "Map values to colors in matplotlib". stackoverflow. https://stackoverflow.com/a/28752903
-                # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
-                plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
-
-                # Activación del botón de guardado.
-                self.argumentos[-1].setEnabled(True)
-                self.argumentos[-1].setStyleSheet(u"color: rgb(246, 247, 247); background-color: rgb(11, 61, 98);")
-
-                self.barracolor = True
-
-        else:
-            # Introducción de la gráfica.
-            self.funcionActualizadora(indice, *self.argumentos[0:-2])
-
-            # Eliminación de cualquier gráfica en el lienzo.
-            try:
-                if self.proyeccion:
-                    self.canva.axes.proyeccion.remove()
-                    if len(self.canva.figura.axes) > 2:
-                        self.canva.axes2.proyeccion.remove()
+        try:
+            print(indice)
+            if (indice > self.argumentos[0]) and (indice <= self.maximo):
+                # Actualización de la gráfica.
+                self.deslizador.setValue(indice-self.argumentos[0])
+            elif indice == self.argumentos[0]:
+                # Último cuadro de la introducción de la gráfica.
+                if self.deslizador.value() != 0:
+                    self.deslizador.setValue(0)
                 else:
-                    self.canva.axes.superficie.remove()
-            except:
-                pass
-        
-        
-        # Graficación de la cuadrícula.
-        if len(self.canva.figura.axes) > 2:
-            self.canva.axes.grid(True, lw = 0.2)
-            self.canva.axes2.grid(True, lw = 0.2)
-        else:
-            self.canva.axes.grid(True, lw = 0.2)
+                    self.actualizarGrafica(0)
+                self.detener()
+
+                if not self.barracolor:
+
+                    # Visualización de la barra de color.
+                    colorbarax = self.canva.figura.add_axes([0.85, 0.15, 0.04, 0.8])
+
+                    # La creación de la barra de color se basa en mfitzp. (26 de febrero de 2015). Respuesta a la pregunta "Map values to colors in matplotlib". stackoverflow. https://stackoverflow.com/a/28752903
+                    # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+                    plt.colorbar(cm.ScalarMappable(norm=plt.Normalize(-self.argumentos[-3], self.argumentos[-3]), cmap=self.argumentos[-2]), colorbarax)
+
+                    # Activación del botón de guardado.
+                    self.argumentos[-1].setEnabled(True)
+                    self.argumentos[-1].setStyleSheet(u"color: rgb(246, 247, 247); background-color: rgb(11, 61, 98);")
+
+                    self.barracolor = True
+
+            else:
+                # Introducción de la gráfica.
+                self.funcionActualizadora(indice, *self.argumentos[0:-2])
+
+                # Eliminación de cualquier gráfica en el lienzo.
+                try:
+                    if self.proyeccion:
+                        self.canva.axes.proyeccion.remove()
+                        if len(self.canva.figura.axes) > 2:
+                            self.canva.axes2.proyeccion.remove()
+                    else:
+                        self.canva.axes.superficie.remove()
+                except:
+                    pass
+            
+            
+            # Graficación de la cuadrícula.
+            if len(self.canva.figura.axes) > 2:
+                self.canva.axes.grid(True, lw = 0.2)
+                self.canva.axes2.grid(True, lw = 0.2)
+            else:
+                self.canva.axes.grid(True, lw = 0.2)
+        except: 
+            exctype, value, line = sys.exc_info()[:3]
+            print(exctype, value, line.tb_lineno)
+            raise Exception
 
 class Graficacion2D_NoTemporal(FuncAnimation):
     """

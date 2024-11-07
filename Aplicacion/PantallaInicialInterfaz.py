@@ -1571,10 +1571,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
         self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
         self.Ui_Carga.label.setText(mensaje)
+        self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
-        self.Ui_Grafica.Animacion.iniciar()
         self.VentanaCarga.close()
         if self.DimensionTemporalEntrada.isChecked() or (self.DimensionEspacialEntrada.value() == 3):
             # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
