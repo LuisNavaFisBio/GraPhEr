@@ -3563,10 +3563,10 @@ class Ui_Graficacion(QMainWindow):
 
             if self.CurvasNivelAuto.isChecked():
                 # Cuando se tienen curvas de nivel calculadas automáticamente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
+                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto, coordenada_especifica=coordenada)   
             elif self.CurvasNivelEspecificas.isChecked():
                 # Cuando se tienen curvas de nivel especificadas manualmente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
+                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas, coordenada_especifica=coordenada) 
             else:
                 # Cuando no se quieren visualizar curvas de nivel.
                 self.graficacion(coordenada_especifica=coordenada)

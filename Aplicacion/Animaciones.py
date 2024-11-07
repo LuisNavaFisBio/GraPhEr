@@ -136,7 +136,7 @@ class ReproductorGeneral(FuncAnimation):
 
     def empezar(self):
         """Comienza la reproducción."""
-
+        
         self.proceso = True
         self.event_source.start()
 
