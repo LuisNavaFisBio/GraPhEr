@@ -1106,8 +1106,6 @@ class Ui_Graficacion(QMainWindow):
     def editarOpciones(self):
         self.envioActualizacion("Habilitando Herramientas")
 
-        print(self.Dominio, self.NumeroTerminos[0])
-
         try:
             # Diseño de la caja de herramientas para la visualización de los coeficientes de cada subsolución.
             self.Subproblema.setMaximum(int(self.NumeroSubproblemas))
@@ -2240,7 +2238,6 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
-                    print(int(len(coordenada1)%10))
                     lienzo.proyeccion.remove()
                     if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
                         x, y = np.meshgrid([0], [0, 1])
@@ -2261,7 +2258,6 @@ class Ui_Graficacion(QMainWindow):
                     Z = coordenada1**2+coordenada2**2
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota, shading='gouraud')
                 elif 0 <= cuadro < cuadro_fijo:
-                    print(int(len(coordenada1)%10), valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.proyeccion.remove()
                     if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
@@ -4126,7 +4122,6 @@ class Ui_Graficacion(QMainWindow):
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             else:
                                 # Curvas de nivel para gráficas sin proyección y sin dependencia temporal.
-                                print(9)
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=2, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             canva.axes.grid(True)
                     else:
@@ -4147,7 +4142,6 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes2.grid(True)
                         else:
                             # Curvas de nivel para graficas sin proyección.
-                            print(12)
                             canva.axes.superficie.set_alpha(0.4)
                             self.Curvas = canva.axes.contour(self.x, self.y, valores, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                         canva.axes.grid(True)
@@ -4223,8 +4217,6 @@ class Ui_Graficacion(QMainWindow):
         subproblema: entero
             Número del subproblema del que se quieren obtener los coeficientes.
         """
-
-        print(self.Soluciones)
 
         # Establecimiento de los indice posibles para el primer conjunto de valores propios del subproblema.
         self.ValorPropio1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
@@ -4303,8 +4295,6 @@ class Ui_Graficacion(QMainWindow):
             Indice del segundo valor propio.
         """
 
-        print(self.Soluciones)
-
         coeficiente = ""
 
         try:
@@ -4314,7 +4304,6 @@ class Ui_Graficacion(QMainWindow):
                     # Cuando se tienen indices no negativos.
                     if self.ValorPropio1.minimum() > 0:
                         valorpropio1 -= 1
-                    print(self.Soluciones[self.Subproblema.value()-1][valorpropio1][0])
                     if self.Soluciones[self.Subproblema.value()-1][valorpropio1][0].args != ():
                         # Obtención del coeficiente cuando el término tiene variables.
                         if self.Soluciones[self.Subproblema.value()-1][valorpropio1][0].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][0].args[1].args != () and not (type(self.Soluciones[self.Subproblema.value()-1][valorpropio1][0].args[0]) == core.add.Add or type(self.Soluciones[self.Subproblema.value()-1][valorpropio1][0].args[1]) == core.add.Add):
@@ -4366,7 +4355,6 @@ class Ui_Graficacion(QMainWindow):
                     if self.ValorPropio3.minimum() > 0:
                         valorpropio3 -= 1
                     
-                    print(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3])
                     if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args != (): 
                         # Obtención del coeficiente cuando el término tiene variables.
                         if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args != ():
@@ -4383,13 +4371,11 @@ class Ui_Graficacion(QMainWindow):
                     # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
                     if self.NumeroTerminos[self.Subproblema.value()-1][2][0] == "-n":
                         valorpropio3 = valorpropio3 + abs(self.ValorPropio3.minimum())
-                        print(valorpropio2)
                     else:
                         valorpropio3 = valorpropio3 + int(self.NumeroTerminos[self.Subproblema.value()-1][2][0])
                     if self.ValorPropio2.minimum() > 0:
                         valorpropio2 -= 1
 
-                    print(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3])
                     if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args != ():
                         # Obtención del coeficiente cuando el término tiene variables.
                         if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args != ():
@@ -4460,8 +4446,7 @@ class Ui_Graficacion(QMainWindow):
                         valorpropio1 -= 1
                     if self.ValorPropio2.minimum() > 0:
                         valorpropio2 -= 1
-                    
-                    print(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2])
+
                     if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args != (): 
                         # Obtención del coeficiente cuando el término tiene variables.
                         if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args != ():
@@ -4478,13 +4463,11 @@ class Ui_Graficacion(QMainWindow):
                     # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
                     if self.NumeroTerminos[self.Subproblema.value()-1][1][0] == "-n":
                         valorpropio2 = valorpropio2 + abs(self.ValorPropio2.minimum())
-                        print(valorpropio2)
                     else:
                         valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
                     if self.ValorPropio1.minimum() > 0:
                         valorpropio1 -= 1
 
-                    print(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2])
                     if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args != ():
                         # Obtención del coeficiente cuando el término tiene variables.
                         if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args != ():
