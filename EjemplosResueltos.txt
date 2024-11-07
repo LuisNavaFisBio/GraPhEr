@@ -323,13 +323,13 @@ Condiciones iniciales y/o de frontera    30;-5;Piecewise((-5,z<2/3),(30,z>2/3))
 Número de subproblemas    3
 
 Solución del Subproblema #1
-Valores Propios    besselj(0, lamda_n)=0        Número de Términos    1:10        Función Peso    r
-Coeficientes    Int[32*f_1*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n)**2),r]
+Valores Propios    besselj(0, lamda_n/4)=0        Número de Términos    1:10        Función Peso    r
+Coeficientes    Int[32*f_1*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n/4)**2),r]
 Funciones Espaciales    besselj(0, lamda_n*r)*sinh(lamda_n*z)
 
 Solución del Subproblema #2
-Valores Propios    besselj(0, lamda_n)=0        Número de Términos    1:10        Función Peso    r
-Coeficientes    Int[32*f_2*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n)**2),r]
+Valores Propios    besselj(0, lamda_n/4)=0        Número de Términos    1:10        Función Peso    r
+Coeficientes    Int[32*f_2*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n/4)**2),r]
 Funciones Espaciales    besselj(0, lamda_n*r)*sinh(lamda_n*(1-z))
 
 Solución del Subproblema #3
