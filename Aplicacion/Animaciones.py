@@ -134,7 +134,7 @@ class ReproductorGeneral(FuncAnimation):
                     yield self.cuadro
 
 
-    def empezar(self):
+    def empezar(self, event=None):
         """Comienza la reproducción."""
 
         self.proceso = True
