@@ -1834,6 +1834,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
 
+        self.Ui_Grafica.GuardarAnimacion.setText("Guardando")
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
+
         self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)

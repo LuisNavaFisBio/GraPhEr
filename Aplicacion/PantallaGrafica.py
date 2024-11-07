@@ -4082,7 +4082,7 @@ class Ui_Graficacion(QMainWindow):
                     # Envio de actualización cuando no se está guardando la animación.
                     self.envioActualizacion("Graficando Curvas")
 
-                if not ((len(self.Dominio) == 3) and (not self.Proyeccion) and (not self.dependencia_tiempo)):
+                if not ((len(self.Dominio) == 3) and (self.Proyeccion) and (not self.dependencia_tiempo)):
                     # Graficación de curvas de nivel para problemas que no sean de tres dimensiones espaciales y no estén proyectados.
                     if not self.valorespecial:
                         # Graficación de curvas de nivel cuando no se especifica un valor especifico para la coordenada fija (si es que se tiene una).
@@ -4101,7 +4101,7 @@ class Ui_Graficacion(QMainWindow):
                                 self.curvasdibujadas2 = True
                                 canva.axes2.grid(True)
                             elif self.Coordenadas == "Esféricas" and self.CoordenadaFija_2.isChecked():
-                                # Curvas de nivel para proyección en coordenadas esféricas con el radio polar como coordenada fija.
+                                # Curvas de nivel para proyección en coordenadas esféricas con el ángulo polar como coordenada fija.
                                 self.Curvas = canva.axes.contour(self.v, self.u*np.sin(np.round((self.dominio[3]-self.dominio[2])*anim.deslizador.value()/(len(self.Dominios[1])-1)+self.dominio[2], 2)), self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             else:
                                 self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
