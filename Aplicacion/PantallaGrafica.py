@@ -238,7 +238,7 @@ class GuardadoAnimacion(FuncAnimation):
         self.funcionActualizadora(cuadro, *self.argumentos[0:-2])
         if self.curvas_nivel:
             # Adicion de curvas de nivel.
-            if self.dependencia_temporal or (self.funcion == self.funciones[0]) or (self.funcion == self.funciones[1]):
+            if self.dependencia_temporal or (self.funcionActualizadora == self.funciones[0]) or (self.funcionActualizadora == self.funciones[1]):
                 # Problemas con dependencia temporal.
                 self.funcion_curvas(guardar = True)
             elif (not self.dependencia_temporal) and (cuadro == self.numerocuadromaximo-50):
