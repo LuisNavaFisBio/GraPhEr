@@ -4134,6 +4134,7 @@ class Ui_Graficacion(QMainWindow):
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             elif len(canva.figura.axes) > 2:
                                 # Curvas de nivel para proyección en coordenadas esféricas con radio como coordenada fija.
+                                print("alpha")
                                 canva.axes2.proyeccion.set_alpha(0.4)
                                 r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.value()/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
                                 r1, phi1 = np.meshgrid(r, self.y)
