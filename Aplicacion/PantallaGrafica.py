@@ -4132,7 +4132,7 @@ class Ui_Graficacion(QMainWindow):
                             if self.Coordenadas == "Cartesianas":
                                 # Curvas de nivel en proyecciones de coordenadas cartesianas.
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
-                            elif len(canva.figura.axes) > 2:
+                            elif self.Coordenadas == "Esféricas" and self.CoordenadaFija_1.isChecked():
                                 # Curvas de nivel para proyección en coordenadas esféricas con radio como coordenada fija.
                                 print("alpha")
                                 canva.axes2.proyeccion.set_alpha(0.4)
@@ -4161,7 +4161,7 @@ class Ui_Graficacion(QMainWindow):
                             if self.Coordenadas == "Cartesianas":
                                 # Curvas de nivel en proyecciones de coordenadas cartesianas.
                                 self.Curvas = canva.axes.contour(self.x, self.y, valores, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
-                            elif len(canva.figura.axes) > 2:
+                            elif self.Coordenadas == "Esféricas" and self.CoordenadaFija_1.isChecked():
                                 # Curvas de nivel para visualizaciones de proyecciones en coordenadas esféricas con radio como coordenada fija.
                                 canva.axes.proyeccion.set_alpha(0.4)
                                 canva.axes2.proyeccion.set_alpha(0.4)
