@@ -1554,7 +1554,7 @@ class Ui_Graficacion(QMainWindow):
                 self.rcount = self.Valores.shape[1]
                 self.ccount = self.Valores.shape[2]        
 
-                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarGrafica3D, fargs=[longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(longitud2+self.DatosGrafica[0]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
+                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarGrafica3D, fargs=[longitud2, *self.Dominios, self.x, self.y, self.DatosGrafica[0], self.Coordenadas, coordenada_especifica, plt.Normalize(vmin = -self.Cota, vmax = self.Cota), self.Valores, self.MostrarSolucion.axes, limites, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(longitud2+self.DatosGrafica[0]-1), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
 
         self.envioActualizacion("Mostrando Coeficientes y Valores")
 
@@ -1997,7 +1997,7 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     y, z = np.meshgrid(coordenada2[:cuadro*10+int(len(coordenada2)%10)], coordenada3)
@@ -2006,9 +2006,9 @@ class Ui_Graficacion(QMainWindow):
                     # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                     lienzo.superficie = lienzo.plot_surface(coordenada1[0], y, z, facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada2)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
 
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(coordenada1[indice], grid1, grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
                     lienzo.set_title(r'$x = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
@@ -2018,14 +2018,14 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     x, z = np.meshgrid(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada3)
                     lienzo.superficie = lienzo.plot_surface(x, coordenada2[0], z, facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(grid1, coordenada2[indice], grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
                     lienzo.set_title(r'$y = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
@@ -2035,14 +2035,14 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)            
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     x, y = np.meshgrid(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2)
                     lienzo.superficie = lienzo.plot_surface(x, y, coordenada3[0]*(1+(x**2+y**2)*0), facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(grid1, grid2, coordenada3[indice]*(1+(grid1**2+grid2**2)*0), facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
                     lienzo.set_title(r'$z = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
@@ -2053,15 +2053,15 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     phi, z = np.meshgrid(coordenada2, coordenada3[:cuadro*10+int(len(coordenada3)%10)])
                     x, y = coordenada1[0]*np.cos(phi), coordenada1[0]*np.sin(phi)
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[0][:cuadro*10+int(len(coordenada3)%10)])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     x, y = coordenada1[indice]*np.cos(grid1), coordenada1[indice]*np.sin(grid1)
                     lienzo.superficie = lienzo.plot_surface(x, y, grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
@@ -2072,15 +2072,15 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     r, z = np.meshgrid(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada3)
                     x, y = r*np.cos(coordenada2[0]), r*np.sin(coordenada2[0])
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     x, y = grid1*np.cos(coordenada2[indice]), grid1*np.sin(coordenada2[indice])
                     lienzo.superficie = lienzo.plot_surface(x, y, grid2, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
@@ -2091,15 +2091,15 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota) 
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     r, phi = np.meshgrid(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2)
                     x, y = r*np.cos(phi), r*np.sin(phi)
                     lienzo.superficie = lienzo.plot_surface(x, y, coordenada3[0]*(1+(x**2+y**2)*0), facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     lienzo.superficie = lienzo.plot_surface(grid1, grid2, coordenada3[indice]*(1+(grid1**2+grid2**2)*0), facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
                     lienzo.set_title(r'$z = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
@@ -2110,16 +2110,16 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     theta, phi = np.meshgrid(coordenada2[:cuadro*10+int(len(coordenada2)%10)], coordenada3)
                     x, y = coordenada1[0]*np.cos(phi)*np.sin(theta), coordenada1[0]*np.sin(phi)*np.sin(theta)
                     z = coordenada1[0]*np.cos(theta)
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada2)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     x, y = coordenada1[indice]*np.cos(grid2)*np.sin(grid1), coordenada1[indice]*np.sin(grid2)*np.sin(grid1)
                     z = coordenada1[indice]*np.cos(grid1)
@@ -2131,16 +2131,16 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     r, phi = np.meshgrid(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada3)
                     x, y = r*np.cos(phi)*np.sin(coordenada2[0]), r*np.sin(phi)*np.sin(coordenada2[0])
                     z = r*np.cos(coordenada2[0])
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     x, y = grid1*np.cos(grid2)*np.sin(coordenada2[indice]), grid1*np.sin(grid2)*np.sin(coordenada2[indice])
                     z = grid1*np.cos(coordenada2[indice])
@@ -2152,16 +2152,16 @@ class Ui_Graficacion(QMainWindow):
                     coordenada1, coordenada2 = np.meshgrid([0], [0])
                     coordenada3 = coordenada1**2+coordenada2**2
                     lienzo.superficie = lienzo.plot_surface(coordenada1, coordenada2, coordenada3, cmap = self.Colormap, vmin=-cota, vmax=cota)
-                elif 0 <= cuadro <= cuadro_fijo:
+                elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.superficie.remove()
                     r, t = np.meshgrid(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2)
                     x, y = r*np.cos(coordenada3[0])*np.sin(t), r*np.sin(coordenada3[0])*np.sin(t)
                     z = r*np.cos(t)
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                elif cuadro_fijo+1 <= cuadro <= cuadro_fijo+longitud:
+                elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
-                    indice = cuadro-cuadro_fijo-1
+                    indice = cuadro-cuadro_fijo
                     lienzo.superficie.remove()
                     x, y = grid1*np.cos(coordenada3[indice])*np.sin(grid2), grid1*np.sin(coordenada3[indice])*np.sin(grid2)
                     z = grid1*np.cos(grid2)
