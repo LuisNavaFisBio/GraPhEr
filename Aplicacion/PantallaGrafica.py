@@ -2240,11 +2240,12 @@ class Ui_Graficacion(QMainWindow):
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 elif 0 <= cuadro < cuadro_fijo:
                     # Creación de la gráfica para el primer valor de la coordenada fija.
+                    print(int(len(coordenada1)%10))
                     lienzo.proyeccion.remove()
                     if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
-                        coordenada1, coordenada2 = np.meshgrid([0], [0, 1])
-                        Z = 0*(coordenada1**2+coordenada2**2)
-                        lienzo.proyeccion = lienzo.pcolormesh(coordenada2, coordenada1, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                        x, y = np.meshgrid([0], [0, 1])
+                        Z = 0*(x**2+y**2)
+                        lienzo.proyeccion = lienzo.pcolormesh(x, y, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
                     else:
                         lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
@@ -2260,9 +2261,15 @@ class Ui_Graficacion(QMainWindow):
                     Z = coordenada1**2+coordenada2**2
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 elif 0 <= cuadro < cuadro_fijo:
+                    print(int(len(coordenada1)%10), valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T)
                     # Creación de la gráfica para el primer valor de la coordenada fija.
                     lienzo.proyeccion.remove()
-                    lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                    if (cuadro == 0) and (int(len(coordenada1)%10) == 0):
+                        x, y = np.meshgrid([0], [0, 1])
+                        Z = 0*(x**2+y**2)
+                        lienzo.proyeccion = lienzo.pcolormesh(x, y, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
+                    else:
+                        lienzo.proyeccion = lienzo.pcolormesh(coordenada1[:cuadro*10+int(len(coordenada1)%10)], coordenada2, valores_matriz[0].T[:cuadro*10+int(len(coordenada1)%10)].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
                 elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
                     # Creación de la gráfica para los demás valores.
                     indice = cuadro-cuadro_fijo

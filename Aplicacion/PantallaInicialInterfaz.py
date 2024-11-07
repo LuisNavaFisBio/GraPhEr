@@ -1751,8 +1751,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
         self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
         self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
-        self.Ui_Grafica.Animacion.iniciar()
-        self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
         self.Ui_Carga.label.setText(mensaje)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
@@ -1777,6 +1775,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
+        self.Ui_Grafica.Animacion.iniciar()
+        self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
+
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
