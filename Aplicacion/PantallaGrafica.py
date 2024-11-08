@@ -2330,7 +2330,7 @@ class Ui_Graficacion(QMainWindow):
                     indice = cuadro-cuadro_fijo
                     lienzo.proyeccion.remove()
                     lienzo.proyeccion = lienzo.pcolormesh(coordenada1, coordenada2, valores_matriz[indice].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
-                    lienzo.set_title(r'$z =%(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
+                    lienzo.set_title(r'$\phi =%(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
         return lienzo
     
     def actualizarProyeccion3D_especial(self, cuadro, cuadro_fijo, coordenada1, coordenada2, longitud, valores_matriz, limites, figura, cota):
@@ -3217,7 +3217,7 @@ class Ui_Graficacion(QMainWindow):
             canva.axes2.set_ylim(self.dominio[0], self.dominio[1])
 
             canva.figura.suptitle(r'$r = %(valor)s $' % {"valor":self.dominio[0]}, x=0.44, y=0.88)
-            
+
             if self.dominio[5] <= np.pi/2:
                 number = 5
             elif np.pi/2 < self.dominio[5] <= 3*np.pi/2:
