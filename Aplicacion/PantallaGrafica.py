@@ -2378,10 +2378,8 @@ class Ui_Graficacion(QMainWindow):
             lienzo[1].proyeccion = lienzo[1].pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
             lienzo[0].grid(True)
             lienzo[1].grid(True)
-            figura.titulo = figura.text(0.4, 0.9, r'$r = %(valor)s $' % {"valor":limites[0]}, fontsize=15)
         elif 0 <= cuadro < cuadro_fijo:
             # Creación de la gráfica para el primer valor de la coordenada fija.
-            figura.titulo.remove()
             if (cuadro == 0) and (int(len(coordenada2)%10) == 0):
                 lienzo[0].proyeccion.remove()
                 lienzo[1].proyeccion.remove()
@@ -2399,7 +2397,7 @@ class Ui_Graficacion(QMainWindow):
                 lienzo[1].grid(False)
                 lienzo[0].proyeccion = lienzo[0].pcolormesh(coordenada2[:cuadro*10+int(len(coordenada2)%10)], r, valores_matriz[0][:cuadro*10+int(len(coordenada2)%10)].T[:int(np.ceil(len(coordenada1)/2))], cmap=self.Colormap, vmin=-cota, vmax=cota)
                 lienzo[1].proyeccion = lienzo[1].pcolormesh(coordenada2[:cuadro*10+int(len(coordenada2)%10)], r, np.flip(valores_matriz[0][:cuadro*10+int(len(coordenada2)%10)].T[int(np.floor(len(coordenada1)/2)):],1), cmap=self.Colormap, vmin=-cota, vmax=cota)
-            figura.titulo = figura.text(0.4, 0.9, r'$r = %(valor)s $' % {"valor":limites[0]}, fontsize=15)
+
         elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
             # Creación de la gráfica para los demás valores.
             indice = cuadro-cuadro_fijo
@@ -2412,7 +2410,7 @@ class Ui_Graficacion(QMainWindow):
             r1, phi1 = np.meshgrid(r,  coordenada2)
             lienzo[0].proyeccion = lienzo[0].pcolormesh(phi1, r1, valores_matriz[indice].T[:int(np.ceil(len(coordenada1)/2))].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
             lienzo[1].proyeccion = lienzo[1].pcolormesh(phi1, r1, np.flip(valores_matriz[indice].T[int(np.floor(len(coordenada1)/2)):].T, 1), cmap=self.Colormap, vmin=-cota, vmax=cota)
-            figura.titulo = figura.text(0.4, 0.9, r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, fontsize=15)
+            figura.suptitle(r'$r = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, x=0.44, y=0.88)
             lienzo[0].grid(True)
             lienzo[1].grid(True)
         return lienzo[0], lienzo[1]
@@ -3217,6 +3215,9 @@ class Ui_Graficacion(QMainWindow):
             canva.axes.set_ylim(self.dominio[0], self.dominio[1])
             canva.axes2.set_xlim(0, self.dominio[5])
             canva.axes2.set_ylim(self.dominio[0], self.dominio[1])
+
+            canva.figura.suptitle(r'$r = %(valor)s $' % {"valor":self.dominio[0]}, x=0.44, y=0.88)
+            
             if self.dominio[5] <= np.pi/2:
                 number = 5
             elif np.pi/2 < self.dominio[5] <= 3*np.pi/2:
