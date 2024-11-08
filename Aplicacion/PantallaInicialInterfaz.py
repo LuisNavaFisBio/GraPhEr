@@ -2061,8 +2061,6 @@ class PantallaGraficacion(QMainWindow):
 def borrardatosaplicacion(ui_informacion, cierretotal):
     """Elimina archivos creados para la visualización de la interpretación y cierra todas las ventanas de la aplicación."""
 
-    if os.path.exists('EntradaUsuario.tex'):
-        os.remove('EntradaUsuario.tex')
     if os.path.exists('Entrada.html'):
         os.remove('Entrada.html')
     if os.path.exists('js'):
