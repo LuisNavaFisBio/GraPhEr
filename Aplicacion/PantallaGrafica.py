@@ -2368,12 +2368,12 @@ class Ui_Graficacion(QMainWindow):
         """
 
         self.valorespecial = False
+        lienzo = figura.axes
 
         if cuadro == -1:
             # Inicialización de la gráfica.
             coordenada1, coordenada2 = np.meshgrid([0], [0])
             Z = coordenada1**2+coordenada2**2
-            lienzo = figura.axes
             lienzo[0].proyeccion = lienzo[0].pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
             lienzo[1].proyeccion = lienzo[1].pcolormesh(coordenada1, coordenada2, Z, cmap=self.Colormap, vmin=-cota, vmax=cota)
             lienzo[0].grid(True)
@@ -2382,7 +2382,6 @@ class Ui_Graficacion(QMainWindow):
         elif 0 <= cuadro < cuadro_fijo:
             # Creación de la gráfica para el primer valor de la coordenada fija.
             if (cuadro == 0) and (int(len(coordenada2)%10) == 0):
-                lienzo = figura.axes
                 lienzo[0].proyeccion.remove()
                 lienzo[1].proyeccion.remove()
                 coordenada1, coordenada2 = np.meshgrid([0], [0, 1])
@@ -2392,7 +2391,6 @@ class Ui_Graficacion(QMainWindow):
                 lienzo[0].grid(True)
                 lienzo[1].grid(True)
             else:
-                lienzo = figura.axes
                 lienzo[0].proyeccion.remove()
                 lienzo[1].proyeccion.remove()
                 r = np.linspace(0, 0, int(np.ceil(len(coordenada1)/2)))
@@ -2402,7 +2400,6 @@ class Ui_Graficacion(QMainWindow):
                 lienzo[1].proyeccion = lienzo[1].pcolormesh(coordenada2[:cuadro*10+int(len(coordenada2)%10)], r, np.flip(valores_matriz[0][:cuadro*10+int(len(coordenada2)%10)].T[int(np.floor(len(coordenada1)/2)):],1), cmap=self.Colormap, vmin=-cota, vmax=cota)
         elif cuadro_fijo <= cuadro <= cuadro_fijo+longitud-1:
             # Creación de la gráfica para los demás valores.
-            lienzo = figura.axes
             indice = cuadro-cuadro_fijo
             lienzo[0].proyeccion.remove()
             lienzo[1].proyeccion.remove()
