@@ -3260,7 +3260,7 @@ class Ui_Graficacion(QMainWindow):
             # Diseño del lienzo.
             canva.axes = canva.figura.add_subplot(projection='polar')
             canva.axes.set_xlim(self.dominio[4], self.dominio[5])
-            canva.axes.set_ylim(self.dominio[0], self.dominio[1])
+            canva.axes.set_ylim(0, self.dominio[1])
             canva.axes.set_title(r'$\theta = %(valor)s$' % {"valor":self.dominio[2]} , pad = 10) 
             canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
             canva.axes.set_facecolor((0.52, 0.50, 0.49, 0.3))
@@ -3279,7 +3279,7 @@ class Ui_Graficacion(QMainWindow):
 
             # Diseño de las etiquetas radiales.
             canva.axes.set_rlabel_position(25)
-            canva.axes.set_yticks(np.arange(self.dominio[0], self.dominio[1]+(self.dominio[1]-self.dominio[0])/10, (self.dominio[1]-self.dominio[0])/5)[1:])
+            canva.axes.set_yticks(np.arange(0, self.dominio[1]+self.dominio[1]/10, self.dominio[1]/5)[1:])
             canva.axes.grid(lw=0.2)
 
             # Variables de ayuda para la graficación y animación.
