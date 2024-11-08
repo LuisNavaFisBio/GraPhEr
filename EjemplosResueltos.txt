@@ -410,5 +410,4 @@ Valores Propios    n;abs(lamda_m)<=lamda_n        Número de Términos    0:2;ab
 Coeficientes    Int[f_1*conjugate(Ynm(lamda_n, lamda_m)),ct,phi]
 Funciones Espaciales    r**lamda_n*Ynm(lamda_n, lamda_m)
 
-
 ############################################################################
