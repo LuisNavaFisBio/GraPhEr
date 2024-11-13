@@ -1100,7 +1100,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         self.finTex = r'''\hline\end{tabular} \end{table}\end{document}'''
 
-        with open('EntradaUsuario.tex','x') as f:
+        with open('EntradaUsuario.tex','w') as f:
             f.write("Entrada del Usuario")
 
         # Inicialización de algunas entradas y botones.
