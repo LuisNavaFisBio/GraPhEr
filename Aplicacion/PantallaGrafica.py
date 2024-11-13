@@ -2776,6 +2776,7 @@ class Ui_Graficacion(QMainWindow):
             longitud: entero
                 Longitud de la partición de la coordenada fija.
 
+                
             resolucion: entero
                 Resolucion temporal de la animación.
         """
