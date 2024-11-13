@@ -2580,7 +2580,7 @@ class Ui_Graficacion(QMainWindow):
         resolucion = 25
 
         canva.axes = canva.figura.add_subplot(projection='3d')
-        canva.axes.set_position([0.05, 0.05, 0.8, 0.8])
+        canva.axes.set_position([0.05, 0.10, 0.8, 0.8])
         canva.axes.set_xlim(self.dominio[0], self.dominio[1])
         canva.axes.set_ylim(self.dominio[2], self.dominio[3])
         canva.axes.set_zlim(self.minimo-(self.maximo-self.minimo)*0.05, self.maximo+(self.maximo-self.minimo)*0.05)
@@ -2676,7 +2676,7 @@ class Ui_Graficacion(QMainWindow):
         self.x, self.y = self.u*np.cos(self.v), self.u*np.sin(self.v)
 
         canva.axes = canva.figura.add_subplot(projection='3d')
-        canva.axes.set_position([0.05, 0.05, 0.8, 0.8])
+        canva.axes.set_position([0.05, 0.10, 0.8, 0.8])
         canva.axes.set_xlim(np.min(self.x), np.max(self.x))
         canva.axes.set_ylim(np.min(self.y), max(np.max(self.y), np.max(self.x)))
         canva.axes.set_zlim(self.minimo-(self.maximo-self.minimo)*0.05, self.maximo+(self.maximo-self.minimo)*0.05)
