@@ -148,7 +148,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # Asigna la imagen a un ícono. Esto se basa en Andy M. (15 de diciembre de 2009). Respuesta a la pregunta "Python QPushButton setIcon: put icon on button". stackoverflow. https://stackoverflow.com/a/1905587
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 2.5 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/2.5/
         self.icono = QIcon()
-        self.icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "Icono.png")), QIcon.Normal, QIcon.Off)
+        self.icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "IconoGraPhEr.png")), QIcon.Normal, QIcon.Off)
 
         # Configuración de la ventana principal.
         ventana.resize(1680, 570)
@@ -1973,7 +1973,7 @@ class PantallaPrincipal(QMainWindow):
         """
         
         icono = QIcon()
-        icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "Icono.png")), QIcon.Normal, QIcon.Off)
+        icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "IconoGraPhEr.png")), QIcon.Normal, QIcon.Off)
 
         EmergenteVentanaPrincipal = QtWidgets.QMessageBox()
         # Diseño de la ventana emergente
@@ -2022,7 +2022,7 @@ class PantallaGraficacion(QMainWindow):
 
         if not self.ui.cierretotal:
             icono = QIcon()
-            icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "Icono.png")), QIcon.Normal, QIcon.Off)
+            icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "IconoGraPhEr.png")), QIcon.Normal, QIcon.Off)
 
             self.EmergenteVentanaGraficacion = QtWidgets.QMessageBox()
             # Diseño de la ventana emergente
