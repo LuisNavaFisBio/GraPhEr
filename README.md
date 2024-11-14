@@ -36,7 +36,7 @@ pip install -U --only-binary :all: matplotlib==3.7.5, PyQt5, plasTeX, sympy, sci
 
 # Ejecución de la aplicación
 
-Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y correr el archivo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo o correr el archivo con un editor como Visual Studio Code.
+Después de la instalación, abrir directamente el archivo “PantallaInicialInterfaz.py” o abrir dicho archivo con el IDLE de Python y ejecutarlo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo o correr el archivo con un editor como Visual Studio Code.
 
 ## Ejemplo de uso
 
