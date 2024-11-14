@@ -10,6 +10,8 @@ GraPhEr es una aplicación de graficación, visualización y exploración de las
 
 # Requerimientos
 
+## Con instalación de Python (archivos .py)
+
 GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior. 
 
 En Windows es necesario instalar Python con las opciones “Use admin privileges when installing py.exe” y “Add python.exe to PATH”, antes de finalizar elegir la opción “Disable PATH limit”.
@@ -34,11 +36,16 @@ pip install -U --only-binary :all: matplotlib==3.7.5, PyQt5, plasTeX, sympy, sci
 
 *Nota: Se necesita una versión inferior o igual a la versión 3.7.5 de la librería MatPlotLib por la existencia de un bug en versiones superiores de dicha librería que impide la graficación de curvas de nivel en la vista tridimensional.*
 
-# Ejecución de la aplicación
+### Ejecución de la aplicación
 
 Después de la instalación, abrir directamente el archivo “PantallaInicialInterfaz.py” o abrir dicho archivo con el IDLE de Python y ejecutarlo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo o correr el archivo con un editor como Visual Studio Code.
 
-## Ejemplo de uso
+
+## Sin instalación de Python (archivo ejecutable)
+
+Si se desea evitar la instalación de Python y las librerías correspondientes, la distribución de la aplicación para Windows se puede descargar de [GraPhEr - Google Drive](https://drive.google.com/file/d/1I3vIstvLn2M7dMdNX2sPaJHzj-khZUCA)
+
+### Ejemplo de uso
 
 Para tener una ejemplificación del desempeño de la app, se puede copiar y pegar en los respectivos campos de la ventana inicial la información siguiente:
 
@@ -47,7 +54,7 @@ Para tener una ejemplificación del desempeño de la app, se puede copiar y pega
 
 Número de Dimensiones Espaciales    2        Coordenadas    Cartesianas
 Dominio x    0:pi/2        Dominio y    0:pi/2
-Condiciones iniciales y/o de frontera    x*sin(2*x);x*sin(2*x);y*(pi/2-y);y*(y-pi/2)
+Condiciones iniciales y/o de frontera   
 Número de subproblemas    4
 
 Solución del Subproblema #1
