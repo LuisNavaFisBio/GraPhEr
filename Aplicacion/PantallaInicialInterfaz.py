@@ -1880,7 +1880,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             # La creación de mapas de colores personalizados se basa en matplotlib. (s. f.). Creating a colormap from a list of colors. matplotlib. https://matplotlib.org/stable/gallery/color/custom_cmap.html
             if len(self.Condiciones[-1]) == 2:
                 # Si el problema es de segundo orden en el tiempo utilizamos un mapa de colores oscuro.
-                self.Colormap = mpl.colormaps['twilight']
+                self.Colormap = mpl.colormaps['cividis']
             else:
                 # Si el problema es de primer orden en el tiempo utilizamos un mapa de colores que simule temperaturas.
                 self.Colormap = LinearSegmentedColormap.from_list("", ["tab:blue", "cornflowerblue", "lightcoral", "red"], N=2**10)
