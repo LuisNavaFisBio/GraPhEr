@@ -2070,8 +2070,6 @@ def borrardatosaplicacion(ui_informacion, cierretotal):
     if os.path.exists('symbol-defs.svg'):
         os.remove('symbol-defs.svg')
 
-    print("Thank you for using this app. Share it if you liked it.")
-
     if cierretotal:
         # Cierre de todas las ventanas.
         if ui_informacion.error:
@@ -2082,6 +2080,7 @@ def borrardatosaplicacion(ui_informacion, cierretotal):
             ui_informacion.cierretotal = True
             ui_informacion.VentanaGrafica.setHidden(True)
             ui_informacion.VentanaGrafica.EmergenteVentanaGraficacion.close()
+        print("Thank you for using this app. Share it if you liked it.")
 
 # Ejecución de la aplicación
 if __name__ == "__main__":
