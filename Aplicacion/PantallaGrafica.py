@@ -3849,6 +3849,7 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelAuto.setCheckable(True)
                 self.CurvasNivelEspecificas.setEnabled(True)
                 self.CurvasNivelEspecificas.setCheckable(True)
+                self.CurvasNivelEspecificasEntrada.setEnabled(True)
                 self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
                 self.GraficarCurvasFija.setEnabled(True)
             else:
@@ -3859,7 +3860,6 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelAuto.setCheckable(False)
                 self.CurvasNivelEspecificas.setEnabled(False)
                 self.CurvasNivelEspecificas.setCheckable(False)
-                self.CurvasNivelEspecificasEntrada.setEnabled(True)
                 self.GraficarCurvasFija.setEnabled(False)
                 self.GraficarCurvasFija.setStyleSheet("background-color: rgb(127,146,151); color: rgb(234,237,239);")
                 self.CoordenadaFija.setDisabled(True)
