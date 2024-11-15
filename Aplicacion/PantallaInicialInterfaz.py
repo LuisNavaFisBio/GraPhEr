@@ -1513,6 +1513,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.disconnect()
             self.Ui_Grafica.Grupo.buttonClicked.disconnect()
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
+            self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
         except:
             pass
         self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
@@ -1520,6 +1521,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
         self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+        self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
 
         # La conectividad para abrir la ventana de etiquetas a partir de la ventana de graficación fue tomada de Elder, J. [Codemy.com] (05 de agosto de 2021). How To Open A Second Window - PyQt5 GUI Thursdays #24. YouTube. https://www.youtube.com/watch?v=R5N8TA0KFxc
         self.Ui_Grafica.Ui_Etiquetas = Ui_VentanaEtiquetas()
@@ -1585,6 +1587,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
                 self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             except:
                 pass
 
@@ -1596,6 +1599,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -1768,6 +1772,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
                 self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             except:
                 pass
 
@@ -1779,6 +1784,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -1943,6 +1949,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
                 self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             except:
                 pass
             
@@ -1954,6 +1961,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
 
 class PantallaPrincipal(QMainWindow):
     """
