@@ -1647,7 +1647,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
     def visualizarCurvasNivel(self):
         """Ejecuta el trabajo de visualización de curvas de nivel para problemas de dos dimensiones espaciales o para problemas de tres dimensiones espaciales en donde se proyectan los cortes."""
 
-        if (not self.VentanaGrafica.isHidden()) and (self.Ui_Grafica.Grupo.checkedButton() != None):
+        if (not self.VentanaGrafica.isHidden()) and (self.Ui_Grafica.CurvasEspecificasEntrada.text() != ""):
             # Si la ventana de graficación se encuentra abierta procede mostrar u ocultar las curvas de nivel de acuerdo a lo especificado por el usuario.
 
             # Diseño de la ventana de carga.
