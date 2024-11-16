@@ -860,7 +860,6 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_5.addWidget(label_13)
 
         self.GraficarCurvasFija = QPushButton(frame3)
-        self.GraficarCurvasFija.setObjectName("CurvasEspecificas")
         self.GraficarCurvasFija.setMaximumSize(QSize(80, 40))
         self.GraficarCurvasFija.setMinimumSize(QSize(80, 40))
         self.GraficarCurvasFija.setText('Ir')
