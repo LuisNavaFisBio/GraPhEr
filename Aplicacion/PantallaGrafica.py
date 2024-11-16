@@ -2405,7 +2405,6 @@ class Ui_Graficacion(QMainWindow):
             lienzo[1].proyeccion.remove()
             lienzo[0].grid(False)
             lienzo[1].grid(False)
-            figura.titulo.remove()
             r = np.linspace(limites[0], np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2), int(np.ceil(len(coordenada1)/2)))
             r1, phi1 = np.meshgrid(r,  coordenada2)
             lienzo[0].proyeccion = lienzo[0].pcolormesh(phi1, r1, valores_matriz[indice].T[:int(np.ceil(len(coordenada1)/2))].T, cmap=self.Colormap, vmin=-cota, vmax=cota)
