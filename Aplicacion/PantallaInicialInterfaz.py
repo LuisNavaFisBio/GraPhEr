@@ -1597,7 +1597,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
-            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -1642,10 +1642,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
 
-    def visualizarCurvasNivel(self, boton):
+    def visualizarCurvasNivel(self, boton=None):
         """Ejecuta el trabajo de visualización de curvas de nivel para problemas de dos dimensiones espaciales o para problemas de tres dimensiones espaciales en donde se proyectan los cortes."""
 
-        if not self.VentanaGrafica.isHidden() and (not (boton.objectName() != "CurvasEspecificas" and not self.Ui_Grafica.CurvasNivelEspecificas.isChecked())):
+        if  not self.VentanaGrafica.isHidden() and (not (boton == True and not self.Ui_Grafica.CurvasNivelEspecificas.isChecked())):
             # Si la ventana de graficación se encuentra abierta procede mostrar u ocultar las curvas de nivel de acuerdo a lo especificado por el usuario.
 
             # Diseño de la ventana de carga.
@@ -1782,7 +1782,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
-            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -1959,7 +1959,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
-            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
 
 class PantallaPrincipal(QMainWindow):
     """
