@@ -1118,8 +1118,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Visualizar.setDisabled(True)
         self.Visualizar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
 
-        QMetaObject.connectSlotsByName(ventana)
-
     def actualizarVentanaEmergente(self, string):
         """
         Actualiza la ventana de carga.
@@ -1644,10 +1642,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
 
-    def visualizarCurvasNivel(self):
+    def visualizarCurvasNivel(self, boton):
         """Ejecuta el trabajo de visualización de curvas de nivel para problemas de dos dimensiones espaciales o para problemas de tres dimensiones espaciales en donde se proyectan los cortes."""
 
-        if (not self.VentanaGrafica.isHidden()) and (self.Ui_Grafica.CurvasEspecificasEntrada.text() != ""):
+        if not self.VentanaGrafica.isHidden() and (not (boton.objectName() != "CurvasEspecificas" and not self.Ui_Grafica.CurvasNivelEspecificas.isChecked())):
             # Si la ventana de graficación se encuentra abierta procede mostrar u ocultar las curvas de nivel de acuerdo a lo especificado por el usuario.
 
             # Diseño de la ventana de carga.
