@@ -3660,7 +3660,7 @@ class Ui_Graficacion(QMainWindow):
                                     coordenada = "r"
                                 elif self.Coordenadas == "Esféricas":
                                     self.MostrarSolucion.axes2.proyeccion.remove()
-                                    r = np.linspace(0, valor_coordenadaFija, int(np.ceil(len(self.x)/2)))
+                                    r = np.linspace(self.dominio[0], valor_coordenadaFija, int(np.ceil(len(self.x)/2)))
                                     r1, phi1 = np.meshgrid(r, self.y)
                                     self.MostrarSolucion.axes.proyeccion = self.MostrarSolucion.axes.pcolormesh(phi1, r1, self.ValoresSolucion[:int(np.ceil(len(self.x)/2))].T, cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
                                     self.MostrarSolucion.axes2.proyeccion = self.MostrarSolucion.axes2.pcolormesh(phi1, r1, np.flip(self.ValoresSolucion[int(np.floor(len(self.x)/2)):].T,1), cmap=self.Colormap, vmin=-self.Cota, vmax=self.Cota)
@@ -4167,8 +4167,8 @@ class Ui_Graficacion(QMainWindow):
                                 canva.axes2.proyeccion.set_alpha(0.4)
                                 r = np.linspace(self.dominio[0], float(parsing.parse_expr(self.CoordenadaFija.text())), int(np.ceil(len(self.x)/2)))
                                 r1, phi1 = np.meshgrid(r, self.y)
-                                self.Curvas = canva.axes.contour(phi1, r1, valores.T[:int(np.ceil(len(r)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
-                                self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores.T[int(np.floor(len(r)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(phi1, r1, valores[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores[int(np.floor(len(self.x)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                                 self.curvasdibujadas2 = True
                                 canva.axes2.grid(True)
                             else:
