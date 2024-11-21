@@ -4165,7 +4165,7 @@ class Ui_Graficacion(QMainWindow):
                                 # Curvas de nivel para visualizaciones de proyecciones en coordenadas esféricas con radio como coordenada fija.
                                 canva.axes.proyeccion.set_alpha(0.4)
                                 canva.axes2.proyeccion.set_alpha(0.4)
-                                r = np.linspace(self.x[0], float(parsing.parse_expr(self.CoordenadaFija.text())), int(np.ceil(len(self.x)/2)))
+                                r = np.linspace(self.x[0], float(parsing.parse_expr(self.CoordenadaFija.text())), 0.03)
                                 r1, phi1 = np.meshgrid(r, self.y)
                                 self.Curvas = canva.axes.contour(phi1, r1, valores.T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                                 self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores.T[int(np.floor(len(self.x)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
