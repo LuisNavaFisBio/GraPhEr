@@ -3683,7 +3683,10 @@ class Ui_Graficacion(QMainWindow):
                                     z = valor_coordenadaFija*np.cos(self.x)
                                     self.MostrarSolucion.axes.superficie = self.MostrarSolucion.axes.plot_surface(x, y, z, facecolors = self.Colormap(norma(self.ValoresSolucion.T)), shade=False)
                                     coordenada = "r"
-                            self.MostrarSolucion.axes.set_title(r'${%(coordenada)s} = {%(valor)s}$' % {'coordenada': coordenada, 'valor': latex(parsing.parse_expr(self.CoordenadaFija.text()))}, pad = 10)        
+                            if not (self.Proyeccion and (self.Coordenadas == "Esféricas")):
+                                self.MostrarSolucion.axes.set_title(r'${%(coordenada)s} = {%(valor)s}$' % {'coordenada': coordenada, 'valor': latex(parsing.parse_expr(self.CoordenadaFija.text()))}, pad = 10)   
+                            else:
+                                self.MostrarSolucion.figura.suptitle(r'$r = %(valor)s $' % {"valor":valor_coordenadaFija}, x=0.44, y=0.88)
                         else: 
                             raise ValorFueraDominioError
                     elif self.CoordenadaFija_2.isChecked():
