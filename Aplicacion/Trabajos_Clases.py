@@ -1326,8 +1326,10 @@ class TrabajoResolucion(QtCore.QRunnable):
             # Determinación de la calidad (puntos por unidad de longitud).
             if self.ui.Calidad:
                 aumento = 0.01
+                aumento_angular = 0.03
             else:
                 aumento = 0.03
+                aumento_angular = 0.06
             
             # Cálculo de las particiones de cada dominio.
             self.ui.ParticionesDominios = []
@@ -1335,7 +1337,10 @@ class TrabajoResolucion(QtCore.QRunnable):
             indice = 0 
             for simbolo in self.ui.Simbolos:
                 if simbolo != t:
-                    particion = np.arange(float(self.ui.Dominios[indice][0])-0.005, float(self.ui.Dominios[indice][1]) + 0.005, step=aumento)
+                    if simbolo in [theta, phi]:
+                        particion = np.arange(float(self.ui.Dominios[indice][0])-0.005, float(self.ui.Dominios[indice][1]) + 0.005, step=aumento_angular)
+                    else:
+                        particion = np.arange(float(self.ui.Dominios[indice][0])-0.005, float(self.ui.Dominios[indice][1]) + 0.005, step=aumento)
                     if particion[-1] < float(self.ui.Dominios[indice][1]):
                         particion = np.append(particion, float(self.ui.Dominios[indice][1])+0.005)
                     else:

@@ -4167,8 +4167,8 @@ class Ui_Graficacion(QMainWindow):
                                 canva.axes2.proyeccion.set_alpha(0.4)
                                 r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.value()/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
                                 r1, phi1 = np.meshgrid(r, self.y)
-                                self.Curvas = canva.axes.contour(phi1, r1, valores[anim.deslizador.value()].T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
-                                self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores[anim.deslizador.value()].T[int(np.floor(len(self.x)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(phi1, r1, valores.T[:int(np.ceil(len(self.x)/2))].T, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas2 = canva.axes2.contour(phi1, r1, np.flip(valores.T[int(np.floor(len(self.x)/2)):].T,1), levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                                 self.curvasdibujadas2 = True
                                 canva.axes2.grid(True)
                             else:
