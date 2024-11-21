@@ -1326,10 +1326,10 @@ class TrabajoResolucion(QtCore.QRunnable):
             # Determinación de la calidad (puntos por unidad de longitud).
             if self.ui.Calidad:
                 aumento = 0.01
-                aumento_angular = 0.03
+                aumento_angular = 0.06
             else:
                 aumento = 0.03
-                aumento_angular = 0.06
+                aumento_angular = 0.09
             
             # Cálculo de las particiones de cada dominio.
             self.ui.ParticionesDominios = []
