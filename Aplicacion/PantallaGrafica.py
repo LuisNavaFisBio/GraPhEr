@@ -4054,6 +4054,99 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelAuto.setCheckable(False)
                 self.CurvasNivelEspecificas.setCheckable(False)
                 self.graficacion(coordenada_especifica=coordenada)
+
+    def intercambiarModoVisualizacion(self, subproblema, valorpropio1, valorpropio2, valorpropio3):
+        """Intercambia entre modos de visualización (solucion parcial completa, modo por modo o soluciones parciales)
+        
+        Parámetros
+        ----------
+        subproblema : entero
+            Indice del subproblema.
+
+        valorpropio1: entero
+            Indice del primer valor propio.
+
+        valorpropio2: entero
+            Indice del segundo valor propio.
+
+        valorpropio3: entero
+            Indice del tercer valor propio.
+        """
+
+        self.envioActualizacion("Cambiando Modo Visualización")
+        # Eliminación de la gráfica visible.
+        self.MostrarSolucion.figura.clear()
+        self.MostrarSolucion.figura.canvas.draw_idle()
+        del self.Animacion
+
+        if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+            self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
+            self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[subproblema-1][0][0]))
+            if len(self.NumeroTerminos[subproblema-1]) >= 2:
+                self.ValorPropio2_1.setEnabled(True)
+                self.label_10.setEnabled(True)
+                self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
+                self.ValorPropio2_1.setVisible(True)
+                self.label_10.setVisible(True)
+
+                if len(self.NumeroTerminos[subproblema-1]) == 3:
+                    self.ValorPropio3_1.setEnabled(True)
+                    self.label_13.setEnabled(True)
+                    self.ValorPropio3_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
+                    self.ValorPropio3_1.setVisible(True)
+                    self.label_13.setVisible(True)
+                else:
+                    self.ValorPropio3_1.setEnabled(False)
+                    self.label_13.setEnabled(False)
+                    self.ValorPropio3_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                    self.ValorPropio3_1.setVisible(False)
+                    self.label_13.setVisible(False)
+            else:
+                self.ValorPropio2_1.setEnabled(False)
+                self.label_10.setEnabled(False)
+                self.ValorPropio2_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                self.ValorPropio2_1.setVisible(False)
+                self.label_10.setVisible(False)
+
+            if self.ValorPropio2_1.isEnabled():
+                # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
+                if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                    self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
+                    self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
+                else:
+                    self.ValorPropio2_1.setMaximum(int(self.NumeroTerminos[subproblema-1][1][1]))
+                    self.ValorPropio2_1.setMinimum(int(self.NumeroTerminos[subproblema-1][1][0]))
+
+                if self.ValorPropio3_1.isEnabled():
+                    # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
+                    if self.NumeroTerminos[subproblema-1][2][0] == "-n":
+                        self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
+                        self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
+                    else:
+                        self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[subproblema-1][2][1]))
+                        self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[subproblema-1][2][0]))
+
+
+            # Despliegue del primer coeficiente de la solución al subproblema requerido.
+            if self.ValorPropio2_1.isEnabled():
+                if not self.ValorPropio3_1.isEnabled():
+                    if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                        self.despliegueCoeficiente_CambioValorPropio(int(self.NumeroTerminos[subproblema-1][0][0]), -int(self.NumeroTerminos[subproblema-1][0][0]), None)
+                    else:
+                        self.despliegueCoeficiente_CambioValorPropio(int(self.NumeroTerminos[subproblema-1][0][0]), int(self.NumeroTerminos[subproblema-1][1][0]), None)
+                else:
+                    if self.NumeroTerminos[subproblema-1][2][0] == "-n":
+                        self.despliegueCoeficiente_CambioValorPropio(int(self.NumeroTerminos[subproblema-1][0][0]), int(self.NumeroTerminos[subproblema-1][1][0]), -int(self.NumeroTerminos[subproblema-1][0][0]))
+                    else:
+                        self.despliegueCoeficiente_CambioValorPropio(int(self.NumeroTerminos[subproblema-1][0][0]), int(self.NumeroTerminos[subproblema-1][1][0]), int(self.NumeroTerminos[subproblema-1][2][0]))
+            else:
+                self.despliegueCoeficiente_CambioValorPropio(int(self.NumeroTerminos[subproblema-1][0][0]), None, None)
+        else:
+            self.CurvasNivelAuto.setChecked(False)
+            self.CurvasNivelEspecificas.setChecked(False)
+            self.ProyeccionEntrada.setChecked(False)
+            self.CoordenadaFija_1.setChecked(True)
+            self.graficacion()
     
     def interpretacionCurvasNivel(self, coordenada_fija = False, valores_matriz = None, guardar = False):
         """
@@ -4443,6 +4536,9 @@ class Ui_Graficacion(QMainWindow):
 
         valorpropio2: entero
             Indice del segundo valor propio.
+
+        valorpropio3: entero
+            Indice del tercer valor propio.
         """
 
         coeficiente = ""

@@ -1907,6 +1907,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.ValorPropio1.valueChanged.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioValorPropio(self.Ui_Grafica.ValorPropio1.value(), self.Ui_Grafica.ValorPropio2.value(), self.Ui_Grafica.ValorPropio3.value()))
         self.Ui_Grafica.ValorPropio2.valueChanged.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioValorPropio(self.Ui_Grafica.ValorPropio1.value(), self.Ui_Grafica.ValorPropio2.value(), self.Ui_Grafica.ValorPropio3.value()))
         self.Ui_Grafica.ValorPropio3.valueChanged.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioValorPropio(self.Ui_Grafica.ValorPropio1.value(), self.Ui_Grafica.ValorPropio2.value(), self.Ui_Grafica.ValorPropio3.value()))
+        self.Ui_Grafica.Subproblema_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.Subproblema_1.value()))
+        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
+        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
+        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
 
         self.VentanaCarga.show()
         self.threadpool.start(trabajo)
