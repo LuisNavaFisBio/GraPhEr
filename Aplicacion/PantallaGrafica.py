@@ -986,6 +986,7 @@ class Ui_Graficacion(QMainWindow):
         self.ProyeccionEntrada.setShortcut("Ctrl+p")
         horizontalLayout_9.addWidget(self.ProyeccionEntrada, alignment=Qt.AlignLeft)
 
+        # Diseño y configuración de la casilla de visualización modo por modo.
         self.Modo = QCheckBox()
         self.Modo.setText("Modo por modo")
         self.Modo.setStyleSheet(u"spacing:20px")
@@ -993,6 +994,7 @@ class Ui_Graficacion(QMainWindow):
         self.Modo.setMaximumSize(QSize(170, 30))
         horizontalLayout_9.addWidget(self.Modo, alignment=Qt.AlignLeft)
 
+        # Diseño y configuración de la casilla de visualización de soluciones parciales.
         self.SolucionParcial = QCheckBox()
         self.SolucionParcial.setText("Solución parcial")
         self.SolucionParcial.setStyleSheet(u"spacing:20px")
@@ -1000,6 +1002,13 @@ class Ui_Graficacion(QMainWindow):
         self.SolucionParcial.setMaximumSize(QSize(170, 30))
         horizontalLayout_9.addWidget(self.SolucionParcial, alignment=Qt.AlignLeft)
         verticalLayout_2.addLayout(horizontalLayout_9)
+
+        # Configuración de las casillas de visualización modo por modo y soluciones parciales como botones mutuamente excluyentes.
+        self.Grupo1 = QButtonGroup()
+        self.Grupo1.addButton(self.Modo, 1)
+        self.Grupo1.addButton(self.SolucionParcial, 2)
+        self.Grupo1.setExclusive(True)
+        self.Grupo1.buttonPressed.connect(self.activarModosVisualizacion)
 
         horizontalLayout_10 = QHBoxLayout()
         horizontalLayout_10.setSpacing(0)
@@ -1201,8 +1210,11 @@ class Ui_Graficacion(QMainWindow):
         try:
             # Diseño de la caja de herramientas para la visualización de los coeficientes de cada subsolución.
             self.Subproblema.setMaximum(int(self.NumeroSubproblemas))
+            self.Subproblema_1.setMaximum(int(self.NumeroSubproblemas))
             self.ValorPropio1.setMaximum(int(self.NumeroTerminos[0][0][1]))
             self.ValorPropio1.setMinimum(int(self.NumeroTerminos[0][0][0]))
+            self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[0][0][1]))
+            self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[0][0][0]))
             if len(self.NumeroTerminos[0]) > 1:
                 sizePolicy2 = self.ValorPropio1.sizePolicy()
                 sizePolicy2.setRetainSizeWhenHidden(True)
@@ -1210,18 +1222,26 @@ class Ui_Graficacion(QMainWindow):
                 if self.NumeroTerminos[0][1][0] == "-n":
                     self.ValorPropio2.setMaximum(int(self.NumeroTerminos[0][0][0]))
                     self.ValorPropio2.setMinimum(-int(self.NumeroTerminos[0][0][0]))
+                    self.ValorPropio2_1.setMaximum(int(self.NumeroTerminos[0][0][0]))
+                    self.ValorPropio2_1.setMinimum(-int(self.NumeroTerminos[0][0][0]))
                 else:
                     self.ValorPropio2.setMaximum(int(self.NumeroTerminos[0][1][1]))
                     self.ValorPropio2.setMinimum(int(self.NumeroTerminos[0][1][0]))
+                    self.ValorPropio2_1.setMaximum(int(self.NumeroTerminos[0][1][1]))
+                    self.ValorPropio2_1.setMinimum(int(self.NumeroTerminos[0][1][0]))
 
                 if len(self.NumeroTerminos[0]) == 3:
                     # Cuando hay más de dos conjuntos de valores propios en el subproblema 1.
                     if self.NumeroTerminos[0][2][0] == "-n":
                         self.ValorPropio3.setMaximum(int(self.NumeroTerminos[0][1][0]))
                         self.ValorPropio3.setMinimum(-int(self.NumeroTerminos[0][1][0]))
+                        self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[0][1][0]))
+                        self.ValorPropio3_1.setMinimum(-int(self.NumeroTerminos[0][1][0]))
                     else:
                         self.ValorPropio3.setMaximum(int(self.NumeroTerminos[0][2][1]))
                         self.ValorPropio3.setMinimum(int(self.NumeroTerminos[0][2][0]))
+                        self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[0][2][1]))
+                        self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[0][2][0]))
                 else:
                     self.ValorPropio3.setRange(0, 10)
                     self.ValorPropio3.setSpecialValueText("")
@@ -1233,6 +1253,17 @@ class Ui_Graficacion(QMainWindow):
                     self.ValorPropio3.setVisible(False)
                     self.label_5_1.setSizePolicy(sizePolicy2)
                     self.label_5_1.setVisible(False)
+
+                    self.ValorPropio3_1.setRange(0, 10)
+                    self.ValorPropio3_1.setSpecialValueText("")
+                    self.ValorPropio3_1.setValue(0)
+                    self.ValorPropio3_1.setEnabled(False)
+                    self.label_13.setEnabled(False)
+                    self.ValorPropio3_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                    self.ValorPropio3_1.setSizePolicy(sizePolicy2)
+                    self.ValorPropio3_1.setVisible(False)
+                    self.label_13.setSizePolicy(sizePolicy2)
+                    self.label_13.setVisible(False)
             else: 
                 # Cuando solo hay un conjunto de valores propios en el subproblema 1.
                 self.ValorPropio2.setRange(0, 10)
@@ -1248,6 +1279,17 @@ class Ui_Graficacion(QMainWindow):
                 self.label_5.setSizePolicy(sizePolicy2)
                 self.label_5.setVisible(False)
 
+                self.ValorPropio2_1.setRange(0, 10)
+                self.ValorPropio2_1.setSpecialValueText("")
+                self.ValorPropio2_1.setValue(0)
+                self.ValorPropio2_1.setEnabled(False)
+                self.label_10.setEnabled(False)
+                self.ValorPropio2_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                self.ValorPropio2_1.setSizePolicy(sizePolicy2)
+                self.ValorPropio2_1.setVisible(False)
+                self.label_10.setSizePolicy(sizePolicy2)
+                self.label_10.setVisible(False)
+
                 self.ValorPropio3.setRange(0, 10)
                 self.ValorPropio3.setSpecialValueText("")
                 self.ValorPropio3.setValue(0)
@@ -1258,6 +1300,17 @@ class Ui_Graficacion(QMainWindow):
                 self.ValorPropio3.setVisible(False)
                 self.label_5_1.setSizePolicy(sizePolicy2)
                 self.label_5_1.setVisible(False)
+
+                self.ValorPropio3_1.setRange(0, 10)
+                self.ValorPropio3_1.setSpecialValueText("")
+                self.ValorPropio3_1.setValue(0)
+                self.ValorPropio3_1.setEnabled(False)
+                self.label_13.setEnabled(False)
+                self.ValorPropio3_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                self.ValorPropio3_1.setSizePolicy(sizePolicy2)
+                self.ValorPropio3_1.setVisible(False)
+                self.label_13.setSizePolicy(sizePolicy2)
+                self.label_13.setVisible(False)
 
             # Diseño de la caja de herramientas para la visualización del valor de la solución en un punto determinado.
             self.Coordenada1.setText("{}".format(self.Dominio[0][0]))
@@ -4648,6 +4701,20 @@ class Ui_Graficacion(QMainWindow):
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
         self.Grupo.setExclusive(not boton.isChecked())
         self.CurvasNivelAuto.setShortcut("Ctrl+A")
+
+    def activarModosVisualizacion(self, boton):
+        """
+        Activa y desactiva la exclusividad de los botones de visualización por modos o por soluciones para permitir elegir una o ninguna de ellas.
+
+        Parámetros
+        ----------
+        boton: QPushButton
+            Boton presionado.
+        """
+
+        # La siguiente línea de código fue tomada de eyllanesc. (21 de marzo de 2021). Respuesta a la pregunta "Uncheck all boxes in exclusive group". stackoverflow. https://stackoverflow.com/a/66728385
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
+        self.Grupo1.setExclusive(not boton.isChecked())
 
     def calcularValorSolucion(self):
         """Calcular y muestra el valor de la solución en el punto especificado por el usuario."""
