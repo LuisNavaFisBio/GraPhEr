@@ -1544,7 +1544,7 @@ class Ui_Graficacion(QMainWindow):
                 # Para problemas de una dimensión espacial y con dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion)
                 self.Valores = self.MatrizResultados
-                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[int(len(self.Dominios[0])/10), *self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10), deslizador_navegacion=self.deslizador)
+                self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[int(len(self.Dominios[0])/10), *self.DatosGrafica, self.Valores, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10), deslizador_navegacion=self.deslizador)
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
                 # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
                 self.Valores = self.MatrizResultados
@@ -1611,11 +1611,12 @@ class Ui_Graficacion(QMainWindow):
                 # Este código (las siguientes 5 líneas) está basado en ImportanceOfBeingErnest. (17 de diciembre de 2017). Respuesta a la pregunta "Plot curve with blending line colors with matplotlib/pyplot". stackoverflow. https://stackoverflow.com/a/47856091
                 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 self.Segmentos = [None for indice_nulo in self.t_grid]
+                self.Valores = self.MatrizResultados
                 for indice in range(len(self.t_grid)):
-                    puntos = np.array([self.Dominios[0], self.MatrizResultados[indice]]).T.reshape(-1, 1, 2)
+                    puntos = np.array([self.Dominios[0], self.Valores[indice]]).T.reshape(-1, 1, 2)
                     self.Segmentos[indice] = np.concatenate([puntos[:-1], puntos[1:]], axis=1)
                 self.DatosGrafica = self.crearGrafica1D(self.MostrarSolucion)
-                self.Animacion =ReproductorGeneral(self.MostrarSolucion,self.actualizarAnimacion1D,fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.MatrizResultados, self.MostrarSolucion.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
+                self.Animacion =ReproductorGeneral(self.MostrarSolucion,self.actualizarAnimacion1D,fargs=[int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.Valores, self.MostrarSolucion.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
                 # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
                 if self.Coordenadas == "Cartesianas":
@@ -1632,7 +1633,7 @@ class Ui_Graficacion(QMainWindow):
                 if self.dependencia_tiempo:
                     self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarAnimacion2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
                 else:
-                    self.Animacion = Graficacion2D_NoTemporal(self.MostrarSolucion, self.introducirGrafica2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
+                    self.Animacion = Graficacion2D_NoTemporal(self.MostrarSolucion, self.introducirGrafica2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas)
             elif len(self.Dominio) == 3:
                 # Para problemas con tres dimensiones espaciales.
                 if coordenada_especifica == None:
