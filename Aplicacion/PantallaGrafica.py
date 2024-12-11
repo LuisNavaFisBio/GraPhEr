@@ -4086,6 +4086,7 @@ class Ui_Graficacion(QMainWindow):
             Indice del tercer valor propio.
         """
 
+        print(subproblema, valorpropio1, valorpropio2, valorpropio3)
         self.envioActualizacion("Cambiando Modo Visualización")
         # Eliminación de la gráfica visible.
         self.MostrarSolucion.figura.clear()
