@@ -1508,7 +1508,7 @@ class Ui_Graficacion(QMainWindow):
 
         self.graficacion()
 
-    def graficacion(self, curvas_nivel = False, casilla = None, coordenada_especifica = None):
+    def graficacion(self, curvas_nivel = False, casilla = None, coordenada_especifica = None, visualizacion_especial = None, valores_visualizacion_especial = None):
         """
         Crea la gráfica y, en su caso, inicializa la animación de la gráfica.
 
@@ -1522,6 +1522,12 @@ class Ui_Graficacion(QMainWindow):
 
         coordenada_especifica: string, None es el cuadro_fijo predeterminado 
             Coordenada fija en la graficación (solo para problemas con tres dimensiones).
+
+        visualizacion_especial: bool, None es la visualización de la solución parcial completa 
+            Determina si se está visualizando un modo especial.
+
+        valores_visualizacion_especial: float array, None es que no se está visualizando un modo especial
+            Determina los valores de la visualización especial de la solución.
         """
 
         if curvas_nivel == True:
@@ -1537,17 +1543,35 @@ class Ui_Graficacion(QMainWindow):
         
         self.envioActualizacion("Construyendo Grafica")
 
+        if visualizacion_especial == None:
+            if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
+                self.Valores = self.MatrizResultados
+            elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
+                # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
+                self.Valores = self.MatrizResultados
+            elif len(self.Dominio) == 3:
+                # Para problemas con tres dimensiones espaciales.
+                if coordenada_especifica == None:
+                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
+                else:
+                    if coordenada_especifica == "x" or coordenada_especifica == "r":
+                        self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
+                    elif coordenada_especifica == "y" or (coordenada_especifica == "phi" and self.Coordenadas == "Cilíndricas / Polares") or (coordenada_especifica == "theta" and self.Coordenadas == "Esféricas"):
+                        self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
+                    elif coordenada_especifica == "z" or (coordenada_especifica == "phi" and self.Coordenadas == "Esféricas"):
+                        self.Valores = self.MatrizResultados
+        else:
+            self.Valores = valores_visualizacion_especial
+                
         # Creación de la gráfica.
         if self.Proyeccion:
             # Cuando se quiere graficar la proyección.
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
                 # Para problemas de una dimensión espacial y con dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion)
-                self.Valores = self.MatrizResultados
                 self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.introducirProyeccion1D, fargs=[int(len(self.Dominios[0])/10), *self.DatosGrafica, self.Valores, self.MostrarSolucion.axes, self.Cota, self.Colormap, self.GuardarAnimacion], interval = 1000/self.DatosGrafica[-1], maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10), deslizador_navegacion=self.deslizador)
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
                 # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
-                self.Valores = self.MatrizResultados
                 if self.Coordenadas == "Cartesianas":
                     self.DatosGrafica = self.crearProyeccion2D_cartesianas(self.MostrarSolucion)
                 elif self.Coordenadas == "Cilíndricas / Polares":
@@ -1570,7 +1594,6 @@ class Ui_Graficacion(QMainWindow):
                         coordenada_especifica = "r"
 
                     self.CoordenadaFija_1.setChecked(True)
-                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                     limites = self.dominio[0:2]
                 else:
                     if self.Coordenadas == "Cartesianas":
@@ -1580,13 +1603,10 @@ class Ui_Graficacion(QMainWindow):
                     elif self.Coordenadas == "Esféricas":
                         self.DatosGrafica = self.crearProyeccion3D_esfericas(self.MostrarSolucion, coordenada_especifica)
                     if coordenada_especifica == "x" or coordenada_especifica == "r":
-                        self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                         limites = self.dominio[0:2]
                     elif coordenada_especifica == "y" or (coordenada_especifica == "phi" and self.Coordenadas == "Cilíndricas / Polares") or (coordenada_especifica == "theta" and self.Coordenadas == "Esféricas"):
-                        self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
                         limites = self.dominio[2:4]
                     elif coordenada_especifica == "z" or (coordenada_especifica == "phi" and self.Coordenadas == "Esféricas"):
-                        self.Valores = self.MatrizResultados
                         limites = self.dominio[4:]
                     
                 self.CoordenadaFija.setText("{}".format(limites[0]))
@@ -1611,7 +1631,6 @@ class Ui_Graficacion(QMainWindow):
                 # Este código (las siguientes 5 líneas) está basado en ImportanceOfBeingErnest. (17 de diciembre de 2017). Respuesta a la pregunta "Plot curve with blending line colors with matplotlib/pyplot". stackoverflow. https://stackoverflow.com/a/47856091
                 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
                 self.Segmentos = [None for indice_nulo in self.t_grid]
-                self.Valores = self.MatrizResultados
                 for indice in range(len(self.t_grid)):
                     puntos = np.array([self.Dominios[0], self.Valores[indice]]).T.reshape(-1, 1, 2)
                     self.Segmentos[indice] = np.concatenate([puntos[:-1], puntos[1:]], axis=1)
@@ -1627,8 +1646,6 @@ class Ui_Graficacion(QMainWindow):
                 # Determinación del número de puntos en las particiones de los dominios.
                 self.rcount = self.MatrizResultados.shape[0]
                 self.ccount = self.MatrizResultados.shape[1]
-
-                self.Valores = self.MatrizResultados
 
                 if self.dependencia_tiempo:
                     self.Animacion = ReproductorGeneral(self.MostrarSolucion, self.actualizarAnimacion2D, fargs=[int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion.axes, self.rcount, self.ccount, self.Cota, self.Colormap, self.GuardarAnimacion], maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1]), interval = 1000/self.DatosGrafica[-1], curvas_nivel = self.curvas, funcion_curvas = self.funcion_curvas, deslizador_navegacion=self.deslizador)
@@ -1650,12 +1667,10 @@ class Ui_Graficacion(QMainWindow):
                         longitud2 = int(len(self.Dominios[1])/10)
                         coordenada_especifica = "r"
 
-                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                     limites = self.dominio[0:2]
                     self.CoordenadaFija_1.setChecked(True)
                 else:
                     if coordenada_especifica == "x" or coordenada_especifica == "r":
-                        self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                         if self.Coordenadas == "Cartesianas":
                             self.DatosGrafica = self.crearGrafica3D_cartesianas(self.MostrarSolucion, "x")
                             longitud2 = int(len(self.Dominios[1])/10)
@@ -1668,7 +1683,6 @@ class Ui_Graficacion(QMainWindow):
                         limites = self.dominio[0:2]
                         
                     elif coordenada_especifica == "y" or (coordenada_especifica == "phi" and self.Coordenadas == "Cilíndricas / Polares") or (coordenada_especifica == "theta" and self.Coordenadas == "Esféricas"):
-                        self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
                         if self.Coordenadas == "Cartesianas":
                             self.DatosGrafica = self.crearGrafica3D_cartesianas(self.MostrarSolucion, "y")
                         elif self.Coordenadas == "Cilíndricas / Polares":
@@ -1679,7 +1693,6 @@ class Ui_Graficacion(QMainWindow):
                         limites = self.dominio[2:4]
 
                     elif coordenada_especifica == "z" or (coordenada_especifica == "phi" and self.Coordenadas == "Esféricas"):
-                        self.Valores = self.MatrizResultados
                         if self.Coordenadas == "Cartesianas":
                             self.DatosGrafica = self.crearGrafica3D_cartesianas(self.MostrarSolucion, "z")
                         elif self.Coordenadas == "Cilíndricas / Polares":
@@ -4126,112 +4139,128 @@ class Ui_Graficacion(QMainWindow):
                         self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[subproblema-1][2][1]))
                         self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[subproblema-1][2][0]))
 
-            if self.Modo.isChecked():
-                # Despliegue del primer coeficiente de la solución al subproblema requerido.
-                if self.ValorPropio2_1.isEnabled():
-                    if not self.ValorPropio3_1.isEnabled():
+            if self.ValorPropio2_1.isEnabled():
+                if not self.ValorPropio3_1.isEnabled():
+                    # Obtención del modo cuando se tienen dos conjuntos de valores propios.
+                    if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                        if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
+                            # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas cilíndricas.
+                            self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                            self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                            self.ValorPropio2_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                            valorpropio2 = self.ValorPropio2_1.value()
+                            self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
 
+                    if (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() >= 0):
+                        # Cuando ambos conjuntos de valores propios tienen indices no negativos.
+                        if self.ValorPropio1_1.minimum() > 0:
+                            valorpropio1 -= 1
+                        if self.ValorPropio2_1.minimum() > 0:
+                            valorpropio2 -= 1
+
+                    elif (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() < 0):
+                        # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
                         if self.NumeroTerminos[subproblema-1][1][0] == "-n":
-                            if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
-                                # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas cilíndricas.
-                                self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                                self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                                self.ValorPropio2_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                                valorpropio2 = self.ValorPropio2_1.value()
-                                self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
-
-                        # Despliegue del coeficiente cuando se tienen dos conjuntos de valores propios.
-                        if (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() >= 0):
-                            # Cuando ambos conjuntos de valores propios tienen indices no negativos.
-                            if self.ValorPropio1_1.minimum() > 0:
-                                valorpropio1 -= 1
-                            if self.ValorPropio2_1.minimum() > 0:
-                                valorpropio2 -= 1
-
-                        elif (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() < 0):
-                            # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            if self.NumeroTerminos[subproblema-1][1][0] == "-n":
-                                valorpropio2 = valorpropio2 + abs(self.ValorPropio2_1.minimum())
-                            else:
-                                valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
-                            if self.ValorPropio1_1.minimum() > 0:
-                                valorpropio1 -= 1
-
-                        elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() >= 0):
-                            # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
-                            if self.ValorPropio2_1.minimum() > 0:
-                                valorpropio2 -= 1
-                        
-                        elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() < 0):
-                            # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
-                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                            valorpropio2 = valorpropio2 + abs(self.ValorPropio2_1.minimum())
+                        else:
                             valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
-
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][0]
-                    else:
-                        # Obtención del modo cuando se tienen tres conjuntos de valores propios.
-                        if self.NumeroTerminos[subproblema-1][2][0] == "-n":
-                            if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
-                                # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas esféricas con dependencia acimutal.
-                                self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                                self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                                self.ValorPropio3_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                                valorpropio3 = self.ValorPropio3_1.value()
-                                self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
-
                         if self.ValorPropio1_1.minimum() > 0:
                             valorpropio1 -= 1
 
-                        # Despliegue del coeficiente cuando se tienen dos conjuntos de valores propios.
-                        if (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() >= 0):
-                            # Cuando ambos conjuntos de valores propios tienen indices no negativos.
-                            if self.ValorPropio2_1.minimum() > 0:
-                                valorpropio2 -= 1
-                            if self.ValorPropio3_1.minimum() > 0:
-                                valorpropio3 -= 1
-                            
-                        elif (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() < 0):
-                            # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            if self.NumeroTerminos[subproblema-1][2][0] == "-n":
-                                valorpropio3 = valorpropio3 + abs(self.ValorPropio3_1.minimum())
-                            else:
-                                valorpropio3 = valorpropio3 + int(self.NumeroTerminos[subproblema-1][2][0])
-
-                            if self.ValorPropio2_1.minimum() > 0:
-                                valorpropio2 -= 1
-
-                        elif (self.ValorPropio2_1.minimum() < 0) and (self.ValorPropio3_1.minimum() >= 0):
-                            # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
-                            if self.ValorPropio3_1.minimum() > 0:
-                                valorpropio3 -= 1
-                            
-                        elif (self.ValorPropio2.minimum() < 0) and (self.ValorPropio3.minimum() < 0):
-                            # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
-                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
-                            valorpropio3 = valorpropio3 + int(self.NumeroTerminos[self.Subproblema.value()-1][2][0])
-
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][valorpropio3][0]
+                    elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() >= 0):
+                        # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                        valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                        if self.ValorPropio2_1.minimum() > 0:
+                            valorpropio2 -= 1
+                    
+                    elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() < 0):
+                        # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
+                        valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                        valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
 
                 else:
-                    # Obtención del modo cuando solo se tiene un conjunto de valores propios.
-                    if self.ValorPropio1_1.minimum() >= 0:
-                        # Cuando se tienen indices no negativos.
-                        if self.ValorPropio1_1.minimum() > 0:
-                            valorpropio1 -= 1
-                    else: 
-                        # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
-                        valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                    # Obtención del modo cuando se tienen tres conjuntos de valores propios.
+                    if self.NumeroTerminos[subproblema-1][2][0] == "-n":
+                        if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
+                            # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas esféricas con dependencia acimutal.
+                            self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                            self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                            self.ValorPropio3_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                            valorpropio3 = self.ValorPropio3_1.value()
+                            self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
 
-                    self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][0]
+                    if self.ValorPropio1_1.minimum() > 0:
+                        valorpropio1 -= 1
+
+                    # Despliegue del coeficiente cuando se tienen dos conjuntos de valores propios.
+                    if (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() >= 0):
+                        # Cuando ambos conjuntos de valores propios tienen indices no negativos.
+                        if self.ValorPropio2_1.minimum() > 0:
+                            valorpropio2 -= 1
+                        if self.ValorPropio3_1.minimum() > 0:
+                            valorpropio3 -= 1
+                        
+                    elif (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() < 0):
+                        # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                        if self.NumeroTerminos[subproblema-1][2][0] == "-n":
+                            valorpropio3 = valorpropio3 + abs(self.ValorPropio3_1.minimum())
+                        else:
+                            valorpropio3 = valorpropio3 + int(self.NumeroTerminos[subproblema-1][2][0])
+
+                        if self.ValorPropio2_1.minimum() > 0:
+                            valorpropio2 -= 1
+
+                    elif (self.ValorPropio2_1.minimum() < 0) and (self.ValorPropio3_1.minimum() >= 0):
+                        # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                        valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
+                        if self.ValorPropio3_1.minimum() > 0:
+                            valorpropio3 -= 1
+                        
+                    elif (self.ValorPropio2.minimum() < 0) and (self.ValorPropio3.minimum() < 0):
+                        # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
+                        valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
+                        valorpropio3 = valorpropio3 + int(self.NumeroTerminos[self.Subproblema.value()-1][2][0])
+
+            else:
+                # Obtención del modo cuando solo se tiene un conjunto de valores propios.
+                if self.ValorPropio1_1.minimum() >= 0:
+                    # Cuando se tienen indices no negativos.
+                    if self.ValorPropio1_1.minimum() > 0:
+                        valorpropio1 -= 1
+                else: 
+                    # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
+                    valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+
+
+            if self.Modo.isChecked():
+                if self.ValorPropio2_1.isEnabled():
+                    if not self.ValorPropio3_1.isEnabled():
+                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2]
+
+                    else:
+                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][valorpropio3]
+
+                else:
+                    self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1]
                     
                 self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
 
-
-
             elif self.SolucionParcial.isChecked():
-                a = 1
+                # Suma de TODAS las subsoluciones encontradas para este subproblema.
+                self.SolucionModo = 0 
+                for indice1 in range(len(self.Soluciones[:subproblema])):
+                    for indice2 in range(len(self.Soluciones[indice1])):
+                        if self.ValorPropio2_1.isEnabled():
+                            for indice3 in range(len(self.Soluciones[indice1][indice2])):
+                                if self.ValorPropio3_1.isEnabled():
+                                    for indice4 in range(len(self.Soluciones[indice1][indice2][indice3])):
+                                        self.SolucionModo = self.SolucionModo + self.Soluciones[indice1][indice2][indice3][indice4]
+                                else:
+                                    self.SolucionModo = self.SolucionModo + self.Soluciones[indice1][indice2][indice3]
+                        else:
+                            self.SolucionModo = self.SolucionModo + self.Soluciones[indice1][indice2]
+
+                self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
 
 
             # Determinación de la calidad (puntos por unidad de longitud).
@@ -4264,23 +4293,25 @@ class Ui_Graficacion(QMainWindow):
                 indice += 1
 
             # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
-            self.Valores = np.zeros(estructura).T
+            self.ValoresSolucion = np.zeros(estructura).T
             if self.dependencia_tiempo:
                 for indice1 in range(0, len(self.t_grid)):
                     for indice2 in range(0, len(self.ParticionesDominios[0])):
                         if len(self.ParticionesDominios) == 2:
                             for indice3 in range(0, len(self.ParticionesDominios[1])):
-                                self.Valores[indice1][indice3][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.ParticionesDominios[1][indice3], self.t_grid[indice1])))
+                                self.ValoresSolucion[indice1][indice3][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.ParticionesDominios[1][indice3], self.t_grid[indice1])))
                         else:
-                            self.Valores[indice1][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.t_grid[indice1])))
+                            self.ValoresSolucion[indice1][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.t_grid[indice1])))
             else:
                 for indice1 in range(0, len(self.ParticionesDominios[0])):
                     for indice2 in range(0, len(self.ParticionesDominios[1])):
                         if len(self.ParticionesDominios) == 3:
                             for indice3 in range(0, len(self.ParticionesDominios[2])):
-                                self.Valores[indice3][indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2], self.ParticionesDominios[2][indice3])))
+                                self.ValoresSolucion[indice3][indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2], self.ParticionesDominios[2][indice3])))
                         else:
-                            self.Valores[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ui.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2])))
+                            self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ui.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2])))
+
+            self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
                         
         else:
             self.CurvasNivelAuto.setChecked(False)
