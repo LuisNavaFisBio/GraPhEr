@@ -53,7 +53,7 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 from sympy import integrate, latex, parsing, pi, preview, symbols, core, simplify, I, cos
-from sympy.abc import lamda, x, t, n, j
+from sympy.abc import lamda, x, t, n, j, theta, phi, y, z
 import atexit, os, shutil, matplotlib.widgets, mpl_toolkits.axes_grid1
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -4130,101 +4130,45 @@ class Ui_Graficacion(QMainWindow):
                 # Despliegue del primer coeficiente de la solución al subproblema requerido.
                 if self.ValorPropio2_1.isEnabled():
                     if not self.ValorPropio3_1.isEnabled():
-                        
-                
-        
-                    else:
-                        if self.NumeroTerminos[self.Subproblema.value()-1][1][0] == "-n":
-                            if (self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1] != self.valorpropiodependendiente):
-                                # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas esféricas con dependencia acimutal.
-                                self.ValorPropio2.setMaximum(int(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]))
-                                self.ValorPropio2.setMinimum(-int(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]))
-                                self.ValorPropio2.setValue(-int(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]))
-                                valorpropio2 = self.ValorPropio2.value()
-                                self.valorpropiodependendiente = self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]
+
+                        if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                            if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
+                                # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas cilíndricas.
+                                self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                self.ValorPropio2_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                valorpropio2 = self.ValorPropio2_1.value()
+                                self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
 
                         # Despliegue del coeficiente cuando se tienen dos conjuntos de valores propios.
-                        if (self.ValorPropio1.minimum() >= 0) and (self.ValorPropio2.minimum() >= 0):
+                        if (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() >= 0):
                             # Cuando ambos conjuntos de valores propios tienen indices no negativos.
-                            if self.ValorPropio1.minimum() > 0:
+                            if self.ValorPropio1_1.minimum() > 0:
                                 valorpropio1 -= 1
-                            if self.ValorPropio2.minimum() > 0:
+                            if self.ValorPropio2_1.minimum() > 0:
                                 valorpropio2 -= 1
 
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args != (): 
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2]), self.Precision))
-                        elif (self.ValorPropio1.minimum() >= 0) and (self.ValorPropio2.minimum() < 0):
+                        elif (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() < 0):
                             # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            if self.NumeroTerminos[self.Subproblema.value()-1][1][0] == "-n":
-                                valorpropio2 = valorpropio2 + abs(self.ValorPropio2.minimum())
+                            if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                                valorpropio2 = valorpropio2 + abs(self.ValorPropio2_1.minimum())
                             else:
-                                valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
-                            if self.ValorPropio1.minimum() > 0:
+                                valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
+                            if self.ValorPropio1_1.minimum() > 0:
                                 valorpropio1 -= 1
 
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args != ():
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2]), self.Precision))
-                        elif (self.ValorPropio1.minimum() < 0) and (self.ValorPropio2.minimum() >= 0):
+                        elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() >= 0):
                             # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[self.Subproblema.value()-1][0][0])
-                            if self.ValorPropio2.minimum() > 0:
+                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                            if self.ValorPropio2_1.minimum() > 0:
                                 valorpropio2 -= 1
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1-1][valorpropio2].args != ():
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2]), self.Precision))
-                        elif (self.ValorPropio1.minimum() < 0) and (self.ValorPropio2.minimum() < 0):
+                        
+                        elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() < 0):
                             # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
-                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[self.Subproblema.value()-1][0][0])
-                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args != ():
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2]), self.Precision))
+                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
 
-                        if self.dependencia  and (self.Subproblema.value()-1 in self.indicesdependencia):
-                            if self.invertir:
-                                coeficiente = str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][1][valorpropio2][valorpropio1]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio2]), self.Precision)) + " : " + coeficiente
-                            else:
-                                coeficiente = str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][1][valorpropio1][valorpropio2]), self.Precision)) + " : " + coeficiente
-                        else:
-                            coeficiente = str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][1][valorpropio2]), self.Precision)) + " : " + coeficiente
+                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][0]
                     else:
                         # Obtención del modo cuando se tienen tres conjuntos de valores propios.
                         if self.NumeroTerminos[subproblema-1][2][0] == "-n":
@@ -4247,7 +4191,7 @@ class Ui_Graficacion(QMainWindow):
                             if self.ValorPropio3_1.minimum() > 0:
                                 valorpropio3 -= 1
                             
-                        elif (self.ValorPropio2.minimum() >= 0) and (self.ValorPropio3.minimum() < 0):
+                        elif (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() < 0):
                             # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
                             if self.NumeroTerminos[subproblema-1][2][0] == "-n":
                                 valorpropio3 = valorpropio3 + abs(self.ValorPropio3_1.minimum())
@@ -4257,80 +4201,86 @@ class Ui_Graficacion(QMainWindow):
                             if self.ValorPropio2_1.minimum() > 0:
                                 valorpropio2 -= 1
 
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args != ():
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3]), self.Precision))
-                        elif (self.ValorPropio2.minimum() < 0) and (self.ValorPropio3.minimum() >= 0):
+                        elif (self.ValorPropio2_1.minimum() < 0) and (self.ValorPropio3_1.minimum() >= 0):
                             # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
-                            if self.ValorPropio3.minimum() > 0:
+                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
+                            if self.ValorPropio3_1.minimum() > 0:
                                 valorpropio3 -= 1
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1-1][valorpropio2][valorpropio3].args != ():
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3]), self.Precision))
+                            
                         elif (self.ValorPropio2.minimum() < 0) and (self.ValorPropio3.minimum() < 0):
                             # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
                             valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
                             valorpropio3 = valorpropio3 + int(self.NumeroTerminos[self.Subproblema.value()-1][2][0])
-                            if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args != ():
-                                # Obtención del coeficiente cuando el término tiene variables.
-                                if self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args != () and self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args != ():
-                                    coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0].args[0]), self.Precision))+";"+str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[1].args[0]), self.Precision))
-                                else:
-                                    if I in self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args:
-                                        coeficiente = str(latex(I*np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0]), self.Precision)))
-                                    else:
-                                        coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3].args[0]), self.Precision))
-                            else:
-                                # Obtención del coeficiente cuando el término es constante.
-                                coeficiente = str(np.round(float(self.Soluciones[self.Subproblema.value()-1][valorpropio1][valorpropio2][valorpropio3]), self.Precision))
 
-                        if self.dependencia and (self.Subproblema.value()-1 in self.indicesdependencia):
-                            if self.bidependencia:
-                                coeficiente = str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]), self.Precision)) + ", " + str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][1][valorpropio1][valorpropio2]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][2][valorpropio1][valorpropio3]), self.Precision)) + " : " + coeficiente
-                            else:
-                                coeficiente = str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][1][valorpropio1][valorpropio2]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][2][valorpropio3]), self.Precision)) + " : " + coeficiente
-                        else:
-                            coeficiente = str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]), self.Precision)) +", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][1][valorpropio2]), self.Precision))+", "+ str(np.round(float(self.ValoresPropios[self.Subproblema.value()-1][2][valorpropio3]), self.Precision)) + " : " + coeficiente
+                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][valorpropio3][0]
 
-                        if self.SolucionModo.has(I):
-                            self.SolucionModo = simplify(self.SolucionModo.rewrite(cos))
                 else:
                     # Obtención del modo cuando solo se tiene un conjunto de valores propios.
                     if self.ValorPropio1_1.minimum() >= 0:
                         # Cuando se tienen indices no negativos.
                         if self.ValorPropio1_1.minimum() > 0:
                             valorpropio1 -= 1
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][0]
                     else: 
                         # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
                         valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][0]
-                    if self.SolucionModo.has(I):
-                        self.SolucionModo = simplify(self.SolucionModo.rewrite(cos))
+
+                    self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][0]
                     
-                self.Solucion_funcion_modo = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+                self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+
+
 
             elif self.SolucionParcial.isChecked():
                 a = 1
+
+
+            # Determinación de la calidad (puntos por unidad de longitud).
+            if self.Calidad:
+                aumento = 0.01
+                aumento_angular = 0.06
+            else:
+                aumento = 0.03
+                aumento_angular = 0.09
+            
+            # Cálculo de las particiones de cada dominio.
+            self.ParticionesDominios = []
+            estructura = []
+            indice = 0 
+            for simbolo in self.Simbolos:
+                if simbolo != t:
+                    if simbolo in [theta, phi]:
+                        particion = np.arange(float(self.Dominios[indice][0])-0.005, float(self.Dominios[indice][1]) + 0.005, step=aumento_angular)
+                    else:
+                        particion = np.arange(float(self.Dominios[indice][0])-0.005, float(self.Dominios[indice][1]) + 0.005, step=aumento)
+                    if particion[-1] < float(self.Dominios[indice][1]):
+                        particion = np.append(particion, float(self.Dominios[indice][1])+0.005)
+                    else:
+                        particion[-1] = float(self.Dominios[indice][1])+0.005
+                    self.ParticionesDominios.append(particion)
+                    estructura.append(int(len(self.ParticionesDominios[-1])))
+                else:
+                    estructura.append(int(float(self.Dominios[indice][0])*25) + 1)
+                    self.t_grid = np.arange(0, float(self.Dominios[indice][0]) + 0.04, step=0.04)
+                indice += 1
+
+            # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
+            self.Valores = np.zeros(estructura).T
+            if self.dependencia_tiempo:
+                for indice1 in range(0, len(self.t_grid)):
+                    for indice2 in range(0, len(self.ParticionesDominios[0])):
+                        if len(self.ParticionesDominios) == 2:
+                            for indice3 in range(0, len(self.ParticionesDominios[1])):
+                                self.Valores[indice1][indice3][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.ParticionesDominios[1][indice3], self.t_grid[indice1])))
+                        else:
+                            self.Valores[indice1][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.t_grid[indice1])))
+            else:
+                for indice1 in range(0, len(self.ParticionesDominios[0])):
+                    for indice2 in range(0, len(self.ParticionesDominios[1])):
+                        if len(self.ParticionesDominios) == 3:
+                            for indice3 in range(0, len(self.ParticionesDominios[2])):
+                                self.Valores[indice3][indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2], self.ParticionesDominios[2][indice3])))
+                        else:
+                            self.Valores[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ui.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2])))
                         
         else:
             self.CurvasNivelAuto.setChecked(False)
@@ -4869,7 +4819,7 @@ class Ui_Graficacion(QMainWindow):
             else:
                 if self.NumeroTerminos[self.Subproblema.value()-1][1][0] == "-n":
                     if (self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1] != self.valorpropiodependendiente):
-                        # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas esféricas con dependencia acimutal.
+                        # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas cilíndricas.
                         self.ValorPropio2.setMaximum(int(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]))
                         self.ValorPropio2.setMinimum(-int(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]))
                         self.ValorPropio2.setValue(-int(self.ValoresPropios[self.Subproblema.value()-1][0][valorpropio1]))
