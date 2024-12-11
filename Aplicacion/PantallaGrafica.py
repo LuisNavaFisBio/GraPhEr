@@ -363,7 +363,7 @@ class Ui_Graficacion(QMainWindow):
         # Asigna la imagen a un ícono. Esto se basa en Andy M. (15 de diciembre de 2009). Respuesta a la pregunta "Python QPushButton setIcon: put icon on button". stackoverflow. https://stackoverflow.com/a/1905587
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 2.5 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/2.5/
         icono = QIcon()
-        icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "Icono.png")), QIcon.Normal, QIcon.Off)
+        icono.addPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "IconoGraPhEr.png")), QIcon.Normal, QIcon.Off)
         
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -4087,239 +4087,241 @@ class Ui_Graficacion(QMainWindow):
         """
 
         print(subproblema, valorpropio1, valorpropio2, valorpropio3)
-        self.envioActualizacion("Cambiando Modo Visualización")
-        # Eliminación de la gráfica visible.
-        self.MostrarSolucion.figura.clear()
-        self.MostrarSolucion.figura.canvas.draw_idle()
-        del self.Animacion
+        try: 
+            self.envioActualizacion("Cambiando Modo Visualización")
+            # Eliminación de la gráfica visible.
+            self.MostrarSolucion.figura.clear()
+            self.MostrarSolucion.figura.canvas.draw_idle()
+            del self.Animacion
 
-        if self.Modo.isChecked() or self.SolucionParcial.isChecked():
-            self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
-            self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[subproblema-1][0][0]))
-            if len(self.NumeroTerminos[subproblema-1]) >= 2:
-                self.ValorPropio2_1.setEnabled(True)
-                self.label_10.setEnabled(True)
-                self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
-                self.ValorPropio2_1.setVisible(True)
-                self.label_10.setVisible(True)
+            if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
+                self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[subproblema-1][0][0]))
+                if len(self.NumeroTerminos[subproblema-1]) >= 2:
+                    self.ValorPropio2_1.setEnabled(True)
+                    self.label_10.setEnabled(True)
+                    self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
+                    self.ValorPropio2_1.setVisible(True)
+                    self.label_10.setVisible(True)
 
-                if len(self.NumeroTerminos[subproblema-1]) == 3:
-                    self.ValorPropio3_1.setEnabled(True)
-                    self.label_13.setEnabled(True)
-                    self.ValorPropio3_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
-                    self.ValorPropio3_1.setVisible(True)
-                    self.label_13.setVisible(True)
-                else:
-                    self.ValorPropio3_1.setEnabled(False)
-                    self.label_13.setEnabled(False)
-                    self.ValorPropio3_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
-                    self.ValorPropio3_1.setVisible(False)
-                    self.label_13.setVisible(False)
-            else:
-                self.ValorPropio2_1.setEnabled(False)
-                self.label_10.setEnabled(False)
-                self.ValorPropio2_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
-                self.ValorPropio2_1.setVisible(False)
-                self.label_10.setVisible(False)
-
-            if self.ValorPropio2_1.isEnabled():
-                # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
-                if self.NumeroTerminos[subproblema-1][1][0] == "-n":
-                    self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
-                    self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
-                else:
-                    self.ValorPropio2_1.setMaximum(int(self.NumeroTerminos[subproblema-1][1][1]))
-                    self.ValorPropio2_1.setMinimum(int(self.NumeroTerminos[subproblema-1][1][0]))
-
-                if self.ValorPropio3_1.isEnabled():
-                    # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
-                    if self.NumeroTerminos[subproblema-1][2][0] == "-n":
-                        self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
-                        self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[self.Subproblema_1.value()-1][0][0]))
+                    if len(self.NumeroTerminos[subproblema-1]) == 3:
+                        self.ValorPropio3_1.setEnabled(True)
+                        self.label_13.setEnabled(True)
+                        self.ValorPropio3_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
+                        self.ValorPropio3_1.setVisible(True)
+                        self.label_13.setVisible(True)
                     else:
-                        self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[subproblema-1][2][1]))
-                        self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[subproblema-1][2][0]))
-
-            if self.ValorPropio2_1.isEnabled():
-                if not self.ValorPropio3_1.isEnabled():
-                    # Obtención del modo cuando se tienen dos conjuntos de valores propios.
-                    if self.NumeroTerminos[subproblema-1][1][0] == "-n":
-                        if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
-                            # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas cilíndricas.
-                            self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                            self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                            self.ValorPropio2_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                            valorpropio2 = self.ValorPropio2_1.value()
-                            self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
-
-                    if (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() >= 0):
-                        # Cuando ambos conjuntos de valores propios tienen indices no negativos.
-                        if self.ValorPropio1_1.minimum() > 0:
-                            valorpropio1 -= 1
-                        if self.ValorPropio2_1.minimum() > 0:
-                            valorpropio2 -= 1
-
-                    elif (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() < 0):
-                        # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                        if self.NumeroTerminos[subproblema-1][1][0] == "-n":
-                            valorpropio2 = valorpropio2 + abs(self.ValorPropio2_1.minimum())
-                        else:
-                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
-                        if self.ValorPropio1_1.minimum() > 0:
-                            valorpropio1 -= 1
-
-                    elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() >= 0):
-                        # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                        valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
-                        if self.ValorPropio2_1.minimum() > 0:
-                            valorpropio2 -= 1
-                    
-                    elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() < 0):
-                        # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
-                        valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
-                        valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
-
+                        self.ValorPropio3_1.setEnabled(False)
+                        self.label_13.setEnabled(False)
+                        self.ValorPropio3_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                        self.ValorPropio3_1.setVisible(False)
+                        self.label_13.setVisible(False)
                 else:
-                    # Obtención del modo cuando se tienen tres conjuntos de valores propios.
-                    if self.NumeroTerminos[subproblema-1][2][0] == "-n":
-                        if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
-                            # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas esféricas con dependencia acimutal.
-                            self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                            self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                            self.ValorPropio3_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
-                            valorpropio3 = self.ValorPropio3_1.value()
-                            self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
+                    self.ValorPropio2_1.setEnabled(False)
+                    self.label_10.setEnabled(False)
+                    self.ValorPropio2_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                    self.ValorPropio2_1.setVisible(False)
+                    self.label_10.setVisible(False)
 
-                    if self.ValorPropio1_1.minimum() > 0:
-                        valorpropio1 -= 1
+                if self.ValorPropio2_1.isEnabled():
+                    # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
+                    if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                        self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][0]))
+                        self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[subproblema.value()-1][0][0]))
+                    else:
+                        self.ValorPropio2_1.setMaximum(int(self.NumeroTerminos[subproblema-1][1][1]))
+                        self.ValorPropio2_1.setMinimum(int(self.NumeroTerminos[subproblema-1][1][0]))
 
-                    # Despliegue del coeficiente cuando se tienen dos conjuntos de valores propios.
-                    if (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() >= 0):
-                        # Cuando ambos conjuntos de valores propios tienen indices no negativos.
-                        if self.ValorPropio2_1.minimum() > 0:
-                            valorpropio2 -= 1
-                        if self.ValorPropio3_1.minimum() > 0:
-                            valorpropio3 -= 1
-                        
-                    elif (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() < 0):
-                        # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                    if self.ValorPropio3_1.isEnabled():
+                        # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
                         if self.NumeroTerminos[subproblema-1][2][0] == "-n":
-                            valorpropio3 = valorpropio3 + abs(self.ValorPropio3_1.minimum())
+                            self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[subproblema.value()-1][0][0]))
+                            self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[subproblema.value()-1][0][0]))
                         else:
-                            valorpropio3 = valorpropio3 + int(self.NumeroTerminos[subproblema-1][2][0])
+                            self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[subproblema-1][2][1]))
+                            self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[subproblema-1][2][0]))
 
-                        if self.ValorPropio2_1.minimum() > 0:
-                            valorpropio2 -= 1
-
-                    elif (self.ValorPropio2_1.minimum() < 0) and (self.ValorPropio3_1.minimum() >= 0):
-                        # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
-                        valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
-                        if self.ValorPropio3_1.minimum() > 0:
-                            valorpropio3 -= 1
-                        
-                    elif (self.ValorPropio2.minimum() < 0) and (self.ValorPropio3.minimum() < 0):
-                        # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
-                        valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
-                        valorpropio3 = valorpropio3 + int(self.NumeroTerminos[self.Subproblema.value()-1][2][0])
-
-            else:
-                # Obtención del modo cuando solo se tiene un conjunto de valores propios.
-                if self.ValorPropio1_1.minimum() >= 0:
-                    # Cuando se tienen indices no negativos.
-                    if self.ValorPropio1_1.minimum() > 0:
-                        valorpropio1 -= 1
-                else: 
-                    # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
-                    valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
-
-
-            if self.Modo.isChecked():
                 if self.ValorPropio2_1.isEnabled():
                     if not self.ValorPropio3_1.isEnabled():
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2]
+                        # Obtención del modo cuando se tienen dos conjuntos de valores propios.
+                        if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                            if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
+                                # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas cilíndricas.
+                                self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                self.ValorPropio2_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                self.ValorPropio2_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                valorpropio2 = self.ValorPropio2_1.value()
+                                self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
 
-                    else:
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][valorpropio3]
+                        if (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() >= 0):
+                            # Cuando ambos conjuntos de valores propios tienen indices no negativos.
+                            if self.ValorPropio1_1.minimum() > 0:
+                                valorpropio1 -= 1
+                            if self.ValorPropio2_1.minimum() > 0:
+                                valorpropio2 -= 1
 
-                else:
-                    self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1]
-                    
-                self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+                        elif (self.ValorPropio1_1.minimum() >= 0) and (self.ValorPropio2_1.minimum() < 0):
+                            # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                            if self.NumeroTerminos[subproblema-1][1][0] == "-n":
+                                valorpropio2 = valorpropio2 + abs(self.ValorPropio2_1.minimum())
+                            else:
+                                valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
+                            if self.ValorPropio1_1.minimum() > 0:
+                                valorpropio1 -= 1
 
-            elif self.SolucionParcial.isChecked():
-                # Suma de TODAS las subsoluciones encontradas para este subproblema.
-                self.SolucionModo = 0 
-                for indice1 in range(len(self.Soluciones[:subproblema])):
-                    for indice2 in range(len(self.Soluciones[indice1])):
-                        if self.ValorPropio2_1.isEnabled():
-                            for indice3 in range(len(self.Soluciones[indice1][indice2])):
-                                if self.ValorPropio3_1.isEnabled():
-                                    for indice4 in range(len(self.Soluciones[indice1][indice2][indice3])):
-                                        self.SolucionModo = self.SolucionModo + self.Soluciones[indice1][indice2][indice3][indice4]
-                                else:
-                                    self.SolucionModo = self.SolucionModo + self.Soluciones[indice1][indice2][indice3]
-                        else:
-                            self.SolucionModo = self.SolucionModo + self.Soluciones[indice1][indice2]
-
-                self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
-
-
-            # Determinación de la calidad (puntos por unidad de longitud).
-            if self.Calidad:
-                aumento = 0.01
-                aumento_angular = 0.06
-            else:
-                aumento = 0.03
-                aumento_angular = 0.09
-            
-            # Cálculo de las particiones de cada dominio.
-            self.ParticionesDominios = []
-            estructura = []
-            indice = 0 
-            for simbolo in self.Simbolos:
-                if simbolo != t:
-                    if simbolo in [theta, phi]:
-                        particion = np.arange(float(self.Dominios[indice][0])-0.005, float(self.Dominios[indice][1]) + 0.005, step=aumento_angular)
-                    else:
-                        particion = np.arange(float(self.Dominios[indice][0])-0.005, float(self.Dominios[indice][1]) + 0.005, step=aumento)
-                    if particion[-1] < float(self.Dominios[indice][1]):
-                        particion = np.append(particion, float(self.Dominios[indice][1])+0.005)
-                    else:
-                        particion[-1] = float(self.Dominios[indice][1])+0.005
-                    self.ParticionesDominios.append(particion)
-                    estructura.append(int(len(self.ParticionesDominios[-1])))
-                else:
-                    estructura.append(int(float(self.Dominios[indice][0])*25) + 1)
-                    self.t_grid = np.arange(0, float(self.Dominios[indice][0]) + 0.04, step=0.04)
-                indice += 1
-
-            # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
-            self.ValoresSolucion = np.zeros(estructura).T
-            if self.dependencia_tiempo:
-                for indice1 in range(0, len(self.t_grid)):
-                    for indice2 in range(0, len(self.ParticionesDominios[0])):
-                        if len(self.ParticionesDominios) == 2:
-                            for indice3 in range(0, len(self.ParticionesDominios[1])):
-                                self.ValoresSolucion[indice1][indice3][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.ParticionesDominios[1][indice3], self.t_grid[indice1])))
-                        else:
-                            self.ValoresSolucion[indice1][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice2], self.t_grid[indice1])))
-            else:
-                for indice1 in range(0, len(self.ParticionesDominios[0])):
-                    for indice2 in range(0, len(self.ParticionesDominios[1])):
-                        if len(self.ParticionesDominios) == 3:
-                            for indice3 in range(0, len(self.ParticionesDominios[2])):
-                                self.ValoresSolucion[indice3][indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2], self.ParticionesDominios[2][indice3])))
-                        else:
-                            self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ui.ParticionesDominios[0][indice1], self.ParticionesDominios[1][indice2])))
-
-            self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                        elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() >= 0):
+                            # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                            if self.ValorPropio2_1.minimum() > 0:
+                                valorpropio2 -= 1
                         
-        else:
-            self.CurvasNivelAuto.setChecked(False)
-            self.CurvasNivelEspecificas.setChecked(False)
-            self.ProyeccionEntrada.setChecked(False)
-            self.CoordenadaFija_1.setChecked(True)
-            self.graficacion()
+                        elif (self.ValorPropio1_1.minimum() < 0) and (self.ValorPropio2_1.minimum() < 0):
+                            # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
+                            valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
+
+                    else:
+                        # Obtención del modo cuando se tienen tres conjuntos de valores propios.
+                        if self.NumeroTerminos[subproblema-1][2][0] == "-n":
+                            if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
+                                # Modificación de los valores máximos y mínimos del segundo valor propio en problemas en coordenadas esféricas con dependencia acimutal.
+                                self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                self.ValorPropio3_1.setValue(-int(self.ValoresPropios[subproblema-1][0][valorpropio1]))
+                                valorpropio3 = self.ValorPropio3_1.value()
+                                self.valorpropiodependendiente = self.ValoresPropios[subproblema-1][0][valorpropio1]
+
+                        if self.ValorPropio1_1.minimum() > 0:
+                            valorpropio1 -= 1
+
+                        # Despliegue del coeficiente cuando se tienen dos conjuntos de valores propios.
+                        if (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() >= 0):
+                            # Cuando ambos conjuntos de valores propios tienen indices no negativos.
+                            if self.ValorPropio2_1.minimum() > 0:
+                                valorpropio2 -= 1
+                            if self.ValorPropio3_1.minimum() > 0:
+                                valorpropio3 -= 1
+                            
+                        elif (self.ValorPropio2_1.minimum() >= 0) and (self.ValorPropio3_1.minimum() < 0):
+                            # Cuando se tienen indices negativos en el segundo conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                            if self.NumeroTerminos[subproblema-1][2][0] == "-n":
+                                valorpropio3 = valorpropio3 + abs(self.ValorPropio3_1.minimum())
+                            else:
+                                valorpropio3 = valorpropio3 + int(self.NumeroTerminos[subproblema-1][2][0])
+
+                            if self.ValorPropio2_1.minimum() > 0:
+                                valorpropio2 -= 1
+
+                        elif (self.ValorPropio2_1.minimum() < 0) and (self.ValorPropio3_1.minimum() >= 0):
+                            # Cuando se tienen indices negativos en el primer conjunto de valores propios se realiza un desplazamiento del indice para que sea no negativo.
+                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[subproblema-1][1][0])
+                            if self.ValorPropio3_1.minimum() > 0:
+                                valorpropio3 -= 1
+                            
+                        elif (self.ValorPropio2.minimum() < 0) and (self.ValorPropio3.minimum() < 0):
+                            # Cuando se tienen indices negativos en ambos conjuntos de valores propios se realiza un desplazamiento de los indices para que sean no negativos.
+                            valorpropio2 = valorpropio2 + int(self.NumeroTerminos[self.Subproblema.value()-1][1][0])
+                            valorpropio3 = valorpropio3 + int(self.NumeroTerminos[self.Subproblema.value()-1][2][0])
+
+                else:
+                    # Obtención del modo cuando solo se tiene un conjunto de valores propios.
+                    if self.ValorPropio1_1.minimum() >= 0:
+                        # Cuando se tienen indices no negativos.
+                        if self.ValorPropio1_1.minimum() > 0:
+                            valorpropio1 -= 1
+                    else: 
+                        # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
+                        valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
+
+                print("Hola", subproblema, valorpropio1, valorpropio2, valorpropio3)
+
+                if self.Modo.isChecked():
+                    if self.ValorPropio2_1.isEnabled():
+                        if not self.ValorPropio3_1.isEnabled():
+                            self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2]
+                            
+                        else:
+                            self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][valorpropio3]
+
+                    else:
+                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1]
+                        print("a")
+                        
+                    self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+
+                elif self.SolucionParcial.isChecked():
+                    # Suma de las soluciones requeridas para el modo parcial.
+                    self.SolucionModoParcial = 0 
+                    for indice1 in range(len(self.Soluciones[:subproblema])):
+                        for indice2 in range(len(self.Soluciones[indice1][:valorpropio1+1])):
+                            if self.ValorPropio2_1.isEnabled():
+                                for indice3 in range(len(self.Soluciones[indice1][indice2][:valorpropio2+1])):
+                                    if self.ValorPropio3_1.isEnabled():
+                                        for indice4 in range(len(self.Soluciones[indice1][indice2][indice3][:valorpropio3+1])):
+                                            self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][indice3][indice4]
+                                    else:
+                                        self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][indice3]
+                            else:
+                                self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][0]
+                                print("c")
+
+
+                    self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModoParcial, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+
+                print(self.Dominios)
+
+                # Determinación de la calidad (puntos por unidad de longitud).
+                if self.Calidad:
+                    aumento = 0.01
+                    aumento_angular = 0.06
+                else:
+                    aumento = 0.03
+                    aumento_angular = 0.09
+                
+                # Cálculo de las particiones de cada dominio.
+                estructura = []
+                indice = 0 
+                for simbolo in self.Simbolos:
+                    if simbolo != t:
+                        estructura.append(int(len(self.Dominios[indice])))
+                    else:
+                        estructura.append(int(float(self.Dominio[indice][0])*25) + 1)
+                        self.t_grid = np.arange(0, float(self.Dominio[indice][0]) + 0.04, step=0.04)
+                    indice += 1
+
+                print("b")
+
+                # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
+                self.ValoresSolucion = np.zeros(estructura).T
+                if self.dependencia_tiempo:
+                    for indice1 in range(0, len(self.t_grid)):
+                        for indice2 in range(0, len(self.Dominios[0])):
+                            if len(self.Dominios) == 2:
+                                for indice3 in range(0, len(self.Dominios[1])):
+                                    self.ValoresSolucion[indice1][indice3][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice2], self.Dominios[1][indice3], self.t_grid[indice1])))
+                            else:
+                                self.ValoresSolucion[indice1][indice2] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice2], self.t_grid[indice1])))
+                else:
+                    for indice1 in range(0, len(self.Dominios[0])):
+                        for indice2 in range(0, len(self.Dominios[1])):
+                            if len(self.Dominios) == 3:
+                                for indice3 in range(0, len(self.Dominios[2])):
+                                    self.ValoresSolucion[indice3][indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice1], self.Dominios[1][indice2], self.Dominios[2][indice3])))
+                            else:
+                                self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ui.Dominios[0][indice1], self.Dominios[1][indice2])))
+
+                self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                            
+            else:
+                self.CurvasNivelAuto.setChecked(False)
+                self.CurvasNivelEspecificas.setChecked(False)
+                self.ProyeccionEntrada.setChecked(False)
+                self.CoordenadaFija_1.setChecked(True)
+                self.graficacion()
+        except:
+            tipoError, explicacion, line = sys.exc_info()[:3]
+
+            print(tipoError, explicacion, line)
     
     def interpretacionCurvasNivel(self, coordenada_fija = False, valores_matriz = None, guardar = False):
         """
