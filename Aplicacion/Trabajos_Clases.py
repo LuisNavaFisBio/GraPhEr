@@ -1498,7 +1498,40 @@ class TrabajoCambioProyeccion(QtCore.QRunnable):
             print(line.tb_lineno)
 
             typeError = "Error -- Intercambio Fallido"
-            Error = "No se pudo obtener intercambiar entre proyección y gráfica tridimensional o viceversa."
+            Error = "No se pudo intercambiar entre proyección y gráfica tridimensional o viceversa."
+
+            self.signals.error_signal.emit((typeError, Error))
+        finally:
+            self.ui.GuardarAnimacion.setShortcut("Ctrl+S")
+            self.ui.CurvasNivelAuto.setShortcut("Ctrl+A")
+            self.ui.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+
+class TrabajoCambioModoVisualizacion(QtCore.QRunnable):
+    """Ejecutable para realizar el procesamiento en paralelo del cambio entre proyecciones."""
+
+    def __init__(self, ui_informacion):
+        """Definicion de la información a utilizar y las señales necesarias para la comunicación."""
+
+        super(self.__class__, self).__init__()
+        self.ui = ui_informacion
+        self.signals = Indicadores()
+        self.ui.signals.avanzar_signal.connect(self.signals.avanzar_signal)
+        self.ui.signals.finalizar_signal.connect(self.signals.finalizar_signal)
+
+    @QtCore.pyqtSlot()    
+    def run(self):
+        try: 
+            self.ui.intercambiarModoVisualizacion(self.ui.Subproblema_1.value(), self.ui.ValorPropio1_1.value(), self.ui.ValorPropio2_1.value(), self.ui.ValorPropio3_1.value())
+            QtCore.QThread.msleep(500)
+            self.signals.finalizar_signal.emit("Intercambio de Modo de Visualización Finalizado")
+        except:
+            tipoError, explicacion, line = sys.exc_info()[:3]
+            print(tipoError)
+            print(explicacion)
+            print(line.tb_lineno)
+
+            typeError = "Error -- Intercambio Fallido"
+            Error = "No se pudo intercambiar el modo de visualización."
 
             self.signals.error_signal.emit((typeError, Error))
         finally:

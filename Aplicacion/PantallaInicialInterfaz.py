@@ -38,7 +38,7 @@ from PantallaGrafica import Ui_Graficacion, Lienzo
 from PantallaEntradaInterpretada import Ui_InterpretacionEDP
 from VentanaCarga import Ui_VentanaCarga
 from VentanaEtiquetas import Ui_VentanaEtiquetas
-from Trabajos_Clases import Inicializacion, TrabajoInterpretacion, TrabajoResolucion, TrabajoCambiarCoordenada, TrabajoCorteEspecifico, TrabajoCurvasNivel, TrabajoCambioProyeccion, TrabajoGuardado, TrabajoVisualizacion
+from Trabajos_Clases import Inicializacion, TrabajoInterpretacion, TrabajoResolucion, TrabajoCambiarCoordenada, TrabajoCorteEspecifico, TrabajoCurvasNivel, TrabajoCambioProyeccion, TrabajoGuardado, TrabajoVisualizacion, TrabajoCambioModoVisualizacion
 
 
 from matplotlib.animation import FuncAnimation, FFMpegFileWriter
@@ -1512,12 +1512,14 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.Grupo.buttonClicked.disconnect()
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
             self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+            self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
         except:
             pass
         self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
         self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
         self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
         self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
         self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
 
@@ -1786,6 +1788,78 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
+    def cambiarModoVisualizacion(self):
+        """Ejecuta el trabajo de cambio de visualización entre la vista modo por modo y la vista de solución parcial."""
+
+        if not self.VentanaGrafica.isHidden():
+            # Si la ventana de graficación se encuentra abierta procede a realizar el cambio entre modos de visualización.
+
+            # Diseño de la ventana de carga.
+            self.Ui_Carga.label.setText("Iniciando Proceso")
+            self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "ProyeccionCarga.gif"))
+            self.Ui_Carga.animacion.setScaledSize(QSize(227,150))
+            self.Ui_Carga.icono.setMovie(self.Ui_Carga.animacion)
+            self.Ui_Carga.animacion.start()
+            QCoreApplication.processEvents()
+
+            if self.Ui_Grafica.etiquetas and (len(self.Ui_Grafica.dominio) == 6):
+                # Oculta la leyenda de las curvas de nivel en problemas de tres dimensiones espaciales. 
+                self.Ui_Grafica.VentanaEtiquetas.close()
+
+            # Configuración y ejecución del trabajo de cambio de proyección.
+            trabajo = TrabajoCambioModoVisualizacion(self.Ui_Grafica)
+            trabajo.signals.finalizar_signal.connect(self.finalizarCambioVisualizacion)
+            trabajo.signals.avanzar_signal.connect(self.actualizarVentanaEmergente)
+            trabajo.signals.error_signal.connect(self.mostrarError)  
+            trabajo.autoDelete()
+            self.VentanaCarga.show()
+            self.threadpool.start(trabajo, 0)
+
+    def finalizarCambioVisualizacion(self, mensaje):
+        """
+        Actualiza la ventana de carga y después inicia la animación de entrada de la gráfica con el nuevo modo de visualizacion.
+
+        Parámetros
+        ----------
+        **mensaje** : string
+            Mensaje a desplegar en la pantalla de carga.
+        """
+
+        # Inicia la animación y actualiza la ventana de carga.
+        self.Interpretar.setShortcut("Ctrl+I")
+        self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
+        self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
+        self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+        self.Ui_Carga.label.setText(mensaje)
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
+        self.VentanaCarga.close()
+        if self.DimensionTemporalEntrada.isChecked() or (self.DimensionEspacialEntrada.value() == 3):
+            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+            try:
+                self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
+                self.Ui_Grafica.BotonReproduccionAdelante.clicked.disconnect()
+                self.Ui_Grafica.BotonPausa.clicked.disconnect()
+                self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
+                self.Ui_Grafica.deslizador.valueChanged.disconnect()
+                self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+            except:
+                pass
+
+            self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
+            self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
+            self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
+            self.Ui_Grafica.BotonPausa.clicked.connect(self.Ui_Grafica.Animacion.detener)
+            self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
+            self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
+            self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
+            self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+        self.Ui_Grafica.Animacion.iniciar()
+        self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
@@ -1948,6 +2022,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
                 self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
                 self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+                self.Ui_Grafica.self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect().clicked.disconnect()
             except:
                 pass
             
