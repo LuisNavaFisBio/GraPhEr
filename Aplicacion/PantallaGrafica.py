@@ -1022,12 +1022,12 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_10.setStretch(4, 60)
         horizontalLayout_10.setStretch(5, 50)
 
-        label_7 = QLabel()
-        label_7.setText(u"Subproblema")
-        label_7.setMinimumSize(QSize(100, 35))
-        label_7.setMaximumSize(QSize(100, 35))
-        label_7.setAlignment(Qt.AlignCenter)
-        horizontalLayout_10.addWidget(label_7)
+        self.label_4 = QLabel()
+        self.label_4.setText(u"Subproblema")
+        self.label_4.setMinimumSize(QSize(100, 35))
+        self.label_4.setMaximumSize(QSize(100, 35))
+        self.label_4.setAlignment(Qt.AlignCenter)
+        horizontalLayout_10.addWidget(self.label_4)
 
         # Diseño y configuración del QSpinBox para determinar el subproblema.
         self.Subproblema_1 = QSpinBox()
@@ -1037,12 +1037,12 @@ class Ui_Graficacion(QMainWindow):
         self.Subproblema_1.setMinimum(1)
         horizontalLayout_10.addWidget(self.Subproblema_1)
         
-        label_8 = QLabel()
-        label_8.setText("Valor n")
-        label_8.setMinimumSize(QSize(60, 35))
-        label_8.setMaximumSize(QSize(60, 35))
-        label_8.setAlignment(Qt.AlignCenter)
-        horizontalLayout_10.addWidget(label_8)
+        self.label_3 = QLabel()
+        self.label_3.setText("Valor n")
+        self.label_3.setMinimumSize(QSize(60, 35))
+        self.label_3.setMaximumSize(QSize(60, 35))
+        self.label_3.setAlignment(Qt.AlignCenter)
+        horizontalLayout_10.addWidget(self.label_3)
 
         # Diseño y configuración del QSpinBox para determinar el primer indice de la doble suma en el subproblema (en caso de una única suma determina el indice de esta). Esto es equivalente a fijar el primer valor propio del subproblema.
         self.ValorPropio1_1 = QSpinBox()
@@ -4313,6 +4313,14 @@ class Ui_Graficacion(QMainWindow):
                 self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
                             
             else:
+                self.Subproblema_1.setEnabled(False)
+                self.ValorPropio1_1.setEnabled(False)
+                self.ValorPropio2_1.setEnabled(False)
+                self.ValorPropio3_1.setEnabled(False)
+                self.label_13.setEnabled(False)
+                self.label_10.setEnabled(False)
+                self.label_4.setEnabled(False)
+                self.label_3.setEnabled(False)
                 self.CurvasNivelAuto.setChecked(False)
                 self.CurvasNivelEspecificas.setChecked(False)
                 self.ProyeccionEntrada.setChecked(False)
