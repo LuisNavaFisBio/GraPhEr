@@ -2037,10 +2037,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
             self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
         
-        self.Ui_Grafica.Subproblema_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.Subproblema_1.value(), self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
-        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.Subproblema_1.value(), self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
-        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.Subproblema_1.value(), self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
-        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(lambda: self.Ui_Grafica.intercambiarModoVisualizacion(self.Ui_Grafica.Subproblema_1.value(), self.Ui_Grafica.ValorPropio1_1.value(), self.Ui_Grafica.ValorPropio2_1.value(), self.Ui_Grafica.ValorPropio3_1.value()))
+        self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(self.cambiarModoVisualizacion)
 
 class PantallaPrincipal(QMainWindow):
     """
