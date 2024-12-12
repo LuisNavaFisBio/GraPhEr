@@ -4267,6 +4267,8 @@ class Ui_Graficacion(QMainWindow):
                     else:
                         self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1]
                         print("a")
+
+                    print(self.SolucionModo)
                         
                     self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
 
@@ -4286,18 +4288,9 @@ class Ui_Graficacion(QMainWindow):
                                 self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][0]
                                 print("c")
 
+                    print(self.SolucionModoParcial)
 
                     self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModoParcial, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
-
-                print(self.Dominios)
-
-                # Determinación de la calidad (puntos por unidad de longitud).
-                if self.Calidad:
-                    aumento = 0.01
-                    aumento_angular = 0.06
-                else:
-                    aumento = 0.03
-                    aumento_angular = 0.09
                 
                 # Cálculo de las particiones de cada dominio.
                 estructura = []
