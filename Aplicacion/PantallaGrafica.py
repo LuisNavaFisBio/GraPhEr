@@ -4095,6 +4095,12 @@ class Ui_Graficacion(QMainWindow):
             del self.Animacion
 
             if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                self.Subproblema_1.setEnabled(True)
+                self.ValorPropio1_1.setEnabled(True)
+                self.label_4.setEnabled(True)
+                self.label_4.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
+                self.label_3.setEnabled(True)
+                self.label_3.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
                 self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
                 self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[subproblema-1][0][0]))
                 if len(self.NumeroTerminos[subproblema-1]) >= 2:
@@ -4318,9 +4324,13 @@ class Ui_Graficacion(QMainWindow):
                 self.ValorPropio2_1.setEnabled(False)
                 self.ValorPropio3_1.setEnabled(False)
                 self.label_13.setEnabled(False)
+                self.label_13.setStyleSheet(u"color: rgb(127,146,151); background-color: rgb(234,237,239);")
                 self.label_10.setEnabled(False)
+                self.label_10.setStyleSheet(u"color: rgb(127,146,151); background-color: rgb(234,237,239);")
                 self.label_4.setEnabled(False)
+                self.label_4.setStyleSheet(u"color: rgb(127,146,151); background-color: rgb(234,237,239);")
                 self.label_3.setEnabled(False)
+                self.label_3.setStyleSheet(u"color: rgb(127,146,151); background-color: rgb(234,237,239);")
                 self.CurvasNivelAuto.setChecked(False)
                 self.CurvasNivelEspecificas.setChecked(False)
                 self.ProyeccionEntrada.setChecked(False)
