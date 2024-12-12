@@ -1260,7 +1260,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             entrada = entrada_inicio+entrada_datosProblema+entrada_subproblemas
 
             # Escritura de la información en el archivo de texto
-            archivo.write(entrada, encoding='utf-8')
+            archivo.write(entrada)
             archivo.close()
 
     def importarEntrada(self):
