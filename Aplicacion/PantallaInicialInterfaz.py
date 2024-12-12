@@ -1076,6 +1076,24 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Limpiar.clicked.connect(self.limpiarEntradas)
         self.Limpiar.setShortcut("Ctrl+l")
         horizontalLayout_22.addWidget(self.Limpiar)
+
+        # Diseño y configuración del botón de importación de entrada.
+        self.Importar = QPushButton(frame_1)
+        self.Importar.setText("Importar")
+        self.Importar.setMinimumSize(QSize(200, 35))
+        self.Importar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98) ")
+        self.Importar.clicked.connect(self.importarEntrada)
+        self.Importar.setShortcut("Ctrl+l")
+        horizontalLayout_22.addWidget(self.Importar)
+
+        # Diseño y configuración del botón de exportación de entrada.
+        self.Exportar = QPushButton(frame_1)
+        self.Exportar.setText("Exportar")
+        self.Exportar.setMinimumSize(QSize(200, 35))
+        self.Exportar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98) ")
+        self.Exportar.clicked.connect(self.exportarEntrada)
+        self.Exportar.setShortcut("Ctrl+l")
+        horizontalLayout_22.addWidget(self.Exportar)
         verticalLayout_1.addLayout(horizontalLayout_22)
         verticalLayout_0.addWidget(frame_1)
 
@@ -1117,6 +1135,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.FuncionPeso10.setText("1")
         self.Visualizar.setDisabled(True)
         self.Visualizar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.Exportar.setDisabled(True)
+        self.Exportar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
 
     def actualizarVentanaEmergente(self, string):
         """
@@ -1192,6 +1212,82 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         trabajo.autoDelete()
         self.VentanaCarga.show()
         self.threadpool.start(trabajo)
+
+    def exportarEntrada(self):
+        """Exporta la entrada ingresada e interpretada correctamente a un archivo de texto para su transferencia."""
+
+        # La implementación de esta función fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
+
+
+
+    def importarEntrada(self):
+        """Importa la entrada ingresada desde un archivo de texto para su interpretación."""
+
+        # Apertura de un cuadro de búsqueda de archivos para encontrar el archivo de texto con una entrada valida para el programa.
+        # La implementación del cuadro de búsqueda de archivos fue tomada de Elder, J. [Codemy.com] (09 de septiembre de 2021). File Dialog Boxes With QFileDialog - PyQt5 GUI Thursdays #29. YouTube. https://www.youtube.com/watch?v=gg5TepTc2Jg
+        archivo_texto, _ = QFileDialog.getOpenFileName(self, "Importar Entrada", "", "Archivos de Texto (*.txt)")
+        
+        # Si se elige un archivo se procede a su interpretación.
+        if archivo_texto != "":
+            self.archivoEntrada = open(str(archivo_texto), "r", encoding='utf-8')
+            
+            # Obtención de la información general del problema.
+            informacion = self.archivoEntrada.read()
+            informacion_problema = informacion.split("{")
+            informacion_problema ="{"+ informacion_problema[1].split("}")[0] +"}"
+            informacion_problema = eval(informacion_problema)
+
+            # Acomodo de la información general en sus respectivas entradas.
+            for entrada in informacion_problema.keys():
+                if entrada == "Número de Dimensiones Espaciales":
+                    self.DimensionEspacialEntrada.setValue(informacion_problema[entrada])
+                elif entrada == "Dependencia Temporal":
+                    if informacion_problema[entrada] == "Sí":
+                        self.DimensionTemporalEntrada.setChecked(True)
+                    elif informacion_problema[entrada] == "No":
+                        self.DimensionTemporalEntrada.setChecked(False)
+                elif entrada == "Coordenadas":
+                    if informacion_problema[entrada] == "Cartesianas":
+                        self.SistemaCoordenadas1.setChecked(True)
+                    elif informacion_problema[entrada] == "Cilíndricas / Polares":
+                        self.SistemaCoordenadas2.setChecked(True)
+                    else:
+                        self.SistemaCoordenadas3.setChecked(True)
+                elif "Dominio" in entrada:
+                    if ("x" or "r") in entrada:
+                        self.DominioEspacial1Entrada.setText(str(informacion_problema[entrada]))
+                    elif ((("phi" or "theta") in entrada) and self.SistemaCoordenadas2.isChecked()) or ("y" in entrada):
+                        self.DominioEspacial2Entrada.setText(str(informacion_problema[entrada]))
+                    elif (("phi" in entrada) and self.SistemaCoordenadas3.isChecked()) or ("z" in entrada):
+                        self.DominioEspacial3Entrada.setText(str(informacion_problema[entrada]))
+                    else:
+                        self.DominioTemporalEntrada.setText(str(informacion_problema[entrada]))
+                elif "Condiciones" in entrada:
+                    self.CondicionesEntrada.setText(str(informacion_problema[entrada]))
+                elif "Subproblemas" in entrada:
+                    self.NumeroEntradasS.setValue(informacion_problema[entrada])
+
+            # Obtención de la información de cada subproblema.
+            informacion_subproblemas = informacion.split("#")
+            for indice in range(1, self.NumeroEntradasS.value()+1):
+                informacion_subproblema = informacion_subproblemas[indice].split("{")
+                informacion_subproblema = "{"+ informacion_subproblema[1].split("}")[0] +"}"
+                informacion_subproblema = eval(informacion_subproblema)
+
+                # Acomodo de la información de cada subproblema en sus respectivas entradas.
+                for entrada in informacion_subproblema.keys():
+                    if entrada == "Valores Propios":
+                        self.ValoresPropiosEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
+                    elif entrada == "Número de Términos":
+                        self.NumeroTerminosEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
+                    elif entrada == "Función Peso":
+                        self.FuncionesPesoEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
+                    elif entrada == "Coeficientes":
+                        self.CoeficientesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
+                    elif entrada == "Funciones Espaciales":
+                        self.FuncionesEspacialesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
+                    elif entrada == "Funciones Temporales":
+                        self.FuncionesTemporalesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
 
     def limpiarEntradas(self):
         """Borra toda la información introducida en los campos de entrada y restablece la ventana principal a su estado inicial."""
