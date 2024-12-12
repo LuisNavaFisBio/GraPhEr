@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+Ecuación de onda unidimensional con resistencia proporcional a la velocidad
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'0;10', 'Número de Subproblemas': 3}
+
+Solución del Subproblema #1
+{'Valores Propios':'sin(2*lamda_n*pi)=0:<2', 'Número de Términos':'auto', 'Función Peso':'1', 'Coeficientes':'Int[g_2*sin(lamda_n*x)/(pi*sqrt(Abs(4-lamda_n**2))),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-2*t)*sinh(sqrt(Abs(4-lamda_n**2))*t)'}
+
+Solución del Subproblema #2
+{'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'Int[g_2*sin(2*x)/pi,x]', 'Funciones Espaciales':'sin(2*x)', 'Funciones Temporales':'t*exp(-2*t)'}
+
+Solución del Subproblema #3
+{'Valores Propios':'n/2:>2', 'Número de Términos':'auto', 'Función Peso':'1', 'Coeficientes':'Int[g_2*sin(lamda_n*x)/(pi*sqrt(Abs(4-lamda_n**2))),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-2*t)*sin(sqrt(Abs(4-lamda_n**2))*t)'}
