@@ -1372,6 +1372,10 @@ class TrabajoResolucion(QtCore.QRunnable):
                             self.ui.MatrizResultados[indice2][indice1] = float(np.real(self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice1], self.ui.ParticionesDominios[1][indice2])))
 
             self.signals.finalizar_signal.emit("Solución Calculada")
+            self.ui.Visualizar.setEnabled(True)
+            self.ui.Visualizar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
+            self.ui.Exportar.setEnabled(True)
+            self.ui.Exportar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
         except:
             # Interpretación del error ocurrido.
             tipoError, explicacion, line = sys.exc_info()[:3]
@@ -1389,8 +1393,6 @@ class TrabajoResolucion(QtCore.QRunnable):
             self.ui.Interpretar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
             self.ui.Interpretar.setText("Actualizar")
             self.ui.Interpretar.setShortcut("Ctrl + I")
-            self.ui.Visualizar.setEnabled(True)
-            self.ui.Visualizar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
             self.ui.Limpiar.setEnabled(True)
             self.ui.Limpiar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
             self.ui.centralwidget.setEnabled(True)
