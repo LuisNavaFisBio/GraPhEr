@@ -1251,7 +1251,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             entrada_subproblemas = "\n"
             for indice in range(1, self.NumeroEntradasS.value()+1):
                 entrada_subproblemas = entrada_subproblemas + "Solución del Subproblema #{0}\n".format(indice)
-                entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text(), self.NumeroTerminosEntrada[str(indice-1)].text(), self.FuncionesPesoEntrada[str(indice-1)].text(), self.CoeficientesEntrada[str(indice-1)].text(), self.FuncionEspacialesEntrada[str(indice-1)].text())
+                entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text(), self.NumeroTerminosEntrada[str(indice-1)].text(), self.FuncionesPesoEntrada[str(indice-1)].text(), self.CoeficientesEntrada[str(indice-1)].text(), self.FuncionesEspacialesEntrada[str(indice-1)].text())
                 if self.DimensionTemporalEntrada.isChecked():
                     entrada_subproblemas = entrada_subproblemas + ", 'Funciones Temporales':'{0}'".format(self.FuncionesTemporalesEntrada[str(indice-1)].text())
                 entrada_subproblemas = entrada_subproblemas + "}\n"
