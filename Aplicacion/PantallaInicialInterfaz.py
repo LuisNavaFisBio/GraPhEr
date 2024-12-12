@@ -1216,121 +1216,128 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
     def exportarEntrada(self):
         """Exporta la entrada ingresada e interpretada correctamente a un archivo de texto para su transferencia."""
 
-        # La implementación de esta función para crear el archivo y escribir en él una vez creado el texto a exportar fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
-        nombre_archivo, _ = QFileDialog.getSaveFileName(self, "Exportar Entrada", "", "Archivos de Texto (*.txt)")
-        if nombre_archivo != "":
-            archivo = open(nombre_archivo, "w", encoding='utf-8')
+        try:
+            # La implementación de esta función para crear el archivo y escribir en él una vez creado el texto a exportar fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
+            nombre_archivo, _ = QFileDialog.getSaveFileName(self, "Exportar Entrada", "", "Archivos de Texto (*.txt)")
+            if nombre_archivo != "":
+                archivo = open(nombre_archivo, "w", encoding='utf-8')
 
-            entrada_inicio = "Entrada valida para la aplicación GraPhEr \n \nDatos Generales del Problema\n"
+                entrada_inicio = "Entrada valida para la aplicación GraPhEr \n \nDatos Generales del Problema\n"
 
-            # Exportación de la información general del problema.
-            entrada_datosProblema ="{"+"'Número de Dimensiones Espaciales':{0} , 'Dependencia Temporal':'{1}', 'Coordenadas':'{2}',".format(self.DimensionEspacialEntrada.value(), "Sí" if self.DimensionTemporalEntrada.isChecked() else "No", self.SistemaCoordenadasEntrada.checkedButton().objectName())
-            for indice in range(self.DimensionEspacialEntrada.value()):
-                if indice == 0:
-                    if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio x':'{0}',".format(self.DominioEspacial1Entrada.text())
+                # Exportación de la información general del problema.
+                entrada_datosProblema ="{"+"'Número de Dimensiones Espaciales':{0} , 'Dependencia Temporal':'{1}', 'Coordenadas':'{2}',".format(self.DimensionEspacialEntrada.value(), "Sí" if self.DimensionTemporalEntrada.isChecked() else "No", self.SistemaCoordenadasEntrada.checkedButton().objectName())
+                for indice in range(self.DimensionEspacialEntrada.value()):
+                    if indice == 0:
+                        if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio x':'{0}',".format(self.DominioEspacial1Entrada.text().replace(" ",""))
+                        else:
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio r':'{0}',".format(self.DominioEspacial1Entrada.text().replace(" ",""))
+                    elif indice == 1:
+                        if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio y':'{0}',".format(self.DominioEspacial2Entrada.text().replace(" ",""))
+                        elif self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio phi':'{0}',".format(self.DominioEspacial2Entrada.text().replace(" ",""))
+                        else:
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio theta':'{0}',".format(self.DominioEspacial2Entrada.text().replace(" ",""))
                     else:
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio r':'{0}',".format(self.DominioEspacial1Entrada.text())
-                elif indice == 1:
-                    if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio y':'{0}',".format(self.DominioEspacial2Entrada.text())
-                    elif self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio phi':'{0}',".format(self.DominioEspacial2Entrada.text())
-                    else:
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio theta':'{0}',".format(self.DominioEspacial2Entrada.text())
-                else:
-                    if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio phi':'{0}',".format(self.DominioEspacial3Entrada.text())
-                    else:
-                        entrada_datosProblema = entrada_datosProblema + " 'Dominio z':'{1}',".format(self.DominioEspacial3Entrada.text())
-            if self.DimensionTemporalEntrada.isChecked():
-                entrada_datosProblema = entrada_datosProblema + " 'Dominio temporal':'{0}',".format(self.DominioTemporalEntrada.text())
-            entrada_datosProblema = entrada_datosProblema + " 'Condiciones iniciales y/o de frontera':'{0}', 'Número de Subproblemas':{1}".format(self.CondicionesEntrada.text(), self.NumeroEntradasS.value())+"}"
-
-            # Exportación de la información de cada subproblema.
-            entrada_subproblemas = "\n\n"
-            for indice in range(1, self.NumeroEntradasS.value()+1):
-                entrada_subproblemas = entrada_subproblemas + "Solución del Subproblema #{0}\n".format(indice)
-                entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text(), self.NumeroTerminosEntrada[str(indice-1)].text(), self.FuncionesPesoEntrada[str(indice-1)].text(), self.CoeficientesEntrada[str(indice-1)].text(), self.FuncionesEspacialesEntrada[str(indice-1)].text())
+                        if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio phi':'{0}',".format(self.DominioEspacial3Entrada.text().replace(" ",""))
+                        else:
+                            entrada_datosProblema = entrada_datosProblema + " 'Dominio z':'{1}',".format(self.DominioEspacial3Entrada.text().replace(" ",""))
                 if self.DimensionTemporalEntrada.isChecked():
-                    entrada_subproblemas = entrada_subproblemas + ", 'Funciones Temporales':'{0}'".format(self.FuncionesTemporalesEntrada[str(indice-1)].text())
-                entrada_subproblemas = entrada_subproblemas + "}\n"
-                
-            # Conjunción de toda la información.
-            entrada = entrada_inicio+entrada_datosProblema+entrada_subproblemas
+                    entrada_datosProblema = entrada_datosProblema + " 'Dominio temporal':'{0}',".format(self.DominioTemporalEntrada.text().replace(" ",""))
+                entrada_datosProblema = entrada_datosProblema + " 'Condiciones iniciales y/o de frontera':'{0}', 'Número de Subproblemas':{1}".format(self.CondicionesEntrada.text().replace(" ",""), self.NumeroEntradasS.value())+"}"
 
-            # Escritura de la información en el archivo de texto
-            archivo.write(entrada)
-            archivo.close()
+                # Exportación de la información de cada subproblema.
+                entrada_subproblemas = "\n\n"
+                for indice in range(1, self.NumeroEntradasS.value()+1):
+                    entrada_subproblemas = entrada_subproblemas + "Solución del Subproblema #{0}\n".format(indice)
+                    entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text().replace(" ",""), self.NumeroTerminosEntrada[str(indice-1)].text().replace(" ",""), self.FuncionesPesoEntrada[str(indice-1)].text().replace(" ",""), self.CoeficientesEntrada[str(indice-1)].text().replace(" ",""), self.FuncionesEspacialesEntrada[str(indice-1)].text().replace(" ",""))
+                    if self.DimensionTemporalEntrada.isChecked():
+                        entrada_subproblemas = entrada_subproblemas + ", 'Funciones Temporales':'{0}'".format(self.FuncionesTemporalesEntrada[str(indice-1)].text().replace(" ",""))
+                    entrada_subproblemas = entrada_subproblemas + "}\n"
+                    
+                # Conjunción de toda la información.
+                entrada = entrada_inicio+entrada_datosProblema+entrada_subproblemas
+
+                # Escritura de la información en el archivo de texto
+                archivo.write(entrada)
+                archivo.close()
+        except:
+            self.mostrarError("No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar.")
 
     def importarEntrada(self):
         """Importa la entrada ingresada desde un archivo de texto para su interpretación."""
 
-        # Apertura de un cuadro de búsqueda de archivos para encontrar el archivo de texto con una entrada valida para el programa.
-        # La implementación del cuadro de búsqueda de archivos fue tomada de Elder, J. [Codemy.com] (09 de septiembre de 2021). File Dialog Boxes With QFileDialog - PyQt5 GUI Thursdays #29. YouTube. https://www.youtube.com/watch?v=gg5TepTc2Jg
-        archivo_texto, _ = QFileDialog.getOpenFileName(self, "Importar Entrada", "", "Archivos de Texto (*.txt)")
-        
-        # Si se elige un archivo se procede a su interpretación.
-        if archivo_texto != "":
-            self.archivoEntrada = open(str(archivo_texto), "r", encoding='utf-8')
+        try:
+            # Apertura de un cuadro de búsqueda de archivos para encontrar el archivo de texto con una entrada valida para el programa.
+            # La implementación del cuadro de búsqueda de archivos fue tomada de Elder, J. [Codemy.com] (09 de septiembre de 2021). File Dialog Boxes With QFileDialog - PyQt5 GUI Thursdays #29. YouTube. https://www.youtube.com/watch?v=gg5TepTc2Jg
+            archivo_texto, _ = QFileDialog.getOpenFileName(self, "Importar Entrada", "", "Archivos de Texto (*.txt)")
             
-            # Obtención de la información general del problema.
-            informacion = self.archivoEntrada.read()
-            informacion_problema = informacion.split("{")
-            informacion_problema ="{"+ informacion_problema[1].split("}")[0] +"}"
-            informacion_problema = eval(informacion_problema)
+            # Si se elige un archivo se procede a su interpretación.
+            if archivo_texto != "":
+                self.archivoEntrada = open(str(archivo_texto), "r", encoding='utf-8')
+                
+                # Obtención de la información general del problema.
+                informacion = self.archivoEntrada.read()
+                informacion_problema = informacion.split("{")
+                informacion_problema ="{"+ informacion_problema[1].split("}")[0] +"}"
+                informacion_problema = eval(informacion_problema)
 
-            # Acomodo de la información general en sus respectivas entradas.
-            for entrada in informacion_problema.keys():
-                if entrada == "Número de Dimensiones Espaciales":
-                    self.DimensionEspacialEntrada.setValue(informacion_problema[entrada])
-                elif entrada == "Dependencia Temporal":
-                    if informacion_problema[entrada] == "Sí":
-                        self.DimensionTemporalEntrada.setChecked(True)
-                    elif informacion_problema[entrada] == "No":
-                        self.DimensionTemporalEntrada.setChecked(False)
-                elif entrada == "Coordenadas":
-                    if informacion_problema[entrada] == "Cartesianas":
-                        self.SistemaCoordenadas1.setChecked(True)
-                    elif informacion_problema[entrada] == "Cilíndricas / Polares":
-                        self.SistemaCoordenadas2.setChecked(True)
-                    else:
-                        self.SistemaCoordenadas3.setChecked(True)
-                elif "Dominio" in entrada:
-                    if ("x" or "r") in entrada:
-                        self.DominioEspacial1Entrada.setText(str(informacion_problema[entrada]))
-                    elif ((("phi" or "theta") in entrada) and self.SistemaCoordenadas2.isChecked()) or ("y" in entrada):
-                        self.DominioEspacial2Entrada.setText(str(informacion_problema[entrada]))
-                    elif (("phi" in entrada) and self.SistemaCoordenadas3.isChecked()) or ("z" in entrada):
-                        self.DominioEspacial3Entrada.setText(str(informacion_problema[entrada]))
-                    else:
-                        self.DominioTemporalEntrada.setText(str(informacion_problema[entrada]))
-                elif "Condiciones" in entrada:
-                    self.CondicionesEntrada.setText(str(informacion_problema[entrada]))
-                elif "Subproblemas" in entrada:
-                    self.NumeroEntradasS.setValue(informacion_problema[entrada])
+                # Acomodo de la información general en sus respectivas entradas.
+                for entrada in informacion_problema.keys():
+                    if entrada == "Número de Dimensiones Espaciales":
+                        self.DimensionEspacialEntrada.setValue(informacion_problema[entrada])
+                    elif entrada == "Dependencia Temporal":
+                        if informacion_problema[entrada] == "Sí":
+                            self.DimensionTemporalEntrada.setChecked(True)
+                        elif informacion_problema[entrada] == "No":
+                            self.DimensionTemporalEntrada.setChecked(False)
+                    elif entrada == "Coordenadas":
+                        if informacion_problema[entrada] == "Cartesianas":
+                            self.SistemaCoordenadas1.setChecked(True)
+                        elif informacion_problema[entrada] == "Cilíndricas / Polares":
+                            self.SistemaCoordenadas2.setChecked(True)
+                        else:
+                            self.SistemaCoordenadas3.setChecked(True)
+                    elif "Dominio" in entrada:
+                        if ("x" or "r") in entrada:
+                            self.DominioEspacial1Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
+                        elif ((("phi" or "theta") in entrada) and self.SistemaCoordenadas2.isChecked()) or ("y" in entrada):
+                            self.DominioEspacial2Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
+                        elif (("phi" in entrada) and self.SistemaCoordenadas3.isChecked()) or ("z" in entrada):
+                            self.DominioEspacial3Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
+                        else:
+                            self.DominioTemporalEntrada.setText(str(informacion_problema[entrada]).replace(" ",""))
+                    elif "Condiciones" in entrada:
+                        self.CondicionesEntrada.setText(str(informacion_problema[entrada]).replace(" ",""))
+                    elif "Subproblemas" in entrada:
+                        self.NumeroEntradasS.setValue(informacion_problema[entrada])
 
-            # Obtención de la información de cada subproblema.
-            informacion_subproblemas = informacion.split("#")
-            for indice in range(1, self.NumeroEntradasS.value()+1):
-                informacion_subproblema = informacion_subproblemas[indice].split("{")
-                informacion_subproblema = "{"+ informacion_subproblema[1].split("}")[0] +"}"
-                informacion_subproblema = eval(informacion_subproblema)
+                # Obtención de la información de cada subproblema.
+                informacion_subproblemas = informacion.split("#")
+                for indice in range(1, self.NumeroEntradasS.value()+1):
+                    informacion_subproblema = informacion_subproblemas[indice].split("{")
+                    informacion_subproblema = "{"+ informacion_subproblema[1].split("}")[0] +"}"
+                    informacion_subproblema = eval(informacion_subproblema)
 
-                # Acomodo de la información de cada subproblema en sus respectivas entradas.
-                for entrada in informacion_subproblema.keys():
-                    if entrada == "Valores Propios":
-                        self.ValoresPropiosEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
-                    elif entrada == "Número de Términos":
-                        self.NumeroTerminosEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
-                    elif entrada == "Función Peso":
-                        self.FuncionesPesoEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
-                    elif entrada == "Coeficientes":
-                        self.CoeficientesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
-                    elif entrada == "Funciones Espaciales":
-                        self.FuncionesEspacialesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
-                    elif entrada == "Funciones Temporales":
-                        self.FuncionesTemporalesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]))
+                    # Acomodo de la información de cada subproblema en sus respectivas entradas.
+                    for entrada in informacion_subproblema.keys():
+                        if entrada == "Valores Propios":
+                            self.ValoresPropiosEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
+                        elif entrada == "Número de Términos":
+                            self.NumeroTerminosEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
+                        elif entrada == "Función Peso":
+                            self.FuncionesPesoEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
+                        elif entrada == "Coeficientes":
+                            self.CoeficientesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
+                        elif entrada == "Funciones Espaciales":
+                            self.FuncionesEspacialesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
+                        elif entrada == "Funciones Temporales":
+                            self.FuncionesTemporalesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
+        
+        except:
+            self.mostrarError("No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida.")
 
     def limpiarEntradas(self):
         """Borra toda la información introducida en los campos de entrada y restablece la ventana principal a su estado inicial."""
