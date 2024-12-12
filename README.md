@@ -47,37 +47,7 @@ Si se desea evitar la instalación de Python y las librerías correspondientes, 
 
 ### Ejemplo de uso
 
-Para tener una ejemplificación del desempeño de la app, se puede copiar y pegar en los respectivos campos de la ventana inicial la información siguiente:
-
-```
-#### Ecuación de Laplace en dos dimensiones y coordenadas cartesianas
-
-Número de Dimensiones Espaciales    2        Coordenadas    Cartesianas
-Dominio x    0:pi/2        Dominio y    0:pi/2
-Condiciones iniciales y/o de frontera   
-Número de subproblemas    4
-
-Solución del Subproblema #1
-Valores Propios    n        Número de Términos    1:5
-Coeficientes    Int[4*f_1*sin(lamda_n*x)/(pi*sinh(lamda_n*pi/2)),x]
-Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*(pi/2-y))
-
-Solución del Subproblema #2
-Valores Propios    n        Número de Términos    1:5
-Coeficientes    Int[4*f_2*sin(lamda_n*x)/(pi*sinh(lamda_n*pi/2)),x]
-Funciones Espaciales    sin(lamda_n*x)*sinh(lamda_n*y)
-
-Solución del Subproblema #3
-Valores Propios    n        Número de Términos    1:5
-Coeficientes    Int[4*f_3*sin(lamda_n*y)/(pi*sinh(lamda_n*pi/2)),y]
-Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*(pi/2-x))
-
-Solución del Subproblema #4
-Valores Propios    n        Número de Términos    1:5
-Coeficientes    Int[4*f_4*sin(lamda_n*y)/(pi*sinh(lamda_n*pi/2)),y]
-Funciones Espaciales    sin(lamda_n*y)*sinh(lamda_n*x)
-```
-
+Para tener una ejemplificación del desempeño de la app, se puede descargar cualquiera de los archivos de texto disponibles en la carpeta **EjemplosResueltos**. Una vez inicializada la aplicación, importar la entrada contenida en el archivo de texto utilizando el botón **Importar**.
 Posteriormente se debe presionar el botón **Interpretar** y esperar a que se realice la interpretación y se muestre la ventana de visualización de la entrada del usuario. En ella se puede observar la entrada en formato LaTeX como se aprecia en la siguiente imagen
 
 <p align="center">
