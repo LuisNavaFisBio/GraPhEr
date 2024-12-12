@@ -112,6 +112,10 @@ class TrabajoInterpretacion(QtCore.QRunnable):
         self.ui.Visualizar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
         self.ui.Limpiar.setDisabled(True)
         self.ui.Limpiar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.ui.Importar.setDisabled(True)
+        self.ui.Importar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.ui.Exportar.setDisabled(True)
+        self.ui.Exportar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
         try: 
             # Actualiza el botón de interpretar para informar que sea realizado una interpretación previa con éxito.
             self.ui.Interpretar.setText("Actualizar")
@@ -1000,6 +1004,10 @@ class TrabajoResolucion(QtCore.QRunnable):
         self.ui.Interpretar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
         self.ui.Limpiar.setDisabled(True)
         self.ui.Limpiar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.ui.Importar.setDisabled(True)
+        self.ui.Importar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.ui.Exportar.setDisabled(True)
+        self.ui.Exportar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
         try:
             self.envioActualizacion("Recopilando datos")
 
@@ -1395,6 +1403,8 @@ class TrabajoResolucion(QtCore.QRunnable):
             self.ui.Interpretar.setShortcut("Ctrl + I")
             self.ui.Limpiar.setEnabled(True)
             self.ui.Limpiar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
+            self.ui.Importar.setDisabled(True)
+            self.ui.Importar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
             self.ui.centralwidget.setEnabled(True)
 
 class TrabajoVisualizacion(QtCore.QRunnable):

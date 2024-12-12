@@ -1368,6 +1368,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Interpretar.setShortcut("Ctrl+I")
         self.Visualizar.setDisabled(True)
         self.Visualizar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+        self.Exportar.setDisabled(True)
+        self.Exportar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
 
     def restriccionDimension(self):
         """Habilita o deshabilita opciones de dimensión de acuerdo al valor de la QSpinBox DimensionEspacialEntrada para no superar el límite de tres coordenadas (tres espaciales o dos espaciales y una temporal)."""
