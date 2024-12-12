@@ -665,6 +665,7 @@ class Ui_Graficacion(QMainWindow):
 
         # Diseño y configuración del cuadro donde se muestra el coeficiente de la solución asociada a los valores propios especificados por los QSpinBoxes anteriores.
         self.ValoresCoeficienteView = QWebEngineView()
+        self.ValoresCoeficienteView.setZoomFactor(0.85)
         self.ValoresCoeficienteView.setMinimumSize(QSize(480, 65))
         self.ValoresCoeficienteView.setMaximumSize(QSize(480, 65))
         self.pagina = self.ValoresCoeficienteView.page()
@@ -758,6 +759,7 @@ class Ui_Graficacion(QMainWindow):
             
         # Diseño y configuración del cuadro donde se muestra el cuadro_fijo de la solución en el punto especificado por los tres QSpinBoxes anteriores.
         self.Valorview = QWebEngineView()
+        self.Valorview.setZoomFactor(0.85)
         self.Valorview.setMinimumSize(QSize(480, 65))
         self.Valorview.setMaximumSize(QSize(480, 65))
         self.pagina2 = self.Valorview.page()
