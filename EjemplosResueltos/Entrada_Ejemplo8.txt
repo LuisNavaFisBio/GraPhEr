@@ -1,0 +1,11 @@
+Entrada valida para la aplicación GraPhEr 
+Ecuación de Laplace en coordenadas polares
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio x':'0:1', 'Dominio phi':'0:pi/2', 'Condiciones iniciales y/o de frontera':'sin(phi)', 'Número de Subproblemas': 2}
+
+Solución del Subproblema #1
+{'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'1', 'Funciones Espaciales':'2*phi/pi'}
+
+Solución del Subproblema #2
+{'Valores Propios':'2*n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[4*(f_1-u_1)*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'r**lamda_n*sin(lamda_n*phi)'}
