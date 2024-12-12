@@ -606,6 +606,8 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             self.ui.Interpretar.setShortcut("Ctrl+I")
             self.ui.Limpiar.setEnabled(True)
             self.ui.Limpiar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
+            self.ui.Importar.setEnabled(True)
+            self.ui.Importar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
             self.ui.centralwidget.setEnabled(True)
 
 class TrabajoResolucion(QtCore.QRunnable):
@@ -1403,8 +1405,8 @@ class TrabajoResolucion(QtCore.QRunnable):
             self.ui.Interpretar.setShortcut("Ctrl + I")
             self.ui.Limpiar.setEnabled(True)
             self.ui.Limpiar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
-            self.ui.Importar.setDisabled(True)
-            self.ui.Importar.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+            self.ui.Importar.setEnabled(True)
+            self.ui.Importar.setStyleSheet("color: rgb(234, 237, 239); background-color: rgb(11, 61, 98);")
             self.ui.centralwidget.setEnabled(True)
 
 class TrabajoVisualizacion(QtCore.QRunnable):
