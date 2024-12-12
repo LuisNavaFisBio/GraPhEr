@@ -1151,7 +1151,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Carga.label.setText(string)
         QCoreApplication.processEvents()
     
-    def mostrarError(self, mensaje):
+    def mostrarError(self, mensaje, exportacion_importacion = False):
         """Muestra la ventana de error cuando se detecte un error durante la ejecución.
         
         Parámetros
@@ -1182,9 +1182,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.MensajeError.setWindowIcon(self.icono)
         self.MensajeError.setStyleSheet("color: rgb(246, 246, 247) ; background-color: rgb(11, 68, 98)")
         self.MensajeError.setIcon(QMessageBox.Critical)
-        self.MensajeError.setText("<b>Hay un error en la entrada</b><br><br> \nDescripción del error:<br> <i>{}</i>".format(mensaje[1]))
+        self.MensajeError.setText("<b>Hay un error en la entrada</b><br><br> \nDescripción del error:<br> <i>{0}</i>".format(mensaje[1]) if not exportacion_importacion else "\nDescripción del error:<br> <i>{0}</i>".format(mensaje[1]))
         self.MensajeError.setWindowModality(Qt.WindowModal)
-        self.MensajeError.setInformativeText("Por favor revisa tu entrada.")
+        if not exportacion_importacion:
+            self.MensajeError.setInformativeText("Por favor revisa tu entrada.")
         self.MensajeError.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowType.Dialog)
         self.MensajeError.setWindowTitle(mensaje[0])
         self.MensajeError.setStandardButtons(QtWidgets.QMessageBox.Ok)
@@ -1264,7 +1265,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 archivo.write(entrada)
                 archivo.close()
         except:
-            self.mostrarError(("Error -- Fallo en la exportación","No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar."))
+            self.mostrarError(("Error -- Fallo en la exportación","No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar."), exportacion_importacion=True)
 
     def importarEntrada(self):
         """Importa la entrada ingresada desde un archivo de texto para su interpretación."""
@@ -1335,9 +1336,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                             self.FuncionesEspacialesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
                         elif entrada == "Funciones Temporales":
                             self.FuncionesTemporalesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
-        
+
         except:
-            self.mostrarError(("Error -- Fallo en la importación", "No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida."))
+            self.mostrarError(("Error -- Fallo en la importación", "No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida."), exportacion_importacion=True)
 
     def limpiarEntradas(self):
         """Borra toda la información introducida en los campos de entrada y restablece la ventana principal a su estado inicial."""
