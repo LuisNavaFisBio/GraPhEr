@@ -1,5 +1,5 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de onda bidimensional en coordenadas cartesianas
+Ecuación de Laplace en coordenadas cartesianas representando una caja cuyos dos lados opuestos tienen potenciales distintos
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio y':'0:1', 'Dominio z':'0:1', 'Condiciones iniciales y/o de frontera':'1;-1', 'Número de Subproblemas': 2}

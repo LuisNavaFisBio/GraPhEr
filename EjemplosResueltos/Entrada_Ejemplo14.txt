@@ -1,5 +1,5 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de onda bidimensional en coordenadas cartesianas
+Ecuación de la placa vibrante en coordenadas polares
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'1;0', 'Número de Subproblemas': 1}

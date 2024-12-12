@@ -1,5 +1,5 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de onda bidimensional en coordenadas cartesianas
+Ecuación de calor bidimensional en coordenadas polares y con condición de frontera no homogénea
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:3', 'Dominio phi':'0:pi/2', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'sin(2*phi):3-r', 'Número de Subproblemas': 2}
