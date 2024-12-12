@@ -48,6 +48,7 @@ Si se desea evitar la instalación de Python y las librerías correspondientes, 
 ### Ejemplo de uso
 
 Para tener una ejemplificación del desempeño de la app, se puede descargar cualquiera de los archivos de texto disponibles en la carpeta **EjemplosResueltos**. Una vez inicializada la aplicación, importar la entrada contenida en el archivo de texto utilizando el botón **Importar**.
+
 Posteriormente se debe presionar el botón **Interpretar** y esperar a que se realice la interpretación y se muestre la ventana de visualización de la entrada del usuario. En ella se puede observar la entrada en formato LaTeX como se aprecia en la siguiente imagen
 
 <p align="center">
