@@ -1264,7 +1264,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 archivo.write(entrada)
                 archivo.close()
         except:
-            self.mostrarError("No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar.")
+            self.mostrarError(("No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar."))
 
     def importarEntrada(self):
         """Importa la entrada ingresada desde un archivo de texto para su interpretación."""
