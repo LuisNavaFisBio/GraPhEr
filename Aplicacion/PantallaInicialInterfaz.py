@@ -1334,6 +1334,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                         elif entrada == "Funciones Temporales":
                             self.FuncionesTemporalesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
 
+                self.archivoEntrada.close()
+
         except:
             self.mostrarError(("Error -- Fallo en la importación", "No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida."), exportacion_importacion=True)
 

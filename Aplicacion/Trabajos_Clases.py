@@ -59,6 +59,9 @@ import scipy as sc
 import sympy as sp
 matplotlib.use('Qt5Agg')
 
+# Determina el directorio actual
+directorio_base = os.path.dirname(__file__)
+
 # La configuracion de las clases de los trabajos y la configuración de las señales de comunicación fue tomada y modificada de S. Nick. (13 de agosto de 2020). Respuesta a la pregunta "How to display a loading animated gif while a code is executing in backend of my Python Qt5 UI?". stackoverflow. https://stackoverflow.com/a/63395218
 # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
 
@@ -542,12 +545,13 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             self.ui.Entrada = self.ui.Entrada % entrada
             self.ui.Entrada = self.ui.inicioTex + self.ui.Entrada + self.ui.finTex
             self.ui.Entrada = self.ui.Entrada.replace("for", "para").replace("otherwise", "en otro caso")
-            with open('EntradaUsuario.tex','w') as texto_LaTeX:
-                texto_LaTeX.write(self.ui.Entrada)
+            texto_LaTeX = open("EntradaUsuario.tex", 'w')
+            texto_LaTeX.write(self.ui.Entrada)
+            texto_LaTeX.close()
 
             # Creación del archivo TeX con la interpretación.
             # La creación de esta parte del código se basó en la documentación de la libería plasTeX, en particular fue tomada de plasTeX. (s. f.). 5.1 Simple Renderer Example. plasTeX 3.0 — A Python Framework for Processing LaTeX Documents. https://plastex.github.io/plastex/plastex/sec-simple-renderer-ex.html
-            with open('EntradaUsuario.tex') as archivotex:
+            with open("EntradaUsuario.tex", 'r') as archivotex:
                 tex = TeX(file=archivotex)
                 # Creación de la página HTML.
                 tex.ownerDocument.config['files']['filename'] = 'Entrada.html'
