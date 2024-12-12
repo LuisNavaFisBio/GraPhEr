@@ -1219,7 +1219,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # La implementación de esta función para crear el archivo y escribir en él una vez creado el texto a exportar fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
         nombre_archivo, _ = QFileDialog.getSaveFileName(self, "Exportar Entrada", "", "Archivos de Texto (*.txt)")
         if nombre_archivo != "":
-            archivo = open(nombre_archivo, "w")
+            archivo = open(nombre_archivo, "w", encoding='utf-8')
 
             entrada_inicio = "Entrada valida para la aplicación GraPhEr \n \nDatos Generales del Problema\n"
 
@@ -1248,7 +1248,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             entrada_datosProblema = entrada_datosProblema + " 'Condiciones iniciales y/o de frontera':'{0}', 'Número de Subproblemas':{1}".format(self.CondicionesEntrada.text(), self.NumeroEntradasS.value())+"}"
 
             # Exportación de la información de cada subproblema.
-            entrada_subproblemas = "\n"
+            entrada_subproblemas = "\n\n"
             for indice in range(1, self.NumeroEntradasS.value()+1):
                 entrada_subproblemas = entrada_subproblemas + "Solución del Subproblema #{0}\n".format(indice)
                 entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text(), self.NumeroTerminosEntrada[str(indice-1)].text(), self.FuncionesPesoEntrada[str(indice-1)].text(), self.CoeficientesEntrada[str(indice-1)].text(), self.FuncionesEspacialesEntrada[str(indice-1)].text())
@@ -1260,7 +1260,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             entrada = entrada_inicio+entrada_datosProblema+entrada_subproblemas
 
             # Escritura de la información en el archivo de texto
-            archivo.write(entrada)
+            archivo.write(entrada, encoding='utf-8')
             archivo.close()
 
     def importarEntrada(self):
