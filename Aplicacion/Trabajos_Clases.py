@@ -538,7 +538,6 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             entrada['condiciones'] = condiciones_string[1:]
             entrada['dominio'] = dominio_string
 
-
             # Creación del texto con la interpretación.
             self.ui.Entrada = self.ui.Entrada % entrada
             self.ui.Entrada = self.ui.inicioTex + self.ui.Entrada + self.ui.finTex
