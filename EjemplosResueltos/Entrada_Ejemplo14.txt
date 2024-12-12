@@ -1,0 +1,8 @@
+Entrada valida para la aplicación GraPhEr 
+Ecuación de onda bidimensional en coordenadas cartesianas
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'1;0', 'Número de Subproblemas': 1}
+
+Solución del Subproblema #1
+{'Valores Propios':'besselj(0,lamda_n)*besseli(1,lamda_n)+besseli(0,lamda_n)*besselj(1,lamda_n)=0', 'Número de Términos':'1:10', 'Función Peso':'r', 'Coeficientes':'Int[g_1*(besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r)),r]/Int[(besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r))**2,r]', 'Funciones Espaciales':'besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r)', 'Funciones Temporales':'cos(lamda_n**2*t)'}
