@@ -1264,7 +1264,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 archivo.write(entrada)
                 archivo.close()
         except:
-            self.mostrarError(("No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar."))
+            self.mostrarError(("Error -- Fallo en la exportación","No se pudo exportar la entrada. Por favor revisa que no se haya modificado la entrada antes de exportar."))
 
     def importarEntrada(self):
         """Importa la entrada ingresada desde un archivo de texto para su interpretación."""
@@ -1337,7 +1337,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                             self.FuncionesTemporalesEntrada[str(indice-1)].setText(str(informacion_subproblema[entrada]).replace(" ",""))
         
         except:
-            self.mostrarError("No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida.")
+            self.mostrarError(("Error -- Fallo en la importación", "No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida."))
 
     def limpiarEntradas(self):
         """Borra toda la información introducida en los campos de entrada y restablece la ventana principal a su estado inicial."""
