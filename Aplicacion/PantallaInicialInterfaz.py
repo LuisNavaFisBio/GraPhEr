@@ -1216,9 +1216,52 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
     def exportarEntrada(self):
         """Exporta la entrada ingresada e interpretada correctamente a un archivo de texto para su transferencia."""
 
-        # La implementación de esta función fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
+        # La implementación de esta función para crear el archivo y escribir en él una vez creado el texto a exportar fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
+        nombre_archivo, _ = QFileDialog.getSaveFileName(self, "Exportar Entrada", "", "Archivos de Texto (*.txt)")
+        if nombre_archivo != "":
+            archivo = open(nombre_archivo, "w")
 
+            entrada_inicio = "Entrada valida para la aplicación GraPhEr \n \nDatos Generales del Problema\n"
 
+            # Exportación de la información general del problema.
+            entrada_datosProblema ="{"+"'Número de Dimensiones Espaciales':{0} , 'Dependencia Temporal':'{1}', 'Coordenadas':'{2}',".format(self.DimensionEspacialEntrada.value(), "Sí" if self.DimensionTemporalEntrada.isChecked() else "No", self.SistemaCoordenadasEntrada.checkedButton().objectName())
+            for indice in range(self.DimensionEspacialEntrada.value()):
+                if indice == 0:
+                    if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio x':'{0}',".format(self.DominioEspacial1Entrada.text())
+                    else:
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio r':'{0}',".format(self.DominioEspacial1Entrada.text())
+                elif indice == 1:
+                    if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cartesianas":
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio y':'{0}',".format(self.DominioEspacial2Entrada.text())
+                    elif self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Cilíndricas / Polares":
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio phi':'{0}',".format(self.DominioEspacial2Entrada.text())
+                    else:
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio theta':'{0}',".format(self.DominioEspacial2Entrada.text())
+                else:
+                    if self.SistemaCoordenadasEntrada.checkedButton().objectName() == "Esféricas":
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio phi':'{0}',".format(self.DominioEspacial3Entrada.text())
+                    else:
+                        entrada_datosProblema = entrada_datosProblema + " 'Dominio z':'{1}',".format(self.DominioEspacial3Entrada.text())
+            if self.DimensionTemporalEntrada.isChecked():
+                entrada_datosProblema = entrada_datosProblema + " 'Dominio temporal':'{0}',".format(self.DominioTemporalEntrada.text())
+            entrada_datosProblema = entrada_datosProblema + " 'Condiciones iniciales y/o de frontera':'{0}', 'Número de Subproblemas':{1}".format(self.CondicionesEntrada.text(), self.NumeroEntradasS.value())+"}"
+
+            # Exportación de la información de cada subproblema.
+            entrada_subproblemas = "\n"
+            for indice in range(1, self.NumeroEntradasS.value()+1):
+                entrada_subproblemas = entrada_subproblemas + "Solución del Subproblema #{0}\n".format(indice)
+                entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text(), self.NumeroTerminosEntrada[str(indice-1)].text(), self.FuncionesPesoEntrada[str(indice-1)].text(), self.CoeficientesEntrada[str(indice-1)].text(), self.FuncionEspacialesEntrada[str(indice-1)].text())
+                if self.DimensionTemporalEntrada.isChecked():
+                    entrada_subproblemas = entrada_subproblemas + ", 'Funciones Temporales':'{0}'".format(self.FuncionesTemporalesEntrada[str(indice-1)].text())
+                entrada_subproblemas = entrada_subproblemas + "}\n"
+                
+            # Conjunción de toda la información.
+            entrada = entrada_inicio+entrada_datosProblema+entrada_subproblemas
+
+            # Escritura de la información en el archivo de texto
+            archivo.write(entrada)
+            archivo.close()
 
     def importarEntrada(self):
         """Importa la entrada ingresada desde un archivo de texto para su interpretación."""
