@@ -1944,7 +1944,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
             # Diseño de la ventana de carga.
             self.Ui_Carga.label.setText("Iniciando Proceso")
-            self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "ProyeccionCarga.gif"))
+            if self.Ui_Grafica.SolucionModo.isChecked():
+                self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "SolucionModo.gif"))
+            else:
+                self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "SolucionParcial.gif"))
             self.Ui_Carga.animacion.setScaledSize(QSize(227,150))
             self.Ui_Carga.icono.setMovie(self.Ui_Carga.animacion)
             self.Ui_Carga.animacion.start()
