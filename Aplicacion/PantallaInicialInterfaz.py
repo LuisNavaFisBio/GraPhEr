@@ -1661,6 +1661,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
             self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
         except:
             pass
 
@@ -1671,6 +1675,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
         self.Ui_Grafica.GraficarCurvasFija.clicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(self.cambiarModoVisualizacion)
 
         # La conectividad para abrir la ventana de etiquetas a partir de la ventana de graficación fue tomada de Elder, J. [Codemy.com] (05 de agosto de 2021). How To Open A Second Window - PyQt5 GUI Thursdays #24. YouTube. https://www.youtube.com/watch?v=R5N8TA0KFxc
         self.Ui_Grafica.Ui_Etiquetas = Ui_VentanaEtiquetas()
@@ -1736,6 +1744,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.Grupo.buttonClicked.disconnect()
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
             self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
         except:
             pass
 
@@ -1765,6 +1777,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+        self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(self.cambiarModoVisualizacion)
 
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
@@ -1938,6 +1954,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.Grupo.buttonClicked.disconnect()
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
             self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
         except:
             pass
 
@@ -1967,6 +1987,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+        self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(self.cambiarModoVisualizacion)
 
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
@@ -2031,6 +2055,14 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.Grupo.buttonClicked.disconnect()
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
             self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
+            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
         except:
             pass
 
@@ -2060,6 +2092,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+        self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ValorPropio3_1.valueChanged.connect(self.cambiarModoVisualizacion)
         
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
@@ -2224,6 +2260,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.Grupo.buttonClicked.disconnect()
             self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
             self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
         except:
             pass
 
@@ -2253,7 +2293,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
         self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
-        
         self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ValorPropio2_1.valueChanged.connect(self.cambiarModoVisualizacion)
@@ -2300,7 +2339,7 @@ class PantallaPrincipal(QMainWindow):
         event.ignore()
 
         if EmergenteVentanaPrincipal.clickedButton() == boton1:
-            borrardatosaplicacion(ui, True)
+            borrardatosaplicacion(ui, True, True)
             event.accept()
 
 class PantallaGraficacion(QMainWindow):
@@ -2362,7 +2401,7 @@ class PantallaGraficacion(QMainWindow):
                     self.ui.MensajeError.close()
                 event.accept()
 
-def borrardatosaplicacion(ui_informacion, cierretotal):
+def borrardatosaplicacion(ui_informacion, cierretotal, cierredeseado=False):
     """Elimina archivos creados para la visualización de la interpretación y cierra todas las ventanas de la aplicación."""
 
     if os.path.exists('Entrada.html'):
@@ -2384,7 +2423,9 @@ def borrardatosaplicacion(ui_informacion, cierretotal):
             ui_informacion.cierretotal = True
             ui_informacion.VentanaGrafica.setHidden(True)
             ui_informacion.VentanaGrafica.EmergenteVentanaGraficacion.close()
-        print("Thank you for using this app. Share it if you liked it.")
+        
+        if cierredeseado:
+            print("Thank you for using this app. Share it if you liked it.")
 
 # Ejecución de la aplicación
 if __name__ == "__main__":
