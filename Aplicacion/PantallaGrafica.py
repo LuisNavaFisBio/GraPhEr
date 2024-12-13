@@ -4494,13 +4494,14 @@ class Ui_Graficacion(QMainWindow):
                 self.curvasdibujadas = False
             # Cambio de opacidad de la solución para mostrar su color original.
             canva.axes.grid(True)
-            if self.Proyeccion:
-                canva.axes.proyeccion.set_alpha(1)
-                if len(canva.figura.axes) > 2:
-                    canva.axes2.proyeccion.set_alpha(1)
-                    canva.axes2.grid(True)
-            else:
-                canva.axes.superficie.set_alpha(1)
+            if not (len(self.Dominio) == 2 and self.dependencia_tiempo):
+                if self.Proyeccion:
+                    canva.axes.proyeccion.set_alpha(1)
+                    if len(canva.figura.axes) > 2:
+                        canva.axes2.proyeccion.set_alpha(1)
+                        canva.axes2.grid(True)
+                else:
+                    canva.axes.superficie.set_alpha(1)
             
             # Actualización del lienzo.
             canva.figura.canvas.draw_idle()
