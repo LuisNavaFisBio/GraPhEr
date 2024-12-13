@@ -4094,6 +4094,7 @@ class Ui_Graficacion(QMainWindow):
                         self.graficacion(coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
                     else:
                         self.graficacion(coordenada_especifica=coordenada)
+                        
             else:
                 # Graficación para problemas de tres dimensiones espaciales o con una dimension espacial y dependencia temporal.
                 # Deshabilitación de las herramientas de curvas de nivel.
