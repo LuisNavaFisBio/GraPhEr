@@ -3766,9 +3766,10 @@ class Ui_Graficacion(QMainWindow):
                             # Problema con una dimensión espacial y dependencia temporal.
 
                             # Calculo de la solución para el tiempo especificado.
-                            self.ValoresSolucion = np.zeros(int(len(self.Dominios[0])))
-                            for indice in range(len(self.Dominios[0])):
-                                self.ValoresSolucion[indice] = self.Funcion(self.Dominios[0][indice], valor_coordenadaFija)
+                            if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
+                                self.ValoresSolucion = np.zeros(int(len(self.Dominios[0])))
+                                for indice in range(len(self.Dominios[0])):
+                                    self.ValoresSolucion[indice] = self.Funcion(self.Dominios[0][indice], valor_coordenadaFija)
                             puntos = np.array([self.Dominios[0], self.ValoresSolucion]).T.reshape(-1, 1, 2)
                             segmentos = np.concatenate([puntos[:-1], puntos[1:]], axis=1)
 
@@ -3780,10 +3781,11 @@ class Ui_Graficacion(QMainWindow):
                             self.MostrarSolucion.axes.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(valor_coordenadaFija//60), int(valor_coordenadaFija%60), int((valor_coordenadaFija*100)%100)), pad = 10)
                         else:
                             # Calculo de la solución para el tiempo especificado.
-                            self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[1]))])
-                            for indice1 in range(len(self.Dominios[0])):
-                                for indice2 in range(len(self.Dominios[1])):
-                                    self.ValoresSolucion[indice1][indice2] = self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2], valor_coordenadaFija)
+                            if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
+                                self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[1]))])
+                                for indice1 in range(len(self.Dominios[0])):
+                                    for indice2 in range(len(self.Dominios[1])):
+                                        self.ValoresSolucion[indice1][indice2] = self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2], valor_coordenadaFija)
 
                             self.envioActualizacion("Graficando Solución")
 
@@ -3815,10 +3817,11 @@ class Ui_Graficacion(QMainWindow):
                             self.envioActualizacion("Calculando Solución")
 
                             # Calculo de la solución para el corte deseado.
-                            self.ValoresSolucion = np.zeros([int(len(self.Dominios[1])), int(len(self.Dominios[2]))])
-                            for indice1 in range(len(self.Dominios[1])):
-                                for indice2 in range(0, len(self.Dominios[2])):
-                                    self.ValoresSolucion[indice1][indice2] = self.Funcion(valor_coordenadaFija, self.Dominios[1][indice1], self.Dominios[2][indice2])
+                            if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
+                                self.ValoresSolucion = np.zeros([int(len(self.Dominios[1])), int(len(self.Dominios[2]))])
+                                for indice1 in range(len(self.Dominios[1])):
+                                    for indice2 in range(0, len(self.Dominios[2])):
+                                        self.ValoresSolucion[indice1][indice2] = self.Funcion(valor_coordenadaFija, self.Dominios[1][indice1], self.Dominios[2][indice2])
 
                             self.envioActualizacion("Graficando Solución")
                                 
@@ -3868,10 +3871,11 @@ class Ui_Graficacion(QMainWindow):
                             self.envioActualizacion("Calculando Solución")
 
                             # Calculo de la solución para el valor especificado.
-                            self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[2]))])
-                            for indice1 in range(len(self.Dominios[0])):
-                                for indice2 in range(0, len(self.Dominios[2])):
-                                    self.ValoresSolucion[indice1][indice2] = self.Funcion(self.Dominios[0][indice1], valor_coordenadaFija, self.Dominios[2][indice2])
+                            if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
+                                self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[2]))])
+                                for indice1 in range(len(self.Dominios[0])):
+                                    for indice2 in range(0, len(self.Dominios[2])):
+                                        self.ValoresSolucion[indice1][indice2] = self.Funcion(self.Dominios[0][indice1], valor_coordenadaFija, self.Dominios[2][indice2])
 
                             self.envioActualizacion("Graficando Solución")
 
@@ -3914,10 +3918,11 @@ class Ui_Graficacion(QMainWindow):
                             self.envioActualizacion("Calculando Solución")
     
                             # Calculo de la solución para el valor especificado.
-                            self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[1]))])
-                            for indice1 in range(len(self.Dominios[0])):
-                                for indice2 in range(len(self.Dominios[1])):
-                                    self.ValoresSolucion[indice1][indice2] = self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2], valor_coordenadaFija)
+                            if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
+                                self.ValoresSolucion = np.zeros([int(len(self.Dominios[0])), int(len(self.Dominios[1]))])
+                                for indice1 in range(len(self.Dominios[0])):
+                                    for indice2 in range(len(self.Dominios[1])):
+                                        self.ValoresSolucion[indice1][indice2] = self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2], valor_coordenadaFija)
 
                             self.envioActualizacion("Graficando Solución")
 
@@ -4094,7 +4099,7 @@ class Ui_Graficacion(QMainWindow):
                         self.graficacion(coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
                     else:
                         self.graficacion(coordenada_especifica=coordenada)
-                        
+
             else:
                 # Graficación para problemas de tres dimensiones espaciales o con una dimension espacial y dependencia temporal.
                 # Deshabilitación de las herramientas de curvas de nivel.
