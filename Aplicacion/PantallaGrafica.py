@@ -4297,7 +4297,7 @@ class Ui_Graficacion(QMainWindow):
                             self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2][valorpropio3]
 
                     else:
-                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1]
+                        self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][0]
                         print("a")
 
                     print(self.SolucionModo)

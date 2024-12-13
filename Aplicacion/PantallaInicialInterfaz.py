@@ -1663,6 +1663,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
         except:
             pass
+
         self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
         self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
         self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
@@ -1724,9 +1725,21 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
+        
+        # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+        try:
+            self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+            self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+            self.Ui_Grafica.GraficarCoordenadaFija.clicked.disconnect()
+            self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.disconnect()
+            self.Ui_Grafica.Grupo.buttonClicked.disconnect()
+            self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
+            self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+        except:
+            pass
+
         if self.DimensionTemporalEntrada.isChecked() or (self.DimensionEspacialEntrada.value() == 3):
-            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
-            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
             try:
                 self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
                 self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
@@ -1734,8 +1747,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPausa.clicked.disconnect()
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
-                self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
-                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             except:
                 pass
 
@@ -1746,8 +1757,15 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
-            self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
-            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+
+        self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+        self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+        self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
+        self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
+        self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -1909,9 +1927,21 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
+        
+        # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+        try:
+            self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+            self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+            self.Ui_Grafica.GraficarCoordenadaFija.clicked.disconnect()
+            self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.disconnect()
+            self.Ui_Grafica.Grupo.buttonClicked.disconnect()
+            self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
+            self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+        except:
+            pass
+
         if self.DimensionTemporalEntrada.isChecked() or (self.DimensionEspacialEntrada.value() == 3):
-            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
-            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
             try:
                 self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
                 self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
@@ -1919,8 +1949,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPausa.clicked.disconnect()
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
-                self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
-                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             except:
                 pass
 
@@ -1931,8 +1959,15 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
-            self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
-            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+
+        self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+        self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+        self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
+        self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
+        self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -1988,6 +2023,17 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+        try:
+            self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+            self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+            self.Ui_Grafica.GraficarCoordenadaFija.clicked.disconnect()
+            self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.disconnect()
+            self.Ui_Grafica.Grupo.buttonClicked.disconnect()
+            self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
+            self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+        except:
+            pass
+
         if self.DimensionTemporalEntrada.isChecked() or (self.DimensionEspacialEntrada.value() == 3):
             try:
                 self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
@@ -1996,8 +2042,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPausa.clicked.disconnect()
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
-                self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
-                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
             except:
                 pass
 
@@ -2011,6 +2055,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
         self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+        self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
+        self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
+        self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
+        
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
 
@@ -2163,9 +2213,21 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
         self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
         self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+        
+        # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
+        # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
+        try:
+            self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
+            self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
+            self.Ui_Grafica.GraficarCoordenadaFija.clicked.disconnect()
+            self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.disconnect()
+            self.Ui_Grafica.Grupo.buttonClicked.disconnect()
+            self.Ui_Grafica.ProyeccionEntrada.stateChanged.disconnect()
+            self.Ui_Grafica.Grupo1.buttonClicked.disconnect()
+        except:
+            pass
+
         if self.DimensionTemporalEntrada.isChecked() or (self.DimensionEspacialEntrada.value() == 3):
-            # La desconexión de los botones de reproducción para evitar el envío doble de las señales se realizó de acuerdo con ingvar. (14 de octubre de 2017). Respuesta a la pregunta "When a QPushButton is clicked, it fires twice". stackoverflow. https://stackoverflow.com/a/46748321
-            # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
             try:
                 self.Ui_Grafica.BotonPasoAtras.clicked.disconnect()
                 self.Ui_Grafica.BotonReproduccionAtras.clicked.disconnect()
@@ -2173,12 +2235,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.BotonPausa.clicked.disconnect()
                 self.Ui_Grafica.BotonPasoAdelante.clicked.disconnect()
                 self.Ui_Grafica.deslizador.valueChanged.disconnect()
-                self.Ui_Grafica.GuardarAnimacion.clicked.disconnect()
-                self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect()
-                self.Ui_Grafica.self.Ui_Grafica.GraficarCurvasFija.clicked.disconnect().clicked.disconnect()
             except:
                 pass
-            
+
             self.Ui_Grafica.BotonPasoAtras.clicked.connect(self.Ui_Grafica.Animacion.pasoAtras)
             self.Ui_Grafica.BotonReproduccionAtras.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAtras)
             self.Ui_Grafica.BotonReproduccionAdelante.clicked.connect(self.Ui_Grafica.Animacion.reproduccionAdelante)
@@ -2186,8 +2245,14 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.BotonPasoAdelante.clicked.connect(self.Ui_Grafica.Animacion.pasoAdelante)
             self.Ui_Grafica.deslizador.setMaximum(self.Ui_Grafica.Animacion.maximo-self.Ui_Grafica.Animacion.argumentos[0])
             self.Ui_Grafica.deslizador.valueChanged.connect(self.Ui_Grafica.Animacion.actualizarGrafica)
-            self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
-            self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+
+        self.Ui_Grafica.GuardarAnimacion.clicked.connect(self.guardarAnimacion)
+        self.Ui_Grafica.GraficarCurvasFija.clicked.connect(lambda: self.visualizarCurvasNivel(boton=True))
+        self.Ui_Grafica.GraficarCoordenadaFija.clicked.connect(self.graficarCorte)
+        self.Ui_Grafica.CoordenadaFija_Casilla.buttonClicked.connect(self.cambiarCoordenadaFija)
+        self.Ui_Grafica.Grupo.buttonClicked.connect(self.visualizarCurvasNivel)
+        self.Ui_Grafica.Grupo1.buttonClicked.connect(self.cambiarModoVisualizacion)
+        self.Ui_Grafica.ProyeccionEntrada.stateChanged.connect(self.cambiarProyeccion)
         
         self.Ui_Grafica.Subproblema_1.valueChanged.connect(self.cambiarModoVisualizacion)
         self.Ui_Grafica.ValorPropio1_1.valueChanged.connect(self.cambiarModoVisualizacion)
