@@ -4261,7 +4261,7 @@ class Ui_Graficacion(QMainWindow):
                 if self.Modo.isChecked():
                     self.envioActualizacion("Obteniendo Solución del Modo")
 
-                    # Obtención el modo requerido.
+                    # Obtención del modo requerido.
                     if self.ValorPropio2_1.isEnabled():
                         if not self.ValorPropio3_1.isEnabled():
                             self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2]
@@ -4331,7 +4331,7 @@ class Ui_Graficacion(QMainWindow):
                                 for indice3 in range(0, len(self.Dominios[2])):
                                     self.ValoresSolucion[indice3][indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice1], self.Dominios[1][indice2], self.Dominios[2][indice3])))
                             else:
-                                self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.ui.Dominios[0][indice1], self.Dominios[1][indice2])))
+                                self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice1], self.Dominios[1][indice2])))
 
                 self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
                             

@@ -1953,7 +1953,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Carga.animacion.start()
             QCoreApplication.processEvents()
 
-            if self.Ui_Grafica.etiquetas and (len(self.Ui_Grafica.dominio) == 6):
+            if self.Ui_Grafica.etiquetas and (len(self.Ui_Grafica.dominio) == 6) and not self.Ui_Grafica.ProyeccionEntrada.isChecked():
                 # Oculta la leyenda de las curvas de nivel en problemas de tres dimensiones espaciales. 
                 self.Ui_Grafica.VentanaEtiquetas.close()
 
