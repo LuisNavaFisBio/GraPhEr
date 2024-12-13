@@ -9,7 +9,7 @@ Solución del Subproblema #1
 {'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'Int[f_1/(2*pi),phi]', 'Funciones Espaciales':'(ln(3)-ln(r))/ln(3)'}
 
 Solución del Subproblema #2
-{'Valores Propios':'n', 'Número de Términos':'1:10', 'Función Peso':'1:10', 'Coeficientes':'Int[f_1*cos(lamda_n*phi)/pi,phi];Int[f_1*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*cos(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n));(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*sin(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n))'}
+{'Valores Propios':'n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[f_1*cos(lamda_n*phi)/pi,phi];Int[f_1*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*cos(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n));(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*sin(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n))'}
 
 Solución del Subproblema #3
 {'Valores Propios':'n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':' Int[f_1*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*sin(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n))'}
