@@ -4110,6 +4110,8 @@ class Ui_Graficacion(QMainWindow):
             del self.Animacion
 
             if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                self.envioActualizacion("Activando Selectores de Indices")
+
                 self.Subproblema_1.setEnabled(True)
                 self.ValorPropio1_1.setEnabled(True)
                 self.label_4.setEnabled(True)
@@ -4257,6 +4259,9 @@ class Ui_Graficacion(QMainWindow):
                 print("Hola", subproblema, valorpropio1, valorpropio2, valorpropio3)
 
                 if self.Modo.isChecked():
+                    self.envioActualizacion("Obteniendo Solución del Modo")
+
+                    # Obtención el modo requerido.
                     if self.ValorPropio2_1.isEnabled():
                         if not self.ValorPropio3_1.isEnabled():
                             self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2]
@@ -4273,6 +4278,8 @@ class Ui_Graficacion(QMainWindow):
                     self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
 
                 elif self.SolucionParcial.isChecked():
+                    self.envioActualizacion("Obteniendo Suma Parcial")
+
                     # Suma de las soluciones requeridas para el modo parcial.
                     self.SolucionModoParcial = 0 
                     for indice1 in range(len(self.Soluciones[:subproblema])):
@@ -4291,6 +4298,8 @@ class Ui_Graficacion(QMainWindow):
                     print(self.SolucionModoParcial)
 
                     self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModoParcial, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+                
+                self.envioActualizacion("Calculando Valores de la Solución")
                 
                 # Cálculo de las particiones de cada dominio.
                 estructura = []
