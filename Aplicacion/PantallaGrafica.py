@@ -5065,20 +5065,20 @@ class Ui_Graficacion(QMainWindow):
                 if not self.dependencia_tiempo:
                     if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) > self.dominio[3]) or (float(parsing.parse_expr(self.Coordenada2.text())) < self.dominio[2]):
                     # Si alguna de las dos primeras coordenadas está fuera del dominio no se calcula el valor.
-                        resultado = "\\text{El punto no está en el dominio.}"
+                        resultado = "\text{El punto no está en el dominio.}"
                 else:
                     if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) < 0):
                     # Si alguna de las dos primeras coordenadas está fuera del dominio no se calcula el valor (en problemas temporales).
-                        resultado = "\\text{El punto no está en el dominio.}"
+                        resultado = "\text{El punto no está en el dominio.}"
             elif self.Coordenada3.isEnabled():
                 if not self.dependencia_tiempo:
                     if (float(parsing.parse_expr(self.Coordenada3.text())) > self.dominio[5]) or (float(parsing.parse_expr(self.Coordenada3.text())) < self.dominio[4]):
                         # Si la tercera coordenada está dentro del dominio o se calcula el valor.
-                        resultado = "\\text{El punto no está en el dominio.}"
+                        resultado = "\text{El punto no está en el dominio.}"
                 else:
                     if float(parsing.parse_expr(self.Coordenada3.text())) < 0:
                         # Si la tercera coordenada está dentro del dominio o se calcula el valor (problemas temporales).
-                        resultado = "\\text{El punto no está en el dominio.}"
+                        resultado = "\text{El punto no está en el dominio.}"
             if resultado == "":
                 # Calculo del valor de la solución.
                 if self.Coordenada3.isEnabled() == False:
@@ -5107,7 +5107,7 @@ class Ui_Graficacion(QMainWindow):
             # La siguiente línea fuer tomada de
             # mugiseyebrows. (31 de marzo 2021). Respuesta a la pregunta "MathJax flickering and statusbar showing in PyQt5". stackoverflow. https://stackoverflow.com/a/66870093
             # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
-            self.pagina2.runJavaScript('convert("{}");'.format("\\text{Hay un error en la entrada.}"))
+            self.pagina2.runJavaScript('convert("{}");'.format("\text{Hay un error en la entrada.}"))
         
 class Indicadores(QtCore.QObject):
     """Clase que contiene las señales necesarias para la ejecución de las tareas de graficación."""
