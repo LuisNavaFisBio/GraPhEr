@@ -907,8 +907,8 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_1_label = QLabel()
         self.CoordenadaFija_1_label.setMinimumSize(QSize(30, 30))
         self.CoordenadaFija_1_label.setMaximumSize(QSize(30, 30))
-        self.CoordenadaFija_1_label.setAlignment(Qt.AlignCenter)
-        horizontalLayout_6.addWidget(self.CoordenadaFija_1_label)
+        self.CoordenadaFija_1_label.setAlignment(Qt.AlignVCenter)
+        horizontalLayout_6.addWidget(self.CoordenadaFija_1_label, alignment=Qt.AlignLeft)
 
         self.CoordenadaFija_2 = QCheckBox()
         self.CoordenadaFija_2.setText("")
@@ -920,8 +920,8 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_2_label = QLabel()
         self.CoordenadaFija_2_label.setMinimumSize(QSize(30, 30))
         self.CoordenadaFija_2_label.setMaximumSize(QSize(30, 30))
-        self.CoordenadaFija_2_label.setAlignment(Qt.AlignCenter)
-        horizontalLayout_6.addWidget(self.CoordenadaFija_2_label)
+        self.CoordenadaFija_2_label.setAlignment(Qt.AlignVCenter)
+        horizontalLayout_6.addWidget(self.CoordenadaFija_2_label, alignment=Qt.AlignLeft)
 
         self.CoordenadaFija_3 = QCheckBox()
         self.CoordenadaFija_3.setText("")
@@ -933,8 +933,9 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_3_label = QLabel()
         self.CoordenadaFija_3_label.setMinimumSize(QSize(30, 30))
         self.CoordenadaFija_3_label.setMaximumSize(QSize(30, 30))
-        self.CoordenadaFija_3_label.setAlignment(Qt.AlignCenter)
-        horizontalLayout_6.addWidget(self.CoordenadaFija_3_label)
+        self.CoordenadaFija_3_label.setAlignment(Qt.AlignVCenter)
+        horizontalLayout_6.addWidget(self.CoordenadaFija_3_label, alignment=Qt.AlignLeft)
+        verticalLayout_2.addLayout(horizontalLayout_6)
         verticalLayout_2.addLayout(horizontalLayout_6)
 
         # Configuración de las casillas de coordenadas fijas como casillas mutuamente excluyentes.
@@ -947,14 +948,14 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_7 = QHBoxLayout()
         horizontalLayout_7.setSpacing(5)
         horizontalLayout_7.setContentsMargins(20, 0, 20, 0)
-        horizontalLayout_7.setStretch(0, 130)
-        horizontalLayout_7.setStretch(1, 200)
+        horizontalLayout_7.setStretch(0, 150)
+        horizontalLayout_7.setStretch(1, 180)
         horizontalLayout_7.setStretch(2, 120)
 
         self.label_15 = QLabel()
         self.label_15.setText("Valor de la Coordenada Fija")
-        self.label_15.setMinimumSize(QSize(150, 30))
-        self.label_15.setMaximumSize(QSize(150, 30))
+        self.label_15.setMinimumSize(QSize(170, 30))
+        self.label_15.setMaximumSize(QSize(170, 30))
         horizontalLayout_7.addWidget(self.label_15, alignment=Qt.AlignLeft)
 
         # Diseño y configuración del campo de entrada del cuadro_fijo de la coordenada fija y el botón de graficación correspondiente.
@@ -1418,6 +1419,9 @@ class Ui_Graficacion(QMainWindow):
 
             if (len(self.Dominio) < 3) and (not self.dependencia_tiempo):
                 # Cuando se tiene un problema de dos coordenadas y estas son espaciales, se deshabilita la opción de graficación de cortes.
+                self.CoordenadaFija_1.setSizePolicy(sizePolicy2)
+                self.CoordenadaFija_2.setSizePolicy(sizePolicy2)
+                self.CoordenadaFija_3.setSizePolicy(sizePolicy2)
                 self.CoordenadaFija_1.setChecked(False)
                 self.CoordenadaFija_1.setEnabled(False)
                 self.CoordenadaFija_2.setEnabled(False)
@@ -1425,18 +1429,15 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1.setVisible(False)
                 self.CoordenadaFija_2.setVisible(False)
                 self.CoordenadaFija_3.setVisible(False)
-                self.CoordenadaFija_1.setSizePolicy(sizePolicy2)
-                self.CoordenadaFija_2.setSizePolicy(sizePolicy2)
-                self.CoordenadaFija_3.setSizePolicy(sizePolicy2)
+                self.CoordenadaFija_1_label.setSizePolicy(sizePolicy2)
+                self.CoordenadaFija_2_label.setSizePolicy(sizePolicy2)
+                self.CoordenadaFija_3_label.setSizePolicy(sizePolicy2)
                 self.CoordenadaFija_1_label.setEnabled(False)
                 self.CoordenadaFija_2_label.setEnabled(False)
                 self.CoordenadaFija_3_label.setEnabled(False)
                 self.CoordenadaFija_1_label.setVisible(False)
                 self.CoordenadaFija_2_label.setVisible(False)
                 self.CoordenadaFija_3_label.setVisible(False)
-                self.CoordenadaFija_1_label.setSizePolicy(sizePolicy2)
-                self.CoordenadaFija_2_label.setSizePolicy(sizePolicy2)
-                self.CoordenadaFija_3_label.setSizePolicy(sizePolicy2)
                 self.CoordenadaFija.setEnabled(False)
                 self.CoordenadaFija.setVisible(False)
                 self.CoordenadaFija.setText("{}".format(float(self.Dominio[0][0])))
@@ -1506,6 +1507,7 @@ class Ui_Graficacion(QMainWindow):
             print(tipoError)
             print(explicacion)
             print(line.tb_lineno)
+
 
     def crearGrafica(self):
         self.envioActualizacion("Habilitando Lienzo")
