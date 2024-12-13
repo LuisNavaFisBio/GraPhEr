@@ -4045,13 +4045,22 @@ class Ui_Graficacion(QMainWindow):
             
             if self.CurvasNivelAuto.isChecked():
                 # Graficación con curvas de nivel calculadas automáticamente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                else:
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
             elif self.CurvasNivelEspecificas.isChecked():
                 # Graficación con curvas de nivel especificadas manualmente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                else:
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
             else:
                 # Graficación sin curvas de nivel.
-                self.graficacion(coordenada_especifica=coordenada)
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                else:
+                    self.graficacion(coordenada_especifica=coordenada)
         else:
             self.Proyeccion = False
 
@@ -4069,19 +4078,31 @@ class Ui_Graficacion(QMainWindow):
             if (len(self.Dominio) == 3 and self.dependencia_tiempo) or (len(self.Dominios) == 2 and not self.dependencia_tiempo):
                 if self.CurvasNivelAuto.isChecked():
                     # Graficación con curvas de nivel calculadas automáticamente.
-                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
+                    if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                        self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                    else:
+                        self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
                 elif self.CurvasNivelEspecificas.isChecked():
                     # Graficación con curvas de nivel especificadas manualmente.
-                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
+                    if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                        self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                    else:
+                        self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
                 else:
                     # Graficación sin curvas de nivel.
-                    self.graficacion(coordenada_especifica=coordenada)
+                    if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                        self.graficacion(coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                    else:
+                        self.graficacion(coordenada_especifica=coordenada)
             else:
                 # Graficación para problemas de tres dimensiones espaciales o con una dimension espacial y dependencia temporal.
                 # Deshabilitación de las herramientas de curvas de nivel.
                 self.CurvasNivelAuto.setCheckable(False)
                 self.CurvasNivelEspecificas.setCheckable(False)
-                self.graficacion(coordenada_especifica=coordenada)
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(coordenada_especifica=coordenada, visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion) 
+                else:
+                    self.graficacion(coordenada_especifica=coordenada)
 
     def intercambiarModoVisualizacion(self, subproblema, valorpropio1, valorpropio2, valorpropio3):
         """Intercambia entre modos de visualización (solucion parcial completa, modo por modo o soluciones parciales)
