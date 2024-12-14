@@ -4371,6 +4371,11 @@ class Ui_Graficacion(QMainWindow):
                                 self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice1], self.Dominios[1][indice2])))
 
                 self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+
+                if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
+                    self.envioActualizacion("Añadiendo Curvas de Nivel")
+
+                    self.interpretacionCurvasNivel()
                             
             else:
                 self.Subproblema_1.setEnabled(False)
