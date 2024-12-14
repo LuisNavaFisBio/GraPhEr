@@ -4575,6 +4575,10 @@ class Ui_Graficacion(QMainWindow):
             curvas_especificas = [Line2D([0], [0], color=self.Colormap(self.valorColor(valor)), lw=2) for valor in self.curvas_nivel]
             self.curvas_nivel.reverse()
 
+            if self.Modo.isChecked() and self.SolucionParcial.isChecked():
+                self.Valores = self.ValoresSolucion
+                valores = self.ValoresSolucion
+
             try:
                 self.curvasdibujadas = True
                 if self.carga:
