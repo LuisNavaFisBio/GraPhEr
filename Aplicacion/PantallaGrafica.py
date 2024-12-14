@@ -4593,7 +4593,7 @@ class Ui_Graficacion(QMainWindow):
                             canva.axes.proyeccion.set_alpha(0.4)
                             if (len(self.Dominios) == 2) and (not self.dependencia_tiempo):
                                 # Curvas de nivel para problemas de dos dimensiones espaciales sin dependencia temporal.
-                                self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores, levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             else:
                                 self.Curvas = canva.axes.contour(self.v, self.u, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             canva.axes.grid(True)
@@ -4604,7 +4604,7 @@ class Ui_Graficacion(QMainWindow):
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 2, alpha = 1)
                             else:
                                 # Curvas de nivel para gráficas sin proyección y sin dependencia temporal.
-                                self.Curvas = canva.axes.contour(self.x, self.y, self.MatrizResultados, levels=self.curvas_nivel, linewidths=2, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
+                                self.Curvas = canva.axes.contour(self.x, self.y, self.Valores, levels=self.curvas_nivel, linewidths=2, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             canva.axes.grid(True)
                     else:
                         # Graficación de curvas de nivel cuando se especifica un valor especifico para la coordenada fija (si es que se tiene una).
