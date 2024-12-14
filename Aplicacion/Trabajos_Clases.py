@@ -285,7 +285,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
 
                 if self.ui.DimensionTemporalEntrada.isChecked():
                     # Modificación de la entrada temporal para su posterior interpretación.
-                    self.ui.FuncionesTemporales[indice] = [expresion.replace("C_1", coeficientes[0]).replace("C_2", coeficientes[-1]).replace("Int[",integral_string_i).replace("]", integral_string_f).replace("Int{", "Integral(").replace("}", ",(s, 0, t))") for expresion in FTE["{}".format(indice)].split(";")]
+                    self.ui.FuncionesTemporales[indice] = [expresion.replace("C_1", coeficientes[0]).replace("C_2", coeficientes[-1]).replace("Int[",integral_string_i).replace("]", integral_string_f).replace("Int|", "Integral(").replace("|", ",(s, 0, t))") for expresion in FTE["{}".format(indice)].split(";")]
                     for indice2 in range(len(self.ui.Condiciones[indice1])):
                         # Modificación de la expresión para sustituir las condiciones iniciales
                         if indice2 == 0:
