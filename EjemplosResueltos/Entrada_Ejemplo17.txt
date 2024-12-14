@@ -1,14 +1,8 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de Laplace tridimensional en coordenadas cilíndricas representando la temperatura en el estado estacionario de un barril flotando en el agua
+Ecuación de Poisson tridimensional en coordenadas cartesianas
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1/4', 'Dominio phi':'0:2*pi', 'Dominio z':'0:1', 'Condiciones iniciales y/o de frontera':'30;-5;Piecewise((-5,z<2/3),(30,z>2/3))', 'Número de Subproblemas': 3}
+{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio y':'0:1', 'Dominio z':'0:1', 'Condiciones iniciales y/o de frontera':'DiracDelta(y-1/2)*DiracDelta(z-1/2)', 'Número de Subproblemas': 1}
 
 Solución del Subproblema #1
-{'Valores Propios':'besselj(0, lamda_n/4)=0', 'Número de Términos':'1:10', 'Función Peso':'r', 'Coeficientes':'Int[32*f_1*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n/4)**2),r]', 'Funciones Espaciales':'besselj(0, lamda_n*r)*sinh(lamda_n*z)'}
-
-Solución del Subproblema #2
-{'Valores Propios':'besselj(0, lamda_n/4)=0', 'Número de Términos':'1:10', 'Función Peso':'r', 'Coeficientes':'Int[32*f_2*besselj(0, lamda_n*r)/(sinh(lamda_n)*besselj(1, lamda_n/4)**2),r]', 'Funciones Espaciales':'besselj(0, lamda_n*r)*sinh(lamda_n*(1-z))'}
-
-Solución del Subproblema #3
-{'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*f_3*sin(lamda_n*z)/besseli(0,lamda_n/4),z]', 'Funciones Espaciales':'besseli(0, lamda_n*r)*sin(lamda_n*z)'}
+{'Valores Propios':'n*pi;m*pi;l*pi', 'Número de Términos':'1:10;1:10;1:10', 'Función Peso':'1', 'Coeficientes':'Int[8*f_1*sin(lamda_n*x)*sin(lamda_m*y)*sin(lamda_l*z)/(lamda_n**2+lamda_m**2+lamda_l**2),x,y,z]', 'Funciones Espaciales':'sin(lamda_n*x)*sin(lamda_m*y)*sin(lamda_l*z)'}

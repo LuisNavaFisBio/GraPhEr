@@ -1,15 +1,11 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de Laplace en una región anular
---- Nota importante: Aunque la entrada se divide en tres partes, el problema solo se divide en dos subproblemas para su solución, es solo una manera de ejemplificar como ingresar entradas distintas de un mismo subproblema.
+Ecuación de Laplace en coordenadas polares
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio x':'1:3', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'(2*pi-phi)*(pi-phi)*phi', 'Número de Subproblemas': 3}
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio x':'0:1', 'Dominio phi':'0:pi/2', 'Condiciones iniciales y/o de frontera':'sin(phi)', 'Número de Subproblemas': 2}
 
 Solución del Subproblema #1
-{'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'Int[f_1/(2*pi),phi]', 'Funciones Espaciales':'(ln(3)-ln(r))/ln(3)'}
+{'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'1', 'Funciones Espaciales':'2*phi/pi'}
 
 Solución del Subproblema #2
-{'Valores Propios':'n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[f_1*cos(lamda_n*phi)/pi,phi];Int[f_1*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*cos(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n));(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*sin(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n))'}
-
-Solución del Subproblema #3
-{'Valores Propios':'n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':' Int[f_1*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'(1/r)**lamda_n*(3**(2*lamda_n)-r**(2*lamda_n))*sin(lamda_n*phi)/(3**(2*lamda_n)-1**(2*lamda_n))'}
+{'Valores Propios':'2*n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[4*(f_1-u_1)*sin(lamda_n*phi)/pi,phi]', 'Funciones Espaciales':'r**lamda_n*sin(lamda_n*phi)'}

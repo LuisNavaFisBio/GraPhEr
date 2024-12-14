@@ -1253,7 +1253,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                     entrada_subproblemas = entrada_subproblemas + "{"+ "'Valores Propios':'{0}', 'Número de Términos':'{1}', 'Función Peso':'{2}', 'Coeficientes':'{3}', 'Funciones Espaciales':'{4}'".format(self.ValoresPropiosEntrada[str(indice-1)].text().replace(" ",""), self.NumeroTerminosEntrada[str(indice-1)].text().replace(" ",""), self.FuncionesPesoEntrada[str(indice-1)].text().replace(" ",""), self.CoeficientesEntrada[str(indice-1)].text().replace(" ",""), self.FuncionesEspacialesEntrada[str(indice-1)].text().replace(" ",""))
                     if self.DimensionTemporalEntrada.isChecked():
                         entrada_subproblemas = entrada_subproblemas + ", 'Funciones Temporales':'{0}'".format(self.FuncionesTemporalesEntrada[str(indice-1)].text().replace(" ",""))
-                    entrada_subproblemas = entrada_subproblemas + "}\n"
+                    entrada_subproblemas = entrada_subproblemas + "}\n\n"
                     
                 # Conjunción de toda la información.
                 entrada = entrada_inicio+entrada_datosProblema+entrada_subproblemas
