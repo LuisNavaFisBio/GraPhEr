@@ -4395,6 +4395,11 @@ class Ui_Graficacion(QMainWindow):
                 self.ProyeccionEntrada.setChecked(False)
                 self.CoordenadaFija_1.setChecked(True)
                 self.graficacion()
+
+                if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
+                    self.envioActualizacion("Añadiendo Curvas de Nivel")
+
+                    self.interpretacionCurvasNivel()
         except:
             tipoError, explicacion, line = sys.exc_info()[:3]
 
