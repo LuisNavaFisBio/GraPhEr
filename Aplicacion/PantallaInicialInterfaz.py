@@ -1286,6 +1286,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 for entrada in informacion_problema.keys():
                     if entrada == "Número de Dimensiones Espaciales":
                         self.DimensionEspacialEntrada.setValue(informacion_problema[entrada])
+                        self.restriccionDimension()
                     elif entrada == "Dependencia Temporal":
                         if informacion_problema[entrada] == "Sí":
                             self.DimensionTemporalEntrada.setChecked(True)
