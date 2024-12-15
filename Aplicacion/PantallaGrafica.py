@@ -1223,6 +1223,9 @@ class Ui_Graficacion(QMainWindow):
     def editarOpciones(self):
         self.envioActualizacion("Habilitando Herramientas")
 
+        self.ui.Ui_Grafica.Modo.setCheckable(True)
+        self.ui.Ui_Grafica.SolucionParcial.setCheckable(True)
+
         try:
             # Diseño de la caja de herramientas para la visualización de los coeficientes de cada subsolución.
             self.Subproblema.setMaximum(int(self.NumeroSubproblemas))
