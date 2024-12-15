@@ -2,7 +2,7 @@ Entrada valida para la aplicación GraPhEr
 Ecuación de Laplace en coordenadas cartesianas representando una caja cuyos dos lados opuestos tienen potenciales distintos
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio y':'0:1', 'Dominio z':'0:1', 'Condiciones iniciales y/o de frontera':'1;-1', 'Número de Subproblemas': 2}
+{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'No', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio y':'0:1', 'Dominio z':'0:1', 'Condiciones iniciales y/o de frontera':'1;-1', 'Número de Subproblemas': 2}
 
 Solución del Subproblema #1
 {'Valores Propios':'n*pi;m*pi', 'Número de Términos':'1:10;1:10', 'Función Peso':'r', 'Coeficientes':'Int[4*sin(lamda_n*y)*sin(lamda_n*z)/sinh(pi*sqrt((lamda_n/pi)**2+(lamda_m/pi)**2)),y,z]', 'Funciones Espaciales':'sinh((pi*sqrt((lamda_n/pi)**2+(lamda_m/pi)**2))*(1-x))*sin(lamda_n*y)*sin(lamda_n*z)'}
