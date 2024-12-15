@@ -1298,19 +1298,21 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                             self.SistemaCoordenadas2.setChecked(True)
                         else:
                             self.SistemaCoordenadas3.setChecked(True)
+                        self.restriccionDimensionSistema(self.SistemaCoordenadasEntrada.checkedButton())
                     elif "Dominio" in entrada:
-                        if ("x" or "r") in entrada:
+                        if ("x" in entrada) or ("Dominio r" in entrada):
                             self.DominioEspacial1Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
-                        elif ((("phi" or "theta") in entrada) and self.SistemaCoordenadas2.isChecked()) or ("y" in entrada):
+                        elif ((("phi" in entrada) or ("theta" in entrada)) and self.SistemaCoordenadas2.isChecked()) or ("y" in entrada):
                             self.DominioEspacial2Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
                         elif (("phi" in entrada) and self.SistemaCoordenadas3.isChecked()) or ("z" in entrada):
                             self.DominioEspacial3Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
-                        else:
+                        elif "temporal" in entrada:
                             self.DominioTemporalEntrada.setText(str(informacion_problema[entrada]).replace(" ",""))
                     elif "Condiciones" in entrada:
                         self.CondicionesEntrada.setText(str(informacion_problema[entrada]).replace(" ",""))
                     elif "Subproblemas" in entrada:
                         self.NumeroEntradasS.setValue(informacion_problema[entrada])
+
 
                 # Obtención de la información de cada subproblema.
                 informacion_subproblemas = informacion.split("#")
