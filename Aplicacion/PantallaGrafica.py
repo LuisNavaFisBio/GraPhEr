@@ -2819,6 +2819,7 @@ class Ui_Graficacion(QMainWindow):
         resolucion = 25
 
         canva.axes = canva.figura.add_subplot()
+        canva.axes.axes.set_aspect('equal')
         canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
         canva.axes.set_xlim(self.dominio[0], self.dominio[1])
         canva.axes.set_ylim(self.dominio[2], self.dominio[3])
@@ -3067,6 +3068,7 @@ class Ui_Graficacion(QMainWindow):
         resolucion = 25
 
         canva.axes = canva.figura.add_subplot()
+        canva.axes.axes.set_aspect('equal')
         canva.axes.set_position([0.13, 0.2, 0.65, 0.65])
         canva.axes.set_facecolor((0.52, 0.50, 0.49, 0.3))
         canva.axes.set_title(r'${%(coordenada)s} = {%(valor)s}$' % {'coordenada': coordenada, 'valor': self.dominio[0]}, pad = 10) 
@@ -3228,6 +3230,7 @@ class Ui_Graficacion(QMainWindow):
         if coordenada == "r":
             # Diseño del lienzo.
             canva.axes = canva.figura.add_subplot()
+            canva.axes.axes.set_aspect('equal')
             canva.axes.set_xlim(0, self.dominio[3])
             canva.axes.set_ylim(self.dominio[4], self.dominio[5])
             canva.axes.set_xlabel(r"$\bf{\phi}$")
@@ -3243,6 +3246,7 @@ class Ui_Graficacion(QMainWindow):
         elif coordenada == "phi":
             # Diseño del lienzo.
             canva.axes = canva.figura.add_subplot()
+            canva.axes.axes.set_aspect('equal')
             canva.axes.set_xlim(self.dominio[0], self.dominio[1])
             canva.axes.set_ylim(self.dominio[4], self.dominio[5])
             canva.axes.set_xlabel(r"$\bf{r}$")
