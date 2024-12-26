@@ -1528,8 +1528,8 @@ class Ui_Graficacion(QMainWindow):
         self.envioActualizacion("Calculando Máximos y Mínimos")
 
         # Determinación del máximo y mínimo.
-        self.minimo = self.MatrizResultados.min()
-        self.maximo = self.MatrizResultados.max()
+        self.minimo = np.nanmin(self.MatrizResultados)
+        self.maximo = np.nanmax(self.MatrizResultados)
         if self.minimo == self.maximo:
             if self.minimo != 0:
                 self.minimo = self.MatrizResultados.min()-self.MatrizResultados.min()*0.1
