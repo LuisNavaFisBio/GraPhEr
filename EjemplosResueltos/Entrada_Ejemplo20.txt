@@ -2,7 +2,7 @@ Entrada valida para la aplicación GraPhEr
 Ecuación de Laplace tridimensional en coordenadas esféricas representando la temperatura en el estado estacionario de una boya flotando en el agua
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Esféricas', 'Dominio r':'0:1', 'Dominio theta':'0:pi', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'Piecewise((30, theta>pi/2+atan2(1,4)), (-5,theta<pi/2+atan2(1,4)))', 'Número de Subproblemas': 1}
+{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'No', 'Coordenadas':'Esféricas', 'Dominio r':'0:1', 'Dominio theta':'0:pi', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'Piecewise((30, theta>pi/2+atan2(1,4)), (-5,theta<pi/2+atan2(1,4)))', 'Número de Subproblemas': 1}
 
 Solución del Subproblema #1
 {'Valores Propios':'n', 'Número de Términos':'0:9', 'Función Peso':'1', 'Coeficientes':'Int[(2*lamda_n+1)*Piecewise((30, s>cos(pi/2+atan2(1,4))), (-5,s<cos(pi/2+atan2(1,4))))*legendre(lamda_n,s)/2,ct]', 'Funciones Espaciales':'r**lamda_n*legendre(lamda_n,cos(theta))'}
