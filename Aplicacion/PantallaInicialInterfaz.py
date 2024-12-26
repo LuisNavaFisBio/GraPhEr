@@ -1303,7 +1303,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                     elif "Dominio" in entrada:
                         if ("x" in entrada) or ("Dominio r" in entrada):
                             self.DominioEspacial1Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
-                        elif ((("phi" in entrada) or ("theta" in entrada)) and self.SistemaCoordenadas2.isChecked()) or ("y" in entrada):
+                        elif (("phi" in entrada) and self.SistemaCoordenadas2.isChecked()) or (("theta" in entrada) and self.SistemaCoordenadas3.isChecked()) or ("y" in entrada):
                             self.DominioEspacial2Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
                         elif (("phi" in entrada) and self.SistemaCoordenadas3.isChecked()) or ("z" in entrada):
                             self.DominioEspacial3Entrada.setText(str(informacion_problema[entrada]).replace(" ",""))
