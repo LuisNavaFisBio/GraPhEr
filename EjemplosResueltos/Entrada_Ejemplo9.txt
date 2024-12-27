@@ -2,7 +2,7 @@ Entrada valida para la aplicación GraPhEr
 Ecuación de Laplace en coordenadas polares
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio x':'0:1', 'Dominio phi':'0:pi/2', 'Condiciones iniciales y/o de frontera':'sin(phi)', 'Número de Subproblemas': 2}
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio x':'0:1', 'Dominio phi':'0:pi/2', 'Condiciones iniciales y/o de frontera':'sin(phi)', 'Número de Subproblemas': 2, 'Calidad +':'No'}
 
 Solución del Subproblema #1
 {'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'1', 'Funciones Espaciales':'2*phi/pi'}
