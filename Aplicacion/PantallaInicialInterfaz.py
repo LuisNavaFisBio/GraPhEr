@@ -2398,6 +2398,7 @@ class PantallaGraficacion(QMainWindow):
                 self.ui.Ui_Grafica.CurvasNivelEspecificas.setCheckable(False)
                 self.ui.Ui_Grafica.Modo.setCheckable(False)
                 self.ui.Ui_Grafica.SolucionParcial.setCheckable(False)
+                plt.close()
 
                 # Cierre de ventana de leyendas y/o ventanas de errores.
                 if self.ui.Ui_Grafica.etiquetas:
