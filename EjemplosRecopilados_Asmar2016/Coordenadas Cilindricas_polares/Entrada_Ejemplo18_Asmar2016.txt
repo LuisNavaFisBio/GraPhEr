@@ -5,7 +5,7 @@ Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with F
 Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
 \\\
 
-Vibración de una membrana circular con velocidad inicial nula (Capítulo 4.2).
+Vibración de una membrana circular con velocidad inicial nula sin dependencia angular (Capítulo 4.2).
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'1-r**2;0', 'Número de Subproblemas': 1, 'Calidad +':'No'}
