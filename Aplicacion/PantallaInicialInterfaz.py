@@ -1314,7 +1314,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                     elif "Subproblemas" in entrada:
                         self.NumeroEntradasS.setValue(informacion_problema[entrada])
                     elif "Calidad" in entrada:
-                        self.CalidadEntrada.setChecked(informacion_problema[entrada])
+                        if informacion_problema[entrada] == "Sí":
+                            self.CalidadEntrada.setChecked(True)
+                        elif informacion_problema[entrada] == "No":
+                            self.CalidadEntrada.setChecked(False)
 
                 # Obtención de la información de cada subproblema.
                 informacion_subproblemas = informacion.split("#")
