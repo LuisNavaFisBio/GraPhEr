@@ -8,7 +8,7 @@ Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas
 Vibración de una cuerda estirada con extremos fijos (Capítulo 3.3).
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'Piecewise((3*x/10, x<=1/3),(3*(1-x)/20, x>1/3))', 'Número de Subproblemas': 1}
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'Piecewise((3*x/10, x<=1/3),(3*(1-x)/20, x>1/3));0', 'Número de Subproblemas': 1}
 
 Solución del Subproblema #1
-{'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*f_1*sin(lamda_n*x),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'cos(lamda_n*t/pi)'}
+{'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*g_1*sin(lamda_n*x),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'cos(lamda_n*t/pi)'}

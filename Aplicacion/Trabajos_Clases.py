@@ -1387,7 +1387,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                         if len(self.ui.ParticionesDominios) == 3:
                             for indice3 in range(0, len(self.ui.ParticionesDominios[2])):
                                 valor = float(np.real(self.ui.Solucion_funcion(self.ui.ParticionesDominios[0][indice1], self.ui.ParticionesDominios[1][indice2], self.ui.ParticionesDominios[2][indice3])))
-                                print({self.ui.Simbolos[0]:self.ui.ParticionesDominios[0][indice1], self.ui.Simbolos[1]:self.ui.ParticionesDominios[1][indice2], self.ui.Simbolos[2]:self.ui.ParticionesDominios[2][indice3]})
                                 if np.isnan(valor):
                                     valor = float(np.real(SolucionEncontrada.subs({self.ui.Simbolos[0]:self.ui.ParticionesDominios[0][indice1], self.ui.Simbolos[1]:self.ui.ParticionesDominios[1][indice2], self.ui.Simbolos[2]:self.ui.ParticionesDominios[2][indice3]}).evalf()))
                                 self.ui.MatrizResultados[indice3][indice2][indice1] = valor
