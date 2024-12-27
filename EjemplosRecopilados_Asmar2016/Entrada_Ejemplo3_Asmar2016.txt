@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Ecuación de onda con velocidad inicial no nula (Capítulo 3.3).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:pi/2', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'0;x*cos(x)', 'Número de Subproblemas': 1, 'Calidad +':'Sí'}
+
+Solución del Subproblema #1
+{'Valores Propios':'2*n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[4*g_2*sin(lamda_n*x)/(lamda_n*pi),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'sin(lamda_n*t)'}

@@ -1,0 +1,17 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Temperatura de una barra con extremos mantenidos a distintas temperaturas (Capítulo 3.5).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'100', 'Número de Subproblemas': 2, 'Calidad +':'Sí'}
+
+Solución del Subproblema #1
+{'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'1', 'Funciones Espaciales':'100*x/pi', 'Funciones Temporales':'1'}
+
+Solución del Subproblema #2
+{'Valores Propios':'n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*(g_1-u_1)*sin(lamda_n*x)/pi,x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-lamda_n**2*t)'}
