@@ -1568,7 +1568,7 @@ class Ui_Graficacion(QMainWindow):
             if self.dependencia_tiempo:
                 for indice1 in range(0, len(self.t_grid)):
                     for indice2 in range(0, len(self.Dominios[0])):
-                        if len(self.Dominio) == 2:
+                        if len(self.Dominios) == 2:
                             for indice3 in range(0, len(self.Dominios[1])):
                                 valor = float(np.real(self.Funcion(self.Dominios[0][indice2], self.Dominios[1][indice3], self.t_grid[indice1])))
                                 if np.isnan(valor):
