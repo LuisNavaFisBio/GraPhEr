@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Temperatura de una placa cuadrada en el estado estacionario (Capítulo 3.7).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio y':'0:1', 'Condiciones iniciales y/o de frontera':'100', 'Número de Subproblemas': 1, 'Calidad +':'No'}
+
+Solución del Subproblema #1
+{'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*f_1*sin(lamda_n*x)/sinh(lamda_n),x]', 'Funciones Espaciales':'sin(lamda_n*x)*sinh(lamda_n*y)'}
