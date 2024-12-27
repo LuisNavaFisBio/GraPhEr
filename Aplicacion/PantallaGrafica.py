@@ -38,6 +38,7 @@ from VentanaCarga import Ui_VentanaCarga
 from Animaciones import ReproductorGeneral, Graficacion2D_NoTemporal
 from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 
+from copy import deepcopy
 from fractions import Fraction
 from matplotlib import cm
 from matplotlib.animation import FuncAnimation, FFMpegFileWriter, FFMpegWriter, PillowWriter
@@ -1127,11 +1128,12 @@ class Ui_Graficacion(QMainWindow):
         self.carga = False
         self.valorespecial = False
         self.valorerroneo = False
+        self.calidad_actual = False
         self.curvas = False
         self.dependencia_tiempo = False
         self.EmergenteVentanaGraficacion = QMessageBox()
 
-    def transferirDatos(self, funcion, soluciones, numero_terminos, valores, dominio, simbolos, colormap, proyeccion, coordenadas, numero_subproblemas, precision, calidad, particiones, dependencia, bidependencia, indicesdependencia, invertir, valorespropios):
+    def transferirDatos(self, funcion, solucion_sympy, soluciones, numero_terminos, valores, dominio, simbolos, colormap, proyeccion, coordenadas, numero_subproblemas, precision, calidad, particiones, dependencia, bidependencia, indicesdependencia, invertir, valorespropios):
         """
         Transfiere datos desde la ventana principal a esta ventana.
 
@@ -1139,6 +1141,9 @@ class Ui_Graficacion(QMainWindow):
         ----------
         **funcion** : Funcion obtenida a través del comando de Sympy 'lambdify'
             Solución representada como una función de numpy.
+
+        **solucion_sympy** : Expresión de Sympy
+            Solución obtenida en la sintaxis de Sympy.
 
         **soluciones** : Expresiones de Sympy
             Subsoluciones de cada subproblema.
@@ -1193,6 +1198,7 @@ class Ui_Graficacion(QMainWindow):
         """
 
         self.Funcion = funcion
+        self.Solucion = solucion_sympy
         self.Soluciones = soluciones
         self.NumeroTerminos = numero_terminos
         self.MatrizResultados = valores
@@ -1525,6 +1531,69 @@ class Ui_Graficacion(QMainWindow):
         self.MostrarSolucion.figura.clear()
         self.MostrarSolucion.figura.canvas.draw_idle()
 
+        if self.Calidad != self.calidad_actual:
+            self.envioActualizacion("Cambiando Calidad")
+            # Determinación de la calidad (puntos por unidad de longitud).
+            if self.Calidad:
+                aumento = 0.01
+                aumento_angular = 0.06
+            else:
+                aumento = 0.03
+                aumento_angular = 0.09
+            
+            # Cálculo de las particiones de cada dominio.
+            particionesDominios = []
+            estructura = []
+            indice = 0 
+            for simbolo in self.Simbolos:
+                if simbolo != t:
+                    if simbolo in [theta, phi]:
+                        particion = np.arange(float(self.Dominio[indice][0])-0.005, float(self.Dominio[indice][1]) + 0.005, step=aumento_angular)
+                    else:
+                        particion = np.arange(float(self.Dominio[indice][0])-0.005, float(self.Dominio[indice][1]) + 0.005, step=aumento)
+                    if particion[-1] < float(self.Dominio[indice][1]):
+                        particion = np.append(particion, float(self.Dominio[indice][1])+0.005)
+                    else:
+                        particion[-1] = float(self.ui.Dominio[indice][1])+0.005
+                    particionesDominios.append(particion)
+                    estructura.append(int(len(particionesDominios[-1])))
+                else:
+                    estructura.append(int(float(self.Dominio[indice][0])*25) + 1)
+                indice += 1
+
+            self.Dominios = particionesDominios
+
+            # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
+            self.MatrizResultados = np.zeros(estructura).T
+            if self.dependencia_tiempo:
+                for indice1 in range(0, len(self.t_grid)):
+                    for indice2 in range(0, len(self.Dominios[0])):
+                        if len(self.Dominio) == 2:
+                            for indice3 in range(0, len(self.Dominios[1])):
+                                valor = float(np.real(self.Funcion(self.Dominios[0][indice2], self.Dominios[1][indice3], self.t_grid[indice1])))
+                                if np.isnan(valor):
+                                    valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice2], self.Simbolos[1]:self.Dominios[1][indice3], self.Simbolos[2]:self.t_grid[indice1]}).evalf()))
+                                self.MatrizResultados[indice1][indice3][indice2] = valor
+                        else:
+                            valor = float(np.real(self.Funcion(self.Dominios[0][indice2], self.t_grid[indice1])))
+                            if np.isnan(valor):
+                                valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice2], self.Simbolos[1]:self.t_grid[indice1]}).evalf()))
+                            self.ui.MatrizResultados[indice1][indice2] = valor
+            else:
+                for indice1 in range(0, len(self.Dominios[0])):
+                    for indice2 in range(0, len(self.Dominios[1])):
+                        if len(self.Dominios) == 3:
+                            for indice3 in range(0, len(self.Dominios[2])):
+                                valor = float(np.real(self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2], self.Dominios[2][indice3])))
+                                if np.isnan(valor):
+                                    valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice1], self.Simbolos[1]:self.Dominios[1][indice2], self.Simbolos[2]:self.Dominios[2][indice3]}).evalf()))
+                                self.ui.MatrizResultados[indice3][indice2][indice1] = valor
+                        else:
+                            valor = float(np.real(self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2])))
+                            if np.isnan(valor):
+                                valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice1], self.Simbolos[1]:self.Dominios[1][indice2]}).evalf()))
+                            self.ui.MatrizResultados[indice2][indice1] = valor
+
         self.envioActualizacion("Calculando Máximos y Mínimos")
 
         # Determinación del máximo y mínimo.
@@ -1752,6 +1821,7 @@ class Ui_Graficacion(QMainWindow):
         self.envioActualizacion("Mostrando Coeficientes y Valores")
 
         self.calcularValorSolucion()
+        self.calidad_actual = deepcopy(self.Calidad)
         self.signals.finalizar_signal.emit("Gráfica Lista")
 
     def actualizarAnimacion1D(self, cuadro, cuadro_fijo, x, linea, tiempo_total, resolucion, segmentos, valores_matriz, lienzo, valor_nulo, valor_nulo2, valor_nulo3):
@@ -4359,8 +4429,6 @@ class Ui_Graficacion(QMainWindow):
                         estructura.append(int(float(self.Dominio[indice][0])*25) + 1)
                         self.t_grid = np.arange(0, float(self.Dominio[indice][0]) + 0.04, step=0.04)
                     indice += 1
-
-                print("b")
 
                 # Cálculo de los valores de la solución en cada uno de los puntos de la partición del espacio. Se toma la parte real para evitar la advertencia generada por el arreglo para evitar errores con las raíces cuadradas ya que se generan números complejos (cuya parte imaginaria es cero, pero es una advertencia que debilita la experiencia del usuario).
                 self.ValoresSolucion = np.zeros(estructura).T

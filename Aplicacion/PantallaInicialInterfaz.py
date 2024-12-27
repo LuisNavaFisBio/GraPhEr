@@ -1313,7 +1313,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                         self.CondicionesEntrada.setText(str(informacion_problema[entrada]).replace(" ",""))
                     elif "Subproblemas" in entrada:
                         self.NumeroEntradasS.setValue(informacion_problema[entrada])
-
+                    elif "Calidad" in entrada:
+                        self.CalidadEntrada.setChecked(informacion_problema[entrada])
 
                 # Obtención de la información de cada subproblema.
                 informacion_subproblemas = informacion.split("#")
@@ -2214,7 +2215,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         trabajo.signals.avanzar_signal.connect(self.actualizarVentanaEmergente)
         trabajo.signals.error_signal.connect(self.mostrarError)  
         trabajo.autoDelete()
-        self.Ui_Grafica.transferirDatos(self.Solucion_funcion, self.Soluciones, self.NumeroTerminos, self.MatrizResultados, self.Dominios, self.Simbolos, self.Colormap, self.ProyeccionEntrada.isChecked(), self.SistemaCoordenadasEntrada.checkedButton().objectName(), self.NumeroEntradas.text(), self.Precision, self.CalidadEntrada.isChecked(), self.ParticionesDominios, self.dependencia, self.bidependencia, self.indicesdependencia, self.invertir, self.ValoresPropios)
+        self.Ui_Grafica.transferirDatos(self.Solucion_funcion, self.Solucion, self.Soluciones, self.NumeroTerminos, self.MatrizResultados, self.Dominios, self.Simbolos, self.Colormap, self.ProyeccionEntrada.isChecked(), self.SistemaCoordenadasEntrada.checkedButton().objectName(), self.NumeroEntradas.text(), self.Precision, self.CalidadEntrada.isChecked(), self.ParticionesDominios, self.dependencia, self.bidependencia, self.indicesdependencia, self.invertir, self.ValoresPropios)
 
         self.Ui_Grafica.CoordenadaFija.setText("{}".format(float(self.Dominios[0][0])))
 

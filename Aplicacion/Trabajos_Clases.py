@@ -1322,6 +1322,7 @@ class TrabajoResolucion(QtCore.QRunnable):
             # Conversión de la solución a una función de numpy y scipy.
             # La necesidad de agregar la función sqrt de manera especial es para evitar un error de la función lambdify con esta función, la respuesta es tomada de alexbatgithub. (19 de diciembre de 2023). Respuesta a la discusión "regression in lambdify: module=['scipy'] ignored for sqrt". github. https://github.com/sympy/sympy/issues/24095#issuecomment-1862478578
             self.ui.Solucion_funcion = sp.lambdify(self.ui.Simbolos, SolucionEncontrada, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
+            self.ui.Solucion = SolucionEncontrada
             self.ui.Soluciones = Soluciones
             self.ui.SolucionesSubproblemas = SolucionesSubproblemas
             self.ui.Coeficientes = coeficientes_copia
