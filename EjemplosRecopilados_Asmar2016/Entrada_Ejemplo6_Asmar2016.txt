@@ -13,5 +13,5 @@ Datos Generales del Problema
 Solución del Subproblema #1
 {'Valores Propios':'0', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'Int[g_1*cos(lamda_n*x),x]', 'Funciones Espaciales':'cos(lamda_n*x)', 'Funciones Temporales':'1'}
 
-Solución del Subproblema #1
+Solución del Subproblema #2
 {'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*g_1*cos(lamda_n*x),x]', 'Funciones Espaciales':'cos(lamda_n*x)', 'Funciones Temporales':'exp(-lamda_n**2*t)'}

@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Temperatura de una barra con un extremo que sigue la ley de transferencia de calor de Newton (Capítulo 3.6).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'x*(1-x)', 'Número de Subproblemas': 1, 'Calidad +':'No'}
+
+Solución del Subproblema #1
+{'Valores Propios':'sin(lamda_n)=-lamda_n*cos(lamda_n)', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[g_1*sin(lamda_n*x),x]/Int[sin(lamda_n*x)**2,x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-lamda_n**2*t)'}
