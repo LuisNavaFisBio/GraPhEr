@@ -1,5 +1,5 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de Poisson tridimensional en coordenadas esféricas representando el potencial de una carga "puntual"
+Ecuación de Poisson tridimensional en coordenadas esféricas representando el potencial de una esfera aterrizada con una carga en su interior
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'No', 'Coordenadas':'Esféricas', 'Dominio r':'0:1', 'Dominio theta':'0:pi', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'0', 'Número de Subproblemas':1}
