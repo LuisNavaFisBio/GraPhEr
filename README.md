@@ -8,7 +8,7 @@
 
 GraPhEr es una aplicación de graficación, visualización y exploración de las soluciones de ecuaciones diferenciales parciales que admitan una resolución en variables separadas.
 
-# Última actualización (12 de diciembre de 2024)
+# Última actualización (02 de diciembre de 2024)
 
 - Implementación de algoritmos para visualizar modo por modo o visualizar soluciones parciales de la entrada ingresada.
 - Implementación de algoritmos para importar y exportar entradas válidas para la aplicación.
