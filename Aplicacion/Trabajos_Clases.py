@@ -563,6 +563,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             # Lectura de la precisión y calidad deseada.
             self.ui.Precision = int(self.ui.PrecisionEntrada.value())
             self.ui.Calidad = self.ui.CalidadEntrada.isChecked()
+            self.ui.Ui_Grafica.calidad_actual = self.ui.CalidadEntrada.isChecked()
 
             self.signals.finalizar_signal.emit("Interpretación Finalizada")
         except:
