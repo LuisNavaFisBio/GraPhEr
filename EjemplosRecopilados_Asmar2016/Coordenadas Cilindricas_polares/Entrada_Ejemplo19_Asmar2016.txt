@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Vibración de una membrana circular con velocidad inicial nula (Capítulo 4.3).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'(1-r**2)*r*sin(phi);0', 'Número de Subproblemas': 1, 'Calidad +':'No'}
+
+Solución del Subproblema #1
+{'Valores Propios':'n;besselj(lamda_n, lamda_m)=0', 'Número de Términos':'0:4;1:5', 'Función Peso':'r', 'Coeficientes':'Int[2*g_1*besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)/(pi*besselj(lamda_n+1,lamda_m)**2),r,phi]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)', 'Funciones Temporales':'cos(lamda_n*t)'}
