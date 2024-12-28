@@ -1,0 +1,15 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Haberman, R. (2004). Applied Partial Differential Equations with Fourier Series 
+and Boundary Value Problems. [Ecuaciones Diferenciales Parciales Aplicadas: con Series de Fourier y
+Problemas de Valores a la Frontera]. (4a. ed.). Pearson Education.
+\\\
+
+Barra con extremos aislados (Capítulo 2.4.1).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'x*(1-x)', 'Número de Subproblemas': 1, 'Calidad +':'Sí'}
+
+Solución del Subproblema #1
+{'Valores Propios':'n*pi', 'Número de Términos':'0:9', 'Función Peso':'1', 'Coeficientes':'Int[g_1*cos(lamda_n*x),x]/Int[cos(lamda_n*x)**2,x]', 'Funciones Espaciales':'cos(lamda_n*x)', 'Funciones Temporales':'exp(-0.01*lamda_n**2*t)'}

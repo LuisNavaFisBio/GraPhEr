@@ -12,4 +12,4 @@ Datos Generales del Problema
 {'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'100', 'Número de Subproblemas': 1, 'Calidad +':'Sí'}
 
 Solución del Subproblema #1
-{'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*g_1*sin(lamda_n*x),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-0.5*lamda_n**2*t)'}
+{'Valores Propios':'n*pi', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[2*g_1*sin(lamda_n*x),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-0.01*lamda_n**2*t)'}
