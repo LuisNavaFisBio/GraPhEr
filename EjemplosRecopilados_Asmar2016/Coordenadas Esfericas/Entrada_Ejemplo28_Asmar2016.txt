@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Temperatura dentro de una esfera en el estado estacionario, caso 2 (Capítulo 5.2).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'No', 'Coordenadas':'Esféricas', 'Dominio r':'0:1', 'Dominio theta':'0:pi', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'50*(1-cos(theta))', 'Número de Subproblemas':1, 'Calidad +':'No'}
+
+Solución del Subproblema #1
+{'Valores Propios':'n', 'Número de Términos':'0:10', 'Función Peso':'1', 'Coeficientes':'Int[(2*lamda_n+1)*50*(1-s)*legendre(lamda_n, s)/2,ct]', 'Funciones Espaciales':'r**lamda_n*legendre(lamda_n,cos(theta))'}
