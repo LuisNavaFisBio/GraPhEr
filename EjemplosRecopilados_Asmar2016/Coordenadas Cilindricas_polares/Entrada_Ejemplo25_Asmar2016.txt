@@ -1,0 +1,17 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Problema en un disco (Capítulo 4.6).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'0', 'Número de Subproblemas':2, 'Calidad +':'No'}
+
+Solución del Subproblema #1
+{'Valores Propios':'0;besselj(lamda_n, lamda_m)=0', 'Número de Términos':'1;1:10', 'Función Peso':'r', 'Coeficientes':'Int[-3*r**2*cos(2*phi)*besselj(0, lamda_m*r)/(pi*lamda_m**2*besselj(1,lamda_m)**2),r,phi]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)'}
+
+Solución del Subproblema #2
+{'Valores Propios':'n;besselj(lamda_n, lamda_m)=0', 'Número de Términos':'1:5;1:5', 'Función Peso':'r', 'Coeficientes':'Int[-2*3*r**2*cos(2*phi)*besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)/(pi*besselj(lamda_n+1, lamda_m)**2*(1+lamda_m**2)),r,phi]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)'}
