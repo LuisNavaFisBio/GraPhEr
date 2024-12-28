@@ -174,6 +174,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             self.ui.Coeficientes = [[] for x in range(int(self.ui.NumeroEntradas.text()))]   
             Coeficientes = [[] for x in range(int(self.ui.NumeroEntradas.text()))]      
             self.ui.FuncionesEspaciales = [[] for x in range(int(self.ui.NumeroEntradas.text()))]
+            FuncionesEspaciales = [[] for x in range(int(self.ui.NumeroEntradas.text()))]
             if self.ui.DimensionTemporalEntrada.isChecked():
                 # Cuando el problema tenga dependencia temporal.
                 self.ui.FuncionesTemporales = [[] for x in range(int(self.ui.NumeroEntradas.text()))]      
@@ -309,6 +310,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
 
                 # Interpretación de las funciones espaciales y temporales.
                 self.ui.FuncionesEspaciales[indice] = [parsing.parse_expr(expresion.replace("Ynm(lamda_n,lamda_m)", "Ynm(lamda_n,lamda_m,theta,phi).expand(func=True)").replace("Ynm(lamda_n,lamda_l)", "Ynm(lamda_n,lamda_l,theta,phi).expand(func=True)")) for expresion in FEE["{}".format(indice)].split(";")]
+                FuncionesEspaciales[indice] = [parsing.parse_expr(expresion.replace("Ynm(lamda_n,lamda_m)", "Ynm(lamda_n,lamda_m,theta,phi)").replace("Ynm(lamda_n,lamda_l)", "Ynm(lamda_n,lamda_l,theta,phi)")) for expresion in FEE["{}".format(indice)].split(";")]
                 if self.ui.DimensionTemporalEntrada.isChecked():
                     self.ui.FuncionesTemporales[indice] = [parsing.parse_expr(expresion) for expresion in self.ui.FuncionesTemporales[indice]]
 
@@ -325,6 +327,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         # Para la primera expresión en la entrada de valores propios del subproblema. Se sustituyen las palabras clave por aquellas con subíndice para la enumeración de todas las expresiones de valores propios.
                         self.ui.ValoresPropios[indice][indice1] = self.ui.ValoresPropios[indice][indice1].replace("lamda_n", "lamda_{}n".format(indice_ayuda)).replace("lamda_m", "lamda_{}m".format(indice_ayuda)).replace("lamda_l", "lamda_{}l".format(indice_ayuda))
                         self.ui.FuncionesEspaciales[indice] = [funcion.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for funcion in self.ui.FuncionesEspaciales[indice]]
+                        FuncionesEspaciales[indice] = [funcion.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for funcion in FuncionesEspaciales[indice]]
                         if self.ui.DimensionTemporalEntrada.isChecked():
                             self.ui.FuncionesTemporales[indice] = [funcion.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for funcion in self.ui.FuncionesTemporales[indice]]
                         self.ui.Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for coeficiente in self.ui.Coeficientes[indice]]
@@ -333,6 +336,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         # En el caso de que exista una segunda expresión en la entrada de valores propios del subproblema. Se sustituyen las palabras clave por aquellas con subíndice para la enumeración de todas las expresiones de valores propios.
                         self.ui.ValoresPropios[indice][indice1] = self.ui.ValoresPropios[indice][indice1].replace("lamda_m", "lamda_{}m".format(indice_ayuda)).replace("lamda_n", "lamda_{}n".format(indice_ayuda)).replace("lamda_l", "lamda_{}l".format(indice_ayuda))
                         self.ui.FuncionesEspaciales[indice] = [funcion.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for funcion in self.ui.FuncionesEspaciales[indice]]
+                        FuncionesEspaciales[indice] = [funcion.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for funcion in FuncionesEspaciales[indice]]
                         if self.ui.DimensionTemporalEntrada.isChecked():
                             self.ui.FuncionesTemporales[indice] = [funcion.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for funcion in self.ui.FuncionesTemporales[indice]]
                         self.ui.Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for coeficiente in self.ui.Coeficientes[indice]]
@@ -341,6 +345,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         # En el caso de que exista una tercera expresión en la entrada de valores propios del subproblema. Se sustituyen las palabras clave por aquellas con subíndice para la enumeración de todas las expresiones de valores propios.
                         self.ui.ValoresPropios[indice][indice1] = self.ui.ValoresPropios[indice][indice1].replace("lamda_l", "lamda_{}l".format(indice_ayuda)).replace("lamda_n", "lamda_{}n".format(indice_ayuda)).replace("lamda_m", "lamda_{}m".format(indice_ayuda))
                         self.ui.FuncionesEspaciales[indice] = [funcion.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for funcion in self.ui.FuncionesEspaciales[indice]]
+                        FuncionesEspaciales[indice] = [funcion.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for funcion in FuncionesEspaciales[indice]]
                         if self.ui.DimensionTemporalEntrada.isChecked():
                             self.ui.FuncionesTemporales[indice] = [funcion.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for funcion in self.ui.FuncionesTemporales[indice]]
                         self.ui.Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for coeficiente in self.ui.Coeficientes[indice]]
@@ -459,7 +464,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             indice_ayuda1 = indice_ayuda1 + len(self.ui.FuncionesEspaciales[indice1])
                 print(coeficientes, indice_ayuda1, indice_ayuda2)
                 # El siguiente ciclo for es parte del diseño de la tabla para mostrar la interpretación. Se encarga de asignarle un símbolo a cada coeficiente y escribir la solución total con estos coeficientes multiplicando a sus respectivas funciones espaciales y temporales.
-                for funproesp in self.ui.FuncionesEspaciales[indice]:
+                for funproesp in FuncionesEspaciales[indice]:
                     if self.ui.DimensionTemporalEntrada.isChecked():
                         for funprotem in self.ui.FuncionesTemporales[indice]:
                             if suma == "":
