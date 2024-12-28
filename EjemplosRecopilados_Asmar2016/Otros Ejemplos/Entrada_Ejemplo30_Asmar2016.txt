@@ -5,7 +5,7 @@ Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with F
 Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
 \\\
 
-Ecuación de la cadena colgante (Capítulo 6.3).
+Problema de la cadena colgante (Capítulo 6.3).
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'Piecewise((x/100, x<1/2), ((1-x)/100, x>=1/2));0', 'Número de Subproblemas': 1}
