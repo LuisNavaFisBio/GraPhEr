@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Sector circular con condición de Robin en su lado curvo (Capítulo 4.4).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:pi/4', 'Condiciones iniciales y/o de frontera':'phi', 'Número de Subproblemas':1, 'Calidad +':'Sí'}
+
+Solución del Subproblema #1
+{'Valores Propios':'4*n', 'Número de Términos':'1:10', 'Función Peso':'1', 'Coeficientes':'Int[-8*f_1*sin(lamda_n*phi)/(pi*(1+lamda_n)),phi]', 'Funciones Espaciales':'r**lamda_n*sin(lamda_n*phi)'}

@@ -8,7 +8,7 @@ Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas
 Temperatura de una placa circular en el estado estacionario (Capítulo 4.4).
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'Piecewise((100, phi<pi),(0,phi>pi))', 'Número de Subproblemas': 2, 'Calidad +':'No'}
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'Piecewise((100, phi<pi),(0,phi>pi))', 'Número de Subproblemas': 2, 'Calidad +':'No'}
 
 Solución del Subproblema #1
 {'Valores Propios':'1', 'Número de Términos':'1', 'Función Peso':'1', 'Coeficientes':'Int[f_1/(2*pi),phi]', 'Funciones Espaciales':'1'}
