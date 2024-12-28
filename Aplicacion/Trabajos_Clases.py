@@ -171,7 +171,8 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             self.ui.ValoresPropios = [[] for x in range(int(self.ui.NumeroEntradas.text()))]
             self.ui.NumeroTerminos = [NTE["{}".format(x)].split(";") for x in range(int(self.ui.NumeroEntradas.text()))]
             self.ui.FuncionesPeso = [parsing.parse_expr(FPE["{}".format(x)]) for x in range(int(self.ui.NumeroEntradas.text()))]
-            self.ui.Coeficientes = [[] for x in range(int(self.ui.NumeroEntradas.text()))]      
+            self.ui.Coeficientes = [[] for x in range(int(self.ui.NumeroEntradas.text()))]   
+            Coeficientes = [[] for x in range(int(self.ui.NumeroEntradas.text()))]      
             self.ui.FuncionesEspaciales = [[] for x in range(int(self.ui.NumeroEntradas.text()))]
             if self.ui.DimensionTemporalEntrada.isChecked():
                 # Cuando el problema tenga dependencia temporal.
@@ -260,6 +261,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                     
                         indice_ayuda += 1    
                 coeficientes = CoefE["{}".format(indice)].split(";")
+                coeficientes0 = [expresion.replace("Int[", integral_string_i).replace("]", integral_string_f).replace("conjugate(Ynm(lamda_n,lamda_m))", "conjugate(Ynm(lamda_n,lamda_m,theta,phi))").replace("Ynm(lamda_n,lamda_m)", "Ynm(lamda_n,lamda_m,theta,phi)").replace("conjugate(Ynm(lamda_n,lamda_l))", "conjugate(Ynm(lamda_n,lamda_l,theta,phi))").replace("Ynm(lamda_n,lamda_l)", "Ynm(lamda_n,lamda_l,theta,phi)") for expresion in coeficientes]
                 coeficientes = [expresion.replace("Int[", integral_string_i).replace("]", integral_string_f).replace("conjugate(Ynm(lamda_n,lamda_m))", "conjugate(Ynm(lamda_n,lamda_m,theta,phi)).expand(func=True)").replace("Ynm(lamda_n,lamda_m)", "Ynm(lamda_n,lamda_m,theta,phi).expand(func=True)").replace("conjugate(Ynm(lamda_n,lamda_l))", "conjugate(Ynm(lamda_n,lamda_l,theta,phi)).expand(func=True)").replace("Ynm(lamda_n,lamda_l)", "Ynm(lamda_n,lamda_l,theta,phi).expand(func=True)").replace("theta","acos(s)") for expresion in coeficientes]
                 print(coeficientes)
 
@@ -273,15 +275,18 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             # En caso de que el problema considere solo condiciones espaciales o de ambos tipos.
                             condiciones_string = condiciones_string  + ", \\quad f_{%(subindice)s}(\\mathbf{x})" % {"subindice":indice2 + 1} +  "= " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2]))  # Tabla.
                             coeficientes = [expresion.replace("f_{}".format(indice2 + 1), "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]
+                            coeficientes0 = [expresion.replace("f_{}".format(indice2 + 1), "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes0]
                         else:
                             if indice2 == 0:
                                 # Cuando el problema tiene primera derivada temporal.
                                 condiciones_string = condiciones_string + ", \\quad u(\\mathbf{x},\\hspace{0.1cm} 0) = " + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2])) # Tabla.
                                 coeficientes = [expresion.replace("g_1", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]
+                                coeficientes0 = [expresion.replace("g_1", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes0]
                             else:
                                 # Cuando el problema tiene segunda derivada temporal.
                                 condiciones_string = condiciones_string + ", \\quad \\frac{\\partial u(\\mathbf{x},\\hspace{0.1cm} t)}{\\partial t}|_{t=0}=" + latex(parsing.parse_expr(self.ui.Condiciones[indice1][indice2]))  # Tabla.
-                                coeficientes = [expresion.replace("g_2", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes]    
+                                coeficientes = [expresion.replace("g_2", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes] 
+                                coeficientes0 = [expresion.replace("g_2", "(" + self.ui.Condiciones[indice1][indice2] + ")").replace("theta", "s") for expresion in coeficientes0]     
 
                 if self.ui.DimensionTemporalEntrada.isChecked():
                     # Modificación de la entrada temporal para su posterior interpretación.
@@ -298,8 +303,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                 print(coeficientes)
 
                 self.ui.Coeficientes[indice] = [parsing.parse_expr(expresion) for expresion in coeficientes]
-
-                print(self.ui.Coeficientes[indice])
+                Coeficientes[indice] = [parsing.parse_expr(expresion) for expresion in coeficientes0]
 
                 self.envioActualizacion("Interpretando Funciones y Valores Propios ({0}/{1})".format(indice + 1, int(self.ui.NumeroEntradas.text())))
 
@@ -324,6 +328,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         if self.ui.DimensionTemporalEntrada.isChecked():
                             self.ui.FuncionesTemporales[indice] = [funcion.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for funcion in self.ui.FuncionesTemporales[indice]]
                         self.ui.Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for coeficiente in self.ui.Coeficientes[indice]]
+                        Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_n"), parsing.parse_expr("lamda_{}n".format(indice_ayuda))) for coeficiente in Coeficientes[indice]]
                     elif indice1 == 1:
                         # En el caso de que exista una segunda expresión en la entrada de valores propios del subproblema. Se sustituyen las palabras clave por aquellas con subíndice para la enumeración de todas las expresiones de valores propios.
                         self.ui.ValoresPropios[indice][indice1] = self.ui.ValoresPropios[indice][indice1].replace("lamda_m", "lamda_{}m".format(indice_ayuda)).replace("lamda_n", "lamda_{}n".format(indice_ayuda)).replace("lamda_l", "lamda_{}l".format(indice_ayuda))
@@ -331,6 +336,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         if self.ui.DimensionTemporalEntrada.isChecked():
                             self.ui.FuncionesTemporales[indice] = [funcion.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for funcion in self.ui.FuncionesTemporales[indice]]
                         self.ui.Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for coeficiente in self.ui.Coeficientes[indice]]
+                        Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_m"), parsing.parse_expr("lamda_{}m".format(indice_ayuda))) for coeficiente in Coeficientes[indice]]
                     else:
                         # En el caso de que exista una tercera expresión en la entrada de valores propios del subproblema. Se sustituyen las palabras clave por aquellas con subíndice para la enumeración de todas las expresiones de valores propios.
                         self.ui.ValoresPropios[indice][indice1] = self.ui.ValoresPropios[indice][indice1].replace("lamda_l", "lamda_{}l".format(indice_ayuda)).replace("lamda_n", "lamda_{}n".format(indice_ayuda)).replace("lamda_m", "lamda_{}m".format(indice_ayuda))
@@ -338,7 +344,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                         if self.ui.DimensionTemporalEntrada.isChecked():
                             self.ui.FuncionesTemporales[indice] = [funcion.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for funcion in self.ui.FuncionesTemporales[indice]]
                         self.ui.Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for coeficiente in self.ui.Coeficientes[indice]]
-
+                        Coeficientes[indice] = [coeficiente.subs(parsing.parse_expr("lamda_l"), parsing.parse_expr("lamda_{}l".format(indice_ayuda))) for coeficiente in Coeficientes[indice]]
 
                     signo = ""
                     if (":<" in self.ui.ValoresPropios[indice][indice1]) or (":>" in self.ui.ValoresPropios[indice][indice1]):
@@ -388,7 +394,6 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                 valorespropios_string = valorespropios_string + "\\lambda_{%(subindice)s l} \\rightarrow "% {"subindice":indice_ayuda} + latex(self.ui.ValoresPropios[indice][indice1]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
 
                     if signo == "":
-                        print((parsing.parse_expr("lamda_{}n".format(indice_ayuda)) or parsing.parse_expr("lamda_{}m".format(indice_ayuda)) or parsing.parse_expr("lamda_{}l".format(indice_ayuda))) in list(self.ui.ValoresPropios[indice][indice1].free_symbols))
                         if len(list(self.ui.ValoresPropios[indice][indice1].free_symbols)) > 1:
                             if not ((parsing.parse_expr("lamda_{}n".format(indice_ayuda)) or parsing.parse_expr("lamda_{}m".format(indice_ayuda)) or parsing.parse_expr("lamda_{}l".format(indice_ayuda))) in list(self.ui.ValoresPropios[indice][indice1].free_symbols)):
                                 # Cuando las expresiones o ecuaciones de valores propios tienen más de una incógnita cuando queremos los primeros n valores propios. 
@@ -466,7 +471,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                     indices = indices + ""  # Tabla.
                                 else:
                                     indices = indices + "m"  # Tabla.
-                            coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                            coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                             solucion = solucion + parsing.parse_expr("{0}_{1}".format(list(ascii_uppercase)[indice_ayuda1],indices))*funproesp*funprotem # Tabla. 
 
                             indice_ayuda1 += 1
@@ -487,7 +492,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                                     indices = indices + "" # Tabla.
                                 else:
                                     indices = indices + "l" # Tabla.
-                        coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(self.ui.Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
+                        coeficientes_string = coeficientes_string + "%(letra)s_{"%{'letra':list(ascii_uppercase)[indice_ayuda1]} + indices + "} =" + latex(Coeficientes[indice][indice_ayuda2]) + "\\quad \\right\\rvert\\left.\\quad " # Tabla.
                         solucion = solucion + parsing.parse_expr("{0}_{1}".format(list(ascii_uppercase)[indice_ayuda1],indices))*funproesp # Tabla.
 
                         indice_ayuda1 += 1
