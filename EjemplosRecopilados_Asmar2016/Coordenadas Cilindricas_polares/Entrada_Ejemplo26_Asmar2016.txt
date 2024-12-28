@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Problema de Poisson en un disco (Capítulo 4.6).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Condiciones iniciales y/o de frontera':'0', 'Número de Subproblemas':1, 'Calidad +':'No'}
+
+Solución del Subproblema #1
+{'Valores Propios':'besselj(0, lamda_n)=0', 'Número de Términos':'1:10', 'Función Peso':'r', 'Coeficientes':'Int[-2*besselj(0, lamda_n*r)/(lamda_n**2*besselj(1,lamda_n)**2),r]', 'Funciones Espaciales':'besselj(0, lamda_n*r)'}
