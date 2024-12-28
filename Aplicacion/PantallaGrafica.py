@@ -5185,9 +5185,9 @@ class Ui_Graficacion(QMainWindow):
             if resultado == "":
                 # Calculo del valor de la solución.
                 if self.Coordenada3.isEnabled() == False:
-                    valor_solucion = self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text()))) 
+                    valor_solucion = float(np.real(self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())))))
                 else:
-                    valor_solucion = self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())), float(parsing.parse_expr(self.Coordenada3.text())))
+                    valor_solucion = float(np.real(self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())), float(parsing.parse_expr(self.Coordenada3.text())))))
                 # Redondeo del valor de la solución.
                 valor_solucion = np.round(valor_solucion, self.Precision)
 
