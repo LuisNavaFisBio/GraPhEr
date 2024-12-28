@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Problema de la placa vibrante en coordenadas polares (Capítulo 6.5).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'(1-r/pi)**2;0', 'Número de Subproblemas': 1}
+
+Solución del Subproblema #1
+{'Valores Propios':'besselj(0,lamda_n)*besseli(1,lamda_n)+besseli(0,lamda_n)*besselj(1,lamda_n)=0', 'Número de Términos':'1:6', 'Función Peso':'r', 'Coeficientes':'Int[g_1*(besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r)),r]/Int[(besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r))**2,r]', 'Funciones Espaciales':'besseli(0,lamda_n)*besselj(0,lamda_n*r)-besselj(0,lamda_n)*besseli(0,lamda_n*r)', 'Funciones Temporales':'cos(lamda_n**2*t)'}
