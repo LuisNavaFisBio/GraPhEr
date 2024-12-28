@@ -1,0 +1,14 @@
+Entrada valida para la aplicación GraPhEr 
+
+\\\
+Ejemplo recopilado de Asmar, N. H. (2016). Partial Differential Equations with Fourier Series and Boundary Value
+Problems. [Ecuaciones Diferenciales Parciales: con Series de Fourier y Problemas de Valores a la Frontera]. (3a. ed.). Elsevier
+\\\
+
+Vibraciones transversales de una viga, caso de un extremo libre y otro fijo (Capítulo 6.5).
+
+Datos Generales del Problema
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'x**2;0', 'Número de Subproblemas': 1}
+
+Solución del Subproblema #1
+{'Valores Propios':'cosh(lamda_n)*cos(lamda_n)=-1', 'Número de Términos':'1:5', 'Función Peso':'1', 'Coeficientes':'Int[g_1*(cos(lamda_n*x)-cosh(lamda_n*x)-(cosh(lamda_n)+cos(lamda_n))*(sin(lamda_n*x)-sinh(lamda_n*x))/(sinh(lamda_n)+sin(lamda_n))),x]/Int[(cos(lamda_n*x)-cosh(lamda_n*x)-(cosh(lamda_n)+cos(lamda_n))*(sin(lamda_n*x)-sinh(lamda_n*x))/(sinh(lamda_n)+sin(lamda_n)))**2,x]', 'Funciones Espaciales':'cos(lamda_n*x)-cosh(lamda_n*x)-(cosh(lamda_n)+cos(lamda_n))*(sin(lamda_n*x)-sinh(lamda_n*x))/(sinh(lamda_n)+sin(lamda_n))', 'Funciones Temporales':'cos(lamda_n**2*t)'}
