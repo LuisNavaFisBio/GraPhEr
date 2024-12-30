@@ -33,7 +33,7 @@
 ## Errores.py, VentanaCarga.py y VentanaEtiquetas.py, así como las carpetas Iconos y Carga para la ejecución de la interfaz gráfica.
 ################################################################################################
 
-from PantallaGrafica import Lienzo
+from GraPhEr_PantallaGrafica import Lienzo
 
 from fractions import Fraction
 from matplotlib import cm
