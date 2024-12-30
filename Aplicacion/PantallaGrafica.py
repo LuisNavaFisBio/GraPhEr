@@ -3590,13 +3590,39 @@ class Ui_Graficacion(QMainWindow):
         
         return [abcisa, ordenada, coordenada, longitud, resolucion]
 
-    def guardarAnimacion(self):
+    def guardarAnimacion(self, visualizacion_especial = None, valores_visualizacion_especial = None):
         """
         Guarda en un archivo .mov (a 25 FPS cuando hay dependencia temporal o 10 FPS cuando no lo hay) una animación mostrando la solución para distintos tiempos o distintos valores de coordenada fija (en problemas con dependencia temporal o con tres dimensiones espaciales, respectivamente) o la creación de la gráfica (en problemas sin dependencia temporal y con dos dimensiones espaciales o en la proyección en problemas de una dimensión espacial).
+
+        visualizacion_especial: bool, None es la visualización de la solución parcial completa 
+            Determina si se está visualizando un modo especial.
+
+        valores_visualizacion_especial: float array, None es que no se está visualizando un modo especial
+            Determina los valores de la visualización especial de la solución.
         """
 
         self.Animacion.progreso = False
         self.envioActualizacion("Iniciando Gráfica")
+
+        if visualizacion_especial == None:
+            if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
+                self.Valores = self.MatrizResultados
+            elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
+                # Para problemas de dos dimensiones espaciales con o sin dependencia temporal.
+                self.Valores = self.MatrizResultados
+            elif len(self.Dominio) == 3:
+                # Para problemas con tres dimensiones espaciales.
+                if coordenada_especifica == None:
+                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
+                else:
+                    if coordenada_especifica == "x" or coordenada_especifica == "r":
+                        self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
+                    elif coordenada_especifica == "y" or (coordenada_especifica == "phi" and self.Coordenadas == "Cilíndricas / Polares") or (coordenada_especifica == "theta" and self.Coordenadas == "Esféricas"):
+                        self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
+                    elif coordenada_especifica == "z" or (coordenada_especifica == "phi" and self.Coordenadas == "Esféricas"):
+                        self.Valores = self.MatrizResultados
+        else:
+            self.Valores = valores_visualizacion_especial
         
         # Preparación de la gráfica y los datos de guardado.
         if self.Proyeccion:
@@ -3605,7 +3631,7 @@ class Ui_Graficacion(QMainWindow):
             if (len(self.Dominio) == 2) and self.dependencia_tiempo:
                 # Problemas de una dimensión espacial y dependencia temporal.
                 self.DatosGrafica = self.crearProyeccion1D(self.MostrarSolucion2)
-                argumentos = [int(len(self.Dominios[0])/10), *self.DatosGrafica, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
+                argumentos = [int(len(self.Dominios[0])/10), *self.DatosGrafica, self.Valores, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
                 maximo = int(self.DatosGrafica[-2]*self.DatosGrafica[-1])+int(len(self.Dominios[0])/10)+50-1
                 minimo = 0
                 funcion = self.introducirProyeccion1D
@@ -3620,14 +3646,14 @@ class Ui_Graficacion(QMainWindow):
                     coordenadas = "cilindricas_polares"
                 if self.dependencia_tiempo:
                     # Problemas con dependencia temporal.
-                    argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
+                    argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
                     maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
                     minimo = int(len(self.DatosGrafica[0])/10)
                     funcion = self.actualizarProyeccion2D
                     nombre = "2DP_tiempo_{}".format(coordenadas)
                 else:
                     # Problemas sin dependencia temporal.
-                    argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:-2], self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
+                    argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica[0:-2], self.Coordenadas, self.Valores, self.MostrarSolucion2.axes, self.Cota, self.Colormap, self.GuardarAnimacion]
                     maximo = int(len(self.DatosGrafica[0])/10)+50
                     minimo = int(len(self.DatosGrafica[0])/10)
                     funcion = self.introducirProyeccion2D
@@ -3639,7 +3665,6 @@ class Ui_Graficacion(QMainWindow):
                         coordenada_especifica = "x"
                     else:
                         coordenada_especifica = "r"
-                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                     limites = self.dominio[0:2]
                 elif self.CoordenadaFija_2.isChecked():
                     if self.Coordenadas == "Cartesianas":
@@ -3648,14 +3673,12 @@ class Ui_Graficacion(QMainWindow):
                         coordenada_especifica = "phi"
                     elif self.Coordenadas == "Esféricas":
                         coordenada_especifica = "theta"
-                    self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
                     limites = self.dominio[2:4]
                 elif self.CoordenadaFija_3.isChecked():
                     if self.Coordenadas == "Esféricas":
                         coordenada_especifica = "phi"
                     else:
                         coordenada_especifica = "z"
-                    self.Valores = self.MatrizResultados
                     limites = self.dominio[4:]
 
                 if self.Coordenadas == "Cartesianas":
@@ -3688,7 +3711,7 @@ class Ui_Graficacion(QMainWindow):
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1): 
                 # Problemas con una dimensión espacial y dependencia temporal.
                 self.DatosGrafica = self.crearGrafica1D(self.MostrarSolucion2)
-                argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.MatrizResultados, self.MostrarSolucion2.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion] 
+                argumentos = [int(len(self.DatosGrafica[0])/10), *self.DatosGrafica, self.Segmentos, self.Valores, self.MostrarSolucion2.axes, None, None, self.Cota, self.Colormap, self.GuardarAnimacion] 
                 maximo = int(len(self.DatosGrafica[0])/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
                 minimo = int(len(self.DatosGrafica[0])/10)
                 funcion = self.actualizarAnimacion1D
@@ -3703,14 +3726,14 @@ class Ui_Graficacion(QMainWindow):
                     coordenadas = "cilindricas_polares"
                 if self.dependencia_tiempo:
                     # Problemas con dependencia temporal.
-                    argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
+                    argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
                     maximo = int(len(self.DatosGrafica[0].T)/10+self.DatosGrafica[-2]*self.DatosGrafica[-1])+50
                     minimo = int(len(self.DatosGrafica[0].T)/10)
                     funcion = self.actualizarAnimacion2D
                     nombre = "2D_tiempo_{}".format(coordenadas)
                 else:
                     # Problemas sin dependencia temporal.
-                    argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.MatrizResultados, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
+                    argumentos = [int(len(self.DatosGrafica[0].T)/10), *self.DatosGrafica, self.Coordenadas, self.Valores, self.MostrarSolucion2.axes, self.ccount, self.rcount, self.Cota, self.Colormap, self.GuardarAnimacion]
                     maximo = int(len(self.DatosGrafica[0].T)/10)+50
                     minimo = int(len(self.DatosGrafica[0].T)/10)
                     funcion = self.introducirGrafica2D
@@ -3727,7 +3750,6 @@ class Ui_Graficacion(QMainWindow):
                     elif self.Coordenadas == "Esféricas":
                         coordenada_especifica = "r"
                         longitud2 = int(len(self.Dominios[1])/10)
-                    self.Valores = self.MatrizResultados.T.swapaxes(1, 2)
                     limites = self.dominio[0:2]
                 elif self.CoordenadaFija_2.isChecked():
                     if self.Coordenadas == "Cartesianas":
@@ -3737,7 +3759,6 @@ class Ui_Graficacion(QMainWindow):
                     elif self.Coordenadas == "Esféricas":
                         coordenada_especifica = "theta"
                     longitud2 = int(len(self.Dominios[0])/10)
-                    self.Valores = self.MatrizResultados.T.swapaxes(0, 1).swapaxes(1, 2)
                     limites = self.dominio[2:4]
                 elif self.CoordenadaFija_3.isChecked():
                     if self.Coordenadas == "Esféricas":
@@ -3745,7 +3766,6 @@ class Ui_Graficacion(QMainWindow):
                     else:
                         coordenada_especifica = "z"
                     longitud2 = int(len(self.Dominios[0])/10)
-                    self.Valores = self.MatrizResultados
                     limites = self.dominio[4:]
                         
                 if self.Coordenadas == "Cartesianas":
