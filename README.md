@@ -50,6 +50,9 @@ Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” c
 
 Si se desea evitar la instalación de Python y las librerías correspondientes, la distribución de la aplicación para Windows se puede descargar de [GraPhEr - Google Drive](https://drive.google.com/file/d/1I3vIstvLn2M7dMdNX2sPaJHzj-khZUCA)
 
+---
+---
+
 ### Ejemplo de uso
 
 Para tener una ejemplificación del desempeño de la app, se puede descargar cualquiera de los archivos de texto disponibles en las carpetas **EjemplosRecopilados_Asmar2016**, **EjemplosRecopilados_Haberman2004** o **EjemplosResueltos**. Una vez inicializada la aplicación, importar la entrada contenida en el archivo de texto utilizando el botón **Importar**.
