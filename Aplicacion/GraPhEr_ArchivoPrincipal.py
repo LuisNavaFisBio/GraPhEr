@@ -33,12 +33,12 @@
 ## Errores.py, VentanaCarga.py y VentanaEtiquetas.py, así como las carpetas Iconos y Carga para la ejecución de la interfaz gráfica.
 ################################################################################################
 
-from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
-from PantallaGrafica import Ui_Graficacion, Lienzo
-from PantallaEntradaInterpretada import Ui_InterpretacionEDP
-from VentanaCarga import Ui_VentanaCarga
-from VentanaEtiquetas import Ui_VentanaEtiquetas
-from Trabajos_Clases import Inicializacion, TrabajoInterpretacion, TrabajoResolucion, TrabajoCambiarCoordenada, TrabajoCorteEspecifico, TrabajoCurvasNivel, TrabajoCambioProyeccion, TrabajoGuardado, TrabajoVisualizacion, TrabajoCambioModoVisualizacion
+from GraPhEr_Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
+from GraPhEr_PantallaGrafica import Ui_Graficacion, Lienzo
+from GraPhEr_PantallaEntradaInterpretada import Ui_InterpretacionEDP
+from GraPhEr_VentanaCarga import Ui_VentanaCarga
+from GraPhEr_VentanaEtiquetas import Ui_VentanaEtiquetas
+from GraPhEr_Trabajos_Clases import Inicializacion, TrabajoInterpretacion, TrabajoResolucion, TrabajoCambiarCoordenada, TrabajoCorteEspecifico, TrabajoCurvasNivel, TrabajoCambioProyeccion, TrabajoGuardado, TrabajoVisualizacion, TrabajoCambioModoVisualizacion
 
 from matplotlib.animation import FuncAnimation, FFMpegFileWriter
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar

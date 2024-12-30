@@ -34,9 +34,9 @@
 ################################################################################################
 
 
-from VentanaCarga import Ui_VentanaCarga
-from Animaciones import ReproductorGeneral, Graficacion2D_NoTemporal
-from Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
+from GraPhEr_VentanaCarga import Ui_VentanaCarga
+from GraPhEr_Animaciones import ReproductorGeneral, Graficacion2D_NoTemporal
+from GraPhEr_Errores import ComandoInvalidoError, DimensionError, EntradaVaciaError, ExcesoEntradaError, ExtremoFaltanteError, ExcesoIncognitasError, NoExistenciaError, NoNumeroError, ValorFueraDominioError
 
 from copy import deepcopy
 from fractions import Fraction
