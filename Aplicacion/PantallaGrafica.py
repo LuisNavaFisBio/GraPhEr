@@ -3604,6 +3604,7 @@ class Ui_Graficacion(QMainWindow):
         self.Animacion.progreso = False
         self.envioActualizacion("Iniciando Gráfica")
 
+        nombre_modo = ""
         if visualizacion_especial == None:
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
                 self.Valores = self.MatrizResultados
@@ -3623,6 +3624,19 @@ class Ui_Graficacion(QMainWindow):
                         self.Valores = self.MatrizResultados
         else:
             self.Valores = valores_visualizacion_especial
+            if self.Modo.isChecked():
+                nombre_modo = nombre_modo + "_modoPorModo"
+            elif self.SolucionParcial.isChecked():
+                nombre_modo = nombre_modo + "_modoSolucionParcial"
+
+            if self.Subproblema_1.isVisible():
+                nombre_modo = nombre_modo + "_Subproblema{0}".format(self.Subproblema_1.value())
+            if self.ValorPropio1_1.isVisible():
+                nombre_modo = nombre_modo + "_{0}".format(self.ValorPropio1_1.value())
+            if self.ValorPropio2_1.isVisible():
+                nombre_modo = nombre_modo + "_{0}".format(self.ValorPropio2_1.value())
+            if self.ValorPropio3_1.isVisible():
+                nombre_modo = nombre_modo + "_{0}".format(self.ValorPropio3_1.value())
         
         # Preparación de la gráfica y los datos de guardado.
         if self.Proyeccion:
@@ -3800,7 +3814,7 @@ class Ui_Graficacion(QMainWindow):
         # La modificación del bitrate y dpi de la animación para optimizar el guardado se basan en DrV. (08 de agosto de 2014). Respuesta a la pregunta "matplotlib animation movie: quality of movie decreasing with time". stackoverflow. https://stackoverflow.com/a/25209973
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         self.writer = FFMpegFileWriter(fps=25, metadata=metadata, bitrate = 12000)
-        self.nombreArchivo = nombre+curvas_str
+        self.nombreArchivo = nombre+curvas_str+nombre_modo
         
     def cambiarCoordenadaFija(self):
         """
