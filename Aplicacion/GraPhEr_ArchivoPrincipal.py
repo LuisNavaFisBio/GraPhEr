@@ -40,7 +40,6 @@ from VentanaCarga import Ui_VentanaCarga
 from VentanaEtiquetas import Ui_VentanaEtiquetas
 from Trabajos_Clases import Inicializacion, TrabajoInterpretacion, TrabajoResolucion, TrabajoCambiarCoordenada, TrabajoCorteEspecifico, TrabajoCurvasNivel, TrabajoCambioProyeccion, TrabajoGuardado, TrabajoVisualizacion, TrabajoCambioModoVisualizacion
 
-
 from matplotlib.animation import FuncAnimation, FFMpegFileWriter
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
 from matplotlib.colors import LinearSegmentedColormap
