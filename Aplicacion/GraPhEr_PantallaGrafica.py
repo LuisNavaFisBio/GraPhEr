@@ -903,7 +903,7 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_1.setStyleSheet(u"color: rgb(255, 255, 255); background-color: rgb(246, 247, 247)")
         self.CoordenadaFija_1.setMinimumSize(QSize(20, 30))
         self.CoordenadaFija_1.setMaximumSize(QSize(20, 30))
-        horizontalLayout_6.addWidget(self.CoordenadaFija_1, alignment=Qt.AlignLeft)
+        horizontalLayout_6.addWidget(self.CoordenadaFija_1, alignment=Qt.AlignHCenter)
 
         self.CoordenadaFija_1_label = QLabel()
         self.CoordenadaFija_1_label.setMinimumSize(QSize(30, 30))
@@ -916,7 +916,7 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_2.setStyleSheet(u"color: rgb(255, 255, 255); background-color: rgb(246, 247, 247)")
         self.CoordenadaFija_2.setMinimumSize(QSize(20, 30))
         self.CoordenadaFija_2.setMaximumSize(QSize(20, 30))
-        horizontalLayout_6.addWidget(self.CoordenadaFija_2, alignment=Qt.AlignLeft)
+        horizontalLayout_6.addWidget(self.CoordenadaFija_2, alignment=Qt.AlignHCenter)
 
         self.CoordenadaFija_2_label = QLabel()
         self.CoordenadaFija_2_label.setMinimumSize(QSize(30, 30))
@@ -929,7 +929,7 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_3.setStyleSheet(u"color: rgb(255, 255, 255); background-color: rgb(246, 247, 247)")
         self.CoordenadaFija_3.setMinimumSize(QSize(20, 30))
         self.CoordenadaFija_3.setMaximumSize(QSize(20, 30))
-        horizontalLayout_6.addWidget(self.CoordenadaFija_3, alignment=Qt.AlignLeft)
+        horizontalLayout_6.addWidget(self.CoordenadaFija_3, alignment=Qt.AlignHCenter)
 
         self.CoordenadaFija_3_label = QLabel()
         self.CoordenadaFija_3_label.setMinimumSize(QSize(30, 30))
@@ -938,7 +938,6 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_6.addWidget(self.CoordenadaFija_3_label, alignment=Qt.AlignLeft)
         verticalLayout_2.addLayout(horizontalLayout_6)
         verticalLayout_2.addLayout(horizontalLayout_6)
-
         # Configuración de las casillas de coordenadas fijas como casillas mutuamente excluyentes.
         self.CoordenadaFija_Casilla = QButtonGroup()
         self.CoordenadaFija_Casilla.addButton(self.CoordenadaFija_1, 1)
@@ -1394,11 +1393,11 @@ class Ui_Graficacion(QMainWindow):
                 self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "phi2.svg")))
             if len(self.Dominio) == 2 and len(self.Dominio[-1]) == 1:
                 self.label_8.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "t2.svg")))
-                self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "sinOpcion.svg")))
+                self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
             elif len(self.Dominio) == 3 and len(self.Dominio[-1]) == 1:
                 self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "t2.svg")))
             elif len(self.Dominio) == 2 and len(self.Dominio[-1]) != 1:
-                self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "sinOpcion.svg")))
+                self.label_9.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
             
             # Diseño de la caja de herramientas para la visualización de curvas de nivel, intercambio de proyecciones y graficación de cortes específicos.
             if ((len(self.Dominio) == 3) and (not self.dependencia_tiempo) and (not self.Proyeccion)) or ((len(self.Dominio) == 2) and self.dependencia_tiempo):
@@ -1448,9 +1447,9 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1_label.setEnabled(False)
                 self.CoordenadaFija_2_label.setEnabled(False)
                 self.CoordenadaFija_3_label.setEnabled(False)
-                self.CoordenadaFija_1_label.setVisible(False)
-                self.CoordenadaFija_2_label.setVisible(False)
-                self.CoordenadaFija_3_label.setVisible(False)
+                self.CoordenadaFija_1_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
+                self.CoordenadaFija_2_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
+                self.CoordenadaFija_3_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
                 self.CoordenadaFija.setEnabled(False)
                 self.CoordenadaFija.setVisible(False)
                 self.CoordenadaFija.setText("{}".format(float(self.Dominio[0][0])))
@@ -1502,8 +1501,8 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_2_label.setEnabled(False)
                 self.CoordenadaFija_3_label.setEnabled(False)
                 self.CoordenadaFija_1_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "t2.svg")))
-                self.CoordenadaFija_2_label.setVisible(False)
-                self.CoordenadaFija_3_label.setVisible(False)
+                self.CoordenadaFija_2_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
+                self.CoordenadaFija_3_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
                 if self.Proyeccion and (len(self.Dominio) > 2):
                     self.CurvasNivelAuto.setShortcut("Ctrl+A")
                     self.CurvasNivelAuto.setEnabled(True)
