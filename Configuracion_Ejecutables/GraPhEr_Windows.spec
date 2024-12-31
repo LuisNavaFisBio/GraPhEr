@@ -30,6 +30,7 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
+    uac_admin=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
@@ -37,12 +38,3 @@ exe = EXE(
     entitlements_file=None,
     icon='Iconos\\IconoGraPhEr.ico',
 )
-
-coll = COLLECT(exe,
-               a.binaries,
-               a.zipfiles,
-               a.datas,
-               strip=False,
-               upx=True,
-               upx_exclude=[],
-               name='GraPhEr')
