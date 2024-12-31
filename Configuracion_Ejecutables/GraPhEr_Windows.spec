@@ -38,7 +38,6 @@ exe = EXE(
     icon='Iconos\\IconoGraPhEr.ico',
 )
 
-
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
