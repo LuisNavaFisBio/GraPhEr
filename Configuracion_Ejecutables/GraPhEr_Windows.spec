@@ -37,3 +37,13 @@ exe = EXE(
     entitlements_file=None,
     icon='Iconos\\IconoGraPhEr.ico',
 )
+
+
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               upx_exclude=[],
+               name='GraPhEr')
