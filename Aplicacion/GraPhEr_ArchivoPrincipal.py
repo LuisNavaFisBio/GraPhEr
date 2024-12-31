@@ -1697,6 +1697,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         """Ejecuta el trabajo de cambio de coordenada fija en la visualización gráfica para problemas con tres dimensiones espaciales."""
 
         if not (self.DimensionTemporalEntrada.isChecked() and self.DimensionEspacialEntrada.value() == 1):
+            self.Ui_Grafica.centralwidget.setDisabled(True)
+            self.Ui_Grafica.setDisabled(True)
+
             # Diseño de la ventana de carga.
             self.Ui_Carga.label.setText("Iniciando Proceso")
             self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "CoordenadaCarga.gif"))
@@ -1792,10 +1795,15 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
+        self.Ui_Grafica.centralwidget.setEnabled(True)
+        self.Ui_Grafica.setEnabled(True)
 
     def graficarCorte(self):
         """Ejecuta el trabajo de cambio de corte, es decir, realiza el trabajo de graficación en problemas de tres dimensiones espaciales para el valor especificado por el usuario para la coordenada fija actual."""
 
+        self.Ui_Grafica.centralwidget.setDisabled(True)
+        self.Ui_Grafica.setDisabled(True)
+        
         # Diseño de la ventana de carga.
         self.Ui_Carga.label.setText("Iniciando Proceso")
         self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "CorteCarga.gif"))
@@ -1833,12 +1841,17 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         self.VentanaCarga.close()
+        self.Ui_Grafica.centralwidget.setEnabled(True)
+        self.Ui_Grafica.setEnabled(True)
 
     def visualizarCurvasNivel(self, boton=None):
         """Ejecuta el trabajo de visualización de curvas de nivel para problemas de dos dimensiones espaciales o para problemas de tres dimensiones espaciales en donde se proyectan los cortes."""
 
         if  not self.VentanaGrafica.isHidden() and (not (boton == True and not self.Ui_Grafica.CurvasNivelEspecificas.isChecked())):
             # Si la ventana de graficación se encuentra abierta procede mostrar u ocultar las curvas de nivel de acuerdo a lo especificado por el usuario.
+
+            self.Ui_Grafica.centralwidget.setDisabled(True)
+            self.Ui_Grafica.setDisabled(True)
 
             # Diseño de la ventana de carga.
             self.Ui_Carga.label.setText("Iniciando Proceso")
@@ -1903,6 +1916,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.Ui_Grafica.MostrarSolucion.axes2.grid(True)
             # Oculta la leyenda si el usuario solicita no mostrar las curvas de nivel.
             self.Ui_Grafica.VentanaEtiquetas.setHidden(True)
+
+        self.Ui_Grafica.centralwidget.setEnabled(True)
+        self.Ui_Grafica.setEnabled(True)
 
     def cambiarProyeccion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
@@ -2008,6 +2024,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         if not self.VentanaGrafica.isHidden():
             # Si la ventana de graficación se encuentra abierta procede a realizar el cambio entre modos de visualización.
+            self.Ui_Grafica.centralwidget.setDisabled(True)
+            self.Ui_Grafica.setDisabled(True)
 
             # Diseño de la ventana de carga.
             self.Ui_Carga.label.setText("Iniciando Proceso")
@@ -2107,6 +2125,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
+        self.Ui_Grafica.centralwidget.setEnabled(True)
+        self.Ui_Grafica.setEnabled(True)
 
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
@@ -2121,6 +2141,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             if archivo_texto != "":
                 if "NombrePredefinido.mov" != archivo_texto.split("/")[-1]:
                     self.nombreArchivo = archivo_texto.split("/")[-1]
+
+                self.Ui_Grafica.centralwidget.setDisabled(True)
+                self.Ui_Grafica.setDisabled(True)
 
                 # Diseño de la ventana de carga.
                 self.Ui_Carga.label.setText("Iniciando Guardado")
@@ -2201,6 +2224,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.interpretacionCurvasNivel()
 
         # Habilita el botón de guardado.
+        self.Ui_Grafica.setEnabled(True)
         self.Ui_Grafica.centralwidget.setEnabled(True)
         self.Ui_Grafica.GuardarAnimacion.setEnabled(True)
         self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(11, 61, 98); color: rgb(246,247,247)")
