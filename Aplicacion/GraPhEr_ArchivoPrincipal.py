@@ -2159,7 +2159,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Carga.label.setText(mensaje)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
-        self.VentanaCarga.close()
+        self.Ui_Carga.animacion.stop()
 
         self.Ui_Grafica.GuardarAnimacion.setText("Guardando")
         QCoreApplication.processEvents()
@@ -2176,6 +2176,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
         del self.Ui_Grafica.animacionGuardado
+        self.VentanaCarga.close()
 
         # Graficación de las curvas de nivel para evitar su desaparación después del proceso de guardado
         self.Ui_Grafica.interpretacionCurvasNivel()

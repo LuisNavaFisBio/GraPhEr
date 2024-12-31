@@ -1495,7 +1495,7 @@ class TrabajoGuardado(QtCore.QRunnable):
         try: 
             self.ui.guardarAnimacion()
             QtCore.QThread.msleep(500)
-            self.signals.finalizar_signal.emit("Animación Lista para Guardado")
+            self.signals.finalizar_signal.emit("Guardando Animacion")
         except:
             tipoError, explicacion, line = sys.exc_info()[:3]
             print(tipoError)
