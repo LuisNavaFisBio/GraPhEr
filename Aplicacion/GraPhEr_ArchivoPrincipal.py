@@ -1099,6 +1099,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         # Inicialización de ventanas y variables auxiliares.
         self.entradaresuelta = False
         self.cierretotal = False
+        self.nombreArchivo = ""
         self.MensajeError = QMessageBox()
         self.error = False
         self.ventanaInterpretacion()
@@ -1214,8 +1215,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         """Exporta la entrada ingresada e interpretada correctamente a un archivo de texto para su transferencia."""
 
         try:
-            # La implementación de esta función para crear el archivo y escribir en él una vez creado el texto a exportar fue tomada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
-            nombre_archivo, _ = QFileDialog.getSaveFileName(self, "Exportar Entrada", "", "Archivos de Texto (*.txt)")
+            # La implementación de esta función para crear el archivo y escribir en él una vez creado el texto a exportar fue tomada y modificada de sentdex. (12 de junio de 2015). File Saving - PyQt with Python GUI Programming tutorial 15. YouTube. https://www.youtube.com/watch?v=QuifITlv0P4
+            # La modificación consiste en colocar un nombre predefinido para el archivo guardado y el diseño del texto.
+            nombre_archivo, _ = QFileDialog.getSaveFileName(self, "Exportar Entrada", "Entrada_Valida_GraPhEr.txt", "Archivos de Texto (*.txt)")
             if nombre_archivo != "":
                 archivo = open(nombre_archivo, "w", encoding='utf-8')
 
@@ -2109,32 +2111,46 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
     def guardarAnimacion(self):
         """Ejecuta el trabajo de cambio de proyeccion entre visualizacion tridimensional y bidimensional o entre visualizacion unidimensional y bidimensional."""
 
-        # Diseño de la ventana de carga.
-        self.Ui_Carga.label.setText("Iniciando Guardado")
-        self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "Guardando.gif"))
-        self.Ui_Carga.animacion.setScaledSize(QSize(227,150))
-        self.Ui_Carga.icono.setMovie(self.Ui_Carga.animacion)
-        self.Ui_Carga.animacion.start()
-        QCoreApplication.processEvents()
+        try:
+            # Apertura de un cuadro de búsqueda de archivos para encontrar el archivo de texto con una entrada valida para el programa.
+            # La implementación del cuadro de búsqueda de archivos fue tomada y modificada de Elder, J. [Codemy.com] (09 de septiembre de 2021). File Dialog Boxes With QFileDialog - PyQt5 GUI Thursdays #29. YouTube. https://www.youtube.com/watch?v=gg5TepTc2Jg
+            # La modificación consiste en colocar un nombre predefinido para el archivo guardado.
+            archivo_texto, _ = QFileDialog.getSaveFileName(self, "Guardar Animacion", "NombrePredefinido.mov", "Archivos de Video (*.mov)")
+            
+            # Si se elige un archivo se procede a su interpretación.
+            if archivo_texto != "":
+                if "NombrePredefinido.mov" != archivo_texto.split("/")[-1]:
+                    self.nombreArchivo = archivo_texto.split("/")[-1]
 
-        # Deshabilita el botón de guardado.
-        self.Ui_Grafica.GuardarAnimacion.setDisabled(True)
-        self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
-        self.Ui_Grafica.GuardarAnimacion.setText("Procesando")
+                # Diseño de la ventana de carga.
+                self.Ui_Carga.label.setText("Iniciando Guardado")
+                self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "Guardando.gif"))
+                self.Ui_Carga.animacion.setScaledSize(QSize(227,150))
+                self.Ui_Carga.icono.setMovie(self.Ui_Carga.animacion)
+                self.Ui_Carga.animacion.start()
+                QCoreApplication.processEvents()
 
-        # Crea el lienzo sobre el que se graficaran los cuadros de la animación.
-        self.Ui_Grafica.MostrarSolucion2 = Lienzo(self, ancho= 854, alto=480, dpi = 72)
-        self.Ui_Grafica.MostrarSolucion2.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.Ui_Grafica.MostrarSolucion2.figura.set_visible(True)
-        
-        # Configuración y ejecución del trabajo de guardado de animaciones.
-        trabajo = TrabajoGuardado(self.Ui_Grafica)
-        trabajo.signals.finalizar_signal.connect(self.finalizarGuardado)
-        trabajo.signals.avanzar_signal.connect(self.actualizarVentanaEmergente)
-        trabajo.signals.error_signal.connect(self.mostrarError)  
-        trabajo.autoDelete()
-        self.VentanaCarga.show()
-        self.threadpool.start(trabajo, 0)
+                # Deshabilita el botón de guardado.
+                self.Ui_Grafica.GuardarAnimacion.setDisabled(True)
+                self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
+                self.Ui_Grafica.GuardarAnimacion.setText("Procesando")
+
+                # Crea el lienzo sobre el que se graficaran los cuadros de la animación.
+                self.Ui_Grafica.MostrarSolucion2 = Lienzo(self, ancho= 854, alto=480, dpi = 72)
+                self.Ui_Grafica.MostrarSolucion2.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+                self.Ui_Grafica.MostrarSolucion2.figura.set_visible(True)
+                
+                # Configuración y ejecución del trabajo de guardado de animaciones.
+                trabajo = TrabajoGuardado(self.Ui_Grafica)
+                trabajo.signals.finalizar_signal.connect(self.finalizarGuardado)
+                trabajo.signals.avanzar_signal.connect(self.actualizarVentanaEmergente)
+                trabajo.signals.error_signal.connect(self.mostrarError)  
+                trabajo.autoDelete()
+                self.VentanaCarga.show()
+                self.threadpool.start(trabajo, 0)
+
+        except:
+            self.mostrarError(("Error -- Fallo en la importación", "No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida."), exportacion_importacion=True)
 
     def finalizarGuardado(self, mensaje):
         """
@@ -2165,7 +2181,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
 
-        self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
+        if self.nombreArchivo == "":
+            self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
+        else:
+            self.Ui_Grafica.animacionGuardado.save(self.nombreArchivo, writer=self.Ui_Grafica.writer, dpi=72)
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
 
