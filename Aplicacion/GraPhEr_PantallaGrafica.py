@@ -886,7 +886,6 @@ class Ui_Graficacion(QMainWindow):
         self.label_14 = QLabel()
         self.label_14.setText("Coordenada Fija")
         self.label_14.setMinimumSize(QSize(100, 30))
-        self.label_14.setMaximumSize(QSize(100, 30))
         horizontalLayout_6.addWidget(self.label_14, alignment=Qt.AlignLeft)
 
         self.line_8 = QFrame()
