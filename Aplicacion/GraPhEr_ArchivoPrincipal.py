@@ -2150,7 +2150,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.threadpool.start(trabajo, 0)
 
         except:
-            self.mostrarError(("Error -- Fallo en la importación", "No se pudo importar la entrada. Revisa que el archivo de texto contenga una entrada válida."), exportacion_importacion=True)
+            self.mostrarError(("Error -- Fallo en el proceso de guardado", "No se pudo guardar la animación. Intenta otra vez."), exportacion_importacion=True)
 
     def finalizarGuardado(self, mensaje):
         """
