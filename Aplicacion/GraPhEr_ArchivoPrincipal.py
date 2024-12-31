@@ -1927,6 +1927,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         if not self.VentanaGrafica.isHidden():
             # Si la ventana de graficación se encuentra abierta procede a realizar el cambio entre proyecciones.
 
+            self.Ui_Grafica.centralwidget.setDisabled(True)
+            self.Ui_Grafica.setDisabled(True)
+
             # Diseño de la ventana de carga.
             self.Ui_Carga.label.setText("Iniciando Proceso")
             self.Ui_Carga.animacion = QMovie(os.path.join(directorio_base, "Carga", "ProyeccionCarga.gif"))
@@ -2018,6 +2021,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         self.Ui_Grafica.Animacion.iniciar()
         self.Ui_Grafica.MostrarSolucion.figura.canvas.draw_idle()
+        self.Ui_Grafica.centralwidget.setEnabled(True)
+        self.Ui_Grafica.setEnabled(True)
 
     def cambiarModoVisualizacion(self):
         """Ejecuta el trabajo de cambio de visualización entre la vista modo por modo y la vista de solución parcial."""
