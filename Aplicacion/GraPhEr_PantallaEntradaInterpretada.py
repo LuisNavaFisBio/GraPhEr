@@ -43,6 +43,7 @@ from plasTeX.Renderers.HTML5 import Renderer
 from PyQt5.QtCore import QCoreApplication, QMetaObject, QSize, Qt, QUrl, QRect, pyqtSignal
 from PyQt5.QtGui import QFont, QPixmap, QGuiApplication, QIcon
 from PyQt5.QtWidgets import *
+from PyQt5.QtWebEngineWidgets import QWebEngineSettings
 from PyQt5 import QtWebEngineWidgets, QtCore
 from string import ascii_uppercase, ascii_lowercase
 from sympy import integrate, latex, parsing, pi, preview, symbols
@@ -144,6 +145,7 @@ class Ui_InterpretacionEDP(QMainWindow):
         self.VisualizacionInterpretacion.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         pagina = self.VisualizacionInterpretacion.page()
         pagina.loadFinished.connect(self.cargaFinalizada)
+        pagina.settings().setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, True)
         self.VisualizacionInterpretacion.setZoomFactor(1.5)
         verticalLayout_2.addWidget(self.VisualizacionInterpretacion)
         verticalLayout_1.addLayout(verticalLayout_2)
