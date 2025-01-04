@@ -42,6 +42,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.collections import LineCollection
 from plasTeX.TeX import TeX
 from plasTeX.Renderers.HTML5 import Renderer
+from plasTeX.Logging import updateLogLevels
 from PyQt5.QtCore import QCoreApplication, QMetaObject, QSize, Qt, QUrl, QRect, pyqtSignal, QTimer
 from PyQt5.QtGui import QFont, QPixmap, QGuiApplication, QIcon, QMovie
 from PyQt5.QtWidgets import *
@@ -107,6 +108,8 @@ class TrabajoInterpretacion(QtCore.QRunnable):
 
     @QtCore.pyqtSlot()
     def run(self):
+        updateLogLevels(log=None, error=None, warning=None, status=None)
+
         # Deshabilitacion de la pantalla principal mientras se realiza la interpretación.
         self.ui.centralwidget.setDisabled(True)
         self.ui.Interpretar.setDisabled(True)

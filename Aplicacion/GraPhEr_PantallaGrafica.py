@@ -936,7 +936,6 @@ class Ui_Graficacion(QMainWindow):
         self.CoordenadaFija_3_label.setAlignment(Qt.AlignVCenter)
         horizontalLayout_6.addWidget(self.CoordenadaFija_3_label, alignment=Qt.AlignLeft)
         verticalLayout_2.addLayout(horizontalLayout_6)
-        verticalLayout_2.addLayout(horizontalLayout_6)
         # Configuración de las casillas de coordenadas fijas como casillas mutuamente excluyentes.
         self.CoordenadaFija_Casilla = QButtonGroup()
         self.CoordenadaFija_Casilla.addButton(self.CoordenadaFija_1, 1)
