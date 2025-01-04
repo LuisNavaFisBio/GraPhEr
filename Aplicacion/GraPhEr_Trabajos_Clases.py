@@ -108,7 +108,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
 
     @QtCore.pyqtSlot()
     def run(self):
-        updateLogLevels(log=None, error=None, warning=None, status=None)
+        updateLogLevels({"log":"CRITICAL", "error":"CRITICAL", "status":"CRITICAL", "root":"CRITICAL", "general":"CRITICAL"})
 
         # Deshabilitacion de la pantalla principal mientras se realiza la interpretación.
         self.ui.centralwidget.setDisabled(True)
