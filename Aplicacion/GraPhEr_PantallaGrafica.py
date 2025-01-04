@@ -672,7 +672,7 @@ class Ui_Graficacion(QMainWindow):
         self.pagina = self.ValoresCoeficienteView.page()
         self.html = html
         self.ValoresCoeficienteView.setHtml(self.html)
-        self.pagina.runJavaScript('convert("{}");'.format("0"))
+        self.pagina.runJavaScript('var x = 0')
         verticalLayout_2.addWidget(self.ValoresCoeficienteView, alignment=Qt.AlignHCenter)
 
         line_4 = QFrame()
@@ -765,7 +765,7 @@ class Ui_Graficacion(QMainWindow):
         self.Valorview.setMaximumSize(QSize(480, 65))
         self.pagina2 = self.Valorview.page()
         self.Valorview.setHtml(self.html)
-        self.pagina2.runJavaScript('convert("{}");'.format("0"))
+        self.pagina2.runJavaScript('var x = 0')
         self.pagina2.loadFinished.connect(lambda: self.calcularValorSolucion())
         verticalLayout_2.addWidget(self.Valorview, alignment=Qt.AlignHCenter)
 

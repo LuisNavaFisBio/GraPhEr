@@ -555,16 +555,16 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             self.ui.Entrada = self.ui.Entrada % entrada
             self.ui.Entrada = self.ui.inicioTex + self.ui.Entrada + self.ui.finTex
             self.ui.Entrada = self.ui.Entrada.replace("for", "para").replace("otherwise", "en otro caso")
-            texto_LaTeX = open("EntradaUsuario.tex", 'w')
+            texto_LaTeX = open(os.path.join(directorio_base, "EntradaUsuario.tex"), 'w')
             texto_LaTeX.write(self.ui.Entrada)
             texto_LaTeX.close()
 
             # Creación del archivo TeX con la interpretación.
             # La creación de esta parte del código se basó en la documentación de la libería plasTeX, en particular fue tomada de plasTeX. (s. f.). 5.1 Simple Renderer Example. plasTeX 3.0 — A Python Framework for Processing LaTeX Documents. https://plastex.github.io/plastex/plastex/sec-simple-renderer-ex.html
-            with open("EntradaUsuario.tex", 'r') as archivotex:
+            with open(os.path.join(directorio_base, "EntradaUsuario.tex"), 'r') as archivotex:
                 tex = TeX(file=archivotex)
                 # Creación de la página HTML.
-                tex.ownerDocument.config['files']['filename'] = 'Entrada.html'
+                tex.ownerDocument.config['files']['filename'] = os.path.join(directorio_base, "Entrada.html")
                 Renderer().render(tex.parse())
 
             # Reinicio del string de interpretación.

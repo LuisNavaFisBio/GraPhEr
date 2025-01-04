@@ -1634,7 +1634,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Interpretacion.ready = True
 
             # La visualización de la página html creada se basa en Dhimal, R. (01 de noviembre de 2020). How to add(render) HTML file in PyQT5 Dialog Box. Medium. https://rojandhimal.medium.com/how-to-add-render-html-file-in-pyqt5-dialog-box-4fc259a8f5a
-            self.Ui_Interpretacion.VisualizacionInterpretacion.load(QUrl.fromLocalFile(os.path.abspath('Entrada.html')))
+            self.Ui_Interpretacion.VisualizacionInterpretacion.load(QUrl.fromLocalFile(os.path.join(directorio_base, 'Entrada.html')))
 
             self.actualizarVentanaEmergente(mensaje)
             QtCore.QThread.msleep(500)
