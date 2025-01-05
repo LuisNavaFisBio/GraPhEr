@@ -13,33 +13,29 @@ GraPhEr es una aplicación de graficación, visualización y exploración de las
 - Implementación de algoritmos para visualizar modo por modo o visualizar soluciones parciales de la entrada ingresada.
 - Implementación de algoritmos para importar y exportar entradas válidas para la aplicación.
 
-# Requerimientos
+# Documentación
 
-## Con instalación de Python (archivos .py)
+La documentación puede ser consultada en el archivo **ManualUsuario.pdf** en este repositorio. En ella se encuentran las instrucciones para la instalación/ejecución de la aplicación, la sintaxis requerida en los campos de entrada y la guía de interacción con la interfaz.
 
-GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior. 
+# Requerimientos para la ejecución desde los archivos *.py*.
 
-En Windows es necesario instalar Python con las opciones “Use admin privileges when installing py.exe” y “Add python.exe to PATH”, antes de finalizar elegir la opción “Disable PATH limit”.
+GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior. En sistemas Linux este programa viene preinstalado, mientras que en Windows/MacOs es necesario realizar la descarga del instalador correspondiente. Revisar la documentación para una correcta instalación de Python. 
 
----
-
-Adicionalmente, requiere la instalación de [FFMPEG](https://ffmpeg.org/download.html) en el sistema (las instrucciones de instalación para diferentes sistemas se pueden encontrar en 
-[ffmpeg-python](https://github.com/kkroening/ffmpeg-python)). Este es un software necesario para crear los videos de las animaciones, si no planea exportar las animaciones no es necesaria su instalación.
-
-El procedimiento en Windows es el siguiente:
-1. Descargar el archivo ffmpeg-release-full.7z de [https://www.gyan.dev/ffmpeg/builds/](https://www.gyan.dev/ffmpeg/builds/) y descomprimirlo.
-2. Agregar los archivos ejecutables de la carpeta *bin* en una carpeta que se llame *FFMPEG* y pasar dicha carpeta a *Archivos de Programa* del sistema.
-3. Posteriormente añadir la dirección de *FFMPEG* a PATH en las variables de entorno del sistema.
-
----
-
-Finalmente, requiere la instalación de varias librerías de Python. Para ello es necesario abrir la consola del sistema (dependiendo del sistema operativo y de preferencia en modo administrador) y correr el comando (o equivalente según el sistema operativo; lo importante es añadir todas estas librerías a Python).
+Adicionalmente, requiere la instalación de varias librerías de Python. Para ello es necesario abrir la consola del sistema (dependiendo del sistema operativo y de preferencia en modo administrador) y correr el comando:
 
 ```
+# Windows
 pip install -U --only-binary :all: matplotlib==3.7.5, PyQt5, plasTeX, sympy, scipy, PySide6, ffmpeg-python, pyqtwebengine
+
+# Linux/MacOs
+pip install -U --only-binary :all: matplotlib==3.7.5 PyQt5 plasTeX sympy scipy PySide6 ffmpeg-python pyqtwebengine
 ```
 
 *Nota: Se necesita una versión inferior o igual a la versión 3.7.5 de la librería MatPlotLib por la existencia de un bug en versiones superiores de dicha librería que impide la graficación de curvas de nivel en la vista tridimensional.*
+
+
+Adicionalmente, requiere la instalación de [FFMPEG](https://ffmpeg.org/download.html) en el sistema. Este es un software necesario para crear los videos de las animaciones, si no planea exportar las animaciones no es necesaria su instalación.
+
 
 ### Ejecución de la aplicación
 
@@ -78,9 +74,7 @@ En esta ventana se puede obtener el valor de la solución en los distintos punto
 **En el siguiente enlace [Ejemplos GraPher](https://youtube.com/playlist?list=PLDXxCxAJtfBglyxTJl_z-5euuph1bhJEH&si=NSw4tSfEgUvtZpNV) se pueden encontrar videos alojados en YouTube que muestran las animaciones obtenidas para cada uno de los problemas ya resueltos, las entradas para estos problemas se encuentran en la carpeta EjemplosResueltos.**
 
 
-# Documentación
 
-No existe una documentación estrictamente hablando, sin embargo, se puede consultar una explicación del desarrollo de la aplicación, así como ejemplos de utilización en el siguiente documento:
 
 
 # Contribuciones
