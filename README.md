@@ -15,7 +15,7 @@ GraPhEr es una aplicación de graficación, visualización y exploración de las
 
 # Documentación
 
-La documentación puede ser consultada en el archivo **ManualUsuario.pdf** en este repositorio. En ella se encuentran las instrucciones para la instalación/ejecución de la aplicación, la sintaxis requerida en los campos de entrada y la guía de interacción con la interfaz.
+La documentación puede ser consultada en el archivo [**ManualUsuario.pdf**](https://github.com/LuisNavaFisBio/GraPhEr/blob/main/ManualUsuario.pdf) en este repositorio. En ella se encuentran las instrucciones para la instalación/ejecución de la aplicación, la sintaxis requerida en los campos de entrada y la guía de interacción con la interfaz.
 
 # Ejecución
 
