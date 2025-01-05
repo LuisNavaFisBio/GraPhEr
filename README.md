@@ -17,7 +17,11 @@ GraPhEr es una aplicación de graficación, visualización y exploración de las
 
 La documentación puede ser consultada en el archivo **ManualUsuario.pdf** en este repositorio. En ella se encuentran las instrucciones para la instalación/ejecución de la aplicación, la sintaxis requerida en los campos de entrada y la guía de interacción con la interfaz.
 
-# Requerimientos para la ejecución desde los archivos *.py*.
+# Ejecución
+
+La aplicación puede ser ejecutada desde los archivos *.py* encontrados en la carpeta **Aplicación** o puede ser instalada (esta opción solo se encuentra disponible actualmente en sistemas Windows).
+
+### Requerimientos para la ejecución desde los archivos *.py*.
 
 GrahPhEr requiere [Python 3](https://www.python.org/downloads/) o superior. En sistemas Linux este programa viene preinstalado, mientras que en Windows/MacOs es necesario realizar la descarga del instalador correspondiente. Revisar la documentación para una correcta instalación de Python. 
 
@@ -33,19 +37,15 @@ pip install -U --only-binary :all: matplotlib==3.7.5 PyQt5 plasTeX sympy scipy P
 
 *Nota: Se necesita una versión inferior o igual a la versión 3.7.5 de la librería MatPlotLib por la existencia de un bug en versiones superiores de dicha librería que impide la graficación de curvas de nivel en la vista tridimensional.*
 
-
 Adicionalmente, requiere la instalación de [FFMPEG](https://ffmpeg.org/download.html) en el sistema. Este es un software necesario para crear los videos de las animaciones, si no planea exportar las animaciones no es necesaria su instalación.
 
+### Requerimientos para la instalación (actualmente solo disponible en Windows).
 
-### Ejecución de la aplicación
+Cuando se utiliza el instalador no es necesario ningún programa adicional.
 
-Después de la instalación, abrir el archivo “PantallaInicialInterfaz.py” con el IDLE de Python y ejecutarlo en la pestaña “Run”. O correr el archivo a través de la terminal del sistema operativo en modo administrador o correr el archivo con un editor (como Visual Studio Code).
+## Ejecución de la aplicación
 
-
-## Sin instalación de Python (archivo ejecutable)
-
-Si se desea evitar la instalación de Python y las librerías correspondientes, la distribución de la aplicación para Windows se puede descargar de [GraPhEr - Google Drive](https://drive.google.com/file/d/1I3vIstvLn2M7dMdNX2sPaJHzj-khZUCA)
-
+Consultar el archivo de documentación para conocer a detalle los pasos para una correcta ejecución de la aplicación.
 ---
 ---
 
