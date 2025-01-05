@@ -46,6 +46,7 @@ Cuando se utiliza el instalador no es necesario ningún programa adicional.
 ## Ejecución de la aplicación
 
 Consultar el archivo de documentación para conocer a detalle los pasos para una correcta ejecución de la aplicación.
+
 ---
 ---
 
@@ -53,7 +54,7 @@ Consultar el archivo de documentación para conocer a detalle los pasos para una
 
 Para tener una ejemplificación del desempeño de la app, se puede descargar cualquiera de los archivos de texto disponibles en las carpetas **EjemplosRecopilados_Asmar2016**, **EjemplosRecopilados_Haberman2004** o **EjemplosResueltos**. Una vez inicializada la aplicación, importar la entrada contenida en el archivo de texto utilizando el botón **Importar**.
 
-Posteriormente se debe presionar el botón **Interpretar** y esperar a que se realice la interpretación y se muestre la ventana de visualización de la entrada del usuario. En ella se puede observar la entrada en formato LaTeX como se aprecia en la siguiente imagen
+Posteriormente presionar el botón **Interpretar** y esperar a que se realice la interpretación y se muestre la ventana de visualización de la entrada del usuario. En ella se puede observar la entrada en formato LaTeX como se aprecia en la siguiente imagen
 
 <p align="center">
     <a>
@@ -61,7 +62,7 @@ Posteriormente se debe presionar el botón **Interpretar** y esperar a que se re
     </a>
 </p>
 
-Si la interpretación es correcta, se debe presionar el botón **Resolver** en esta ventana de visualización, con esto se procede a la realización de los cálculos necesarios para tener la aproximación numérica de la solución. Una vez finalizados los cálculos se abre la ventana de graficación (la vista inicial se muestra en la siguiente imagen)
+Si la interpretación es correcta, se debe presionar el botón **Resolver** en esta ventana de visualización, con esto se procede a la realización de los cálculos necesarios para tener la aproximación numérica de la solución. Una vez finalizados los cálculos se abre la ventana de graficación con el botón **Visualizar** (la vista inicial se muestra en la siguiente imagen)
 
 <p align="center">
     <a>
@@ -69,13 +70,9 @@ Si la interpretación es correcta, se debe presionar el botón **Resolver** en e
     </a>
 </p>
 
-En esta ventana se puede obtener el valor de la solución en los distintos puntos del dominio, el valor de los coeficientes de cada uno de los términos considerados, la visualización de las curvas de nivel y, en este caso, también se puede realizar el cambio entre la vista 3D y una vista cenital.
+En esta ventana se puede obtener el valor de la solución en los distintos puntos del dominio, el valor de los coeficientes de cada uno de los términos considerados, la visualización de las curvas de nivel y, en este caso, también se puede realizar el cambio entre la vista 3D y una vista cenital. Además, la aplicación permite intercambiar entre los modos: **_solución completa_** (considera toda la solución ingresada por el usuario), **_solución parcial_** (considera solo una parte de la solución ingresada) y **_modo por modo_** (considera cada subsolución ingresada por separado).
 
-**En el siguiente enlace [Ejemplos GraPher](https://youtube.com/playlist?list=PLDXxCxAJtfBglyxTJl_z-5euuph1bhJEH&si=NSw4tSfEgUvtZpNV) se pueden encontrar videos alojados en YouTube que muestran las animaciones obtenidas para cada uno de los problemas ya resueltos, las entradas para estos problemas se encuentran en la carpeta EjemplosResueltos.**
-
-
-
-
+**En el siguiente enlace [Ejemplos GraPher](https://youtube.com/playlist?list=PLDXxCxAJtfBglyxTJl_z-5euuph1bhJEH&si=NSw4tSfEgUvtZpNV) se pueden encontrar videos alojados en YouTube que muestran las animaciones obtenidas para varios problemas resueltos, las entradas para estos problemas se encuentran en la carpeta EjemplosResueltos.**
 
 # Contribuciones
 Cualquier modificación sugerida es aceptada, por favor explique el motivo del cambio y ejemplos del efecto que tendría en la aplicación. 
