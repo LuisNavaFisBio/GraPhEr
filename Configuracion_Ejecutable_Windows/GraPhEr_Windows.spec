@@ -23,7 +23,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='GraPhEr',
+    name='GraPhEr_Ejecutable',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
