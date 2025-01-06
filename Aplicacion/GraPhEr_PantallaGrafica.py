@@ -1274,7 +1274,7 @@ class Ui_Graficacion(QMainWindow):
                     self.ValorPropio3.setSizePolicy(sizePolicy2)
                     self.ValorPropio3.setVisible(False)
                     self.label_5_1.setSizePolicy(sizePolicy2)
-                    self.label_5_1.setVisible(False) 
+                    self.label_5_1.setVisible(False)
 
                     self.ValorPropio3_1.setRange(0, 10)
                     self.ValorPropio3_1.setSpecialValueText("")
