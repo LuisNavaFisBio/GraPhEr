@@ -5198,16 +5198,16 @@ class Ui_Graficacion(QMainWindow):
                         resultado = r"\\text{El punto no está en el dominio.}"
             elif self.Coordenada3.isEnabled():
                 if not self.dependencia_tiempo:
-                    if (float(parsing.parse_expr(self.Coordenada3.text())) > self.dominio[5]) or (float(parsing.parse_expr(self.Coordenada3.text())) < self.dominio[4]):
-                        # Si la tercera coordenada está dentro del dominio o se calcula el valor.
+                    if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) > self.dominio[3]) or (float(parsing.parse_expr(self.Coordenada2.text())) < self.dominio[2]) or (float(parsing.parse_expr(self.Coordenada3.text())) > self.dominio[5]) or (float(parsing.parse_expr(self.Coordenada3.text())) < self.dominio[4]):
+                        # Si algún valor no están dentro del dominio no se calcular el valor.
                         resultado = r"\\text{El punto no está en el dominio.}"
                 else:
-                    if float(parsing.parse_expr(self.Coordenada3.text())) < 0:
-                        # Si la tercera coordenada está dentro del dominio o se calcula el valor (problemas temporales).
+                    if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) > self.dominio[3]) or (float(parsing.parse_expr(self.Coordenada2.text())) < self.dominio[2]) or (float(parsing.parse_expr(self.Coordenada3.text())) < 0):
+                        # Si algún valor no están dentro del dominio no se calcular el valor. (problemas temporales).
                         resultado = r"\\text{El punto no está en el dominio.}"
             if resultado == "":
                 # Calculo del valor de la solución.
-                if self.Coordenada3.isEnabled() == False:
+                if self.Coordenada3.isVisible() == False:
                     valor_solucion = float(np.real(self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())))))
                 else:
                     valor_solucion = float(np.real(self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())), float(parsing.parse_expr(self.Coordenada3.text())))))
