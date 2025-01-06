@@ -261,7 +261,6 @@ class GuardadoAnimacion(FuncAnimation):
 
     def actualizar(self, indice):
         try:
-            print(indice, self.deslizador.value(), self.umbral)
             if indice == -1:
                 # Eliminación de cualquier gráfica en el lienzo.
                 try:
@@ -312,8 +311,10 @@ class GuardadoAnimacion(FuncAnimation):
             else:
                 self.canva.axes.grid(True, lw = 0.2)
         except: 
-            exctype, value, line = sys.exc_info()[:3]
-            print(exctype, value, line.tb_lineno)
+            tipoError, explicacion, line = sys.exc_info()[:3]
+            print(tipoError)
+            print(explicacion)
+            print(line.tb_lineno)
             raise Exception
 
 class Ui_Graficacion(QMainWindow):
@@ -4097,8 +4098,9 @@ class Ui_Graficacion(QMainWindow):
                             self.interpretacionCurvasNivel(coordenada_fija = True, valores_matriz = self.ValoresSolucion.T)
         except:
             tipoError, explicacion, line = sys.exc_info()[:3]
-
-            print(tipoError, explicacion, line)
+            print(tipoError)
+            print(explicacion)
+            print(line.tb_lineno)
 
             if tipoError == NoNumeroError:
                 raise NoNumeroError
@@ -4247,8 +4249,6 @@ class Ui_Graficacion(QMainWindow):
         valorpropio3: entero
             Indice del tercer valor propio.
         """
-
-        print(subproblema, valorpropio1, valorpropio2, valorpropio3)
         try: 
             self.envioActualizacion("Cambiando Modo Visualización")
             # Eliminación de la gráfica visible.
@@ -4420,10 +4420,7 @@ class Ui_Graficacion(QMainWindow):
 
                     else:
                         self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][0]
-                        print("a")
 
-                    print(self.SolucionModo)
-                        
                     self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModo, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
 
                 elif self.SolucionParcial.isChecked():
@@ -4442,9 +4439,6 @@ class Ui_Graficacion(QMainWindow):
                                         self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][indice3]
                             else:
                                 self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][0]
-                                print("c")
-
-                    print(self.SolucionModoParcial)
 
                     self.Solucion_funcion_visualizacion = sp.lambdify(self.Simbolos, self.SolucionModoParcial, modules=[{'sqrt':np.emath.sqrt}, "scipy","numpy"])
                 
@@ -4511,9 +4505,11 @@ class Ui_Graficacion(QMainWindow):
 
                     self.interpretacionCurvasNivel()
         except:
-            tipoError, explicacion, line = sys.exc_info()[:3]
+            tipoError, explicacion, linea = sys.exc_info()[:3]
 
-            print(tipoError, explicacion, line)
+            print(tipoError)
+            print(explicacion)
+            print(linea.tb_lineno)
     
     def interpretacionCurvasNivel(self, coordenada_fija = False, valores_matriz = None, guardar = False):
         """
@@ -4748,7 +4744,6 @@ class Ui_Graficacion(QMainWindow):
                                 self.Curvas = canva.axes.contour(self.x, self.y, self.Valores[anim.deslizador.value()], levels=self.curvas_nivel, linewidths=3, cmap = self.Colormap, vmin = -self.Cota, vmax = self.Cota, zorder = 1, alpha = 1)
                             elif self.Coordenadas == "Esféricas" and self.CoordenadaFija_1.isChecked():
                                 # Curvas de nivel para proyección en coordenadas esféricas con radio como coordenada fija.
-                                print("alpha")
                                 canva.axes2.proyeccion.set_alpha(0.4)
                                 r = np.linspace(0, np.round((self.dominio[1]-self.dominio[0])*anim.deslizador.value()/(len(self.Dominios[0])-1)+self.dominio[0], 2), int(np.ceil(len(self.x)/2)))
                                 r1, phi1 = np.meshgrid(r, self.y)
@@ -4815,8 +4810,10 @@ class Ui_Graficacion(QMainWindow):
                     self.curvasdibujadas = False
                     self.VentanaEtiquetas.setHidden(True)
             except:
-                exctype, value, line = sys.exc_info()[:3]
-                print(exctype, value, line.tb_lineno)
+                tipoError, explicacion, line = sys.exc_info()[:3]
+                print(tipoError)
+                print(explicacion)
+                print(line.tb_lineno)
             
                 self.curvasdibujadas = False
                 raise Exception
