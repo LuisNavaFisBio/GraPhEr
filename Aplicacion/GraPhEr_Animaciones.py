@@ -182,7 +182,6 @@ class ReproductorGeneral(FuncAnimation):
         elif self.argumentos[0] <= self.cuadro < self.maximo and self.adelante:
             # Aumentar el número de cuadro si se quiere el siguiente cuadro.
             self.cuadro += 1
-        print(self.cuadro)
         # Actualizar el valor del deslizador.
         self.deslizador.setValue(self.cuadro-self.argumentos[0])
         self.canva.figura.canvas.draw_idle()
@@ -216,7 +215,6 @@ class ReproductorGeneral(FuncAnimation):
             Determina el número del cuadro requerido.
         """
         try:
-            print(indice)
             if (indice > self.argumentos[0]) and (indice <= self.maximo):
                 # Actualización de la gráfica.
                 self.deslizador.setValue(indice-self.argumentos[0])
@@ -266,8 +264,11 @@ class ReproductorGeneral(FuncAnimation):
             else:
                 self.canva.axes.grid(True, lw = 0.2)
         except: 
-            exctype, value, line = sys.exc_info()[:3]
-            print(exctype, value, line.tb_lineno)
+            tipoError, explicacion, line = sys.exc_info()[:3]
+            print(tipoError)
+            print(explicacion)
+            print(line.tb_lineno)
+
             raise Exception
 
 class Graficacion2D_NoTemporal(FuncAnimation):
@@ -355,8 +356,6 @@ class Graficacion2D_NoTemporal(FuncAnimation):
         indice: entero
             Determina el número del cuadro requerido.
         """
-
-        print(indice)
 
         if indice == self.argumentos[0]:
             # Último cuadro de la introducción de la gráfica.
