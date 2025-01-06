@@ -1306,6 +1306,7 @@ class Ui_Graficacion(QMainWindow):
                 self.ValorPropio2_1.setValue(0)
                 self.ValorPropio2_1.setEnabled(False)
                 self.label_10.setEnabled(False)
+                self.label_10.setStyleSheet(u"color: rgb(127,146,151)")
                 self.ValorPropio2_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
                 self.ValorPropio2_1.setSizePolicy(sizePolicy2)
                 self.ValorPropio2_1.setVisible(False)
@@ -1328,6 +1329,7 @@ class Ui_Graficacion(QMainWindow):
                 self.ValorPropio3_1.setValue(0)
                 self.ValorPropio3_1.setEnabled(False)
                 self.label_13.setEnabled(False)
+                self.label_13.setStyleSheet(u"color: rgb(127,146,151)")
                 self.ValorPropio3_1.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
                 self.ValorPropio3_1.setSizePolicy(sizePolicy2)
                 self.ValorPropio3_1.setVisible(False)
@@ -4268,6 +4270,7 @@ class Ui_Graficacion(QMainWindow):
                 if len(self.NumeroTerminos[subproblema-1]) >= 2:
                     self.ValorPropio2_1.setEnabled(True)
                     self.label_10.setEnabled(True)
+                    self.label_10.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
                     self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
                     self.ValorPropio2_1.setVisible(True)
                     self.label_10.setVisible(True)
@@ -4275,6 +4278,7 @@ class Ui_Graficacion(QMainWindow):
                     if len(self.NumeroTerminos[subproblema-1]) == 3:
                         self.ValorPropio3_1.setEnabled(True)
                         self.label_13.setEnabled(True)
+                        self.label_13.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
                         self.ValorPropio3_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
                         self.ValorPropio3_1.setVisible(True)
                         self.label_13.setVisible(True)
@@ -4401,7 +4405,7 @@ class Ui_Graficacion(QMainWindow):
                         # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
                         valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
 
-                print("Hola", subproblema, valorpropio1, valorpropio2, valorpropio3)
+                QCoreApplication.processEvents()
 
                 if self.Modo.isChecked():
                     self.envioActualizacion("Obteniendo Solución del Modo")
