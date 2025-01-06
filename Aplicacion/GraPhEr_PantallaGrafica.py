@@ -3586,22 +3586,17 @@ class Ui_Graficacion(QMainWindow):
         
         return [abcisa, ordenada, coordenada, longitud, resolucion]
 
-    def guardarAnimacion(self, visualizacion_especial = None, valores_visualizacion_especial = None):
+    def guardarAnimacion(self):
         """
         Guarda en un archivo .mov (a 25 FPS cuando hay dependencia temporal o 10 FPS cuando no lo hay) una animación mostrando la solución para distintos tiempos o distintos valores de coordenada fija (en problemas con dependencia temporal o con tres dimensiones espaciales, respectivamente) o la creación de la gráfica (en problemas sin dependencia temporal y con dos dimensiones espaciales o en la proyección en problemas de una dimensión espacial).
 
-        visualizacion_especial: bool, None es la visualización de la solución parcial completa 
-            Determina si se está visualizando un modo especial.
-
-        valores_visualizacion_especial: float array, None es que no se está visualizando un modo especial
-            Determina los valores de la visualización especial de la solución.
         """
 
         self.Animacion.progreso = False
         self.envioActualizacion("Iniciando Gráfica")
 
         nombre_modo = ""
-        if visualizacion_especial == None:
+        if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
             if (len(self.Dominio) == 2) and (len(self.Dominio[-1]) == 1):
                 self.Valores = self.MatrizResultados
             elif (len(self.Dominio) == 2) or (len(self.Dominio[-1]) == 1):
@@ -3619,7 +3614,7 @@ class Ui_Graficacion(QMainWindow):
                     elif coordenada_especifica == "z" or (coordenada_especifica == "phi" and self.Coordenadas == "Esféricas"):
                         self.Valores = self.MatrizResultados
         else:
-            self.Valores = valores_visualizacion_especial
+            self.Valores = self.ValoresSolucion
             if self.Modo.isChecked():
                 nombre_modo = nombre_modo + "_modoPorModo"
             elif self.SolucionParcial.isChecked():
@@ -5235,7 +5230,7 @@ class Ui_Graficacion(QMainWindow):
             print(explicacion)
             print(line.tb_lineno)
 
-            # La siguiente línea fuer tomada de
+            # La siguiente línea fue tomada de
             # mugiseyebrows. (31 de marzo 2021). Respuesta a la pregunta "MathJax flickering and statusbar showing in PyQt5". stackoverflow. https://stackoverflow.com/a/66870093
             # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 4.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/4.0/
             self.pagina2.runJavaScript('convert("{}");'.format(r"\\text{Hay un error en la entrada.}"))

@@ -2451,6 +2451,7 @@ class PantallaGraficacion(QMainWindow):
                 self.ui.Ui_Grafica.Modo.setCheckable(False)
                 self.ui.Ui_Grafica.SolucionParcial.setCheckable(False)
                 self.ui.Ui_Grafica.BotonPausa.click()
+                self.ui.Ui_Grafica.editarOpciones()
                 plt.close()
 
                 # Cierre de ventana de leyendas y/o ventanas de errores.
