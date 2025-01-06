@@ -267,7 +267,6 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                 coeficientes = CoefE["{}".format(indice)].split(";")
                 coeficientes0 = [expresion.replace("Int[", integral_string_i).replace("]", integral_string_f).replace("conjugate(Ynm(lamda_n,lamda_m))", "conjugate(Ynm(lamda_n,lamda_m,theta,phi))").replace("Ynm(lamda_n,lamda_m)", "Ynm(lamda_n,lamda_m,theta,phi)").replace("conjugate(Ynm(lamda_n,lamda_l))", "conjugate(Ynm(lamda_n,lamda_l,theta,phi))").replace("Ynm(lamda_n,lamda_l)", "Ynm(lamda_n,lamda_l,theta,phi)") for expresion in coeficientes]
                 coeficientes = [expresion.replace("Int[", integral_string_i).replace("]", integral_string_f).replace("conjugate(Ynm(lamda_n,lamda_m))", "conjugate(Ynm(lamda_n,lamda_m,theta,phi)).expand(func=True)").replace("Ynm(lamda_n,lamda_m)", "Ynm(lamda_n,lamda_m,theta,phi).expand(func=True)").replace("conjugate(Ynm(lamda_n,lamda_l))", "conjugate(Ynm(lamda_n,lamda_l,theta,phi)).expand(func=True)").replace("Ynm(lamda_n,lamda_l)", "Ynm(lamda_n,lamda_l,theta,phi).expand(func=True)").replace("theta","acos(s)") for expresion in coeficientes]
-                print(coeficientes)
 
                 # Interpretación de las condiciones de frontera o iniciales.
                 condiciones_string = "" # Tabla.
@@ -583,7 +582,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
             print(tipoError)
             print(explicacion)
             print(linea.tb_lineno)
-            
+
             Error = ""
             typeError = ""
             if tipoError == SyntaxError:
@@ -846,8 +845,6 @@ class TrabajoResolucion(QtCore.QRunnable):
             print(explicacion)
             print(line.tb_lineno)
 
-        
-        print(ValoresObtenidos)
         return ValoresObtenidos
     
     def buscadorRaices(self, cantidad, funcion, extremo_izq, extremo_der, precision, signo = ""):
@@ -993,7 +990,6 @@ class TrabajoResolucion(QtCore.QRunnable):
             # En caso de que se busquen raíces hasta completar la cantidad especificada.
             while len(raices) < cantidad+1:
                 x1, x2 = buscadorIntervalos_optimizado(funcion, extremo_izq, extremo_der, precision)
-                print(x1,x2)
                 if x1 != None:
                     # Si existe el subintervalo donde ocurre un cambio de signo se procede a encontrar la raíz con mayor precisión.
                     raiz = sc.optimize.brentq(funcion, x1, x2, maxiter = 1000)
@@ -1064,7 +1060,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                 lamda_n = parsing.parse_expr("lamda_{}n".format(indice_ayuda))
                 lamda_m = parsing.parse_expr("lamda_{}m".format(indice_ayuda))
                 lamda_l = parsing.parse_expr("lamda_{}l".format(indice_ayuda))
-                print(lamda_n, lamda_m, lamda_l)
 
                 invertir = False
                 if len(valorespropios_copia[indice]) == 2:
@@ -1133,7 +1128,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                         if parsing.parse_expr("u_{}".format(indice1 + 1)) in list(coeficientes_copia[indice][indice2].free_symbols):
                             coeficientes_copia[indice][indice2] = coeficientes_copia[indice][indice2].subs(parsing.parse_expr("u_{}".format(indice1 + 1)), SolucionesSubproblemas[indice1])
 
-                print(valorespropios_copia[indice])
                 # Creación de la lista donde se guardarán las subsoluciones.
                 if dependencia:
                     if len(valorespropios_copia[indice]) == 2:
@@ -1153,7 +1147,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                 if self.ui.dependencia_tiempo:
                     funciones_temporales[indice] = [expresion.subs(lamda_n, lamda).subs(lamda_m, mu).doit() for expresion in funciones_temporales[indice]]
                 coeficientes = [expresion.subs(lamda_n, lamda).subs(lamda_m, mu).subs(lamda_l, nu) for expresion in coeficientes_copia[indice]]
-                print(coeficientes)
+
                 if dependencia and (len(valorespropios_copia[indice]) == 2):
                     for indice1 in range(len(valorespropios_copia[indice][0])):
                         for indice2 in range(len(valorespropios_copia[indice][1][indice1])):
@@ -1169,7 +1163,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                                             solucion_parcial = solucion_parcial + coeficiente*funcion_espacial*funcion_temporal.subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1])
                                         else:
                                             # Cuando el segundo valor propio depende del primero.
-                                            print(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]))
                                             coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).doit()), precision_copia)
                                             solucion_parcial = solucion_parcial + coeficiente*funcion_espacial*funcion_temporal.subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2])
                                         indice_auxiliar += 1
@@ -1219,12 +1212,10 @@ class TrabajoResolucion(QtCore.QRunnable):
                                     if self.ui.dependencia_tiempo:
                                         # Cuando hay dependencia temporal.
                                         for funcion_temporal in funciones_temporales[indice]:
-                                            print(coeficientes[indice_auxiliar])
                                             coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).doit()), precision_copia)
                                             solucion_parcial = solucion_parcial + coeficiente*funcion_espacial*funcion_temporal.subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3])
                                             indice_auxiliar += 1
                                     else:
-                                        print(indice1, indice2, indice3, coeficientes[indice_auxiliar])
                                         # Cuando no hay dependencia temporal.
                                         coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).doit()), precision_copia)
                                         solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
@@ -1245,7 +1236,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                                             indice_auxiliar = 0
                                             for funcion_espacial in funciones_espaciales[indice]:
                                                 # Cuando no hay dependencia temporal.
-                                                print(coeficientes[indice_auxiliar])
                                                 if invertir:
                                                     coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).doit()), precision_copia)
                                                 else:
@@ -1255,7 +1245,6 @@ class TrabajoResolucion(QtCore.QRunnable):
 
                                             solucion_parcial = solucion_parcial.subs(lamda_n, valorespropios_copia[indice][0][indice1]).subs(lamda_m, valorespropios_copia[indice][1][indice1][indice2]).subs(lamda_l, valorespropios_copia[indice][2][indice1][indice3])
 
-                                            print(solucion_parcial)
                                             if solucion_parcial.has(I):
                                                 Soluciones[indice][indice1][indice2][indice3] = solucion_parcial.rewrite(cos)
                                             else:
@@ -1269,7 +1258,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                                             indice_auxiliar = 0
                                             for funcion_espacial in funciones_espaciales[indice]:
                                                 # Cuando no hay dependencia temporal.
-                                                print(coeficientes[indice_auxiliar])
                                                 coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).doit()), precision_copia)
                                                 solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                                 indice_auxiliar += 1
@@ -1287,7 +1275,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                                     indice_auxiliar = 0
                                     for funcion_espacial in funciones_espaciales[indice]:
                                         # Cuando no hay dependencia temporal.
-                                        print(coeficientes[indice_auxiliar])
                                         coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).doit()), precision_copia)
                                         solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                         indice_auxiliar += 1
@@ -1328,8 +1315,6 @@ class TrabajoResolucion(QtCore.QRunnable):
             SolucionEncontrada = 0
             for indice in range(len(SolucionesSubproblemas)):
                 SolucionEncontrada = SolucionEncontrada + SolucionesSubproblemas[indice]
-            
-            print(SolucionEncontrada)
 
             # Envio de la información encontrada a la pantalla principal.
             # Conversión de la solución a una función de numpy y scipy.
