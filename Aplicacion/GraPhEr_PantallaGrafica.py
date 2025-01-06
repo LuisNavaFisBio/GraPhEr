@@ -1240,8 +1240,6 @@ class Ui_Graficacion(QMainWindow):
             if len(self.NumeroTerminos[0]) > 1:
                 sizePolicy2 = self.ValorPropio1.sizePolicy()
                 sizePolicy2.setRetainSizeWhenHidden(True)
-                self.ValorPropio2_1.setEnabled(True)
-                self.label_10.setStyleSheet(u"color: rgb(11, 61, 98)")
                 # Cuando hay más de un conjunto de valores propios en el subproblema 1.
                 if self.NumeroTerminos[0][1][0] == "-n":
                     self.ValorPropio2.setMaximum(int(self.NumeroTerminos[0][0][0]))
@@ -1255,8 +1253,6 @@ class Ui_Graficacion(QMainWindow):
                     self.ValorPropio2_1.setMinimum(int(self.NumeroTerminos[0][1][0]))
 
                 if len(self.NumeroTerminos[0]) == 3:
-                    self.ValorPropio3_1.setEnabled(True)
-                    self.label_13.setStyleSheet(u"color: rgb(11, 61, 98)")
                     # Cuando hay más de dos conjuntos de valores propios en el subproblema 1.
                     if self.NumeroTerminos[0][2][0] == "-n":
                         self.ValorPropio3.setMaximum(int(self.NumeroTerminos[0][1][0]))
