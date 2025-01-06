@@ -304,8 +304,6 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             # Cuando el problema tiene segunda derivada temporal.
                             self.ui.FuncionesTemporales[indice] = [expresion.replace("g_2", "(" + self.ui.Condiciones[-1][indice2] + ")") for expresion in self.ui.FuncionesTemporales[indice]]    
 
-                print(coeficientes)
-
                 self.ui.Coeficientes[indice] = [parsing.parse_expr(expresion) for expresion in coeficientes]
                 Coeficientes[indice] = [parsing.parse_expr(expresion) for expresion in coeficientes0]
 
@@ -465,7 +463,7 @@ class TrabajoInterpretacion(QtCore.QRunnable):
                             indice_ayuda1 = indice_ayuda1 + len(self.ui.FuncionesEspaciales[indice1])*len(self.ui.FuncionesTemporales[indice1])
                         else:
                             indice_ayuda1 = indice_ayuda1 + len(self.ui.FuncionesEspaciales[indice1])
-                print(coeficientes, indice_ayuda1, indice_ayuda2)
+
                 # El siguiente ciclo for es parte del diseño de la tabla para mostrar la interpretación. Se encarga de asignarle un símbolo a cada coeficiente y escribir la solución total con estos coeficientes multiplicando a sus respectivas funciones espaciales y temporales.
                 for funproesp in FuncionesEspaciales[indice]:
                     if self.ui.DimensionTemporalEntrada.isChecked():
@@ -582,7 +580,10 @@ class TrabajoInterpretacion(QtCore.QRunnable):
         except:
             # Interpretación del error ocurrido.
             tipoError, explicacion, linea = sys.exc_info()[:3]
-            print(tipoError, explicacion, linea.tb_lineno)
+            print(tipoError)
+            print(explicacion)
+            print(linea.tb_lineno)
+            
             Error = ""
             typeError = ""
             if tipoError == SyntaxError:
@@ -677,7 +678,6 @@ class TrabajoResolucion(QtCore.QRunnable):
         """
 
         try: 
-            print(entrada)
             if type(entrada) != list:
                 if parsing.parse_expr("lamda_{}n".format(valorpropio_numero)) in entrada.free_symbols:
                     variable = parsing.parse_expr("lamda_{}n".format(valorpropio_numero))
@@ -751,7 +751,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                         while valor < np.round(entrada[1], precision):
                             # Búsqueda de todas las raíces menores al número especificado por entrada[1].
                             raiz = self.buscadorRaices(1, funcion_valorespropios, ValoresObtenidos[-1]+10**(-precision), entrada[1], precision, entrada[2])
-                            print(raiz)
                             if raiz != []:
                                 if 0 < raiz[0] < np.round(entrada[1], precision) and valor != raiz[0]:
                                     if Fraction(raiz[0]).limit_denominator().denominator == 1:
