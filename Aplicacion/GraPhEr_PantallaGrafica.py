@@ -4227,7 +4227,7 @@ class Ui_Graficacion(QMainWindow):
                 else:
                     self.graficacion(coordenada_especifica=coordenada)
 
-    def intercambiarModoVisualizacion(self, subproblema, valorpropio1, valorpropio2, valorpropio3):
+    def intercambiarModoVisualizacion(self, subproblema, valorpropio1, valorpropio2, valorpropio3, cerrada = False):
         """Intercambia entre modos de visualización (solucion parcial completa, modo por modo o soluciones parciales)
         
         Parámetros
@@ -4243,6 +4243,9 @@ class Ui_Graficacion(QMainWindow):
 
         valorpropio3: entero
             Indice del tercer valor propio.
+            
+        cerrada: bool
+            Determina si la ventana de graficación está abierta o cerrada.
         """
         try: 
             self.envioActualizacion("Cambiando Modo Visualización")
@@ -4493,7 +4496,9 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelEspecificas.setChecked(False)
                 self.ProyeccionEntrada.setChecked(False)
                 self.CoordenadaFija_1.setChecked(True)
-                self.graficacion()
+                
+                if not cerrada:
+                    self.graficacion()
 
                 if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
                     self.envioActualizacion("Añadiendo Curvas de Nivel")
@@ -5187,7 +5192,7 @@ class Ui_Graficacion(QMainWindow):
 
         resultado = ""
         try:
-            if not self.Coordenada3.isEnabled():
+            if len(self.Dominio) < 3:
                 if not self.dependencia_tiempo:
                     if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) > self.dominio[3]) or (float(parsing.parse_expr(self.Coordenada2.text())) < self.dominio[2]):
                     # Si alguna de las dos primeras coordenadas está fuera del dominio no se calcula el valor.
@@ -5196,7 +5201,7 @@ class Ui_Graficacion(QMainWindow):
                     if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) < 0):
                     # Si alguna de las dos primeras coordenadas está fuera del dominio no se calcula el valor (en problemas temporales).
                         resultado = r"\\text{El punto no está en el dominio.}"
-            elif self.Coordenada3.isEnabled():
+            elif len(self.Dominio) == 3:
                 if not self.dependencia_tiempo:
                     if (float(parsing.parse_expr(self.Coordenada1.text())) > self.dominio[1]) or (float(parsing.parse_expr(self.Coordenada1.text())) < self.dominio[0]) or (float(parsing.parse_expr(self.Coordenada2.text())) > self.dominio[3]) or (float(parsing.parse_expr(self.Coordenada2.text())) < self.dominio[2]) or (float(parsing.parse_expr(self.Coordenada3.text())) > self.dominio[5]) or (float(parsing.parse_expr(self.Coordenada3.text())) < self.dominio[4]):
                         # Si algún valor no están dentro del dominio no se calcular el valor.
@@ -5207,9 +5212,9 @@ class Ui_Graficacion(QMainWindow):
                         resultado = r"\\text{El punto no está en el dominio.}"
             if resultado == "":
                 # Calculo del valor de la solución.
-                if self.Coordenada3.isVisible() == False:
+                if len(self.Dominio) < 3:
                     valor_solucion = float(np.real(self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())))))
-                else:
+                elif len(self.Dominio) == 3:
                     valor_solucion = float(np.real(self.Funcion(float(parsing.parse_expr(self.Coordenada1.text())), float(parsing.parse_expr(self.Coordenada2.text())), float(parsing.parse_expr(self.Coordenada3.text())))))
                 # Redondeo del valor de la solución.
                 valor_solucion = np.round(valor_solucion, self.Precision)
