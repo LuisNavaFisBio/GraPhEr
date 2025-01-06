@@ -45,7 +45,7 @@ Cuando se utiliza el instalador no es necesario ningún programa adicional.
 
 ## Ejecución de la aplicación
 
-Consultar el archivo de documentación para conocer a detalle los pasos para una correcta ejecución de la aplicación.
+Consultar el archivo [**ManualUsuario.pdf**](https://github.com/LuisNavaFisBio/GraPhEr/blob/main/ManualUsuario.pdf) para conocer a detalle los pasos para una correcta ejecución de la aplicación.
 
 ---
 ---
