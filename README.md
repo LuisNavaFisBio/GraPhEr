@@ -45,7 +45,7 @@ Cuando se utiliza el instalador no es necesario ningún programa adicional.
 
 ## Ejecución de la aplicación
 
-Consultar el archivo [**ManualUsuario.pdf**](https://github.com/LuisNavaFisBio/GraPhEr/blob/main/ManualUsuario.pdf) para conocer a detalle los pasos para una correcta ejecución de la aplicación.
+Consultar el archivo [**ManualUsuario.pdf**](https://github.com/LuisNavaFisBio/GraPhEr/blob/main/ManualUsuario.pdf) para conocer a detalle los pasos para una correcta ejecución de la aplicación. A continuación se presenta un ejemplo sencillo para mostrar el uso de la aplicación:
 
 ---
 ---
@@ -77,6 +77,9 @@ En esta ventana se puede obtener el valor de la solución en los distintos punto
 - **_Modo por modo_**, considera cada subsolución ingresada por separado.
 
 **Nota:** En el siguiente enlace [Ejemplos GraPher](https://youtube.com/playlist?list=PLDXxCxAJtfBglyxTJl_z-5euuph1bhJEH&si=NSw4tSfEgUvtZpNV) se pueden encontrar videos alojados en YouTube que muestran las animaciones obtenidas para varios problemas resueltos, las entradas para estos problemas se encuentran en la carpeta EjemplosResueltos.
+
+---
+---
 
 # Contribuciones
 Cualquier modificación sugerida es aceptada, por favor explique el motivo del cambio y ejemplos del efecto que tendría en la aplicación. 
