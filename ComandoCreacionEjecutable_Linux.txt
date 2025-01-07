@@ -1,0 +1,1 @@
+pyinstaller --add-data "/home/luis-garcia/Descargas/GraPhEr-main/Aplicacion/Iconos:./Iconos" --add-data "/home/luis-garcia/Descargas/GraPhEr-main/Aplicacion/Carga:./Carga" --add-data "/home/luis-garcia/Descargas/GraPhEr-main/Aplicacion/plasTeX:./plasTeX" --n "GraPhEr" ./GraPhEr_ArchivoPrincipal.py
