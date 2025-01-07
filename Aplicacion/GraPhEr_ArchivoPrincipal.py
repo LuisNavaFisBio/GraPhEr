@@ -2206,7 +2206,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Grafica.CurvasNivelAuto.setShortcut("Ctrl+A")
         self.Ui_Grafica.CurvasNivelEspecificas.setShortcut("Ctrl+E")
         self.Ui_Carga.label.setText(mensaje)
-        QCoreApplication.processEvents()
+        QCoreApplication.processEvents() 
         QtCore.QThread.msleep(500)
         self.Ui_Carga.animacion.stop()
 
