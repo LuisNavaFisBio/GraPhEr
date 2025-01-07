@@ -2144,8 +2144,11 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             
             # Si se elige un archivo se procede a su interpretación.
             if archivo_texto != "":
-                if "NombrePredefinido.mov" != archivo_texto.split("/")[-1]:
-                    self.nombreArchivo = archivo_texto.split("/")[-1]
+                if "NombrePredefinido.mov" == archivo_texto.split("/")[-1]:
+                    self.nombreArchivo = archivo_texto.split("/")[0]
+                    for indice in range(1,len(archivo_texto.split("/"))-2):
+                        self.nombreArchivo = self.nombreArchivo+"/"+archivo_texto.split("/")[indice]
+                    self.nombreArchivo = self.nombreArchivo+"/"
 
                 self.Ui_Grafica.centralwidget.setDisabled(True)
                 self.Ui_Grafica.setDisabled(True)
@@ -2209,8 +2212,8 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
         QtCore.QThread.msleep(500)
 
-        if self.nombreArchivo == "":
-            self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
+        if ".mov" not in self.nombreArchivo:
+            self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.nombreArchivo+self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
         else:
             self.Ui_Grafica.animacionGuardado.save(self.nombreArchivo, writer=self.Ui_Grafica.writer, dpi=72)
         QCoreApplication.processEvents()
