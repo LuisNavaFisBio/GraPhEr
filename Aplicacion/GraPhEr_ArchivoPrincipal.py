@@ -2145,11 +2145,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             # Si se elige un archivo se procede a su interpretación.
             if archivo_texto != "":
                 if "NombrePredefinido.mov" == archivo_texto.split("/")[-1]:
-                    #
                     self.nombreArchivo = archivo_texto.split("/")[0]
                     for indice in range(1,len(archivo_texto.split("/"))-1):
-                        self.nombreArchivo = self.nombreArchivo+"\\\\"+archivo_texto.split("/")[indice]
-                    self.nombreArchivo = self.nombreArchivo+"\\\\"
+                        self.nombreArchivo = self.nombreArchivo+"/"+archivo_texto.split("/")[indice]
+                    self.nombreArchivo = self.nombreArchivo+"/"
+                else:
+                    self.nombreArchivo = archivo_texto
 
                 self.Ui_Grafica.centralwidget.setDisabled(True)
                 self.Ui_Grafica.setDisabled(True)
