@@ -2145,12 +2145,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             # Si se elige un archivo se procede a su interpretación.
             if archivo_texto != "":
                 if "NombrePredefinido.mov" == archivo_texto.split("/")[-1]:
-                    self.nombreArchivo = archivo_texto.split("/")[0]
+                    self.Ui_Grafica.rutaArchivo = archivo_texto.split("/")[0]
                     for indice in range(1,len(archivo_texto.split("/"))-1):
-                        self.nombreArchivo = self.nombreArchivo+"/"+archivo_texto.split("/")[indice]
-                    self.nombreArchivo = self.nombreArchivo+"/"
+                        self.Ui_Grafica.rutaArchivo = self.Ui_Grafica.rutaArchivo+"/"+archivo_texto.split("/")[indice]
+                    self.Ui_Grafica.rutaArchivo = self.Ui_Grafica.rutaArchivo+"/"
                 else:
-                    self.nombreArchivo = archivo_texto
+                    self.Ui_Grafica.rutaArchivo = archivo_texto
 
                 self.Ui_Grafica.centralwidget.setDisabled(True)
                 self.Ui_Grafica.setDisabled(True)
@@ -2175,9 +2175,9 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 
                 # Configuración y ejecución del trabajo de guardado de animaciones.
                 trabajo = TrabajoGuardado(self.Ui_Grafica)
-                trabajo.signals.finalizar_signal.connect(self.finalizarGuardado)
-                trabajo.signals.avanzar_signal.connect(self.actualizarVentanaEmergente)
-                trabajo.signals.error_signal.connect(self.mostrarError)  
+                trabajo.signals.finalizar_signal.connect(self.finalizarGuardado, Qt.QueuedConnection)
+                trabajo.signals.avanzar_signal.connect(self.actualizarVentanaEmergente, Qt.QueuedConnection)
+                trabajo.signals.error_signal.connect(self.mostrarError, Qt.QueuedConnection)  
                 trabajo.autoDelete()
                 self.VentanaCarga.show()
                 self.threadpool.start(trabajo, 0)
@@ -2197,9 +2197,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         self.Ui_Grafica.GuardarAnimacion.setDisabled(True)
         self.Ui_Grafica.GuardarAnimacion.setStyleSheet("background-color : rgb(127,146,151); color: rgb(234,237,239);")
-        self.Ui_Grafica.GuardarAnimacion.setText("Iniciando guardado")
-        QCoreApplication.processEvents()
-        QtCore.QThread.msleep(500)
         
         self.Interpretar.setShortcut("Ctrl+I")
         self.Ui_Grafica.GuardarAnimacion.setShortcut("Ctrl+S")
@@ -2208,21 +2205,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         self.Ui_Carga.label.setText(mensaje)
         QCoreApplication.processEvents() 
         QtCore.QThread.msleep(500)
-        self.Ui_Carga.animacion.stop()
-
-        self.Ui_Grafica.GuardarAnimacion.setText("Guardando")
-        QCoreApplication.processEvents()
-        QtCore.QThread.msleep(500)
-
-        if ".mov" not in self.nombreArchivo:
-            self.Ui_Grafica.animacionGuardado.save("{0}Solucion_{1}.mov".format(self.nombreArchivo, self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
-        else:
-            self.Ui_Grafica.animacionGuardado.save(self.nombreArchivo, writer=self.Ui_Grafica.writer, dpi=72)
-        QCoreApplication.processEvents()
-        QtCore.QThread.msleep(500)
-
-        # Finalización
-        self.Ui_Grafica.animacionGuardado.pause()
 
         self.Ui_Grafica.GuardarAnimacion.setText("Guardado Finalizado")
         QCoreApplication.processEvents()
@@ -2232,7 +2214,6 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         # Graficación de las curvas de nivel para evitar su desaparación después del proceso de guardado
         self.Ui_Grafica.interpretacionCurvasNivel()
-
         # Habilita el botón de guardado.
         self.Ui_Grafica.setEnabled(True)
         self.Ui_Grafica.centralwidget.setEnabled(True)

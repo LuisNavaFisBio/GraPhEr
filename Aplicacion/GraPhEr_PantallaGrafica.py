@@ -3806,6 +3806,18 @@ class Ui_Graficacion(QMainWindow):
         # El uso de esta respuesta está licenciado bajo la licencia CC BY-SA 3.0 la cual puede ser consultada en https://creativecommons.org/licenses/by-sa/3.0/
         self.writer = FFMpegFileWriter(fps=25, metadata=metadata, bitrate = 12000)
         self.nombreArchivo = nombre+curvas_str+nombre_modo
+
+        self.envioActualizacion("Guardando Animacion")
+        self.GuardarAnimacion.setText("Guardando")
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
+
+        if ".mov" not in self.rutaArchivo:
+            self.animacionGuardado.save("{0}Solucion_{1}.mov".format(self.rutaArchivo, self.nombreArchivo), writer=self.writer, dpi=72)
+        else:
+            self.animacionGuardado.save(self.rutaArchivo, writer=self.writer, dpi=72)
+        QCoreApplication.processEvents()
+        QtCore.QThread.msleep(500)
         
     def cambiarCoordenadaFija(self):
         """
