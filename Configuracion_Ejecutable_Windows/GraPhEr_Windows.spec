@@ -5,7 +5,7 @@ a = Analysis(
     ['GraPhEr_ArchivoPrincipal.py'],
     pathex=[],
     binaries=[],
-    datas=[('bin', 'ffmpeg'), ('plasTeX', 'plasTeX'), ('Iconos', 'Iconos'), ('Carga', 'Carga')],
+    datas=[('plasTeX', 'plasTeX'), ('Iconos', 'Iconos'), ('Carga', 'Carga')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
