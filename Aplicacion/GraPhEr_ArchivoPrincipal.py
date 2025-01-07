@@ -2141,14 +2141,15 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             # La implementación del cuadro de búsqueda de archivos fue tomada y modificada de Elder, J. [Codemy.com] (09 de septiembre de 2021). File Dialog Boxes With QFileDialog - PyQt5 GUI Thursdays #29. YouTube. https://www.youtube.com/watch?v=gg5TepTc2Jg
             # La modificación consiste en colocar un nombre predefinido para el archivo guardado.
             archivo_texto, _ = QFileDialog.getSaveFileName(self, "Guardar Animacion", "NombrePredefinido.mov", "Archivos de Video (*.mov)")
-            
+
             # Si se elige un archivo se procede a su interpretación.
             if archivo_texto != "":
                 if "NombrePredefinido.mov" == archivo_texto.split("/")[-1]:
+                    #
                     self.nombreArchivo = archivo_texto.split("/")[0]
-                    for indice in range(1,len(archivo_texto.split("/"))-2):
-                        self.nombreArchivo = self.nombreArchivo+"/"+archivo_texto.split("/")[indice]
-                    self.nombreArchivo = self.nombreArchivo+"/"
+                    for indice in range(1,len(archivo_texto.split("/"))-1):
+                        self.nombreArchivo = self.nombreArchivo+"\\\\"+archivo_texto.split("/")[indice]
+                    self.nombreArchivo = self.nombreArchivo+"\\\\"
 
                 self.Ui_Grafica.centralwidget.setDisabled(True)
                 self.Ui_Grafica.setDisabled(True)
@@ -2213,7 +2214,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QtCore.QThread.msleep(500)
 
         if ".mov" not in self.nombreArchivo:
-            self.Ui_Grafica.animacionGuardado.save("Solucion_{}.mov".format(self.nombreArchivo+self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
+            self.Ui_Grafica.animacionGuardado.save("{0}Solucion_{1}.mov".format(self.nombreArchivo, self.Ui_Grafica.nombreArchivo), writer=self.Ui_Grafica.writer, dpi=72)
         else:
             self.Ui_Grafica.animacionGuardado.save(self.nombreArchivo, writer=self.Ui_Grafica.writer, dpi=72)
         QCoreApplication.processEvents()
