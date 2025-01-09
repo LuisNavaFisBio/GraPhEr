@@ -4292,8 +4292,11 @@ class Ui_Graficacion(QMainWindow):
         try: 
             self.envioActualizacion("Cambiando Modo Visualización")
             # Eliminación de la gráfica visible.
-            self.MostrarSolucion.figura.clear()
-            self.MostrarSolucion.figura.canvas.draw_idle()
+            try:
+                self.MostrarSolucion.figura.clear()
+                self.MostrarSolucion.figura.canvas.draw_idle()
+            except:
+                pass
 
             coordenada = None
             # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
