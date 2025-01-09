@@ -4156,7 +4156,6 @@ class Ui_Graficacion(QMainWindow):
         # Eliminación de la gráfica visible.
         self.MostrarSolucion.figura.clear()
         self.MostrarSolucion.figura.canvas.draw_idle()
-        del self.Animacion
 
         coordenada = None
         # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
@@ -4295,7 +4294,6 @@ class Ui_Graficacion(QMainWindow):
             # Eliminación de la gráfica visible.
             self.MostrarSolucion.figura.clear()
             self.MostrarSolucion.figura.canvas.draw_idle()
-            del self.Animacion
 
             coordenada = None
             # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
