@@ -2090,10 +2090,10 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
             self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
             self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
             self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
-            self.Ui_Grafica.Subproblema_1.valueChanged.disconnect()
-            self.Ui_Grafica.ValorPropio1_1.valueChanged.disconnect()
-            self.Ui_Grafica.ValorPropio2_1.valueChanged.disconnect()
-            self.Ui_Grafica.ValorPropio3_1.valueChanged.disconnect()
+            self.Ui_Grafica.Subproblema_1.clicked.disconnect()
+            self.Ui_Grafica.ValorPropio1_1.clicked.disconnect()
+            self.Ui_Grafica.ValorPropio2_1.clicked.disconnect()
+            self.Ui_Grafica.ValorPropio3_1.clicked.disconnect()
         except:
             pass
 
