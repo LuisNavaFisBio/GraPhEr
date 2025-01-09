@@ -4537,12 +4537,33 @@ class Ui_Graficacion(QMainWindow):
                 self.label_3.setStyleSheet(u"color: rgb(127,146,151)")
                 
                 if not cerrada:
-                    self.graficacion()
+                    coordenada = None
+                    # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
+                    if len(self.dominio) == 6:
+                        if self.CoordenadaFija_1.isChecked():
+                            if self.Coordenadas == "Cartesianas":
+                                coordenada = "x"
+                            elif self.Coordenadas == "Cilíndricas / Polares" or self.Coordenadas == "Esféricas":
+                                coordenada = "r"
+                        elif self.CoordenadaFija_2.isChecked():
+                            if self.Coordenadas == "Cartesianas":
+                                coordenada = "y"
+                            elif self.Coordenadas == "Cilíndricas / Polares":
+                                coordenada = "phi"
+                            elif self.Coordenadas == "Esféricas":
+                                coordenada = "theta"
+                        elif self.CoordenadaFija_3.isChecked():
+                            if self.Coordenadas == "Cartesianas" or self.Coordenadas == "Cilíndricas / Polares":
+                                coordenada = "z"
+                            elif self.Coordenadas == "Esféricas":
+                                coordenada = "phi"
 
-                if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
-                    self.envioActualizacion("Añadiendo Curvas de Nivel")
+                    self.graficacion(coordenada_especifica=coordenada)
 
-                    self.interpretacionCurvasNivel()
+                    if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
+                        self.envioActualizacion("Añadiendo Curvas de Nivel")
+
+                        self.interpretacionCurvasNivel()
         except:
             tipoError, explicacion, linea = sys.exc_info()[:3]
 
