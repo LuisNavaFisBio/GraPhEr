@@ -2431,13 +2431,21 @@ class PantallaGraficacion(QMainWindow):
             if self.EmergenteVentanaGraficacion.clickedButton() == boton1:
                 # Configuración de la ventana de graficación a su estado inicial.
                 self.ui.VentanaGrafica.setHidden(True)
+                QCoreApplication.processEvents()
                 self.ui.Ui_Grafica.ProyeccionEntrada.setChecked(False)
-                self.ui.Ui_Grafica.CurvasNivelAuto.setCheckable(False)
-                self.ui.Ui_Grafica.CurvasNivelEspecificas.setCheckable(False)
-                self.ui.Ui_Grafica.Modo.setCheckable(False)
-                self.ui.Ui_Grafica.SolucionParcial.setCheckable(False)
+                if self.ui.Ui_Grafica.CurvasNivelAuto.isChecked():
+                    self.ui.Ui_Grafica.CurvasNivelAuto.click()
+                    self.ui.Ui_Grafica.CurvasNivelAuto.setCheckable(False)
+                elif self.ui.Ui_Grafica.CurvasNivelEspecificas.isChecked():
+                    self.ui.Ui_Grafica.CurvasNivelEspecificas.click()
+                    self.ui.Ui_Grafica.CurvasNivelEspecificas.setCheckable(False)
+                if self.ui.Ui_Grafica.Modo.isChecked():
+                    self.ui.Ui_Grafica.Modo.click()
+                    self.ui.Ui_Grafica.Modo.setCheckable(False)
+                elif self.ui.Ui_Grafica.SolucionParcial.isChecked():
+                    self.ui.Ui_Grafica.SolucionParcial.click()
+                    self.ui.Ui_Grafica.SolucionParcial.setCheckable(False)
                 self.ui.Ui_Grafica.BotonPausa.click()
-                self.ui.Ui_Grafica.intercambiarModoVisualizacion(1, 1, 1, 1, cerrada = True)
                 QCoreApplication.processEvents()
                 plt.close()
 

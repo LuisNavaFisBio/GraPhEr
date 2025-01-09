@@ -1230,6 +1230,19 @@ class Ui_Graficacion(QMainWindow):
         self.Modo.setCheckable(True)
         self.SolucionParcial.setCheckable(True)
 
+        self.Subproblema_1.setEnabled(False)
+        self.ValorPropio1_1.setEnabled(False)
+        self.ValorPropio2_1.setEnabled(False)
+        self.ValorPropio3_1.setEnabled(False)
+        self.label_13.setEnabled(False)
+        self.label_13.setStyleSheet(u"color: rgb(127,146,151)")
+        self.label_10.setEnabled(False)
+        self.label_10.setStyleSheet(u"color: rgb(127,146,151)")
+        self.label_4.setEnabled(False)
+        self.label_4.setStyleSheet(u"color: rgb(127,146,151)")
+        self.label_3.setEnabled(False)
+        self.label_3.setStyleSheet(u"color: rgb(127,146,151)")
+
         try:
             # Diseño de la caja de herramientas para la visualización de los coeficientes de cada subsolución.
             self.Subproblema.setMaximum(int(self.NumeroSubproblemas))
@@ -3854,26 +3867,44 @@ class Ui_Graficacion(QMainWindow):
         
             if self.CurvasNivelAuto.isChecked():
                 # Cuando se tienen curvas de nivel calculadas automáticamente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada,visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                else:   
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)
             elif self.CurvasNivelEspecificas.isChecked():
                 # Cuando se tienen curvas de nivel especificadas manualmente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada,visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                else:
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
             else:
                 # Cuando no se visualizan curvas de nivel.
-                self.graficacion(coordenada_especifica=coordenada)
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(coordenada_especifica=coordenada,visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                else:
+                    self.graficacion(coordenada_especifica=coordenada)
         else:
             # Cuando se visualiza la gráfica sin proyección.
             self.Proyeccion = False
 
             if self.CurvasNivelAuto.isChecked():
                 # Cuando se tienen curvas de nivel calculadas automáticamente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto, coordenada_especifica=coordenada)   
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada,visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                else:   
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)
             elif self.CurvasNivelEspecificas.isChecked():
                 # Cuando se tienen curvas de nivel especificadas manualmente.
-                self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas, coordenada_especifica=coordenada) 
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada,visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                else:
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
             else:
                 # Cuando no se quieren visualizar curvas de nivel.
-                self.graficacion(coordenada_especifica=coordenada)
+                if self.Modo.isChecked() or self.SolucionParcial.isChecked():
+                    self.graficacion(coordenada_especifica=coordenada,visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
+                else:
+                    self.graficacion(coordenada_especifica=coordenada)
 
     def cambiarValorCoordenadaFija(self):
         """
@@ -4504,10 +4535,6 @@ class Ui_Graficacion(QMainWindow):
                 self.label_4.setStyleSheet(u"color: rgb(127,146,151)")
                 self.label_3.setEnabled(False)
                 self.label_3.setStyleSheet(u"color: rgb(127,146,151)")
-                self.CurvasNivelAuto.setChecked(False)
-                self.CurvasNivelEspecificas.setChecked(False)
-                self.ProyeccionEntrada.setChecked(False)
-                self.CoordenadaFija_1.setChecked(True)
                 
                 if not cerrada:
                     self.graficacion()
