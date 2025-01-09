@@ -4515,12 +4515,16 @@ class Ui_Graficacion(QMainWindow):
                             else:
                                 self.ValoresSolucion[indice2][indice1] = float(np.real(self.Solucion_funcion_visualizacion(self.Dominios[0][indice1], self.Dominios[1][indice2])))
 
-                self.graficacion(visualizacion_especial=True, valores_visualizacion_especial=self.ValoresSolucion)
-
-                if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
+                if self.CurvasNivelAuto.isChecked():
+                    # Graficación con curvas de nivel calculadas automáticamente.
                     self.envioActualizacion("Añadiendo Curvas de Nivel")
-
-                    self.interpretacionCurvasNivel()
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada, visualizacion_especial = True, valores_visualizacion_especial = self.ValoresSolucion)   
+                elif self.CurvasNivelEspecificas.isChecked():
+                    # Graficación con curvas de nivel especificadas manualmente.
+                    self.envioActualizacion("Añadiendo Curvas de Nivel")
+                    self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada, visualizacion_especial = True, valores_visualizacion_especial = self.ValoresSolucion) 
+                else:
+                    self.graficacion(coordenada_especifica=coordenada, visualizacion_especial = True,  valores_visualizacion_especial = self.ValoresSolucion)
                             
             else:
                 self.Subproblema_1.setEnabled(False)
@@ -4558,12 +4562,16 @@ class Ui_Graficacion(QMainWindow):
                             elif self.Coordenadas == "Esféricas":
                                 coordenada = "phi"
 
-                    self.graficacion(coordenada_especifica=coordenada)
-
-                    if self.CurvasNivelAuto.isChecked() or self.CurvasNivelEspecificas.isChecked():
+                    if self.CurvasNivelAuto.isChecked():
+                        # Graficación con curvas de nivel calculadas automáticamente.
                         self.envioActualizacion("Añadiendo Curvas de Nivel")
-
-                        self.interpretacionCurvasNivel()
+                        self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelAuto,coordenada_especifica=coordenada)   
+                    elif self.CurvasNivelEspecificas.isChecked():
+                        # Graficación con curvas de nivel especificadas manualmente.
+                        self.envioActualizacion("Añadiendo Curvas de Nivel")
+                        self.graficacion(curvas_nivel = True, casilla = self.CurvasNivelEspecificas,coordenada_especifica=coordenada) 
+                    else:
+                        self.graficacion(coordenada_especifica=coordenada)
         except:
             tipoError, explicacion, linea = sys.exc_info()[:3]
 
