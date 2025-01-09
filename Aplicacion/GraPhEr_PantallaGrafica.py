@@ -4297,6 +4297,27 @@ class Ui_Graficacion(QMainWindow):
             self.MostrarSolucion.figura.canvas.draw_idle()
             del self.Animacion
 
+            coordenada = None
+            # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
+            if len(self.dominio) == 6:
+                if self.CoordenadaFija_1.isChecked():
+                    if self.Coordenadas == "Cartesianas":
+                        coordenada = "x"
+                    elif self.Coordenadas == "Cilíndricas / Polares" or self.Coordenadas == "Esféricas":
+                        coordenada = "r"
+                elif self.CoordenadaFija_2.isChecked():
+                    if self.Coordenadas == "Cartesianas":
+                        coordenada = "y"
+                    elif self.Coordenadas == "Cilíndricas / Polares":
+                        coordenada = "phi"
+                    elif self.Coordenadas == "Esféricas":
+                        coordenada = "theta"
+                elif self.CoordenadaFija_3.isChecked():
+                    if self.Coordenadas == "Cartesianas" or self.Coordenadas == "Cilíndricas / Polares":
+                        coordenada = "z"
+                    elif self.Coordenadas == "Esféricas":
+                        coordenada = "phi"
+
             if self.Modo.isChecked() or self.SolucionParcial.isChecked():
                 self.envioActualizacion("Activando Selectores de Indices")
 
@@ -4541,27 +4562,6 @@ class Ui_Graficacion(QMainWindow):
                 self.label_3.setStyleSheet(u"color: rgb(127,146,151)")
                 
                 if not cerrada:
-                    coordenada = None
-                    # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
-                    if len(self.dominio) == 6:
-                        if self.CoordenadaFija_1.isChecked():
-                            if self.Coordenadas == "Cartesianas":
-                                coordenada = "x"
-                            elif self.Coordenadas == "Cilíndricas / Polares" or self.Coordenadas == "Esféricas":
-                                coordenada = "r"
-                        elif self.CoordenadaFija_2.isChecked():
-                            if self.Coordenadas == "Cartesianas":
-                                coordenada = "y"
-                            elif self.Coordenadas == "Cilíndricas / Polares":
-                                coordenada = "phi"
-                            elif self.Coordenadas == "Esféricas":
-                                coordenada = "theta"
-                        elif self.CoordenadaFija_3.isChecked():
-                            if self.Coordenadas == "Cartesianas" or self.Coordenadas == "Cilíndricas / Polares":
-                                coordenada = "z"
-                            elif self.Coordenadas == "Esféricas":
-                                coordenada = "phi"
-
                     if self.CurvasNivelAuto.isChecked():
                         # Graficación con curvas de nivel calculadas automáticamente.
                         self.envioActualizacion("Añadiendo Curvas de Nivel")
