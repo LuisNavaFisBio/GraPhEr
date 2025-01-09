@@ -4327,12 +4327,15 @@ class Ui_Graficacion(QMainWindow):
                 self.label_3.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
                 self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
                 self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[subproblema-1][0][0]))
+                print(len(self.NumeroTerminos[subproblema-1]) >= 2)
                 if len(self.NumeroTerminos[subproblema-1]) >= 2:
+                    print("s")
+                    self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
+                    self.ValorPropio2_1.setVisible(True)
                     self.ValorPropio2_1.setEnabled(True)
                     self.label_10.setEnabled(True)
                     self.label_10.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
-                    self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
-                    self.ValorPropio2_1.setVisible(True)
+                    
                     self.label_10.setVisible(True)
 
                     if len(self.NumeroTerminos[subproblema-1]) == 3:
@@ -4355,7 +4358,7 @@ class Ui_Graficacion(QMainWindow):
                     self.ValorPropio2_1.setVisible(False)
                     self.label_10.setVisible(False)
 
-                if self.ValorPropio2_1.isEnabled():
+                if len(self.NumeroTerminos[subproblema-1]) >= 2:
                     # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
                     if self.NumeroTerminos[subproblema-1][1][0] == "-n":
                         self.ValorPropio2_1.setMaximum(int(self.ValoresPropios[subproblema-1][0][0]))
@@ -4364,8 +4367,8 @@ class Ui_Graficacion(QMainWindow):
                         self.ValorPropio2_1.setMaximum(int(self.NumeroTerminos[subproblema-1][1][1]))
                         self.ValorPropio2_1.setMinimum(int(self.NumeroTerminos[subproblema-1][1][0]))
 
-                    if self.ValorPropio3_1.isEnabled():
-                        # Establecimiento de los indice posibles para el segundo conjunto de valores propios del subproblema.
+                    if len(self.NumeroTerminos[subproblema-1]) == 3:
+                        # Establecimiento de los indice posibles para el tercer conjunto de valores propios del subproblema.
                         if self.NumeroTerminos[subproblema-1][2][0] == "-n":
                             self.ValorPropio3_1.setMaximum(int(self.ValoresPropios[subproblema.value()-1][0][0]))
                             self.ValorPropio3_1.setMinimum(-int(self.ValoresPropios[subproblema.value()-1][0][0]))
@@ -4373,8 +4376,10 @@ class Ui_Graficacion(QMainWindow):
                             self.ValorPropio3_1.setMaximum(int(self.NumeroTerminos[subproblema-1][2][1]))
                             self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[subproblema-1][2][0]))
 
-                if self.ValorPropio2_1.isEnabled():
-                    if not self.ValorPropio3_1.isEnabled():
+                QtCore.QThread.msleep(500)
+                
+                if len(self.NumeroTerminos[subproblema-1]) >= 2:
+                    if not (len(self.NumeroTerminos[subproblema-1]) == 3):
                         # Obtención del modo cuando se tienen dos conjuntos de valores propios.
                         if self.NumeroTerminos[subproblema-1][1][0] == "-n":
                             if (self.ValoresPropios[subproblema-1][0][valorpropio1] != self.valorpropiodependendiente):
@@ -4465,14 +4470,12 @@ class Ui_Graficacion(QMainWindow):
                         # Cuando se tienen indices negativos se realiza un desplazamiento del indice para que sea no negativo.
                         valorpropio1 = valorpropio1 + int(self.NumeroTerminos[subproblema-1][0][0])
 
-                QCoreApplication.processEvents()
-
                 if self.Modo.isChecked():
                     self.envioActualizacion("Obteniendo Solución del Modo")
 
                     # Obtención del modo requerido.
-                    if self.ValorPropio2_1.isEnabled():
-                        if not self.ValorPropio3_1.isEnabled():
+                    if len(self.NumeroTerminos[subproblema-1]) >= 2:
+                        if not (len(self.NumeroTerminos[subproblema-1]) == 3):
                             self.SolucionModo = self.Soluciones[subproblema-1][valorpropio1][valorpropio2]
                             
                         else:
@@ -4490,9 +4493,9 @@ class Ui_Graficacion(QMainWindow):
                     self.SolucionModoParcial = 0 
                     for indice1 in range(len(self.Soluciones[:subproblema])):
                         for indice2 in range(len(self.Soluciones[indice1][:valorpropio1+1])):
-                            if self.ValorPropio2_1.isEnabled():
+                            if len(self.NumeroTerminos[subproblema-1]) >= 2:
                                 for indice3 in range(len(self.Soluciones[indice1][indice2][:valorpropio2+1])):
-                                    if self.ValorPropio3_1.isEnabled():
+                                    if len(self.NumeroTerminos[subproblema-1]) == 3:
                                         for indice4 in range(len(self.Soluciones[indice1][indice2][indice3][:valorpropio3+1])):
                                             self.SolucionModoParcial = self.SolucionModoParcial + self.Soluciones[indice1][indice2][indice3][indice4]
                                     else:
