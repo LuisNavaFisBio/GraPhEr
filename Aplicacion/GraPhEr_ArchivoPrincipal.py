@@ -2250,7 +2250,12 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         trabajo.autoDelete()
         self.Ui_Grafica.transferirDatos(self.Solucion_funcion, self.Solucion, self.Soluciones, self.NumeroTerminos, self.MatrizResultados, self.Dominios, self.Simbolos, self.Colormap, self.ProyeccionEntrada.isChecked(), self.SistemaCoordenadasEntrada.checkedButton().objectName(), self.NumeroEntradas.text(), self.Precision, self.CalidadEntrada.isChecked(), self.ParticionesDominios, self.dependencia, self.bidependencia, self.indicesdependencia, self.invertir, self.ValoresPropios)
 
-        self.Ui_Grafica.CoordenadaFija.setText("{}".format(float(self.Dominios[0][0])))
+        QCoreApplication.processEvents()
+
+        if self.Ui_Grafica.dependencia_tiempo:
+            self.Ui_Grafica.CoordenadaFija.setText(0)
+        else:
+            self.Ui_Grafica.CoordenadaFija.setText("{}".format(float(self.Dominios[0][0])))
 
         self.Ui_Grafica.pagina.loadFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioExpresion(self.Ui_Grafica.Subproblema.value()))
         self.Ui_Grafica.Subproblema.editingFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioExpresion(self.Ui_Grafica.Subproblema.value()))

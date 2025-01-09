@@ -1484,7 +1484,7 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelEspecificas.setShortcut("Ctrl+E")
             elif self.dependencia_tiempo:
                 # Cuando se tiene dependencia temporal, solo se pueden graficar cortes temporales.
-                if not self.Proyeccion:
+                if not ((len(self.Dominio) == 2) and (self.dependencia_tiempo and self.Proyeccion)):
                     self.CoordenadaFija_1.setEnabled(True)
                     self.CoordenadaFija_1.setCheckable(True)
                     self.CoordenadaFija_1.setChecked(True)   
@@ -1718,7 +1718,7 @@ class Ui_Graficacion(QMainWindow):
                         limites = self.dominio[2:4]
                     elif coordenada_especifica == "z" or (coordenada_especifica == "phi" and self.Coordenadas == "Esféricas"):
                         limites = self.dominio[4:]
-                    
+                
                 self.CoordenadaFija.setText("{}".format(limites[0]))
                 # Activación de la herramienta de curvas de nivel.
                 self.CurvasNivelAuto.setEnabled(True)
