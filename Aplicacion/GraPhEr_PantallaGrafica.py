@@ -4327,9 +4327,7 @@ class Ui_Graficacion(QMainWindow):
                 self.label_3.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(246, 247, 247)")
                 self.ValorPropio1_1.setMaximum(int(self.NumeroTerminos[subproblema-1][0][1]))
                 self.ValorPropio1_1.setMinimum(int(self.NumeroTerminos[subproblema-1][0][0]))
-                print(len(self.NumeroTerminos[subproblema-1]) >= 2)
                 if len(self.NumeroTerminos[subproblema-1]) >= 2:
-                    print("s")
                     self.ValorPropio2_1.setStyleSheet(u"color: rgb(11, 61, 98); background-color: rgb(255, 255, 255)")
                     self.ValorPropio2_1.setVisible(True)
                     self.ValorPropio2_1.setEnabled(True)
@@ -4377,7 +4375,7 @@ class Ui_Graficacion(QMainWindow):
                             self.ValorPropio3_1.setMinimum(int(self.NumeroTerminos[subproblema-1][2][0]))
 
                 QtCore.QThread.msleep(500)
-                
+
                 if len(self.NumeroTerminos[subproblema-1]) >= 2:
                     if not (len(self.NumeroTerminos[subproblema-1]) == 3):
                         # Obtención del modo cuando se tienen dos conjuntos de valores propios.
