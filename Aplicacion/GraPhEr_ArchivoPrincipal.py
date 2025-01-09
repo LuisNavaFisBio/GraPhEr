@@ -2253,7 +2253,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         QCoreApplication.processEvents()
 
         if self.Ui_Grafica.dependencia_tiempo:
-            self.Ui_Grafica.CoordenadaFija.setText(0)
+            self.Ui_Grafica.CoordenadaFija.setText("0")
         else:
             self.Ui_Grafica.CoordenadaFija.setText("{}".format(float(self.Dominios[0][0])))
 
