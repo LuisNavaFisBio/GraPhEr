@@ -1159,18 +1159,27 @@ class TrabajoResolucion(QtCore.QRunnable):
                                     for funcion_temporal in funciones_temporales[indice]:
                                         if invertir:
                                             # Cuando el primer valor propio depende del segundo.
-                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1]).doit()), precision_copia)
+                                            try:
+                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1]).doit()), precision_copia)
+                                            except:
+                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1]).evalf()), precision_copia)
                                             solucion_parcial = solucion_parcial + coeficiente*funcion_espacial*funcion_temporal.subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1])
                                         else:
                                             # Cuando el segundo valor propio depende del primero.
-                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).doit()), precision_copia)
+                                            try:
+                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).doit()), precision_copia)
+                                            except:
+                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).evalf()), precision_copia)
                                             solucion_parcial = solucion_parcial + coeficiente*funcion_espacial*funcion_temporal.subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2])
                                         indice_auxiliar += 1
                                 else:
                                     # Cuando no hay dependencia temporal.
                                     if invertir:
                                         # Cuando el primer valor propio depende del segundo.
-                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1]).doit()), precision_copia)
+                                        try:
+                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1]).doit()), precision_copia)
+                                        except:
+                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][1][indice1][indice2]).subs(mu, valorespropios_copia[indice][0][indice1]).evalf()), precision_copia)
                                         solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                     else:
                                         # Cuando el segundo valor propio depende del primero.
@@ -1179,7 +1188,10 @@ class TrabajoResolucion(QtCore.QRunnable):
                                         cantidadCompleja = symbols('b', complex = True, zero = False)
                                         valornulo = symbols('a', positive = True)
                                         # Se sustituye la unidad imaginaria por un número real cualquiera distinto de cero y se reexpresa el coeficiente para expandir las exponenciales complejas, después se evalua la integral y en el resultado se sustituye primero el valor nulo y después la unidad imaginaria. Finalmente, se reexpresa la solución para expandir las exponenciales complejasque puedan haber surgido.
-                                        valor = simplify(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).rewrite(cos).subs(I, cantidadCompleja).doit()).subs(cantidadCompleja, valornulo).subs(valornulo, I).rewrite(cos)
+                                        try:
+                                            valor = simplify(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).rewrite(cos).subs(I, cantidadCompleja).doit()).subs(cantidadCompleja, valornulo).subs(valornulo, I).rewrite(cos)
+                                        except:
+                                            valor = simplify(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).rewrite(cos).subs(I, cantidadCompleja).evalf()).subs(cantidadCompleja, valornulo).subs(valornulo, I).rewrite(cos)
 
                                         if I in valor.args:
                                             # Cuando el valor es un número imaginario puro se redondea el número real y después se agrega la unidad imaginaria.
@@ -1212,12 +1224,18 @@ class TrabajoResolucion(QtCore.QRunnable):
                                     if self.ui.dependencia_tiempo:
                                         # Cuando hay dependencia temporal.
                                         for funcion_temporal in funciones_temporales[indice]:
-                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).doit()), precision_copia)
+                                            try:
+                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).doit()), precision_copia)
+                                            except:
+                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).evalf()), precision_copia)
                                             solucion_parcial = solucion_parcial + coeficiente*funcion_espacial*funcion_temporal.subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3])
                                             indice_auxiliar += 1
                                     else:
                                         # Cuando no hay dependencia temporal.
-                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).doit()), precision_copia)
+                                        try:
+                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).doit()), precision_copia)
+                                        except:
+                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2][indice3]).evalf()), precision_copia)
                                         solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                         indice_auxiliar += 1
                                 solucion_parcial = solucion_parcial.subs(lamda_n, valorespropios_copia[indice][0][indice1]).subs(lamda_m, valorespropios_copia[indice][1][indice2][indice3])
@@ -1237,9 +1255,15 @@ class TrabajoResolucion(QtCore.QRunnable):
                                             for funcion_espacial in funciones_espaciales[indice]:
                                                 # Cuando no hay dependencia temporal.
                                                 if invertir:
-                                                    coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).doit()), precision_copia)
+                                                    try:
+                                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).doit()), precision_copia)
+                                                    except:
+                                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).evalf()), precision_copia)
                                                 else:
-                                                    coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).doit()), precision_copia)
+                                                    try:
+                                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).doit()), precision_copia)
+                                                    except:
+                                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice1][indice3]).evalf()), precision_copia)
                                                 solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                                 indice_auxiliar += 1
 
@@ -1258,7 +1282,10 @@ class TrabajoResolucion(QtCore.QRunnable):
                                             indice_auxiliar = 0
                                             for funcion_espacial in funciones_espaciales[indice]:
                                                 # Cuando no hay dependencia temporal.
-                                                coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).doit()), precision_copia)
+                                                try:
+                                                    coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).doit()), precision_copia)
+                                                except:
+                                                    coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).evalf()), precision_copia)
                                                 solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                                 indice_auxiliar += 1
                                             
@@ -1275,7 +1302,10 @@ class TrabajoResolucion(QtCore.QRunnable):
                                     indice_auxiliar = 0
                                     for funcion_espacial in funciones_espaciales[indice]:
                                         # Cuando no hay dependencia temporal.
-                                        coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).doit()), precision_copia)
+                                        try:
+                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).doit()), precision_copia)
+                                        except:
+                                            coeficiente = np.round(float(coeficientes[indice_auxiliar].subs(lamda, valorespropios_copia[indice][0][indice1]).subs(mu, valorespropios_copia[indice][1][indice2]).subs(nu, valorespropios_copia[indice][2][indice3]).evalf()), precision_copia)
                                         solucion_parcial = solucion_parcial + coeficiente*funcion_espacial
                                         indice_auxiliar += 1
                                     
