@@ -1362,6 +1362,12 @@ class Ui_Graficacion(QMainWindow):
                 self.deslizador.setVisible(False)
             else:
                 self.Coordenada2.setText("0")
+                self.BotonPasoAdelante.setVisible(True)
+                self.BotonPasoAtras.setVisible(True)
+                self.BotonPausa.setVisible(True)
+                self.BotonReproduccionAdelante.setVisible(True)
+                self.BotonReproduccionAtras.setVisible(True)
+                self.deslizador.setVisible(True)
 
             if len(self.Dominio) < 3:
                 # Cuando solo hay dos variables en la solución.
