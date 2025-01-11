@@ -1378,6 +1378,13 @@ class Ui_Graficacion(QMainWindow):
                 self.Coordenada3.setSizePolicy(sizePolicy2)
                 self.Coordenada3.setVisible(False)
                 self.Coordenada3.setStyleSheet(u"color: rgba(11, 61, 98, 0.9); background-color: rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 0.9)")
+                if not self.dependencia_tiempo:
+                    # En caso de que la segunda variable sea espacial.
+                    self.Coordenada2.setText("{}".format(self.Dominio[-1][0]))
+                else:
+                    # Cuando la segunda variable es temporal.
+                    self.Coordenada2.setText("0")
+
             else:
                 if not self.Coordenada3.isEnabled():
                     self.Coordenada3.setEnabled(True)
