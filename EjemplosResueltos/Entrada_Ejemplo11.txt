@@ -1,5 +1,5 @@
 Entrada valida para la aplicación GraPhEr 
-Ecuación de Laplace en dos dimensiones y coordenadas cartesianas
+Ecuación de Poisson en dos dimensiones y coordenadas cartesianas
 
 Datos Generales del Problema
 {'Número de Dimensiones Espaciales':2 , 'Dependencia Temporal':'No', 'Coordenadas':'Cartesianas', 'Dominio x':'0:1', 'Dominio y':'0:1', 'Condiciones iniciales y/o de frontera':'DiracDelta(x-1/2)*DiracDelta(y-1/2)', 'Número de Subproblemas': 1, 'Calidad +':'No'}
