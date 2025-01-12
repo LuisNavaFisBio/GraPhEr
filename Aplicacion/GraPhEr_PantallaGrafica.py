@@ -1607,7 +1607,7 @@ class Ui_Graficacion(QMainWindow):
                     if particion[-1] < float(self.Dominio[indice][1]):
                         particion = np.append(particion, float(self.Dominio[indice][1])+0.005)
                     else:
-                        particion[-1] = float(self.ui.Dominio[indice][1])+0.005
+                        particion[-1] = float(self.Dominio[indice][1])+0.005
                     particionesDominios.append(particion)
                     estructura.append(int(len(particionesDominios[-1])))
                 else:
