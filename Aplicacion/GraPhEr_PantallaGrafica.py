@@ -1631,7 +1631,7 @@ class Ui_Graficacion(QMainWindow):
                             valor = float(np.real(self.Funcion(self.Dominios[0][indice2], self.t_grid[indice1])))
                             if np.isnan(valor):
                                 valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice2], self.Simbolos[1]:self.t_grid[indice1]}).evalf()))
-                            self.ui.MatrizResultados[indice1][indice2] = valor
+                            self.MatrizResultados[indice1][indice2] = valor
             else:
                 for indice1 in range(0, len(self.Dominios[0])):
                     for indice2 in range(0, len(self.Dominios[1])):
@@ -1640,12 +1640,12 @@ class Ui_Graficacion(QMainWindow):
                                 valor = float(np.real(self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2], self.Dominios[2][indice3])))
                                 if np.isnan(valor):
                                     valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice1], self.Simbolos[1]:self.Dominios[1][indice2], self.Simbolos[2]:self.Dominios[2][indice3]}).evalf()))
-                                self.ui.MatrizResultados[indice3][indice2][indice1] = valor
+                                self.MatrizResultados[indice3][indice2][indice1] = valor
                         else:
                             valor = float(np.real(self.Funcion(self.Dominios[0][indice1], self.Dominios[1][indice2])))
                             if np.isnan(valor):
                                 valor = float(np.real(self.Solucion.subs({self.Simbolos[0]:self.Dominios[0][indice1], self.Simbolos[1]:self.Dominios[1][indice2]}).evalf()))
-                            self.ui.MatrizResultados[indice2][indice1] = valor
+                            self.MatrizResultados[indice2][indice1] = valor
 
         self.envioActualizacion("Calculando Máximos y Mínimos")
 
