@@ -2,7 +2,7 @@ Entrada valida para la aplicación GraPhEr
 Ecuación de onda 1D con resistencia proporcional a la velocidad (caso 1)
  
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'0;10', 'Número de Subproblemas':2, 'Calidad +':'No'}
+{'Número de Dimensiones Espaciales':1 , 'Dependencia Temporal':'Sí', 'Coordenadas':'Cartesianas', 'Dominio x':'0:pi', 'Dominio temporal':'10', 'Condiciones iniciales y/o de frontera':'0;sin(pi*x)', 'Número de Subproblemas':2, 'Calidad +':'No'}
 
 Solución del Subproblema #1
 {'Valores Propios':'sin(lamda_n*pi)=0:<3/2', 'Número de Términos':'auto', 'Función Peso':'1', 'Coeficientes':'Int[2*g_2*sin(lamda_n*x)/(pi*sqrt(Abs(9/4-lamda_n**2))),x]', 'Funciones Espaciales':'sin(lamda_n*x)', 'Funciones Temporales':'exp(-3*t/2)*sinh(sqrt(Abs(9/4-lamda_n**2))*t)'}
