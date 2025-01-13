@@ -838,15 +838,15 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_5 = QHBoxLayout()
         horizontalLayout_5.setContentsMargins(20, 0, 20, 5)
         horizontalLayout_5.setSpacing(5)
-        horizontalLayout_5.setStretch(0, 130)
-        horizontalLayout_5.setStretch(1, 200)
+        horizontalLayout_5.setStretch(0, 160)
+        horizontalLayout_5.setStretch(1, 170)
         horizontalLayout_5.setStretch(2, 120)
 
         # Diseño y configuración del campo de entrada y el botón para el ingreso manual de valores para las curvas de nivel.
         label_13 = QLabel()
         label_13.setText("Valores de las Curvas")
-        label_13.setMinimumSize(QSize(130, 30))
-        label_13.setMaximumSize(QSize(130, 30))
+        label_13.setMinimumSize(QSize(160, 30))
+        label_13.setMaximumSize(QSize(160, 30))
         horizontalLayout_5.addWidget(label_13, alignment=Qt.AlignLeft)
 
         self.CurvasNivelEspecificasEntrada = QLineEdit()
@@ -947,14 +947,14 @@ class Ui_Graficacion(QMainWindow):
         horizontalLayout_7 = QHBoxLayout()
         horizontalLayout_7.setSpacing(5)
         horizontalLayout_7.setContentsMargins(20, 0, 20, 0)
-        horizontalLayout_7.setStretch(0, 150)
-        horizontalLayout_7.setStretch(1, 180)
+        horizontalLayout_7.setStretch(0, 170)
+        horizontalLayout_7.setStretch(1, 170)
         horizontalLayout_7.setStretch(2, 120)
 
         self.label_15 = QLabel()
-        self.label_15.setText("Valor de la Coordenada Fija")
-        self.label_15.setMinimumSize(QSize(170, 30))
-        self.label_15.setMaximumSize(QSize(170, 30))
+        self.label_15.setText("Valor de la Coordenada")
+        self.label_15.setMinimumSize(QSize(175, 30))
+        self.label_15.setMaximumSize(QSize(175, 30))
         horizontalLayout_7.addWidget(self.label_15, alignment=Qt.AlignLeft)
 
         # Diseño y configuración del campo de entrada del cuadro_fijo de la coordenada fija y el botón de graficación correspondiente.
@@ -3651,6 +3651,27 @@ class Ui_Graficacion(QMainWindow):
 
         self.Animacion.progreso = False
         self.envioActualizacion("Iniciando Gráfica")
+
+        coordenada_especifica = None
+        # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
+        if len(self.dominio) == 6:
+            if self.CoordenadaFija_1.isChecked():
+                if self.Coordenadas == "Cartesianas":
+                    coordenada_especifica = "x"
+                elif self.Coordenadas == "Cilíndricas / Polares" or self.Coordenadas == "Esféricas":
+                    coordenada_especifica = "r"
+            elif self.CoordenadaFija_2.isChecked():
+                if self.Coordenadas == "Cartesianas":
+                    coordenada_especifica = "y"
+                elif self.Coordenadas == "Cilíndricas / Polares":
+                    coordenada_especifica = "phi"
+                elif self.Coordenadas == "Esféricas":
+                    coordenada_especifica = "theta"
+            elif self.CoordenadaFija_3.isChecked():
+                if self.Coordenadas == "Cartesianas" or self.Coordenadas == "Cilíndricas / Polares":
+                    coordenada_especifica = "z"
+                elif self.Coordenadas == "Esféricas":
+                    coordenada_especifica = "phi"
 
         nombre_modo = ""
         if not (self.Modo.isChecked() or self.SolucionParcial.isChecked()):
