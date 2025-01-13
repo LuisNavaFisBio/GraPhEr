@@ -3,10 +3,10 @@ Ecuación de Poisson tridimensional en coordenadas cilíndricas
 --- Nota importante: Aunque la entrada se divide en dos partes, el problema no se divide en subproblemas para su solución, es solo una manera de ejemplificar como ingresar entradas distintas de un mismo subproblema.
 
 Datos Generales del Problema
-{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio z':'-1:1', 'Condiciones iniciales y/o de frontera':'DiracDelta(r-1/2)*DiracDelta(z)/pi', 'Número de Subproblemas': 2, 'Calidad +':'No'}
+{'Número de Dimensiones Espaciales':3 , 'Dependencia Temporal':'No', 'Coordenadas':'Cilíndricas / Polares', 'Dominio r':'0:1', 'Dominio phi':'0:2*pi', 'Dominio z':'-1:1', 'Condiciones iniciales y/o de frontera':'0;0;0', 'Número de Subproblemas': 2, 'Calidad +':'No'}
 
 Solución del Subproblema #1
-{'Valores Propios':'0;besselj(0,lamda_m)=0;(2*l-1)*pi/2', 'Número de Términos':'1;1:5;1:5', 'Función Peso':'r', 'Coeficientes':'Int[f_1*besselj(lamda_n, lamda_m*r)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)*cos(lamda_l*z)'}
+{'Valores Propios':'0;besselj(0,lamda_m)=0;(2*l-1)*pi/2', 'Número de Términos':'1;1:5;1:5', 'Función Peso':'r', 'Coeficientes':'Int[DiracDelta(r-1/2)*DiracDelta(z)/(2*pi*r)*besselj(lamda_n, lamda_m*r)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)*cos(lamda_l*z)'}
 
 Solución del Subproblema #2
-{'Valores Propios':'n;besselj(lamda_n,lamda_m)=0;(2*l-1)*pi/2', 'Número de Términos':'1:5;1:5;1:5', 'Función Peso':'r', 'Coeficientes':'Int[2*f_1*besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z];Int[2*f_1*besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)*cos(lamda_l*z);besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)*cos(lamda_l*z)'}
+{'Valores Propios':'n;besselj(lamda_n,lamda_m)=0;(2*l-1)*pi/2', 'Número de Términos':'1:5;1:5;1:5', 'Función Peso':'r', 'Coeficientes':'Int[2*DiracDelta(r-1/2)*DiracDelta(z)/(2*pi*r)*besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z];Int[2*DiracDelta(r-1/2)*DiracDelta(z)/(2*pi*r)*besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)*cos(lamda_l*z)/(pi*besselj(lamda_n+1, lamda_m)**2),r,phi,z]', 'Funciones Espaciales':'besselj(lamda_n, lamda_m*r)*cos(lamda_n*phi)*cos(lamda_l*z);besselj(lamda_n, lamda_m*r)*sin(lamda_n*phi)*cos(lamda_l*z)'}
