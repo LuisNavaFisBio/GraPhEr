@@ -4361,7 +4361,11 @@ class Ui_Graficacion(QMainWindow):
                 self.MostrarSolucion.figura.clear()
                 self.MostrarSolucion.figura.canvas.draw_idle()
             except:
-                pass
+                self.MostrarSolucion.axes.set_title("")
+                try:
+                    self.MostrarSolucion.figura.suptitle("")
+                except:
+                    pass
 
             coordenada = None
             # Determinación de la coordenada fija para problemas de tres dimensiones espaciales.
