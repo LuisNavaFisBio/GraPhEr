@@ -2257,7 +2257,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
         else:
             self.Ui_Grafica.CoordenadaFija.setText("{}".format(float(self.Dominios[0][0])))
 
-        self.Ui_Grafica.pagina.loadFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioExpresion(self.Ui_Grafica.Subproblema.value()))
+        #self.Ui_Grafica.pagina.loadFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioExpresion(self.Ui_Grafica.Subproblema.value()))
         self.Ui_Grafica.Subproblema.editingFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioExpresion(self.Ui_Grafica.Subproblema.value()))
         self.Ui_Grafica.ValorPropio1.editingFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioValorPropio(self.Ui_Grafica.ValorPropio1.value(), self.Ui_Grafica.ValorPropio2.value(), self.Ui_Grafica.ValorPropio3.value()))
         self.Ui_Grafica.ValorPropio2.editingFinished.connect(lambda: self.Ui_Grafica.despliegueCoeficiente_CambioValorPropio(self.Ui_Grafica.ValorPropio1.value(), self.Ui_Grafica.ValorPropio2.value(), self.Ui_Grafica.ValorPropio3.value()))
