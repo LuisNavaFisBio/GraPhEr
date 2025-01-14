@@ -4362,8 +4362,10 @@ class Ui_Graficacion(QMainWindow):
                 self.MostrarSolucion.figura.canvas.draw_idle()
             except:
                 self.MostrarSolucion.axes.set_title("")
+                self.MostrarSolucion.figura.canvas.draw_idle()
                 try:
                     self.MostrarSolucion.figura.suptitle("")
+                    self.MostrarSolucion.figura.canvas.draw_idle()
                 except:
                     pass
 
