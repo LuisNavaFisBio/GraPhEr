@@ -2798,6 +2798,8 @@ class Ui_Graficacion(QMainWindow):
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
 
+        canva.figura.clear()
+
         canva.axes = canva.figura.add_subplot()
         canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
         canva.axes.set_xlim(self.dominio[0], self.dominio[1])
@@ -2850,6 +2852,8 @@ class Ui_Graficacion(QMainWindow):
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
 
+        canva.figura.clear()
+
         canva.axes = canva.figura.add_subplot()
         canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
         canva.axes.set_xlim(0, self.dominio[-1])
@@ -2891,6 +2895,8 @@ class Ui_Graficacion(QMainWindow):
         self.dominio = [float(self.Dominio[0][0]), float(self.Dominio[0][1]), float(self.Dominio[1][0]), float(self.Dominio[1][1]), float(self.Dominio[-1][0])]
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
+
+        canva.figura.clear()
 
         canva.axes = canva.figura.add_subplot(projection='3d')
         canva.axes.set_position([0.05, 0.10, 0.8, 0.8])
@@ -2941,6 +2947,8 @@ class Ui_Graficacion(QMainWindow):
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
 
+        canva.figura.clear()
+
         canva.axes = canva.figura.add_subplot()
         canva.axes.axes.set_aspect('equal')
         canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
@@ -2988,6 +2996,8 @@ class Ui_Graficacion(QMainWindow):
 
         self.u, self.v = np.meshgrid(self.Dominios[0], self.Dominios[1])
         self.x, self.y = self.u*np.cos(self.v), self.u*np.sin(self.v)
+
+        canva.figura.clear()
 
         canva.axes = canva.figura.add_subplot(projection='3d')
         canva.axes.set_position([0.05, 0.10, 0.8, 0.8])
@@ -3043,6 +3053,8 @@ class Ui_Graficacion(QMainWindow):
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
 
+        canva.figura.clear()
+
         canva.axes = canva.figura.add_subplot(projection='polar')
         canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
         canva.axes.set_xlim(0, self.dominio[3])
@@ -3097,6 +3109,8 @@ class Ui_Graficacion(QMainWindow):
         self.dominio = [float(self.Dominio[0][0]), float(self.Dominio[0][1]), float(self.Dominio[1][0]), float(self.Dominio[1][1]), float(self.Dominio[-1][0]), float(self.Dominio[-1][1])]
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
+
+        canva.figura.clear()
 
         canva.axes = canva.figura.add_subplot(1, 1, 1, projection='3d')
         canva.axes.set_position([0.05, 0.05, 0.8, 0.8])
@@ -3190,6 +3204,8 @@ class Ui_Graficacion(QMainWindow):
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
 
+        canva.figura.clear()
+
         canva.axes = canva.figura.add_subplot()
         canva.axes.axes.set_aspect('equal')
         canva.axes.set_position([0.13, 0.2, 0.65, 0.65])
@@ -3263,6 +3279,8 @@ class Ui_Graficacion(QMainWindow):
         self.dominio = [float(self.Dominio[0][0]), float(self.Dominio[0][1]), float(self.Dominio[1][0]), float(self.Dominio[1][1]), float(self.Dominio[-1][0]), float(self.Dominio[-1][1])]
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
+
+        canva.figura.clear()
         
         canva.axes = canva.figura.add_subplot(projection='3d')
         canva.axes.set_position([0.05, 0.05, 0.8, 0.8])
@@ -3349,6 +3367,8 @@ class Ui_Graficacion(QMainWindow):
         self.dominio = [float(self.Dominio[0][0]), float(self.Dominio[0][1]), float(self.Dominio[1][0]), float(self.Dominio[1][1]), float(self.Dominio[-1][0]), float(self.Dominio[-1][1])]
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
+
+        canva.figura.clear()
 
         if coordenada == "r":
             # Diseño del lienzo.
@@ -3443,6 +3463,8 @@ class Ui_Graficacion(QMainWindow):
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
 
+        canva.figura.clear()
+
         canva.axes = canva.figura.add_subplot(projection='3d')
         canva.axes.set_position([0.05, 0.05, 0.8, 0.8])
         canva.axes.xaxis.set_pane_color((0.52, 0.50, 0.49, 1.0))
@@ -3519,6 +3541,8 @@ class Ui_Graficacion(QMainWindow):
         self.dominio = [float(self.Dominio[0][0]), float(self.Dominio[0][1]), float(self.Dominio[1][0]), float(self.Dominio[1][1]), float(self.Dominio[-1][0]), float(self.Dominio[-1][1])]
         self.Cota = max(abs(self.minimo-(self.maximo-self.minimo)*0.05), abs(self.maximo+(self.maximo-self.minimo)*0.05))
         resolucion = 25
+
+        canva.figura.clear()
 
         if coordenada == "r":
             # Diseño del lienzo.
