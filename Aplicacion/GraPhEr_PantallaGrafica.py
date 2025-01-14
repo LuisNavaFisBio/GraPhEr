@@ -1929,7 +1929,7 @@ class Ui_Graficacion(QMainWindow):
             linea.set_array(valores_matriz[tiempo])
             lienzo.set_title(' Tiempo \n{:02d}:{:02d}.{:02d}'.format(int(tiempo*0.04//60), int(tiempo*0.04%60), int((tiempo*0.04*100)%100)), pad = 10)
             
-        return linea
+        return linea, lienzo
     
     def introducirProyeccion1D(self, cuadro, cuadro_fijo, x, t, tiempo_total, resolucion, valores_matriz, lienzo, cota):
         """
