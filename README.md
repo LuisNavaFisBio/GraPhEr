@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables">
-        <img src="https://github.com/LuisNavaFisBio/GraPhEr_Ecuaciones-Diferenciales-Parciales-Separables/blob/main/LogoPrincipal.png">
+        <img src="https://github.com/LuisNavaFisBio/GraPhEr/blob/19b2525490a7d2e5d14a654d777c85b92d9b1825/LogoPrincipal.png">
     </a>
 </p>
 
