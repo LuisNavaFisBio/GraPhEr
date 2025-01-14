@@ -1495,6 +1495,9 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelEspecificas.setEnabled(True)
                 self.CurvasNivelEspecificas.setCheckable(True)
                 self.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+                self.CurvasNivelEspecificasEntrada.setEnabled(True)
+                self.GraficarCurvasFija.setEnabled(True)
+                self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
             elif self.dependencia_tiempo:
                 # Cuando se tiene dependencia temporal, solo se pueden graficar cortes temporales.
                 if not ((len(self.Dominio) == 2) and (self.dependencia_tiempo and self.Proyeccion)):
@@ -1526,13 +1529,16 @@ class Ui_Graficacion(QMainWindow):
                 self.CoordenadaFija_1_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "t2.svg")))
                 self.CoordenadaFija_2_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
                 self.CoordenadaFija_3_label.setPixmap(QPixmap(os.path.join(directorio_base, "Iconos", "noMostrar.svg")))
-                if self.Proyeccion and (len(self.Dominio) > 2):
+                if len(self.Dominio) > 2:
                     self.CurvasNivelAuto.setShortcut("Ctrl+A")
                     self.CurvasNivelAuto.setEnabled(True)
                     self.CurvasNivelAuto.setCheckable(True)
                     self.CurvasNivelEspecificas.setShortcut("Ctrl+E")
                     self.CurvasNivelEspecificas.setEnabled(True)
                     self.CurvasNivelEspecificas.setCheckable(True)
+                    self.CurvasNivelEspecificasEntrada.setEnabled(True)
+                    self.GraficarCurvasFija.setEnabled(True)
+                    self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
             else:
                 # En otro caso, tres coordenadas espaciales, se activa el corte en la primera coordenada.
                 self.CoordenadaFija_1.setChecked(True)
@@ -1567,6 +1573,9 @@ class Ui_Graficacion(QMainWindow):
                 self.CurvasNivelEspecificas.setEnabled(True)
                 self.CurvasNivelEspecificas.setCheckable(True)
                 self.CurvasNivelEspecificas.setShortcut("Ctrl+E")
+                self.CurvasNivelEspecificasEntrada.setEnabled(True)
+                self.GraficarCurvasFija.setEnabled(True)
+                self.GraficarCurvasFija.setStyleSheet(u"color: rgba(246, 247, 247, 255); background-color: rgb(11, 61, 98)")
         except:
             # Interpretación del tipo de error.
             tipoError, explicacion, line = sys.exc_info()[:3]
