@@ -998,7 +998,6 @@ class TrabajoResolucion(QtCore.QRunnable):
                     raiz = (x1+x2)/2
                     if (raiz != None) and (np.round(raiz, precision) != raices[-1]) and (raiz != 0) and (np.round(raiz, precision) != extremo_izq_old):
                         if abs(funcion(raiz)) < 10**(-precision+2):
-                            print(funcion(raiz), raiz)
                             # Si la raíz encontrada conlleva la precisión necesaria, entonces se agrega a la lista de raíces.
                             raices.append(np.round(raiz, precision))
                     # Después de encontrar una raíz se reduce el intervalo de búsqueda para no volver a considerar el mismo valor. 
