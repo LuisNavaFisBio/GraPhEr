@@ -969,7 +969,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                     extremo_izq = x2
                     raiz = (x1+x2)/2
                     if (raiz != None) and (raiz != float(0)) and (np.round(raiz, precision) < extremo_der):
-                        if funcion(raiz) < 10**(-precision+1):
+                        if abs(funcion(raiz)) < 10**(-precision+2):
                             # Si la raíz encontrada conlleva la precisión necesaria, entonces se agrega a la lista de raíces.
                             raices.append(np.round(raiz, precision))
                     if (signo == "<") and (x2 > extremo_der):
@@ -979,7 +979,8 @@ class TrabajoResolucion(QtCore.QRunnable):
                         # Si el extremo derecho del intervalo donde hay un cambio de signo es mayor que el extremo derecho del intervalo inicial, este valor se recorre pi unidades. Esto de acuerdo al valor asintótico para las raíces de las funciones base del problema de Sturm-Liouville.
                         extremo_der = extremo_der + np.pi
                     else:
-                        extremo_der = extremo_der + np.pi/2
+                        if abs(funcion(raiz)) > 1:
+                            extremo_der = extremo_der + np.pi/2
                 else:
                     if signo == ">":
                         # En caso contrario, es decir, cuando no se encuentren subintervalos de cambio de signo en el intervalo inicial, se considera el intervalo de longitud pi que se encuentra justo a la derecha del intervalo inicial, siempre y cuando busquemos valores mayores.
@@ -996,7 +997,8 @@ class TrabajoResolucion(QtCore.QRunnable):
                     # Si existe el subintervalo donde ocurre un cambio de signo se procede a encontrar la raíz con mayor precisión.
                     raiz = (x1+x2)/2
                     if (raiz != None) and (np.round(raiz, precision) != raices[-1]) and (raiz != 0) and (np.round(raiz, precision) != extremo_izq_old):
-                        if funcion(raiz) < 10**(-precision+1):
+                        if abs(funcion(raiz)) < 10**(-precision+2):
+                            print(funcion(raiz), raiz)
                             # Si la raíz encontrada conlleva la precisión necesaria, entonces se agrega a la lista de raíces.
                             raices.append(np.round(raiz, precision))
                     # Después de encontrar una raíz se reduce el intervalo de búsqueda para no volver a considerar el mismo valor. 
@@ -1006,7 +1008,8 @@ class TrabajoResolucion(QtCore.QRunnable):
                         # Si el extremo derecho del intervalo donde hay un cambio de signo es mayor que el extremo derecho del intervalo inicial, este valor se recorre pi unidades. Esto de acuerdo al valor asintótico para las raíces de las funciones base del problema de Sturm-Liouville.
                         extremo_der = extremo_der + np.pi
                     else:
-                        extremo_der = extremo_der + np.pi/2
+                        if abs(funcion(raiz)) > 1:
+                            extremo_der = extremo_der + np.pi/2
                 else:
                     # En caso contrario, es decir, cuando no se encuentren subintervalos de cambio de signo en el intervalo inicial, se considera el intervalo de longitud pi que se encuentra justo a la derecha del intervalo inicial.
                     extremo_izq = extremo_der
