@@ -1497,7 +1497,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
                 self.DimensionEspacialEntrada.setValue(3)
             self.DimensionEspacialEntrada.setMinimum(3)
     
-    def numeroSeries(self, valor):
+    def numeroSubproblemas(self, valor):
         """Muestra o oculta los cuadros de entrada de subsoluciones dependiendo de la cantidad de subproblemas a ingresar.
         
         Parámetros
@@ -1525,37 +1525,7 @@ class Ui_GraficadoraVentanaPrincipal(QMainWindow):
 
         # Modifica el deslizador de la ventana de entrada de soluciones.
         deslizador = self.VentanaExpresiones.horizontalScrollBar()
-        deslizador.setMaximum((valor+self.NumeroEntradasS_1.value())*1120)
-
-    def numeroExpresiones(self, valor):
-        """Muestra o oculta los cuadros de entrada de subsoluciones dependiendo de la cantidad de subproblemas a ingresar.
-        
-        Parámetros
-        ----------
-        **valor : entero
-            Cantidad de subproblemas a ingresar.
-        """
-
-        if valor < int(self.NumeroEntradas_1.text()):
-            # Oculta los cuadros no necesarios si el valor del deslizador es menor que el valor anterior.
-            for i in range(valor, int(self.NumeroEntradas_1.text())):
-                self.horizontalLayout_11.removeWidget(self.Cuadros['{}'.format(i+5)])
-                self.ValoresPropiosEntrada['{}'.format(i+5)].clear()
-                self.NumeroTerminosEntrada['{}'.format(i+5)].clear()
-                self.FuncionesPesoEntrada['{}'.format(i+5)].setText("1")
-                self.CoeficientesEntrada['{}'.format(i+5)].clear()
-                self.FuncionesEspacialesEntrada['{}'.format(i+5)].clear()
-                self.FuncionesTemporalesEntrada['{}'.format(i+5)].clear()
-            self.NumeroEntradas_1.setText("{}".format(valor))
-        else:
-            # Muestra los cuadros necesarios si el valor del deslizador es mayor que el valor anterior.
-            for i in range(int(self.NumeroEntradas_1.text()), valor):
-                self.horizontalLayout_11.addWidget(self.Cuadros['{}'.format(i+5)])
-            self.NumeroEntradas_1.setText("{}".format(valor))
-
-        # Modifica el deslizador de la ventana de entrada de soluciones.
-        deslizador = self.VentanaExpresiones.horizontalScrollBar()
-        deslizador.setMaximum((valor+self.NumeroEntradasS.value())*1120)
+        deslizador.setMaximum(valor*1120)
 
     def dependenciaTemporal(self):
         """Habilita o deshabilita opciones de dimensión y campos de entrada de funciones temporales de acuerdo al estado del QChekBox DimensionTemporalEntrada."""
