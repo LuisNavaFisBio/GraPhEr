@@ -1,4 +1,4 @@
-#    GraPhEr - Ecuaciones Diferenciales Parciales Separables. Un programa para la graficación de la solución aproximada a ecuaciones diferenciales parciales que admiten }
+#    GraPhEr - Ecuaciones Diferenciales Parciales Separables. Un programa para la graficación de la solución aproximada a ecuaciones diferenciales parciales que admiten
 #    soluciones en variables separadas.
    
 # Copyright (C) 2024  Luis Enrique Nava Garcia
