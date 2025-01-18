@@ -2470,7 +2470,7 @@ class Ui_Graficacion(QMainWindow):
                     x, y = grid1*np.cos(grid2)*np.sin(coordenada2[indice]), grid1*np.sin(grid2)*np.sin(coordenada2[indice])
                     z = grid1*np.cos(coordenada2[indice])
                     lienzo.superficie = lienzo.plot_surface(x, y, z, facecolors = self.Colormap(norma(valores_matriz[indice])), shade=False, ccount = numero_columnas, rcount = numero_filas)
-                    lienzo.set_title(r'$\phi = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
+                    lienzo.set_title(r'$\theta = %(valor)s $' % {"valor":np.round((limites[1]-limites[0])*indice/(longitud-1)+limites[0], 2)}, pad = 10)
             elif coordenada_fija == "phi":
                 if cuadro == -1:
                     # Inicialización de la gráfica.
