@@ -3644,10 +3644,11 @@ class Ui_Graficacion(QMainWindow):
             canva.axes.set_ylim(self.dominio[0], self.dominio[1])
 
             # El cambio en la orientación de los ángulos (para que vayan en sentido contrario a las manecillas del reloj) fue tomado de Kumar Rishi, R. (06 de mayo de 2021). How to make the angles in a Matplotlib polar plot go clockwise with 0° at the top?. tutorialspoint. https://www.tutorialspoint.com/how-to-make-the-angles-in-a-matplotlib-polar-plot-go-clockwise-with-0-at-the-top
-            canva.axes.set_theta_offset(np.pi)
+            canva.axes.set_theta_offset(np.pi/2)
             canva.axes.set_theta_direction(-1)
 
             canva.axes.set_title(r'$\phi = %(valor)s$' % {"valor":self.dominio[4]}, pad = 10) 
+            canva.axes.set_xlabel(r"$\bf{\theta}$")
             canva.axes.set_position([0.15, 0.2, 0.65, 0.65])
             canva.axes.set_facecolor((0.52, 0.50, 0.49, 0.3))
             if self.dominio[5] <= np.pi/2:
