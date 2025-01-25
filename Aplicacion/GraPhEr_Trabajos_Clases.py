@@ -969,7 +969,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                     extremo_izq = x2
                     raiz = (x1+x2)/2
                     if (raiz != None) and (raiz != float(0)) and (np.round(raiz, precision) < extremo_der):
-                        if abs(funcion(raiz)) < 10**(-precision+2):
+                        if (abs(funcion(raiz)) < 10**(-precision+2)) or ((funcion(x1) > 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) < 0)) or ((funcion(x1) < 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) > 0)):
                             # Si la raíz encontrada conlleva la precisión necesaria, entonces se agrega a la lista de raíces.
                             raices.append(np.round(raiz, precision))
                     if (signo == "<") and (x2 > extremo_der):
@@ -997,7 +997,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                     # Si existe el subintervalo donde ocurre un cambio de signo se procede a encontrar la raíz con mayor precisión.
                     raiz = (x1+x2)/2
                     if (raiz != None) and (np.round(raiz, precision) != raices[-1]) and (raiz != 0) and (np.round(raiz, precision) != extremo_izq_old):
-                        if abs(funcion(raiz)) < 10**(-precision+2):
+                        if (abs(funcion(raiz)) < 10**(-precision+2)) or ((funcion(x1) > 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) < 0)) or ((funcion(x1) < 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) > 0)):
                             # Si la raíz encontrada conlleva la precisión necesaria, entonces se agrega a la lista de raíces.
                             raices.append(np.round(raiz, precision))
                     # Después de encontrar una raíz se reduce el intervalo de búsqueda para no volver a considerar el mismo valor. 
