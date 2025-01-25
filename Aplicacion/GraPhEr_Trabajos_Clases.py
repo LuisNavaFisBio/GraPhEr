@@ -979,7 +979,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                         # Si el extremo derecho del intervalo donde hay un cambio de signo es mayor que el extremo derecho del intervalo inicial, este valor se recorre pi unidades. Esto de acuerdo al valor asintótico para las raíces de las funciones base del problema de Sturm-Liouville.
                         extremo_der = extremo_der + np.pi
                     else:
-                        if (abs(funcion(x1)) > 1) or (abs(funcion(x2)) > 1):
+                        if (abs(funcion(x1)) > 1) or (abs(funcion(x2)) > 1) or ((funcion(x1) > 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) > 0)) or ((funcion(x1) < 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) < 0)):
                             extremo_der = extremo_der + np.pi/2
                 else:
                     if signo == ">":
@@ -1007,7 +1007,7 @@ class TrabajoResolucion(QtCore.QRunnable):
                         # Si el extremo derecho del intervalo donde hay un cambio de signo es mayor que el extremo derecho del intervalo inicial, este valor se recorre pi unidades. Esto de acuerdo al valor asintótico para las raíces de las funciones base del problema de Sturm-Liouville.
                         extremo_der = extremo_der + np.pi
                     else:
-                        if (abs(funcion(x1)) > 1) or (abs(funcion(x2)) > 1):
+                        if (abs(funcion(x1)) > 1) or (abs(funcion(x2)) > 1) or ((funcion(x1) > 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) > 0)) or ((funcion(x1) < 0) and ((funcion(x1+10**(-precision-2))-funcion(x1))/10**(-precision-2) < 0)):
                             extremo_der = extremo_der + np.pi/2
                 else:
                     # En caso contrario, es decir, cuando no se encuentren subintervalos de cambio de signo en el intervalo inicial, se considera el intervalo de longitud pi que se encuentra justo a la derecha del intervalo inicial.
